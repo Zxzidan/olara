@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
@@ -11,14 +10,6 @@ class HomeController extends Controller
 {
     public function index(Request $request): View
     {
-        // Auto-login default user if not logged in for seamless demo experience
-        if (! Auth::check()) {
-            $defaultUser = User::where('email', 'zidan@olara.id')->first();
-            if ($defaultUser) {
-                Auth::login($defaultUser);
-            }
-        }
-
         $user = Auth::user();
 
         // Calculate progress to next tier

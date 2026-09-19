@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\WasteAnalysis;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -13,13 +12,6 @@ class AiScannerController extends Controller
 {
     public function index(): View
     {
-        if (! Auth::check()) {
-            $defaultUser = User::where('email', 'zidan@olara.id')->first() ?: User::first();
-            if ($defaultUser) {
-                Auth::login($defaultUser);
-            }
-        }
-
         $user = Auth::user();
         $recentAnalyses = $user ? $user->wasteAnalyses()->take(5)->get() : collect();
 
@@ -107,13 +99,6 @@ class AiScannerController extends Controller
         $weight = (float) $validated['weight_kg'];
         $price = (float) $validated['estimated_price_per_kg'];
         $totalVal = round($weight * $price, 2);
-
-        if (! Auth::check()) {
-            $defaultUser = User::where('email', 'zidan@olara.id')->first() ?: User::first();
-            if ($defaultUser) {
-                Auth::login($defaultUser);
-            }
-        }
 
         $user = Auth::user();
 

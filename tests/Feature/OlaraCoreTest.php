@@ -218,3 +218,13 @@ test('user can confirm delivery arrival like shopee and completes order', functi
     expect($order->delivered_at)->not->toBeNull();
     expect($order->completed_at)->not->toBeNull();
 });
+
+test('logged out user cannot access dashboard and must login again', function () {
+    $response = $this->actingAs($this->user)->post(route('logout'));
+    $response->assertRedirect(route('login'));
+    $this->assertGuest();
+
+    // Guest accessing protected dashboard is redirected to login
+    $guestResponse = $this->get(route('home'));
+    $guestResponse->assertRedirect(route('login'));
+});
