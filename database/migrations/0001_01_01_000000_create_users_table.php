@@ -17,6 +17,12 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->integer('eco_points')->default(50);
+            $table->string('recycler_level')->default('Starter');
+            $table->string('membership_tier')->default('lite');
+            $table->string('phone')->nullable();
+            $table->text('address')->nullable();
+            $table->string('avatar_url')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

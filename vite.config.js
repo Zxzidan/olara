@@ -8,15 +8,17 @@ export default defineConfig({
         laravel({
             input: ['resources/css/app.css', 'resources/js/app.js'],
             refresh: true,
+            detectTls: 'olara.test',
             fonts: [
-                bunny('Instrument Sans', {
-                    weights: [400, 500, 600],
+                bunny('Plus Jakarta Sans', {
+                    weights: [300, 400, 500, 600, 700, 800],
                 }),
             ],
         }),
         tailwindcss(),
     ],
     server: {
+        cors: true,
         watch: {
             ignored: ['**/storage/framework/views/**'],
         },

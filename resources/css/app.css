@@ -2,8 +2,68 @@
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
+@source '../views/**/*.blade.php';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    
+    /* OLARA Primary Brand Greens */
+    --color-olara-primary: #168A5B;
+    --color-olara-primary-hover: #0F6B47;
+    --color-olara-primary-dark: #0B4F38;
+    --color-olara-primary-light: #10B981;
+    
+    /* OLARA Supporting Greens */
+    --color-olara-surface-soft: #DDF4E8;
+    --color-olara-section-bg: #EEF9F2;
+    --color-olara-border-soft: #BFE7D0;
+    
+    /* OLARA Neutrals */
+    --color-olara-bg: #F7F8F6;
+    --color-olara-surface: #FFFFFF;
+    --color-olara-text: #1B211E;
+    --color-olara-muted: #66716B;
+    --color-olara-border: #DDE3DF;
+    
+    /* OLARA Semantic Accents */
+    --color-olara-warning: #F59E0B;
+    --color-olara-danger: #EF4444;
+    --color-olara-info: #0284C7;
+}
+
+/* Base custom styles */
+body {
+    background-color: #F7F8F6;
+    color: #1B211E;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Gradient Utility Classes */
+.gradient-olara {
+    background: linear-gradient(135deg, #0B4F38 0%, #168A5B 60%, #2FAF76 100%);
+}
+
+.gradient-card {
+    background: linear-gradient(145deg, #0D5C3A 0%, #168A5B 100%);
+}
+
+.gradient-soft {
+    background: linear-gradient(145deg, #EEF9F2 0%, #FFFFFF 100%);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #F1F5F3;
+}
+::-webkit-scrollbar-thumb {
+    background: #BFE7D0;
+    border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #168A5B;
 }
