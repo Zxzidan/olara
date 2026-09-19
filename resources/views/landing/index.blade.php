@@ -1166,7 +1166,7 @@
                     Cerita Pengguna
                 </span>
                 <h2 class="font-outfit text-2xl sm:text-4xl font-bold text-[#292524] mt-3">
-                    tumbuh bersama 
+                    Tumbuh Bersama 
                     <span class="relative inline-block keyword-target">
                         OLARA
                         <svg class="hand-drawn-underline" viewBox="0 0 100 14" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" aria-hidden="true">
