@@ -122,10 +122,10 @@
 
     <!-- Floating Pill Navigation Bar -->
     <header class="fixed top-3 sm:top-4 md:top-6 left-0 right-0 z-40 flex justify-center px-3 sm:px-4">
-        <nav class="w-full max-w-5xl bg-white/80 backdrop-blur-[20px] border border-stone-200/70 rounded-full px-3.5 sm:px-6 py-2.5 sm:py-3 shadow-soft flex items-center justify-between transition-all">
+        <nav class="w-full max-w-5xl bg-white/85 backdrop-blur-[20px] border border-stone-200/70 rounded-full px-4 sm:px-5 lg:px-6 py-2 sm:py-2.5 shadow-soft flex items-center justify-between transition-all">
             <!-- Brand & Official Logo -->
-            <a href="{{ route('landing') }}" class="flex items-center gap-2 sm:gap-2.5 group shrink-0">
-                <img src="{{ asset('assets/img/logo-emblem.png') }}" class="h-7 sm:h-9 w-auto object-contain group-hover:scale-105 transition-transform" alt="Logo OLARA">
+            <a href="{{ route('landing') }}" class="flex items-center gap-2 sm:gap-2.5 group shrink-0 whitespace-nowrap">
+                <img src="{{ asset('assets/img/logo-emblem.png') }}" class="h-7 sm:h-8 w-auto object-contain group-hover:scale-105 transition-transform" alt="Logo OLARA">
                 <div class="flex flex-col">
                     <span class="font-outfit font-extrabold text-base md:text-lg tracking-tight text-[#292524] leading-none">OLARA</span>
                     <span class="text-[8px] sm:text-[9px] font-semibold text-stone-500 tracking-widest uppercase mt-0.5 hidden xs:inline-block">Sirkular Bumi</span>
@@ -133,29 +133,29 @@
             </a>
 
             <!-- Desktop Links -->
-            <div class="hidden lg:flex items-center gap-6 text-[13.5px] font-medium text-[#78716C]">
-                <a href="#fitur" class="hover:text-[#292524] transition-colors">Fitur Utama</a>
-                <a href="#cara-kerja" class="hover:text-[#292524] transition-colors">Cara Kerja</a>
-                <a href="#preview" class="hover:text-[#292524] transition-colors">Preview</a>
-                <a href="#marketplace" class="hover:text-[#292524] transition-colors">Marketplace</a>
-                <a href="#harga" class="hover:text-[#292524] transition-colors">Paket & Harga</a>
-                <a href="#testimoni" class="hover:text-[#292524] transition-colors">Testimoni</a>
-                <a href="#faq" class="hover:text-[#292524] transition-colors">Tanya Jawab</a>
+            <div class="hidden lg:flex items-center gap-3 xl:gap-5 2xl:gap-6 text-xs xl:text-[13px] 2xl:text-[13.5px] font-medium text-[#78716C] whitespace-nowrap">
+                <a href="#fitur" class="hover:text-[#292524] transition-colors whitespace-nowrap">Fitur Utama</a>
+                <a href="#cara-kerja" class="hover:text-[#292524] transition-colors whitespace-nowrap">Cara Kerja</a>
+                <a href="#preview" class="hover:text-[#292524] transition-colors whitespace-nowrap">Preview</a>
+                <a href="#marketplace" class="hover:text-[#292524] transition-colors whitespace-nowrap">Marketplace</a>
+                <a href="#harga" class="hover:text-[#292524] transition-colors whitespace-nowrap">Paket & Harga</a>
+                <a href="#testimoni" class="hover:text-[#292524] transition-colors whitespace-nowrap">Testimoni</a>
+                <a href="#faq" class="hover:text-[#292524] transition-colors whitespace-nowrap">Tanya Jawab</a>
             </div>
 
             <!-- CTA Cluster (Desktop Only) & Mobile Hamburger Toggle -->
-            <div class="flex items-center gap-1.5 sm:gap-2">
+            <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
                 @auth
-                    <a href="{{ route('home') }}" class="hidden lg:inline-flex items-center gap-1.5 sm:gap-2 bg-[#292524] text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs font-semibold hover:bg-stone-800 transition-all shadow-sm">
+                    <a href="{{ route('home') }}" class="hidden lg:inline-flex items-center gap-1.5 sm:gap-2 bg-[#292524] text-white px-3.5 py-1.5 xl:px-4 xl:py-2 rounded-full text-xs font-semibold hover:bg-stone-800 transition-all shadow-sm shrink-0 whitespace-nowrap">
                         <span>Dashboard</span>
                         <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
                     </a>
                 @else
-                    <div class="hidden lg:flex items-center gap-2">
-                        <a href="{{ route('login') }}" class="text-xs font-semibold text-[#292524] hover:text-stone-900 px-3 py-2 transition-colors">
+                    <div class="hidden lg:flex items-center gap-1.5 xl:gap-2.5 shrink-0 whitespace-nowrap">
+                        <a href="{{ route('login') }}" class="text-xs font-semibold text-[#292524] hover:text-stone-900 px-2.5 py-1.5 transition-colors shrink-0 whitespace-nowrap">
                             Masuk
                         </a>
-                        <a href="{{ route('register') }}" class="inline-flex items-center gap-1.5 bg-[#FFB7B2] hover:bg-[#FF9E98] text-[#292524] px-4 py-2 rounded-full text-xs font-bold transition-all shadow-soft group">
+                        <a href="{{ route('register') }}" class="inline-flex items-center gap-1.5 bg-[#FFB7B2] hover:bg-[#FF9E98] text-[#292524] px-3.5 py-1.5 xl:px-4 xl:py-2 rounded-full text-xs font-bold transition-all shadow-soft group shrink-0 whitespace-nowrap">
                             <span>Daftar Sekarang</span>
                             <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform"></i>
                         </a>
@@ -988,21 +988,23 @@
             <!-- Feature 4: Marketplace B2B & Tracking Resi (Section) -->
             <div id="marketplace" class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center reveal-item">
                 <div class="md:col-span-6 order-2 md:order-1 flex justify-center">
-                    <div class="w-full max-w-[360px] bg-white rounded-[2.5rem] p-6 border border-stone-200/70 shadow-soft-lg space-y-4">
+                    <div class="w-full max-w-[360px] sm:max-w-[400px] bg-white rounded-[2.5rem] p-5 sm:p-6 border border-stone-200/70 shadow-soft-lg space-y-4">
                         <div class="flex items-center justify-between">
                             <span class="text-xs font-bold text-stone-800">Bahan Siap Kirim</span>
-                            <span class="text-[10px] text-[#cb3930] bg-[#FFB7B2]/20 px-2 py-0.5 rounded-full font-bold">B2B Verified</span>
+                            <span class="text-[10px] text-[#cb3930] bg-[#FFB7B2]/20 px-2.5 py-0.5 rounded-full font-bold">B2B Verified</span>
                         </div>
-                        <div class="space-y-2">
+                        <div class="space-y-2.5">
                             @foreach($sampleProducts->take(3) as $product)
-                                <div class="p-3 rounded-2xl bg-stone-50 border border-stone-100 flex items-center justify-between">
-                                    <div>
-                                        <p class="text-xs font-bold text-stone-800 leading-snug">{{ $product->name }}</p>
-                                        <span class="text-[10px] text-stone-500">Min. {{ $product->min_order_kg }} kg • Stok: {{ number_format($product->stock_kg) }} kg</span>
+                                <div class="p-3 sm:p-3.5 rounded-2xl bg-stone-50 border border-stone-100/90 flex items-center justify-between gap-3 hover:bg-stone-100/60 transition-colors">
+                                    <div class="min-w-0 flex-1">
+                                        <p class="text-xs font-bold text-stone-800 leading-snug">{{ str_replace('Bening Bening', 'Bening', $product->name) }}</p>
+                                        <span class="text-[10px] text-stone-500 block mt-0.5">Min. {{ $product->min_order_kg }} kg • Stok: {{ number_format($product->stock_kg, 0, ',', '.') }} kg</span>
                                     </div>
-                                    <div class="text-right">
-                                        <span class="text-xs font-bold text-[#cb3930]">Rp {{ number_format($product->price_per_kg) }}</span>
-                                        <span class="block text-[9px] text-stone-400">/ kg</span>
+                                    <div class="text-right shrink-0 whitespace-nowrap pl-2">
+                                        <div class="text-xs sm:text-sm font-extrabold text-[#cb3930] leading-tight">
+                                            <span class="text-[11px] font-semibold mr-0.5">Rp</span>{{ number_format($product->price_per_kg, 0, ',', '.') }}
+                                        </div>
+                                        <span class="block text-[10px] text-stone-400 font-medium mt-0.5">/ kg</span>
                                     </div>
                                 </div>
                             @endforeach

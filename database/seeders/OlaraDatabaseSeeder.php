@@ -350,7 +350,7 @@ class OlaraDatabaseSeeder extends Seeder
         // 7. Marketplace Products
         $products = [
             [
-                'name' => 'PET Flakes Bening Bening Grade A (Hot Washed)',
+                'name' => 'PET Flakes Bening Grade A (Hot Washed)',
                 'grade' => 'Grade A Hot Washed',
                 'category' => 'Plastik',
                 'price_per_kg' => 11500,
