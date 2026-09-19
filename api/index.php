@@ -35,9 +35,9 @@ if (! getenv('APP_MAINTENANCE_DRIVER') && empty($_ENV['APP_MAINTENANCE_DRIVER'])
 }
 
 if (! getenv('SESSION_DRIVER') && empty($_ENV['SESSION_DRIVER'])) {
-    $_ENV['SESSION_DRIVER'] = 'file';
-    $_SERVER['SESSION_DRIVER'] = 'file';
-    putenv('SESSION_DRIVER=file');
+    $_ENV['SESSION_DRIVER'] = 'database';
+    $_SERVER['SESSION_DRIVER'] = 'database';
+    putenv('SESSION_DRIVER=database');
 }
 
 if (! getenv('CACHE_STORE') && empty($_ENV['CACHE_STORE'])) {
