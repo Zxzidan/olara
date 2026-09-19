@@ -18,16 +18,23 @@ class LandingController extends Controller
     {
         $user = Auth::user();
 
-        // Sample marketplace products for B2B showcase
-        $sampleProducts = MarketplaceProduct::take(4)->get();
+        try {
+            $sampleProducts = MarketplaceProduct::take(4)->get();
+            $partnerCount = DropoffPartner::count() ?: 12;
+            $rewardCount = Reward::count() ?: 9;
+        } catch (\Throwable $e) {
+            $sampleProducts = collect();
+            $partnerCount = 12;
+            $rewardCount = 9;
+        }
 
         // Key ecological & community statistics
         $stats = [
             'total_waste_kg' => 24850,
             'co2_avoided_kg' => 42120,
             'trees_saved' => 1850,
-            'active_partners' => DropoffPartner::count() ?: 12,
-            'total_rewards' => Reward::count() ?: 9,
+            'active_partners' => $partnerCount,
+            'total_rewards' => $rewardCount,
             'community_members' => 12400,
         ];
 

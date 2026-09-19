@@ -20,7 +20,7 @@
   ],
   "env": {
     "APP_ENV": "production",
-    "APP_DEBUG": "false",
+    "APP_DEBUG": "true",
     "APP_KEY": "base64:mS23d4kJQ29OKoXMmzNOqYgu2J3UPNguJRKiWATo8DA=",
     "LARAVEL_STORAGE_PATH": "/tmp/storage",
     "APP_CONFIG_CACHE": "/tmp/storage/framework/cache/config.php",

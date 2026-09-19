@@ -1,6 +1,9 @@
 <?php
 
-// Serverless storage and cache configuration
+$_ENV['APP_DEBUG'] = 'true';
+$_SERVER['APP_DEBUG'] = 'true';
+putenv('APP_DEBUG=true');
+
 $_ENV['LARAVEL_STORAGE_PATH'] = '/tmp/storage';
 $_SERVER['LARAVEL_STORAGE_PATH'] = '/tmp/storage';
 putenv('LARAVEL_STORAGE_PATH=/tmp/storage');
@@ -47,12 +50,26 @@ if (! getenv('LOG_CHANNEL') && empty($_ENV['LOG_CHANNEL'])) {
     putenv('LOG_CHANNEL=stderr');
 }
 
-// Fallback for APP_KEY if not set in Vercel environment
-if (empty($_ENV['APP_KEY']) && empty(getenv('APP_KEY'))) {
-    $defaultKey = 'base64:mS23d4kJQ29OKoXMmzNOqYgu2J3UPNguJRKiWATo8DA=';
-    $_ENV['APP_KEY'] = $defaultKey;
-    $_SERVER['APP_KEY'] = $defaultKey;
-    putenv('APP_KEY='.$defaultKey);
+// Fallback environment variables for Vercel Serverless
+$defaults = [
+    'APP_NAME' => 'Olara',
+    'APP_KEY' => 'base64:mS23d4kJQ29OKoXMmzNOqYgu2J3UPNguJRKiWATo8DA=',
+    'APP_DEBUG' => 'true',
+    'DB_CONNECTION' => 'pgsql',
+    'DB_HOST' => 'aws-0-ap-northeast-1.pooler.supabase.com',
+    'DB_PORT' => '5432',
+    'DB_DATABASE' => 'postgres',
+    'DB_USERNAME' => 'postgres.gqxporcsrphrifukongr',
+    'DB_PASSWORD' => 'Jancok1234@zida',
+    'DB_SSLMODE' => 'require',
+];
+
+foreach ($defaults as $k => $v) {
+    if (empty($_ENV[$k]) && empty(getenv($k))) {
+        $_ENV[$k] = $v;
+        $_SERVER[$k] = $v;
+        putenv("{$k}={$v}");
+    }
 }
 
 // Ensure storage subdirectories exist in /tmp for Vercel serverless environment
