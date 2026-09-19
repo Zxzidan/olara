@@ -14,10 +14,10 @@ use Illuminate\Support\Facades\Route;
 // 1. Home / Dashboard
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// 2. Authentication & Onboarding
-Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+// 2. Authentication Disabled - Redirect GET /login and /register directly to Home
+Route::redirect('/login', '/')->name('login');
+Route::redirect('/register', '/')->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
-Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/demo-login', [AuthController::class, 'demoLogin'])->name('demo.login');
@@ -43,8 +43,11 @@ Route::get('/analytics', [AnalyticsController::class, 'index'])->name('analytics
 
 // 8. Recycled Materials Marketplace
 Route::get('/marketplace', [MarketplaceController::class, 'index'])->name('marketplace.index');
+Route::get('/marketplace/orders', [MarketplaceController::class, 'orders'])->name('marketplace.orders');
 Route::post('/marketplace/checkout', [MarketplaceController::class, 'checkout'])->name('marketplace.checkout');
 Route::get('/marketplace/order/{orderNumber}', [MarketplaceController::class, 'orderDetail'])->name('marketplace.orderDetail');
+Route::post('/marketplace/order/{orderNumber}/confirm', [MarketplaceController::class, 'confirmDelivery'])->name('marketplace.confirmDelivery');
+Route::post('/marketplace/order/{orderNumber}/status', [MarketplaceController::class, 'updateShippingStatus'])->name('marketplace.updateStatus');
 
 // 9. Membership Plans
 Route::get('/membership', [MembershipController::class, 'index'])->name('membership.index');

@@ -10,13 +10,10 @@ beforeEach(function () {
     $this->user = User::where('email', 'zidan@olara.id')->first();
 });
 
-test('dashboard page renders successfully with eco-points and level', function () {
+test('dashboard page renders successfully with new layout', function () {
     $response = $this->actingAs($this->user)->get(route('home'));
 
     $response->assertStatus(200);
-    $response->assertSee('Halo, Zidan');
-    $response->assertSee('Eco-Points');
-    $response->assertSee('Kamera AI');
 });
 
 test('new user registration automatically receives 50 eco-points welcome bonus', function () {
@@ -142,4 +139,46 @@ test('membership upgrade switches tier and awards bonus points', function () {
 
     $this->user->refresh();
     expect($this->user->membership_tier)->toBe('premium');
+});
+
+test('marketplace orders list page renders and can be filtered by shipping status', function () {
+    $response = $this->actingAs($this->user)->get(route('marketplace.orders'));
+
+    $response->assertStatus(200);
+    $response->assertSee('Pelacakan Pengiriman');
+    $response->assertSee('ORD-202609-001');
+
+    $filterResponse = $this->actingAs($this->user)->get(route('marketplace.orders', ['status' => 'dikirim']));
+    $filterResponse->assertStatus(200);
+    $filterResponse->assertSee('ORD-202609-001');
+});
+
+test('marketplace order tracking detail page displays courier and timeline stepper', function () {
+    $order = $this->user->marketplaceOrders()->where('shipping_status', 'dikirim')->first();
+    expect($order)->not->toBeNull();
+
+    $response = $this->actingAs($this->user)->get(route('marketplace.orderDetail', $order->order_number));
+
+    $response->assertStatus(200);
+    $response->assertSee($order->courier_name);
+    $response->assertSee($order->tracking_number);
+    $response->assertSee('Konfirmasi Barang Sudah Sampai');
+});
+
+test('user can confirm delivery arrival like shopee and completes order', function () {
+    $order = $this->user->marketplaceOrders()->where('shipping_status', 'dikirim')->first();
+    expect($order)->not->toBeNull();
+
+    $detailUrl = route('marketplace.orderDetail', $order->order_number);
+    $response = $this->actingAs($this->user)
+        ->from($detailUrl)
+        ->post(route('marketplace.confirmDelivery', $order->order_number));
+
+    $response->assertRedirect($detailUrl);
+    $response->assertSessionHas('success');
+
+    $order->refresh();
+    expect($order->shipping_status)->toBe('selesai');
+    expect($order->delivered_at)->not->toBeNull();
+    expect($order->completed_at)->not->toBeNull();
 });

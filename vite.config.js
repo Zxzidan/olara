@@ -10,7 +10,7 @@ export default defineConfig({
             refresh: true,
             detectTls: 'olara.test',
             fonts: [
-                bunny('Plus Jakarta Sans', {
+                bunny('Inter', {
                     weights: [300, 400, 500, 600, 700, 800],
                 }),
             ],

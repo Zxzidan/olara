@@ -19,7 +19,93 @@
             </p>
         </div>
 
-        <div class="flex items-center gap-2">
+        <div class="flex flex-wrap items-center gap-3">
+            <!-- Order Tracking Dropdown Button -->
+            <div class="relative">
+                <button
+                    id="orderTrackingDropdownBtn"
+                    data-dropdown-toggle="order-tracking-dropdown"
+                    type="button"
+                    class="inline-flex items-center gap-2 px-4 py-2 rounded-2xl text-xs font-bold text-white bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 shadow-md shadow-emerald-600/20 transition group"
+                >
+                    <i data-lucide="truck" class="w-4 h-4 text-emerald-200 group-hover:scale-110 transition-transform"></i>
+                    <span>Pelacakan Pesanan</span>
+                    @if($userOrders->whereIn('shipping_status', ['dikirim', 'sampai'])->count() > 0)
+                        <span class="w-2 h-2 rounded-full bg-amber-300 animate-ping"></span>
+                    @endif
+                    <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-emerald-200"></i>
+                </button>
+
+                <!-- Dropdown Menu -->
+                <div
+                    id="order-tracking-dropdown"
+                    class="hidden z-50 my-2 w-80 sm:w-96 text-base list-none bg-white rounded-2xl divide-y divide-gray-100 shadow-2xl border border-gray-100 dark:bg-gray-800 dark:divide-gray-700 dark:border-gray-700"
+                >
+                    <div class="py-3 px-4 flex items-center justify-between bg-gray-50 dark:bg-gray-750 rounded-t-2xl">
+                        <span class="text-xs font-bold text-gray-900 dark:text-white uppercase tracking-wider flex items-center gap-1.5">
+                            <i data-lucide="package-check" class="w-4 h-4 text-emerald-600"></i>
+                            Pelacakan Pengiriman Pesanan
+                        </span>
+                        <a href="{{ route('marketplace.orders') }}" class="text-[11px] font-bold text-primary-600 hover:text-primary-700 dark:text-primary-400">
+                            Semua →
+                        </a>
+                    </div>
+
+                    <div class="max-h-80 overflow-y-auto divide-y divide-gray-100 dark:divide-gray-700">
+                        @forelse($userOrders as $order)
+                            <a href="{{ route('marketplace.orderDetail', $order->order_number) }}" class="block p-3.5 hover:bg-gray-50 dark:hover:bg-gray-700/60 transition group">
+                                <div class="flex items-center justify-between gap-2 mb-1">
+                                    <span class="font-mono text-[11px] font-bold text-gray-800 dark:text-gray-200 group-hover:text-primary-600">
+                                        #{{ $order->order_number }}
+                                    </span>
+                                    @if($order->shipping_status === 'diproses')
+                                        <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300">
+                                            Dikemas
+                                        </span>
+                                    @elseif($order->shipping_status === 'dikirim')
+                                        <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300 animate-pulse">
+                                            🚚 Dikirim
+                                        </span>
+                                    @elseif($order->shipping_status === 'sampai')
+                                        <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-100 text-purple-800 dark:bg-purple-950 dark:text-purple-300">
+                                            📍 Sampai
+                                        </span>
+                                    @elseif($order->shipping_status === 'selesai')
+                                        <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
+                                            ✓ Selesai
+                                        </span>
+                                    @endif
+                                </div>
+                                <p class="text-xs font-semibold text-gray-900 dark:text-white line-clamp-1">
+                                    {{ $order->product->name ?? 'Bahan Baku Daur Ulang' }}
+                                </p>
+                                <div class="flex items-center justify-between text-[11px] text-gray-500 dark:text-gray-400 mt-1">
+                                    <span>{{ $order->courier_name ?? 'Kurir' }}: <strong class="font-mono text-gray-700 dark:text-gray-300">{{ $order->tracking_number ?? '-' }}</strong></span>
+                                    <span class="font-bold text-emerald-600 dark:text-emerald-400">Rp {{ number_format($order->total_price) }}</span>
+                                </div>
+                                @if(in_array($order->shipping_status, ['dikirim', 'sampai']))
+                                    <div class="mt-2 text-[10px] font-bold text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/60 px-2 py-1 rounded-lg flex items-center gap-1">
+                                        <span>🔔</span>
+                                        <span>Barang sudah sampai? Klik untuk konfirmasi penerimaan.</span>
+                                    </div>
+                                @endif
+                            </a>
+                        @empty
+                            <div class="py-6 text-center text-xs text-gray-400">
+                                Belum ada riwayat pesanan bahan baku.
+                            </div>
+                        @endforelse
+                    </div>
+
+                    <div class="p-2.5 bg-gray-50 dark:bg-gray-750 text-center rounded-b-2xl">
+                        <a href="{{ route('marketplace.orders') }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700 dark:text-emerald-400 hover:underline">
+                            <i data-lucide="package" class="w-3.5 h-3.5"></i>
+                            Buka Halaman Pelacakan Pesanan & Status Lengkap
+                        </a>
+                    </div>
+                </div>
+            </div>
+
             <span class="text-xs font-bold text-[#0B4F38] bg-[#EEF9F2] border border-[#BFE7D0] px-3.5 py-2 rounded-2xl flex items-center gap-2 shadow-xs">
                 <i data-lucide="shield-check" class="w-4 h-4 text-[#168A5B]"></i> Standar Kualitas Industri Terverifikasi
             </span>

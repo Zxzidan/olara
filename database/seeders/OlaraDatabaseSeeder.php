@@ -415,28 +415,65 @@ class OlaraDatabaseSeeder extends Seeder
             MarketplaceProduct::create($prod);
         }
 
-        // 8. Sample Past Marketplace Order
+        // 8. Sample Past Marketplace Orders (In-transit and Completed)
         MarketplaceOrder::create([
             'order_number' => 'ORD-202609-001',
             'user_id' => $user->id,
             'items' => [
                 [
-                    'name' => 'PET Flakes Bening Bening Grade A',
+                    'name' => 'PET Flakes Bening Grade A',
+                    'grade' => 'Grade A (Pencucian Panas)',
                     'price' => 11500,
                     'qty_kg' => 50,
                     'total' => 575000,
                 ],
             ],
-            'shipping_address' => 'Gudang Workshop Olara, Jl. Industri Hijau No. 8, Cikarang',
+            'shipping_address' => 'Gudang Workshop Olara, Jl. Industri Hijau No. 8, Cikarang, Jawa Barat',
             'subtotal' => 575000,
             'ppn_amount' => 57500,
             'shipping_fee' => 45000,
             'grand_total' => 677500,
             'payment_method' => 'BCA Virtual Account',
             'payment_status' => 'paid',
+            'shipping_status' => 'dikirim',
+            'courier_name' => 'JNE Trucking (JTR)',
+            'tracking_number' => 'JTR-982103891',
+            'estimated_delivery_date' => now()->addDay()->toDateString(),
+            'recipient_name' => 'Zidan Ramadhan',
             'co2_saved_kg' => 105.0,
-            'points_earned' => 150,
-            'created_at' => now()->subDays(14),
+            'points_earned' => 57,
+            'created_at' => now()->subDays(2),
+        ]);
+
+        MarketplaceOrder::create([
+            'order_number' => 'ORD-202608-088',
+            'user_id' => $user->id,
+            'items' => [
+                [
+                    'name' => 'HDPE Pellet Daur Ulang Biru',
+                    'grade' => 'Injeksi / Blow Molding MFI 0.8',
+                    'price' => 13500,
+                    'qty_kg' => 100,
+                    'total' => 1350000,
+                ],
+            ],
+            'shipping_address' => 'Gudang Workshop Olara, Jl. Industri Hijau No. 8, Cikarang, Jawa Barat',
+            'subtotal' => 1350000,
+            'ppn_amount' => 135000,
+            'shipping_fee' => 65000,
+            'grand_total' => 1550000,
+            'payment_method' => 'Mandiri Virtual Account',
+            'payment_status' => 'paid',
+            'shipping_status' => 'selesai',
+            'courier_name' => 'SiCepat Cargo (GOKIL)',
+            'tracking_number' => '004128917821',
+            'estimated_delivery_date' => now()->subDays(5)->toDateString(),
+            'delivered_at' => now()->subDays(4),
+            'completed_at' => now()->subDays(4),
+            'recipient_name' => 'Zidan Ramadhan (Penerima Satpam)',
+            'co2_saved_kg' => 210.0,
+            'points_earned' => 135,
+            'created_at' => now()->subDays(6),
         ]);
     }
 }

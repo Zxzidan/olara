@@ -23,6 +23,13 @@ class MarketplaceOrder extends Model
         'payment_status',
         'co2_saved_kg',
         'points_earned',
+        'shipping_status',
+        'courier_name',
+        'tracking_number',
+        'estimated_delivery_date',
+        'delivered_at',
+        'completed_at',
+        'recipient_name',
     ];
 
     protected function casts(): array
@@ -35,6 +42,9 @@ class MarketplaceOrder extends Model
             'grand_total' => 'decimal:2',
             'co2_saved_kg' => 'decimal:2',
             'points_earned' => 'integer',
+            'estimated_delivery_date' => 'date',
+            'delivered_at' => 'datetime',
+            'completed_at' => 'datetime',
         ];
     }
 

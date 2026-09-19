@@ -4,52 +4,42 @@
 @source '../../storage/framework/views/*.php';
 @source '../views/**/*.blade.php';
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
-    --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    
-    /* OLARA Primary Brand Greens */
-    --color-olara-primary: #168A5B;
-    --color-olara-primary-hover: #0F6B47;
-    --color-olara-primary-dark: #0B4F38;
-    --color-olara-primary-light: #10B981;
-    
-    /* OLARA Supporting Greens */
-    --color-olara-surface-soft: #DDF4E8;
-    --color-olara-section-bg: #EEF9F2;
-    --color-olara-border-soft: #BFE7D0;
-    
-    /* OLARA Neutrals */
-    --color-olara-bg: #F7F8F6;
-    --color-olara-surface: #FFFFFF;
-    --color-olara-text: #1B211E;
-    --color-olara-muted: #66716B;
-    --color-olara-border: #DDE3DF;
-    
-    /* OLARA Semantic Accents */
-    --color-olara-warning: #F59E0B;
-    --color-olara-danger: #EF4444;
-    --color-olara-info: #0284C7;
+    --color-primary-50: #eff6ff;
+    --color-primary-100: #dbeafe;
+    --color-primary-200: #bfdbfe;
+    --color-primary-300: #93c5fd;
+    --color-primary-400: #60a5fa;
+    --color-primary-500: #3b82f6;
+    --color-primary-600: #2563eb;
+    --color-primary-700: #1d4ed8;
+    --color-primary-800: #1e40af;
+    --color-primary-900: #1e3a8a;
+    --color-primary-950: #172554;
+
+    --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-body: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
 /* Base custom styles */
 body {
-    background-color: #F7F8F6;
-    color: #1B211E;
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
 }
 
-/* Gradient Utility Classes */
-.gradient-olara {
-    background: linear-gradient(135deg, #0B4F38 0%, #168A5B 60%, #2FAF76 100%);
+/* Gradients and custom accents */
+.gradient-primary {
+    background: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #3b82f6 100%);
 }
 
 .gradient-card {
-    background: linear-gradient(145deg, #0D5C3A 0%, #168A5B 100%);
+    background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 60%, #2563eb 100%);
 }
 
-.gradient-soft {
-    background: linear-gradient(145deg, #EEF9F2 0%, #FFFFFF 100%);
+.gradient-emerald {
+    background: linear-gradient(135deg, #065f46 0%, #059669 60%, #10b981 100%);
 }
 
 /* Custom scrollbar */
@@ -58,12 +48,12 @@ body {
     height: 6px;
 }
 ::-webkit-scrollbar-track {
-    background: #F1F5F3;
+    background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-    background: #BFE7D0;
+    background: rgba(156, 163, 175, 0.4);
     border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: #168A5B;
+    background: rgba(107, 114, 128, 0.7);
 }
