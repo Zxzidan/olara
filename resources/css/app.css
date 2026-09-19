@@ -583,8 +583,19 @@ body {
     }
 }
 
+#landing-mobile-backdrop {
+    z-index: 60 !important;
+}
+
+#landing-mobile-drawer {
+    z-index: 70 !important;
+}
+
 @media (min-width: 1024px) {
     #landing-mobile-backdrop.mobile-drawer-backdrop {
+        display: none !important;
+    }
+    #landing-mobile-drawer {
         display: none !important;
     }
 }

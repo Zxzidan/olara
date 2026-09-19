@@ -143,21 +143,23 @@
                 <a href="#faq" class="hover:text-[#292524] transition-colors">Tanya Jawab</a>
             </div>
 
-            <!-- CTA Cluster & Mobile Hamburger Toggle -->
+            <!-- CTA Cluster (Desktop Only) & Mobile Hamburger Toggle -->
             <div class="flex items-center gap-1.5 sm:gap-2">
                 @auth
-                    <a href="{{ route('home') }}" class="inline-flex items-center gap-1.5 sm:gap-2 bg-[#292524] text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs font-semibold hover:bg-stone-800 transition-all shadow-sm">
+                    <a href="{{ route('home') }}" class="hidden lg:inline-flex items-center gap-1.5 sm:gap-2 bg-[#292524] text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs font-semibold hover:bg-stone-800 transition-all shadow-sm">
                         <span>Dashboard</span>
                         <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
                     </a>
                 @else
-                    <a href="{{ route('login') }}" class="text-xs font-semibold text-[#292524] hover:text-stone-900 px-3 py-2 transition-colors">
-                        Masuk
-                    </a>
-                    <a href="{{ route('register') }}" class="inline-flex items-center gap-1.5 bg-[#FFB7B2] hover:bg-[#FF9E98] text-[#292524] px-4 py-2 rounded-full text-xs font-bold transition-all shadow-soft group">
-                        <span>Daftar Sekarang</span>
-                        <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform"></i>
-                    </a>
+                    <div class="hidden lg:flex items-center gap-2">
+                        <a href="{{ route('login') }}" class="text-xs font-semibold text-[#292524] hover:text-stone-900 px-3 py-2 transition-colors">
+                            Masuk
+                        </a>
+                        <a href="{{ route('register') }}" class="inline-flex items-center gap-1.5 bg-[#FFB7B2] hover:bg-[#FF9E98] text-[#292524] px-4 py-2 rounded-full text-xs font-bold transition-all shadow-soft group">
+                            <span>Daftar Sekarang</span>
+                            <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform"></i>
+                        </a>
+                    </div>
                 @endauth
 
                 <!-- Hamburger Strip 3 Button for Mobile -->
@@ -178,8 +180,8 @@
     </header>
 
     <!-- Mobile Navigation Drawer / Overlay (Landing Page) -->
-    <div id="landing-mobile-backdrop" onclick="closeLandingMobileMenu()" class="mobile-drawer-backdrop z-40 cursor-pointer" aria-hidden="true"></div>
-    <div id="landing-mobile-drawer" class="fixed top-16 sm:top-20 inset-x-3 sm:inset-x-4 max-w-md mx-auto bg-white/95 backdrop-blur-xl border border-stone-200/90 shadow-2xl rounded-3xl p-5 z-50 hidden transition-all duration-300 transform -translate-y-4 opacity-0 lg:hidden">
+    <div id="landing-mobile-backdrop" onclick="closeLandingMobileMenu()" class="mobile-drawer-backdrop z-[60] cursor-pointer" aria-hidden="true"></div>
+    <div id="landing-mobile-drawer" class="fixed top-16 sm:top-20 inset-x-3 sm:inset-x-4 max-w-md mx-auto bg-white/95 backdrop-blur-xl border border-stone-200/90 shadow-2xl rounded-3xl p-5 z-[70] hidden transition-all duration-300 transform -translate-y-4 opacity-0 lg:hidden">
         <div class="flex items-center justify-between pb-3 border-b border-stone-100">
             <div class="flex items-center gap-2">
                 <img src="{{ asset('assets/img/logo-emblem.png') }}" class="h-6 w-auto object-contain" alt="OLARA">
@@ -227,12 +229,12 @@
                 </a>
             @else
                 <div class="grid grid-cols-2 gap-2">
-                    <a href="{{ route('login') }}" class="py-2.5 px-3 rounded-xl border border-stone-200 text-stone-800 text-center text-xs font-bold hover:bg-stone-50 transition">
-                        Masuk Akun
+                    <a href="{{ route('login') }}" class="py-2.5 px-3 rounded-xl border border-stone-200 text-stone-800 text-center text-xs font-bold hover:bg-stone-50 transition flex items-center justify-center">
+                        Masuk
                     </a>
-                    <a href="{{ route('demo.login') }}" class="py-2.5 px-3 rounded-xl bg-[#FFB7B2] hover:bg-[#FF9E98] text-[#292524] text-center text-xs font-bold transition shadow-soft flex items-center justify-center gap-1.5">
-                        <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
-                        <span>Coba Demo</span>
+                    <a href="{{ route('register') }}" class="py-2.5 px-3 rounded-xl bg-[#FFB7B2] hover:bg-[#FF9E98] text-[#292524] text-center text-xs font-bold transition shadow-soft flex items-center justify-center gap-1.5">
+                        <span>Daftar Sekarang</span>
+                        <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
                     </a>
                 </div>
             @endauth
@@ -293,22 +295,34 @@
             </div>
 
             <!-- Micro Stats Ticker with Dynamic Count-up Animation -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto pt-6 border-t border-stone-200/70 text-left">
-                <div class="p-4 bg-white rounded-2xl border border-stone-200/70 card-lift shadow-xs">
-                    <span class="text-xs text-[#78716C]">Sampah Terkelola</span>
-                    <p class="font-outfit text-xl font-bold text-[#292524] stat-counter mt-0.5" data-target="{{ (float)$stats['total_waste_kg'] }}" data-suffix=" kg">{{ number_format($stats['total_waste_kg']) }} kg</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4 max-w-3xl mx-auto pt-6 border-t border-stone-200/70 text-left">
+                <div class="p-3 sm:p-4 bg-white rounded-xl sm:rounded-2xl border border-stone-200/70 card-lift shadow-xs">
+                    <span class="text-[11px] sm:text-xs text-[#78716C] block truncate">Sampah Terkelola</span>
+                    <p class="font-outfit text-base xs:text-lg sm:text-xl font-bold text-[#292524] mt-0.5 whitespace-nowrap flex items-baseline gap-1">
+                        <span class="stat-counter" data-target="{{ (float)$stats['total_waste_kg'] }}">{{ number_format($stats['total_waste_kg']) }}</span>
+                        <span class="text-xs sm:text-sm font-semibold text-[#78716C]">kg</span>
+                    </p>
                 </div>
-                <div class="p-4 bg-white rounded-2xl border border-stone-200/70 card-lift shadow-xs">
-                    <span class="text-xs text-[#78716C]">Karbon Dicegah</span>
-                    <p class="font-outfit text-xl font-bold text-[#292524] stat-counter mt-0.5" data-target="{{ (float)$stats['co2_avoided_kg'] }}" data-suffix=" kg CO₂e">{{ number_format($stats['co2_avoided_kg']) }} kg CO₂e</p>
+                <div class="p-3 sm:p-4 bg-white rounded-xl sm:rounded-2xl border border-stone-200/70 card-lift shadow-xs">
+                    <span class="text-[11px] sm:text-xs text-[#78716C] block truncate">Karbon Dicegah</span>
+                    <p class="font-outfit text-base xs:text-lg sm:text-xl font-bold text-[#292524] mt-0.5 whitespace-nowrap flex items-baseline gap-1">
+                        <span class="stat-counter" data-target="{{ (float)$stats['co2_avoided_kg'] }}">{{ number_format($stats['co2_avoided_kg']) }}</span>
+                        <span class="text-xs sm:text-sm font-semibold text-[#78716C]">kg CO₂e</span>
+                    </p>
                 </div>
-                <div class="p-4 bg-white rounded-2xl border border-stone-200/70 card-lift shadow-xs">
-                    <span class="text-xs text-[#78716C]">Mitra Bank Sampah</span>
-                    <p class="font-outfit text-xl font-bold text-[#292524] stat-counter mt-0.5" data-target="{{ (int)$stats['active_partners'] }}" data-suffix=" Lokasi">{{ $stats['active_partners'] }} Lokasi</p>
+                <div class="p-3 sm:p-4 bg-white rounded-xl sm:rounded-2xl border border-stone-200/70 card-lift shadow-xs">
+                    <span class="text-[11px] sm:text-xs text-[#78716C] block truncate">Mitra Bank Sampah</span>
+                    <p class="font-outfit text-base xs:text-lg sm:text-xl font-bold text-[#292524] mt-0.5 whitespace-nowrap flex items-baseline gap-1">
+                        <span class="stat-counter" data-target="{{ (int)$stats['active_partners'] }}">{{ $stats['active_partners'] }}</span>
+                        <span class="text-xs sm:text-sm font-semibold text-[#78716C]">Lokasi</span>
+                    </p>
                 </div>
-                <div class="p-4 bg-white rounded-2xl border border-stone-200/70 card-lift shadow-xs">
-                    <span class="text-xs text-[#78716C]">Komunitas Terdaftar</span>
-                    <p class="font-outfit text-xl font-bold text-[#292524] stat-counter mt-0.5" data-target="{{ (int)$stats['community_members'] }}" data-suffix=" Jiwa">{{ number_format($stats['community_members']) }} Jiwa</p>
+                <div class="p-3 sm:p-4 bg-white rounded-xl sm:rounded-2xl border border-stone-200/70 card-lift shadow-xs">
+                    <span class="text-[11px] sm:text-xs text-[#78716C] block truncate">Komunitas Terdaftar</span>
+                    <p class="font-outfit text-base xs:text-lg sm:text-xl font-bold text-[#292524] mt-0.5 whitespace-nowrap flex items-baseline gap-1">
+                        <span class="stat-counter" data-target="{{ (int)$stats['community_members'] }}">{{ number_format($stats['community_members']) }}</span>
+                        <span class="text-xs sm:text-sm font-semibold text-[#78716C]">Jiwa</span>
+                    </p>
                 </div>
             </div>
         </section>
