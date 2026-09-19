@@ -20,9 +20,13 @@ class AutoLoginMiddleware
         // Don't auto-login on guest-facing landing page and auth pages
         // to allow genuine guest visitors to see login/register prompts
         if (! Auth::check() && ! $request->is('/', 'login', 'register')) {
-            $defaultUser = User::where('email', 'zidan@olara.id')->first() ?? User::first();
-            if ($defaultUser) {
-                Auth::login($defaultUser);
+            try {
+                $defaultUser = User::where('email', 'zidan@olara.id')->first() ?? User::first();
+                if ($defaultUser) {
+                    Auth::login($defaultUser);
+                }
+            } catch (\Throwable $e) {
+                // Ignore DB error during auto login
             }
         }
 

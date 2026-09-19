@@ -1,6 +1,5 @@
 <?php
 
-// Serverless storage and cache configuration
 $_ENV['LARAVEL_STORAGE_PATH'] = '/tmp/storage';
 $_SERVER['LARAVEL_STORAGE_PATH'] = '/tmp/storage';
 putenv('LARAVEL_STORAGE_PATH=/tmp/storage');
@@ -29,6 +28,12 @@ $_ENV['APP_EVENTS_CACHE'] = '/tmp/storage/framework/cache/events.php';
 $_SERVER['APP_EVENTS_CACHE'] = '/tmp/storage/framework/cache/events.php';
 putenv('APP_EVENTS_CACHE=/tmp/storage/framework/cache/events.php');
 
+if (! getenv('APP_MAINTENANCE_DRIVER') && empty($_ENV['APP_MAINTENANCE_DRIVER'])) {
+    $_ENV['APP_MAINTENANCE_DRIVER'] = 'array';
+    $_SERVER['APP_MAINTENANCE_DRIVER'] = 'array';
+    putenv('APP_MAINTENANCE_DRIVER=array');
+}
+
 if (! getenv('SESSION_DRIVER') && empty($_ENV['SESSION_DRIVER'])) {
     $_ENV['SESSION_DRIVER'] = 'cookie';
     $_SERVER['SESSION_DRIVER'] = 'cookie';
@@ -49,7 +54,11 @@ if (! getenv('LOG_CHANNEL') && empty($_ENV['LOG_CHANNEL'])) {
 
 // Ensure storage subdirectories exist in /tmp for Vercel serverless environment
 $storageDirs = [
+    '/tmp/storage',
+    '/tmp/storage/app',
     '/tmp/storage/app/public',
+    '/tmp/storage/framework',
+    '/tmp/storage/framework/cache',
     '/tmp/storage/framework/cache/data',
     '/tmp/storage/framework/sessions',
     '/tmp/storage/framework/views',
@@ -58,7 +67,7 @@ $storageDirs = [
 
 foreach ($storageDirs as $dir) {
     if (! is_dir($dir)) {
-        mkdir($dir, 0755, true);
+        @mkdir($dir, 0755, true);
     }
 }
 
