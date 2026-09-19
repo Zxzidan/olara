@@ -18,7 +18,7 @@ Route::get('/', [LandingController::class, 'index'])->name('landing');
 // 2. Dashboard
 Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
 
-// 3. Authentication
+// 3. Authentication Routes
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
