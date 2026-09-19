@@ -7,26 +7,26 @@
     <div class="max-w-md mx-auto">
 
         <!-- Welcome Bonus Pill Banner -->
-        <div class="bg-[#EEF9F2] border border-[#BFE7D0] p-4 rounded-2xl mb-6 shadow-sm flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-[#168A5B] text-white flex items-center justify-center shrink-0 text-lg">
+        <div class="bg-[#FFE4E1]/60 border border-[#FFB7B2]/70 p-4 rounded-3xl mb-6 shadow-soft flex items-center gap-3">
+            <div class="w-10 h-10 rounded-2xl bg-[#FFB7B2] text-[#292524] flex items-center justify-center shrink-0 text-lg shadow-sm">
                 🎁
             </div>
             <div>
-                <span class="text-xs font-bold uppercase tracking-wider text-[#168A5B]">Bonus Pengguna Baru</span>
-                <p class="text-xs text-[#0B4F38] font-medium leading-tight mt-0.5">
+                <span class="text-xs font-bold uppercase tracking-wider text-[#a7322b]">Bonus Pengguna Baru</span>
+                <p class="text-xs text-[#292524] font-medium leading-tight mt-0.5">
                     Dapatkan <strong>50 Eco-Points otomatis</strong> saat Anda mendaftarkan akun baru hari ini!
                 </p>
             </div>
         </div>
 
         <!-- Auth Card -->
-        <div class="bg-white border border-[#DDE3DF] rounded-3xl p-6 sm:p-8 shadow-sm">
+        <div class="bg-white border border-stone-200/80 rounded-[2rem] p-6 sm:p-8 shadow-soft">
             <!-- Mode Toggle Tabs -->
-            <div class="flex rounded-xl bg-[#F7F8F6] p-1 mb-6">
-                <button type="button" onclick="switchAuthTab('login')" id="tabLoginBtn" class="flex-1 py-2 text-xs font-bold rounded-lg transition {{ $mode === 'login' ? 'bg-white text-[#0B4F38] shadow-sm' : 'text-[#66716B]' }}">
+            <div class="flex rounded-2xl bg-stone-100 p-1 mb-6">
+                <button type="button" onclick="switchAuthTab('login')" id="tabLoginBtn" class="flex-1 py-2.5 text-xs font-bold rounded-xl transition {{ $mode === 'login' ? 'bg-white text-stone-900 shadow-sm' : 'text-stone-500' }}">
                     Masuk
                 </button>
-                <button type="button" onclick="switchAuthTab('register')" id="tabRegisterBtn" class="flex-1 py-2 text-xs font-bold rounded-lg transition {{ $mode === 'register' ? 'bg-white text-[#0B4F38] shadow-sm' : 'text-[#66716B]' }}">
+                <button type="button" onclick="switchAuthTab('register')" id="tabRegisterBtn" class="flex-1 py-2.5 text-xs font-bold rounded-xl transition {{ $mode === 'register' ? 'bg-white text-stone-900 shadow-sm' : 'text-stone-500' }}">
                     Daftar (+50 Pts)
                 </button>
             </div>
@@ -34,39 +34,39 @@
             <!-- Login Form -->
             <div id="loginFormContainer" class="{{ $mode === 'login' ? '' : 'hidden' }}">
                 <div class="mb-6">
-                    <h2 class="text-xl font-extrabold text-[#1B211E]">Masuk ke Akun OLARA</h2>
-                    <p class="text-xs text-[#66716B] mt-1">Lanjutkan pengelolaan sampah dan pantau poin Anda.</p>
+                    <h2 class="text-xl font-bold font-outfit text-stone-900">Masuk ke Akun OLARA</h2>
+                    <p class="text-xs text-stone-500 mt-1">Lanjutkan pengelolaan sampah dan pantau poin Anda.</p>
                 </div>
 
                 <form action="{{ route('login.submit') }}" method="POST" class="space-y-4">
                     @csrf
                     <div>
-                        <label for="login_email" class="block text-xs font-bold text-[#1B211E] mb-1.5">Alamat Surel</label>
-                        <input type="email" name="email" id="login_email" value="{{ old('email', 'zidan@olara.id') }}" required class="w-full px-4 py-2.5 rounded-xl border border-[#DDE3DF] text-sm focus:outline-none focus:ring-2 focus:ring-[#168A5B] focus:border-transparent transition" placeholder="nama@email.com" />
+                        <label for="login_email" class="block text-xs font-bold text-stone-800 mb-1.5">Alamat Surel</label>
+                        <input type="email" name="email" id="login_email" value="{{ old('email', 'zidan@olara.id') }}" required class="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFB7B2] focus:border-transparent transition" placeholder="nama@email.com" />
                     </div>
 
                     <div>
                         <div class="flex items-center justify-between mb-1.5">
-                            <label for="login_password" class="block text-xs font-bold text-[#1B211E]">Kata Sandi</label>
-                            <span class="text-[11px] text-[#168A5B] hover:underline cursor-pointer">Lupa kata sandi?</span>
+                            <label for="login_password" class="block text-xs font-bold text-stone-800">Kata Sandi</label>
+                            <span class="text-[11px] text-stone-500 hover:text-stone-800 cursor-pointer">Lupa kata sandi?</span>
                         </div>
-                        <input type="password" name="password" id="login_password" value="password123" required class="w-full px-4 py-2.5 rounded-xl border border-[#DDE3DF] text-sm focus:outline-none focus:ring-2 focus:ring-[#168A5B] focus:border-transparent transition" placeholder="••••••••" />
+                        <input type="password" name="password" id="login_password" value="password123" required class="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFB7B2] focus:border-transparent transition" placeholder="••••••••" />
                     </div>
 
                     <div class="flex items-center">
-                        <input type="checkbox" name="remember" id="remember" class="w-4 h-4 text-[#168A5B] rounded border-gray-300 focus:ring-[#168A5B]" checked />
-                        <label for="remember" class="ml-2 text-xs text-[#66716B]">Ingat saya di perangkat ini</label>
+                        <input type="checkbox" name="remember" id="remember" class="w-4 h-4 text-stone-800 rounded border-stone-300 focus:ring-[#FFB7B2]" checked />
+                        <label for="remember" class="ml-2 text-xs text-stone-600">Ingat saya di perangkat ini</label>
                     </div>
 
-                    <button type="submit" class="w-full py-3 px-4 rounded-xl bg-[#168A5B] hover:bg-[#0F6B47] text-white text-sm font-bold shadow-sm transition">
+                    <button type="submit" class="w-full py-3 px-4 rounded-xl bg-[#292524] hover:bg-stone-800 text-white text-sm font-bold shadow-soft transition">
                         Masuk ke Akun
                     </button>
                 </form>
 
                 <!-- Fast Demo Login Button -->
-                <div class="mt-4 pt-4 border-t border-gray-100 text-center">
-                    <a href="{{ route('demo.login') }}" class="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-[#EEF9F2] hover:bg-[#DDF4E8] text-[#0B4F38] text-xs font-bold border border-[#BFE7D0] transition">
-                        <i data-lucide="zap" class="w-4 h-4 text-[#168A5B]"></i> 1-Klik Masuk sebagai Akun Demo (Zidan Ramadhan)
+                <div class="mt-4 pt-4 border-t border-stone-100 text-center">
+                    <a href="{{ route('demo.login') }}" class="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-[#E8EFE8] hover:bg-[#dfeadf] text-stone-800 text-xs font-bold border border-[#C8D7C8] transition">
+                        <i data-lucide="zap" class="w-4 h-4 text-emerald-700"></i> 1-Klik Masuk sebagai Akun Demo (Zidan Ramadhan)
                     </a>
                 </div>
             </div>

@@ -17,7 +17,9 @@ class AutoLoginMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (! Auth::check()) {
+        // Don't auto-login on guest-facing landing page and auth pages
+        // to allow genuine guest visitors to see login/register prompts
+        if (! Auth::check() && ! $request->is('/', 'login', 'register')) {
             $defaultUser = User::where('email', 'zidan@olara.id')->first() ?? User::first();
             if ($defaultUser) {
                 Auth::login($defaultUser);

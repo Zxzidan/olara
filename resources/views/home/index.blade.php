@@ -10,7 +10,7 @@
         <div>
             <div class="flex items-center gap-2 flex-wrap">
                 <h1 class="text-xl sm:text-2xl font-extrabold text-gray-900 dark:text-white tracking-tight">
-                    Halo, {{ $user ? explode(' ', $user->name)[0] : 'Pejuang Bumi' }}! 👋
+                    Halo, {{ $user ? explode(' ', $user->name)[0] : 'Pejuang Bumi' }}!
                 </h1>
                 <span class="inline-flex items-center gap-1 bg-emerald-100 text-emerald-800 dark:bg-emerald-900/80 dark:text-emerald-300 text-xs font-bold px-2.5 py-0.5 rounded-full">
                     <i data-lucide="award" class="w-3.5 h-3.5"></i> {{ $tierName }}
@@ -22,7 +22,7 @@
                 @endif
             </div>
             <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-1">
-                Kelola sampah daur ulang Anda hari ini, jaga bumi, dan tingkatkan saldo Eco-Points.
+                Kelola sampah pilahan dan kumpulkan poinmu.
             </p>
         </div>
 
@@ -31,7 +31,7 @@
                 <i data-lucide="compass" class="w-4 h-4 text-primary-600 dark:text-primary-400"></i> Panduan
             </button>
             <a href="{{ route('scanner.index') }}" class="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold rounded-lg bg-primary-600 hover:bg-primary-700 text-white shadow-sm transition">
-                <i data-lucide="scan-line" class="w-4 h-4"></i> Scan Kamera AI
+                <i data-lucide="scan-line" class="w-4 h-4"></i> Scan AI
             </a>
         </div>
     </div>
@@ -42,7 +42,7 @@
         <div class="bg-white dark:bg-gray-800 p-4 sm:p-5 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm relative overflow-hidden group">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Saldo Eco-Points</p>
+                    <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Saldo Poin</p>
                     <h3 class="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white mt-1 tabular-nums">
                         {{ number_format($user?->eco_points ?? 0) }}
                     </h3>
@@ -63,7 +63,7 @@
         <div class="bg-white dark:bg-gray-800 p-4 sm:p-5 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm relative overflow-hidden group">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Sampah Terkelola</p>
+                    <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Sampah Dikelola</p>
                     <h3 class="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white mt-1 tabular-nums">
                         {{ number_format($totalWasteManaged, 1) }} <span class="text-base font-medium text-gray-500 dark:text-gray-400">kg</span>
                     </h3>
@@ -84,7 +84,7 @@
         <div class="bg-white dark:bg-gray-800 p-4 sm:p-5 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm relative overflow-hidden group">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">CO₂ Terhindar</p>
+                    <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">CO₂ Dicegah</p>
                     <h3 class="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white mt-1 tabular-nums">
                         {{ number_format($totalCo2Avoided, 1) }} <span class="text-base font-medium text-gray-500 dark:text-gray-400">kg</span>
                     </h3>
@@ -94,7 +94,7 @@
                 </div>
             </div>
             <div class="mt-3 flex items-center justify-between text-xs pt-2 border-t border-gray-100 dark:border-gray-700">
-                <span class="text-gray-500 dark:text-gray-400">Setara jejak karbon</span>
+                <span class="text-gray-500 dark:text-gray-400">Pengurangan emisi</span>
                 <a href="{{ route('analytics.index') }}" class="text-teal-600 dark:text-teal-400 font-bold hover:underline inline-flex items-center gap-0.5">
                     Analisis <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
                 </a>
@@ -140,7 +140,7 @@
                     <div class="bg-primary-600 h-3.5 rounded-full transition-all duration-500" style="width: {{ $tierProgressPercent }}%"></div>
                 </div>
                 <p class="text-[11px] text-gray-500 dark:text-gray-400">
-                    Kumpulkan poin dengan memindai sampah dengan kamera AI (+10 Pts) atau setor ke bank sampah terdekat untuk naik level.
+                    Scan sampah (+10 Pts) atau setor ke mitra untuk naik level.
                 </p>
             </div>
 
@@ -180,7 +180,7 @@
                 </div>
             </div>
             <a href="{{ route('pickup.show', $activePickup->pickup_code) }}" class="inline-flex items-center justify-center px-3.5 py-2 text-xs font-bold rounded-lg bg-primary-600 hover:bg-primary-700 text-white shadow-sm transition shrink-0">
-                Lacak Penjemputan →
+                Lacak Armada →
             </a>
         </div>
     @endif
@@ -192,7 +192,7 @@
             <div class="flex items-center justify-between mb-4">
                 <div class="flex items-center gap-2">
                     <i data-lucide="scan-line" class="w-5 h-5 text-primary-600 dark:text-primary-400"></i>
-                    <h3 class="text-sm sm:text-base font-bold text-gray-900 dark:text-white">Hasil Pindai Kamera AI Terbaru</h3>
+                    <h3 class="text-sm sm:text-base font-bold text-gray-900 dark:text-white">Riwayat Scan AI</h3>
                 </div>
                 <a href="{{ route('scanner.index') }}" class="text-xs font-bold text-primary-600 dark:text-primary-400 hover:underline">
                     Scan Baru →
@@ -202,8 +202,7 @@
             @if($recentAnalysis->isEmpty())
                 <div class="text-center py-8 text-gray-400 dark:text-gray-500 text-xs">
                     <i data-lucide="scan" class="w-10 h-10 mx-auto mb-2 opacity-50"></i>
-                    Belum ada riwayat pemindaian sampah.<br />
-                    Arahkan kamera smartphone ke botol atau material daur ulang Anda!
+                    Belum ada riwayat scan sampah.
                 </div>
             @else
                 <div class="divide-y divide-gray-100 dark:divide-gray-700">
@@ -241,7 +240,7 @@
             <div class="flex items-center justify-between mb-4">
                 <div class="flex items-center gap-2">
                     <i data-lucide="history" class="w-5 h-5 text-emerald-600 dark:text-emerald-400"></i>
-                    <h3 class="text-sm sm:text-base font-bold text-gray-900 dark:text-white">Riwayat Transaksi Eco-Points</h3>
+                    <h3 class="text-sm sm:text-base font-bold text-gray-900 dark:text-white">Transaksi Poin</h3>
                 </div>
                 <a href="{{ route('rewards.index') }}" class="text-xs font-bold text-primary-600 dark:text-primary-400 hover:underline">
                     Lihat Dompet →

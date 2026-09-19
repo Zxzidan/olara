@@ -6,10 +6,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'OLARA — Olah Kembali, Jaga Bumi')</title>
 
-    <!-- Google Fonts: Inter -->
+    <!-- Google Fonts: Plus Jakarta Sans, Outfit, Reenie Beanie -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Reenie+Beanie&display=swap" rel="stylesheet">
 
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
@@ -37,11 +37,13 @@
 
     @stack('styles')
 </head>
-<body class="font-sans antialiased bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen flex flex-col">
+<body class="font-sans antialiased bg-[#FDFCF8] dark:bg-stone-900 text-stone-800 dark:text-stone-100 min-h-screen flex flex-col">
+  <!-- Subtle Analog Grain Overlay -->
+  <div class="grain-overlay" aria-hidden="true"></div>
 
-  <div class="antialiased bg-gray-50 dark:bg-gray-900 min-h-screen">
+  <div class="antialiased bg-[#FDFCF8] dark:bg-stone-900 min-h-screen">
     <!-- Top Navigation Bar -->
-    <nav class="bg-white border-b border-gray-200 px-4 py-2.5 dark:bg-gray-800 dark:border-gray-700 fixed left-0 right-0 top-0 z-50">
+    <nav class="bg-[#FDFCF8]/90 border-b border-stone-200/80 px-4 py-2.5 backdrop-blur-md dark:bg-stone-900/90 dark:border-stone-800 fixed left-0 right-0 top-0 z-50 transition-colors">
       <div class="flex flex-wrap justify-between items-center">
         <!-- Brand & Mobile Toggle -->
         <div class="flex justify-start items-center">
@@ -58,12 +60,16 @@
             <span class="sr-only">Toggle sidebar</span>
           </button>
 
-          <a href="{{ route('home') }}" class="flex items-center mr-3 sm:mr-4 group py-0.5" title="OLARA — Pengelola Sampah Plastik">
+          <a href="{{ route('home') }}" class="flex items-center gap-2.5 mr-3 sm:mr-4 group py-0.5" title="OLARA — Sirkular Bumi">
             <img
-              src="{{ asset('assets/img/LOGO ORALA.png') }}"
-              alt="OLARA — Pengelola Sampah Plastik"
-              class="h-8 sm:h-9 md:h-10 w-auto object-contain rounded-lg dark:bg-white/95 dark:p-0.5 transition-transform group-hover:scale-105"
+              src="{{ asset('assets/img/logo-emblem.png') }}"
+              alt="OLARA — Sirkular Bumi"
+              class="h-8 sm:h-9 w-auto object-contain transition-transform group-hover:scale-105"
             />
+            <div class="flex flex-col">
+              <span class="font-outfit font-extrabold text-base tracking-tight text-stone-900 dark:text-white leading-none">OLARA</span>
+              <span class="text-[9px] font-semibold text-stone-500 dark:text-stone-400 tracking-widest uppercase mt-0.5">Sirkular Bumi</span>
+            </div>
           </a>
 
           <!-- Topbar Search -->
@@ -285,15 +291,15 @@
 
     <!-- Sidebar Navigation -->
     <aside
-      class="fixed top-0 left-0 z-40 w-64 h-screen pt-14 bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700 transition-transform duration-300 ease-in-out"
+      class="fixed top-0 left-0 z-40 w-64 h-screen pt-14 bg-[#FDFCF8] border-r border-stone-200/80 dark:bg-stone-900 dark:border-stone-800 transition-transform duration-300 ease-in-out"
       aria-label="Sidenav"
       id="drawer-navigation"
     >
-      <div class="overflow-y-auto py-5 px-3 h-full bg-white dark:bg-gray-800">
+      <div class="overflow-y-auto py-5 px-3 h-full bg-[#FDFCF8] dark:bg-stone-900">
         <!-- Mobile Sidebar Close Header -->
-        <div class="flex items-center justify-between pb-2 mb-2 border-b border-gray-100 dark:border-gray-700 md:hidden">
-          <span class="text-xs font-bold uppercase tracking-wider text-gray-400">Navigasi OLARA</span>
-          <button id="sidebar-close-btn" type="button" onclick="closeMobileSidebar()" class="p-1.5 text-gray-500 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer" title="Tutup Menu">
+        <div class="flex items-center justify-between pb-2 mb-2 border-b border-stone-200/60 dark:border-stone-800 md:hidden">
+          <span class="text-xs font-bold uppercase tracking-wider text-stone-400">Navigasi OLARA</span>
+          <button id="sidebar-close-btn" type="button" onclick="closeMobileSidebar()" class="p-1.5 text-stone-500 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800 cursor-pointer" title="Tutup Menu">
             <i data-lucide="x" class="w-5 h-5"></i>
           </button>
         </div>
@@ -301,14 +307,14 @@
         <form action="{{ route('dropoff.index') }}" method="GET" class="md:hidden mb-3">
           <label for="sidebar-search" class="sr-only">Search</label>
           <div class="relative">
-            <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none text-gray-400">
+            <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none text-stone-400">
               <i data-lucide="search" class="w-4 h-4"></i>
             </div>
             <input
               type="text"
               name="search"
               id="sidebar-search"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-9 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+              class="bg-stone-50 border border-stone-200 text-stone-800 text-sm rounded-xl focus:ring-[#FFB7B2] focus:border-[#FFB7B2] block w-full pl-9 p-2 dark:bg-stone-800 dark:border-stone-700 dark:placeholder-stone-400 dark:text-white"
               placeholder="Cari lokasi dropoff..."
             />
           </div>
@@ -316,20 +322,32 @@
 
         <!-- Main Navigation Links -->
         <ul class="space-y-1.5 font-medium">
+          <!-- Landing Page Quick Link -->
+          <li>
+            <a
+              href="{{ route('landing') }}"
+              class="flex items-center p-2 text-sm rounded-xl transition-colors group text-stone-600 dark:text-stone-300 hover:bg-[#FFE4E1]/40 dark:hover:bg-stone-800 hover:text-stone-900 dark:hover:text-white"
+            >
+              <i data-lucide="sparkles" class="w-5 h-5 text-[#ff948d] group-hover:scale-110 transition-transform"></i>
+              <span class="ml-3">Halaman Utama</span>
+              <span class="ml-auto text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-[#FFE4E1] text-[#a7322b]">Web</span>
+            </a>
+          </li>
+
           <!-- Overview -->
           <li>
             <a
               href="{{ route('home') }}"
-              class="flex items-center p-2 text-sm rounded-lg transition-colors group {{ request()->routeIs('home') ? 'bg-primary-50 text-primary-700 dark:bg-primary-950 dark:text-primary-300 font-bold' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white' }}"
+              class="flex items-center p-2 text-sm rounded-xl transition-colors group {{ request()->routeIs('home') ? 'bg-[#FFE4E1]/60 text-stone-900 dark:bg-stone-800 dark:text-white font-bold shadow-sm' : 'text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 hover:text-stone-900 dark:hover:text-white' }}"
             >
-              <i data-lucide="layout-dashboard" class="w-5 h-5 {{ request()->routeIs('home') ? 'text-primary-600 dark:text-primary-400' : 'text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-200' }}"></i>
-              <span class="ml-3">Dashboard Utama</span>
+              <i data-lucide="layout-dashboard" class="w-5 h-5 {{ request()->routeIs('home') ? 'text-[#ef5348] dark:text-[#ffb7b2]' : 'text-stone-400 group-hover:text-stone-700 dark:group-hover:text-stone-200' }}"></i>
+              <span class="ml-3">Dashboard</span>
             </a>
           </li>
 
           <!-- Category Header: Layanan Inti -->
           <li class="pt-4 pb-1">
-            <span class="px-3 text-[11px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500">Layanan Sampah</span>
+            <span class="px-3 text-[11px] font-bold uppercase tracking-wider text-stone-400 dark:text-stone-500">Layanan Sampah</span>
           </li>
 
           <!-- 1. AI Scanner -->
@@ -339,7 +357,7 @@
               class="flex items-center p-2 text-sm rounded-lg transition-colors group {{ request()->routeIs('scanner.*') ? 'bg-primary-50 text-primary-700 dark:bg-primary-950 dark:text-primary-300 font-bold' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white' }}"
             >
               <i data-lucide="scan-line" class="w-5 h-5 {{ request()->routeIs('scanner.*') ? 'text-primary-600 dark:text-primary-400' : 'text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-200' }}"></i>
-              <span class="flex-1 ml-3 whitespace-nowrap">Scan Kamera AI</span>
+              <span class="flex-1 ml-3 whitespace-nowrap">Scan AI</span>
               <span class="inline-flex items-center justify-center px-2 py-0.5 text-[10px] font-bold rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-300">
                 +10 Pts
               </span>
@@ -364,7 +382,7 @@
               class="flex items-center p-2 text-sm rounded-lg transition-colors group {{ request()->routeIs('dropoff.*') ? 'bg-primary-50 text-primary-700 dark:bg-primary-950 dark:text-primary-300 font-bold' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white' }}"
             >
               <i data-lucide="map-pin" class="w-5 h-5 {{ request()->routeIs('dropoff.*') ? 'text-primary-600 dark:text-primary-400' : 'text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-200' }}"></i>
-              <span class="flex-1 ml-3 whitespace-nowrap">Peta Bank Sampah</span>
+              <span class="flex-1 ml-3 whitespace-nowrap">Peta Mitra</span>
             </a>
           </li>
 
@@ -380,7 +398,7 @@
               class="flex items-center p-2 text-sm rounded-lg transition-colors group {{ request()->routeIs('rewards.*') ? 'bg-primary-50 text-primary-700 dark:bg-primary-950 dark:text-primary-300 font-bold' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white' }}"
             >
               <i data-lucide="gift" class="w-5 h-5 {{ request()->routeIs('rewards.*') ? 'text-primary-600 dark:text-primary-400' : 'text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-200' }}"></i>
-              <span class="flex-1 ml-3 whitespace-nowrap">Tukar Eco-Points</span>
+              <span class="flex-1 ml-3 whitespace-nowrap">Tukar Poin</span>
               <span class="inline-flex items-center justify-center w-5 h-5 text-xs font-bold rounded-full text-white bg-emerald-600">
                 ★
               </span>
@@ -396,7 +414,7 @@
               class="flex items-center w-full p-2 text-sm rounded-lg transition-colors group cursor-pointer {{ request()->routeIs('marketplace.*') ? 'bg-primary-50 text-primary-700 dark:bg-primary-950 dark:text-primary-300 font-bold' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white' }}"
             >
               <i data-lucide="shopping-bag" class="w-5 h-5 {{ request()->routeIs('marketplace.*') ? 'text-primary-600 dark:text-primary-400' : 'text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-200' }}"></i>
-              <span class="flex-1 ml-3 text-left whitespace-nowrap">Marketplace Daur Ulang</span>
+              <span class="flex-1 ml-3 text-left whitespace-nowrap">Marketplace B2B</span>
               <span id="marketplace-chevron-wrapper" class="inline-flex transition-transform duration-200 {{ request()->routeIs('marketplace.*') ? 'rotate-180' : '' }}">
                 <i data-lucide="chevron-down" id="marketplace-chevron" class="w-4 h-4 text-gray-400"></i>
               </span>
@@ -408,7 +426,7 @@
                 class="flex items-center gap-2 p-2 text-xs rounded-lg transition-colors {{ request()->routeIs('marketplace.index') ? 'text-primary-600 font-bold dark:text-primary-400 bg-primary-100/50 dark:bg-primary-900/40' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white' }}"
               >
                 <i data-lucide="store" class="w-3.5 h-3.5"></i>
-                <span>Katalog Bahan Baku</span>
+                <span>Katalog Produk</span>
               </a>
               <a
                 href="{{ route('marketplace.orders') }}"
@@ -417,7 +435,7 @@
               >
                 <span class="flex items-center gap-2">
                   <i data-lucide="truck" class="w-3.5 h-3.5"></i>
-                  <span>Pelacakan Pesanan</span>
+                  <span>Lacak Pesanan</span>
                 </span>
                 <span class="px-1.5 py-0.5 text-[9px] font-bold rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950/80 dark:text-emerald-300">
                   Live
@@ -433,7 +451,7 @@
               class="flex items-center p-2 text-sm rounded-lg transition-colors group {{ request()->routeIs('analytics.*') ? 'bg-primary-50 text-primary-700 dark:bg-primary-950 dark:text-primary-300 font-bold' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white' }}"
             >
               <i data-lucide="bar-chart-3" class="w-5 h-5 {{ request()->routeIs('analytics.*') ? 'text-primary-600 dark:text-primary-400' : 'text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-200' }}"></i>
-              <span class="flex-1 ml-3 whitespace-nowrap">Dampak Jejak Karbon</span>
+              <span class="flex-1 ml-3 whitespace-nowrap">Dampak Karbon</span>
             </a>
           </li>
 
@@ -444,7 +462,7 @@
               class="flex items-center p-2 text-sm rounded-lg transition-colors group {{ request()->routeIs('membership.*') ? 'bg-primary-50 text-primary-700 dark:bg-primary-950 dark:text-primary-300 font-bold' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white' }}"
             >
               <i data-lucide="crown" class="w-5 h-5 {{ request()->routeIs('membership.*') ? 'text-primary-600 dark:text-primary-400' : 'text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-200' }}"></i>
-              <span class="flex-1 ml-3 whitespace-nowrap">Paket Membership</span>
+              <span class="flex-1 ml-3 whitespace-nowrap">Membership</span>
             </a>
           </li>
         </ul>
@@ -458,7 +476,7 @@
               class="w-full flex items-center p-2 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white group"
             >
               <i data-lucide="help-circle" class="w-5 h-5 text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-200"></i>
-              <span class="ml-3">Panduan Edukasi</span>
+              <span class="ml-3">Panduan</span>
             </button>
           </li>
           <li>
@@ -467,7 +485,7 @@
               class="flex items-center p-2 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white group"
             >
               <i data-lucide="refresh-cw" class="w-5 h-5 text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-200"></i>
-              <span class="ml-3">Reset Akun Demo</span>
+              <span class="ml-3">Akun Demo</span>
             </a>
           </li>
         </ul>
@@ -541,9 +559,9 @@
           </div>
           <div>
             <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950 px-2.5 py-1 rounded-full">Langkah 1 dari 3</span>
-            <h3 class="text-xl font-bold text-gray-900 dark:text-white mt-2">Pindai Sampah dengan Kamera AI</h3>
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mt-2">Pindai Sampah via AI</h3>
             <p class="text-sm text-gray-600 dark:text-gray-300 mt-1.5 leading-relaxed">
-              Cukup arahkan kamera smartphone ke material sampah Anda. AI cerdas OLARA akan mendeteksi jenis plastik, tingkat kontaminasi, dan valuasi pasar secara instan.
+              Arahkan kamera ke sampah. AI langsung mengenali jenis material dan estimasi harganya.
             </p>
           </div>
         </div>
@@ -555,9 +573,9 @@
           </div>
           <div>
             <span class="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950 px-2.5 py-1 rounded-full">Langkah 2 dari 3</span>
-            <h3 class="text-xl font-bold text-gray-900 dark:text-white mt-2">Jemput atau Setor ke Mitra Terdekat</h3>
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mt-2">Jemput atau Setor Mandiri</h3>
             <p class="text-sm text-gray-600 dark:text-gray-300 mt-1.5 leading-relaxed">
-              Pesan armada kurir untuk menjemput sampah ke depan rumah Anda, atau bawa langsung ke mitra Bank Sampah terdekat lewat panduan peta interaktif.
+              Pesan armada jemput ke rumah atau bawa langsung ke Bank Sampah mitra terdekat.
             </p>
           </div>
         </div>
@@ -569,9 +587,9 @@
           </div>
           <div>
             <span class="text-xs font-bold uppercase tracking-wider text-pink-600 dark:text-pink-400 bg-pink-50 dark:bg-pink-950 px-2.5 py-1 rounded-full">Langkah 3 dari 3</span>
-            <h3 class="text-xl font-bold text-gray-900 dark:text-white mt-2">Kumpulkan Eco-Points & Tukar Hadiah</h3>
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mt-2">Tukar Poin Jadi Hadiah</h3>
             <p class="text-sm text-gray-600 dark:text-gray-300 mt-1.5 leading-relaxed">
-              Setiap sampah yang terverifikasi menghasilkan Eco-Points. Tukarkan menjadi saldo GoPay, OVO, voucher belanja, atau donasi untuk bibit pohon mangrove!
+              Kumpulkan poin tiap setoran dan tukar jadi saldo e-wallet, voucher, atau bibit pohon.
             </p>
           </div>
         </div>
