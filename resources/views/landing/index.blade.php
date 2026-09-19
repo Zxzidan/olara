@@ -28,6 +28,91 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* 3D Dashboard Showcase Styles */
+        .perspective-container {
+            perspective: 3000px;
+        }
+
+        .dashboard-3d {
+            transform: rotateX(12deg) rotateY(-8deg) rotateZ(1deg);
+            box-shadow: -30px 50px 100px -20px rgba(41, 37, 36, 0.12), 
+                        0 10px 30px -5px rgba(41, 37, 36, 0.04);
+            transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .dashboard-3d:hover {
+            transform: rotateX(4deg) rotateY(-2deg) rotateZ(0deg);
+        }
+
+        .floating {
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0) scale(1); }
+            50% { transform: translateY(-30px) rotate(6deg) scale(1.04); }
+        }
+
+        /* Dynamic Mouse Cursor Animation */
+        .simulated-cursor {
+            position: absolute;
+            pointer-events: none;
+            z-index: 200;
+            transform: translate(120px, 120px);
+            filter: drop-shadow(0 8px 16px rgba(0,0,0,0.25));
+            transition: all 0.1s linear;
+        }
+
+        /* Sequential Form Animations */
+        .modal-element {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .modal-element.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Cursor Animation Timeline */
+        @keyframes cursor-flow {
+            0% { transform: translate(120px, 120px); }
+            15% { transform: translate(240px, 490px) scale(1); }
+            18% { transform: translate(240px, 490px) scale(0.82); }
+            21% { transform: translate(240px, 490px) scale(1); }
+            35% { transform: translate(460px, 260px); }
+            55% { transform: translate(460px, 350px); }
+            75% { transform: translate(460px, 520px); }
+            80% { transform: translate(460px, 520px) scale(0.85); }
+            100% { transform: translate(120px, 120px); }
+        }
+
+        .animate-cursor-journey {
+            animation: cursor-flow 18s infinite ease-in-out;
+        }
+
+        /* Gradient Shine */
+        .shine {
+            position: relative;
+            overflow: hidden;
+        }
+        .shine::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.25), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
     </style>
 </head>
 <body class="bg-[#FDFCF8] text-[#292524] font-sans antialiased selection:bg-[#FFB7B2] selection:text-[#292524] relative overflow-x-hidden">
@@ -226,158 +311,383 @@
         </section>
 
 
-        <!-- ===================================================================
-             3. APP EXPERIENCE PREVIEW
-        =================================================================== -->
-        <section id="preview" class="py-16 md:py-24 max-w-6xl mx-auto px-4 sm:px-6 reveal-item">
-            <div class="text-center max-w-2xl mx-auto mb-14">
-                <span class="text-xs font-bold uppercase tracking-wider text-[#cb3930] bg-[#FFB7B2]/20 border border-[#FFB7B2]/40 px-3 py-1 rounded-full">
-                    Preview Aplikasi
+        <section id="preview" style="scroll-margin-top: 90px;" class="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 reveal-item overflow-hidden">
+            <div class="text-center max-w-2xl mx-auto mb-10 md:mb-14">
+                <span class="text-xs font-bold uppercase tracking-wider text-[#cb3930] bg-[#FFB7B2]/20 border border-[#FFB7B2]/40 px-3.5 py-1 rounded-full">
+                    Preview Aplikasi & Dashboard
                 </span>
                 <h2 class="font-outfit text-3xl sm:text-4xl font-bold text-[#292524] mt-3">
-                    Seringan 
+                    Pengalaman Dashboard 
                     <span class="relative inline-block keyword-target">
-                        Hembusan Nafas
+                        Interaktif
                         <svg class="hand-drawn-underline" viewBox="0 0 160 14" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" aria-hidden="true">
                             <path d="M 3 9 C 35 3, 110 12, 157 5" stroke="#cb3930" stroke-width="3" stroke-linecap="round" class="underline-path" />
                         </svg>
                     </span>
                 </h2>
                 <p class="text-sm text-[#78716C] mt-2">
-                    Interaksi taktil, intuitif, dan bebas distraksi untuk kelestarian bumi.
+                    Pantau saldo poin, kelola pesanan jemput sampah, dan saksikan kontribusi nyata Anda bagi bumi dalam satu tampilan intuitif.
                 </p>
             </div>
 
-            <!-- Mockups Grid Container -->
-            <div class="relative flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8 pt-4 pb-12">
+            <!-- 3D Perspective Wrapper -->
+            <div class="relative w-full max-w-[1180px] mx-auto perspective-container my-4">
                 
-                <!-- Left Phone: Pickup Tracking (280x580px, +48px translateY, Clean Stone) -->
-                <div class="w-[280px] h-[540px] md:h-[580px] bg-stone-50 rounded-[2.5rem] p-4 border-[6px] border-white shadow-soft-lg md:translate-y-12 opacity-90 transition-transform duration-500 hover:opacity-100 hover:scale-[1.02] flex flex-col justify-between">
-                    <!-- Phone Notch & Status -->
-                    <div class="flex justify-between items-center px-3 pt-1 text-[11px] font-semibold text-stone-600">
-                        <span>09:41</span>
-                        <div class="w-16 h-3.5 bg-stone-300 rounded-full mx-auto"></div>
-                        <i data-lucide="wifi" class="w-3.5 h-3.5"></i>
-                    </div>
+                <!-- Background Parallax Ambient Glow Orbs -->
+                <div class="absolute -top-24 -left-20 w-72 h-72 bg-[#FFB7B2]/25 rounded-full blur-[100px] pointer-events-none" id="parallax-bg-1"></div>
+                <div class="absolute top-48 -right-24 w-80 h-80 bg-emerald-400/15 rounded-full blur-[120px] pointer-events-none" id="parallax-bg-2"></div>
 
-                    <!-- Screen Content -->
-                    <div class="bg-white rounded-3xl p-4 shadow-sm my-auto space-y-3 border border-stone-100">
-                        <div class="flex items-center justify-between">
-                            <span class="text-[11px] font-bold text-[#cb3930] bg-[#FFB7B2]/20 px-2 py-0.5 rounded-full">On The Way</span>
-                            <span class="text-[10px] text-stone-400">PKP-202609-089</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-2xl bg-stone-100 flex items-center justify-center text-[#292524] font-bold">
-                                <i data-lucide="truck" class="w-5 h-5"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-xs font-bold text-stone-800">Kurir Budi Santoso</h4>
-                                <p class="text-[10px] text-stone-500">Motor Listrik EV — B 4219 SZR</p>
-                            </div>
-                        </div>
-                        <div class="p-2.5 rounded-xl bg-stone-50 border border-stone-100 text-[11px] space-y-1">
-                            <div class="flex justify-between text-stone-600">
-                                <span>Estimasi Muatan:</span>
-                                <span class="font-bold text-stone-800">15.0 kg</span>
-                            </div>
-                            <div class="flex justify-between text-stone-600">
-                                <span>Total Ongkir:</span>
-                                <span class="font-bold text-stone-800">Rp 23.000</span>
-                            </div>
-                        </div>
+                <!-- Floating 3D Badges (Parallax Depth) -->
+                <div class="absolute -top-8 left-6 md:left-12 bg-white/95 backdrop-blur-md border border-stone-200/80 shadow-xl rounded-2xl p-3 sm:p-3.5 hidden sm:flex items-center gap-3 floating z-30 pointer-events-none" style="animation-delay: -0.5s;" id="parallax-icon-1">
+                    <div class="w-10 h-10 rounded-xl bg-[#FFE4E1] text-[#cb3930] flex items-center justify-center shrink-0 shadow-xs">
+                        <i data-lucide="coins" class="w-5 h-5"></i>
                     </div>
-
-                    <!-- Bottom Bar -->
-                    <div class="text-center py-1">
-                        <span class="text-[10px] font-medium text-stone-500">Pelacakan Armada Realtime</span>
+                    <div>
+                        <span class="text-xs font-bold text-stone-900 block">+150 Pts Setor Botol</span>
+                        <span class="text-[10px] text-stone-500 font-medium">Saldo Dompet Bertambah</span>
                     </div>
                 </div>
 
-                <!-- Center Phone: AI Scanner (300x620px, fully opaque, pulsing Coral button) -->
-                <div class="w-[300px] h-[580px] md:h-[620px] bg-white rounded-[2.8rem] p-4 border-[7px] border-stone-800 shadow-2xl relative z-20 flex flex-col justify-between">
-                    <!-- Phone Speaker Notch -->
-                    <div class="flex justify-between items-center px-3 pt-1 text-[11px] font-semibold text-stone-600">
-                        <span>09:41</span>
-                        <div class="w-20 h-4 bg-stone-900 rounded-full mx-auto"></div>
-                        <i data-lucide="battery-charging" class="w-4 h-4 text-stone-700"></i>
+                <div class="absolute bottom-16 -left-4 md:-left-8 bg-white/95 backdrop-blur-md border border-stone-200/80 shadow-xl rounded-2xl p-3 sm:p-3.5 hidden sm:flex items-center gap-3 floating z-30 pointer-events-none" style="animation-delay: -3.2s;" id="parallax-icon-2">
+                    <div class="w-10 h-10 rounded-xl bg-[#E8EFE8] text-[#168A5B] flex items-center justify-center shrink-0 shadow-xs">
+                        <i data-lucide="leaf" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs font-bold text-stone-900 block">42.8 kg CO₂e Dicegah</span>
+                        <span class="text-[10px] text-[#168A5B] font-semibold">100% Bebas TPA</span>
+                    </div>
+                </div>
+
+                <div class="absolute top-16 -right-4 md:-right-8 bg-white/95 backdrop-blur-md border border-stone-200/80 shadow-xl rounded-2xl p-3 sm:p-3.5 hidden sm:flex items-center gap-3 floating z-30 pointer-events-none" style="animation-delay: -1.8s;" id="parallax-icon-3">
+                    <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center shrink-0 shadow-xs">
+                        <i data-lucide="crown" class="w-5 h-5 text-amber-600"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs font-bold text-stone-900 block">Olara Premium 1.2x</span>
+                        <span class="text-[10px] text-amber-700 font-semibold">VIP Eco-Tier Aktif</span>
+                    </div>
+                </div>
+
+                <div class="absolute -bottom-6 right-10 md:right-20 bg-white/95 backdrop-blur-md border border-stone-200/80 shadow-xl rounded-2xl p-3 sm:p-3.5 hidden sm:flex items-center gap-3 floating z-30 pointer-events-none" style="animation-delay: -5s;" id="parallax-icon-4">
+                    <div class="w-10 h-10 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center shrink-0 shadow-xs">
+                        <i data-lucide="truck" class="w-5 h-5 text-sky-600"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs font-bold text-stone-900 block">Kurir Armada Listrik</span>
+                        <span class="text-[10px] text-stone-500 font-medium">Estimasi Tiba: 14 Mnt</span>
+                    </div>
+                </div>
+
+                <!-- Main 3D Dashboard Canvas -->
+                <div class="dashboard-3d bg-[#FAF8F5] rounded-[2.5rem] md:rounded-[3rem] p-5 sm:p-8 md:p-10 border border-stone-200/90 shadow-2xl relative overflow-hidden text-left select-none">
+                    
+                    <!-- Simulated Cursor -->
+                    <div class="simulated-cursor animate-cursor-journey hidden md:block" id="main-simulated-cursor">
+                        <svg class="w-8 h-8 text-[#cb3930] filter drop-shadow-md rotate-[-25deg]" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M4 2l16 12-7 1.5 4.5 7.5-3 1.5-4.5-7.5-6 5.5z"/>
+                        </svg>
                     </div>
 
-                    <!-- Screen Viewfinder -->
-                    <div class="relative bg-stone-900 rounded-3xl overflow-hidden h-[400px] flex flex-col justify-between p-4 my-auto text-white">
-                        <!-- Top Camera Header -->
-                        <div class="flex justify-between items-center text-xs">
-                            <span class="bg-black/40 backdrop-blur px-2.5 py-1 rounded-full text-[10px] text-[#FFB7B2] flex items-center gap-1">
-                                <span class="w-1.5 h-1.5 rounded-full bg-[#FFB7B2] animate-pulse"></span> AI Scanner Aktif
+                    <!-- Dashboard Header / Greeting Bar -->
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 sm:pb-8 border-b border-stone-200/70">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 sm:w-14 h-12 sm:h-14 rounded-2xl bg-[#FFE4E1] text-[#cb3930] flex items-center justify-center font-outfit font-extrabold text-xl shadow-sm shrink-0">
+                                ZR
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-2 flex-wrap">
+                                    <h3 class="font-outfit text-xl sm:text-2xl font-extrabold text-stone-900">Halo, Zidan!</h3>
+                                    <span class="inline-flex items-center gap-1 bg-[#FFE4E1] text-[#cb3930] text-[11px] font-bold px-2.5 py-0.5 rounded-full">
+                                        <i data-lucide="award" class="w-3 h-3"></i> Level 4 Eco Champion
+                                    </span>
+                                    <span class="inline-flex items-center gap-1 bg-amber-100 text-amber-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full">
+                                        <i data-lucide="crown" class="w-3 h-3 text-amber-600"></i> Premium 1.2x
+                                    </span>
+                                </div>
+                                <p class="text-xs text-stone-500 mt-0.5">Kelola sampah terpilah dan pantau kontribusi lingkungan Anda secara real-time.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-2.5 self-start sm:self-auto shrink-0">
+                            <span class="inline-flex items-center gap-1.5 bg-[#E8EFE8] text-[#168A5B] text-xs font-bold px-3 py-1.5 rounded-full border border-emerald-200/60">
+                                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Sistem Aktif
                             </span>
-                            <span class="text-[10px] text-stone-300">Timbangan: 12.4 kg</span>
+                            <a href="{{ route('home') }}" class="px-4 py-2 rounded-xl bg-stone-900 text-white hover:bg-stone-800 text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
+                                <span>Buka Dashboard</span>
+                                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 4 Metric Cards -->
+                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4 my-6 sm:my-8">
+                        <!-- Stat 1: Saldo Poin -->
+                        <div class="bg-white p-4 sm:p-5 rounded-2xl border border-stone-200/80 shadow-xs flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-[10px] font-bold uppercase tracking-wider text-stone-500">Saldo Poin</span>
+                                    <div class="w-7 h-7 rounded-lg bg-[#FFE4E1] text-[#cb3930] flex items-center justify-center">
+                                        <i data-lucide="coins" class="w-4 h-4"></i>
+                                    </div>
+                                </div>
+                                <h4 class="font-outfit text-2xl sm:text-3xl font-extrabold text-stone-900 mt-2">1.450</h4>
+                            </div>
+                            <div class="pt-2 border-t border-stone-100 mt-2 text-[11px] text-stone-500 flex justify-between items-center">
+                                <span>≈ Rp 145.000</span>
+                                <span class="text-[#cb3930] font-bold">Tukar →</span>
+                            </div>
                         </div>
 
-                        <!-- Scanner Crosshairs -->
-                        <div class="my-auto border-2 border-dashed border-[#FFB7B2] rounded-2xl h-48 flex flex-col items-center justify-center p-3 text-center bg-white/5">
-                            <span class="text-[10px] uppercase font-bold text-[#FFB7B2] tracking-wider">Akurasi AI: 98%</span>
-                            <p class="text-sm font-bold text-white mt-1">Plastik PET Bening</p>
-                            <span class="text-[11px] text-stone-300">Est. Rp 4.800 / kg</span>
+                        <!-- Stat 2: Sampah Terkelola -->
+                        <div class="bg-white p-4 sm:p-5 rounded-2xl border border-stone-200/80 shadow-xs flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-[10px] font-bold uppercase tracking-wider text-stone-500">Sampah Dikelola</span>
+                                    <div class="w-7 h-7 rounded-lg bg-stone-100 text-stone-700 flex items-center justify-center">
+                                        <i data-lucide="recycle" class="w-4 h-4"></i>
+                                    </div>
+                                </div>
+                                <h4 class="font-outfit text-2xl sm:text-3xl font-extrabold text-stone-900 mt-2">57.4 <span class="text-xs font-normal text-stone-500">kg</span></h4>
+                            </div>
+                            <div class="pt-2 border-t border-stone-100 mt-2 text-[11px] text-stone-500 flex justify-between items-center">
+                                <span class="text-[#168A5B] font-semibold">Bebas TPA</span>
+                                <span class="text-stone-700 font-bold">Jemput →</span>
+                            </div>
                         </div>
 
-                        <!-- Pulsing 'Breathe / Scan' Button (per spec) -->
-                        <div class="text-center">
-                            <button type="button" class="w-full py-3 rounded-full bg-[#FFB7B2] text-[#292524] font-bold text-xs shadow-soft animate-pulse-breathe flex items-center justify-center gap-2">
-                                <i data-lucide="sparkles" class="w-4 h-4"></i>
-                                <span>Scan Sampah Sekarang</span>
+                        <!-- Stat 3: CO2 Dicegah -->
+                        <div class="bg-white p-4 sm:p-5 rounded-2xl border border-stone-200/80 shadow-xs flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-[10px] font-bold uppercase tracking-wider text-stone-500">CO₂ Dicegah</span>
+                                    <div class="w-7 h-7 rounded-lg bg-[#E8EFE8] text-[#168A5B] flex items-center justify-center">
+                                        <i data-lucide="cloud-off" class="w-4 h-4"></i>
+                                    </div>
+                                </div>
+                                <h4 class="font-outfit text-2xl sm:text-3xl font-extrabold text-stone-900 mt-2">42.8 <span class="text-xs font-normal text-stone-500">kg</span></h4>
+                            </div>
+                            <div class="pt-2 border-t border-stone-100 mt-2 text-[11px] text-stone-500 flex justify-between items-center">
+                                <span>Reduksi Emisi</span>
+                                <span class="text-[#168A5B] font-bold">Audit →</span>
+                            </div>
+                        </div>
+
+                        <!-- Stat 4: Pohon Donasi -->
+                        <div class="bg-white p-4 sm:p-5 rounded-2xl border border-stone-200/80 shadow-xs flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-[10px] font-bold uppercase tracking-wider text-stone-500">Pohon Tertanam</span>
+                                    <div class="w-7 h-7 rounded-lg bg-[#E8EFE8] text-[#168A5B] flex items-center justify-center">
+                                        <i data-lucide="sprout" class="w-4 h-4"></i>
+                                    </div>
+                                </div>
+                                <h4 class="font-outfit text-2xl sm:text-3xl font-extrabold text-[#168A5B] mt-2">12.450</h4>
+                            </div>
+                            <div class="pt-2 border-t border-stone-100 mt-2 text-[11px] text-stone-500 flex justify-between items-center">
+                                <span>Mangrove Pesisir</span>
+                                <span class="text-[#168A5B] font-bold">Donasi →</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Quick Actions & Progress Widget -->
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
+                        <!-- Left 8 Cols: Quick Action Services -->
+                        <div class="lg:col-span-8 bg-white rounded-3xl p-6 border border-stone-200/80 shadow-xs flex flex-col justify-between">
+                            <div class="flex items-center justify-between mb-5">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-8 h-8 rounded-xl bg-stone-900 text-white flex items-center justify-center">
+                                        <i data-lucide="sparkles" class="w-4 h-4 text-[#FFB7B2]"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-outfit text-base font-bold text-stone-900">Layanan Sampah Terintegrasi</h4>
+                                        <p class="text-xs text-stone-500">Pilih aksi cepat untuk memilah dan menyetor sampah</p>
+                                    </div>
+                                </div>
+                                <span class="text-xs font-semibold text-[#cb3930] hidden sm:inline-block">Klik kartu di bawah</span>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+                                <!-- Trigger Button to Launch Simulated Modal -->
+                                <button type="button" id="btn-new-pickup-trigger" class="p-4 rounded-2xl bg-[#FFE4E1]/40 hover:bg-[#FFE4E1]/70 border border-[#FFB7B2]/60 text-left transition-all group flex flex-col justify-between cursor-pointer hover:scale-[1.02] active:scale-[0.98]">
+                                    <div class="w-10 h-10 rounded-xl bg-[#cb3930] text-white flex items-center justify-center mb-3 group-hover:scale-110 transition-transform shadow-sm">
+                                        <i data-lucide="truck" class="w-5 h-5"></i>
+                                    </div>
+                                    <div>
+                                        <span class="font-outfit text-sm font-extrabold text-stone-900 block group-hover:text-[#cb3930] transition-colors">Jemput Sampah</span>
+                                        <span class="text-[11px] text-stone-500 leading-tight block mt-0.5">Armada EV ke depan pintu</span>
+                                    </div>
+                                </button>
+
+                                <a href="{{ route('scanner.index') }}" class="p-4 rounded-2xl bg-stone-50 hover:bg-stone-100 border border-stone-200/70 text-left transition-all group flex flex-col justify-between hover:scale-[1.02] active:scale-[0.98]">
+                                    <div class="w-10 h-10 rounded-xl bg-stone-900 text-white flex items-center justify-center mb-3 group-hover:scale-110 transition-transform shadow-sm">
+                                        <i data-lucide="scan-line" class="w-5 h-5 text-[#FFB7B2]"></i>
+                                    </div>
+                                    <div>
+                                        <span class="font-outfit text-sm font-extrabold text-stone-900 block">Scan AI Kamera</span>
+                                        <span class="text-[11px] text-stone-500 leading-tight block mt-0.5">Deteksi instan nilai material</span>
+                                    </div>
+                                </a>
+
+                                <a href="{{ route('rewards.index') }}" class="p-4 rounded-2xl bg-stone-50 hover:bg-stone-100 border border-stone-200/70 text-left transition-all group flex flex-col justify-between hover:scale-[1.02] active:scale-[0.98]">
+                                    <div class="w-10 h-10 rounded-xl bg-[#E8EFE8] text-[#168A5B] flex items-center justify-center mb-3 group-hover:scale-110 transition-transform shadow-sm">
+                                        <i data-lucide="gift" class="w-5 h-5"></i>
+                                    </div>
+                                    <div>
+                                        <span class="font-outfit text-sm font-extrabold text-stone-900 block">Tukar Hadiah</span>
+                                        <span class="text-[11px] text-stone-500 leading-tight block mt-0.5">E-Wallet & voucher belanja</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Right 4 Cols: Eco Progress Tier Status -->
+                        <div class="lg:col-span-4 bg-white rounded-3xl p-6 border border-stone-200/80 shadow-xs flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center gap-2.5 mb-4">
+                                    <div class="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center">
+                                        <i data-lucide="target" class="w-4 h-4 text-amber-600"></i>
+                                    </div>
+                                    <div>
+                                        <span class="font-outfit text-sm font-bold text-stone-900 block">Target Bulan Ini</span>
+                                        <span class="text-[10px] text-stone-400">September 2026</span>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-3.5">
+                                    <div>
+                                        <div class="flex justify-between text-xs font-bold mb-1.5">
+                                            <span class="text-stone-600">Pilah Sampah Rumah</span>
+                                            <span class="text-stone-900">35 / 45 kg (78%)</span>
+                                        </div>
+                                        <div class="h-2 bg-stone-100 rounded-full overflow-hidden">
+                                            <div class="h-full bg-[#cb3930] rounded-full" style="width: 78%"></div>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="flex justify-between text-xs font-bold mb-1.5">
+                                            <span class="text-stone-600">Level Eco-Champion</span>
+                                            <span class="text-[#168A5B]">85% Tercapai</span>
+                                        </div>
+                                        <div class="h-2 bg-stone-100 rounded-full overflow-hidden">
+                                            <div class="h-full bg-emerald-500 rounded-full" style="width: 85%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pt-4 border-t border-stone-100 mt-4 text-[11px] text-stone-500 flex items-center justify-between">
+                                <span>Kurang 10 kg untuk bonus tier</span>
+                                <span class="font-bold text-[#cb3930]">+250 Pts</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MODAL OVERLAY (Interactive Simulation per reference spec) -->
+                    <div id="new-pickup-modal" class="absolute inset-0 z-[150] bg-white opacity-0 pointer-events-none invisible transition-all duration-500 flex flex-col p-6 sm:p-10 justify-between">
+                        
+                        <!-- Modal Header -->
+                        <div class="modal-element flex items-center justify-between border-b border-stone-200/70 pb-5">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-2xl bg-[#cb3930] text-white flex items-center justify-center text-xl shadow-lg shadow-rose-200/50">
+                                    <i data-lucide="truck" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-outfit text-xl sm:text-2xl font-black text-stone-900">Pesan Penjemputan Sampah Kilat</h3>
+                                    <p class="text-stone-500 text-xs font-bold uppercase tracking-wider mt-0.5">Armada Listrik Ramah Lingkungan OLARA</p>
+                                </div>
+                            </div>
+                            <button id="modal-close-btn" type="button" class="p-2 rounded-xl text-stone-400 hover:text-stone-600 hover:bg-stone-100 transition cursor-pointer">
+                                <i data-lucide="x" class="w-5 h-5"></i>
                             </button>
                         </div>
+
+                        <!-- Modal Form Elements -->
+                        <div class="space-y-4 max-w-4xl w-full mx-auto my-auto py-2">
+                            <!-- Category Selection -->
+                            <div class="modal-element space-y-2">
+                                <label class="flex items-center gap-2 text-[11px] font-black text-stone-500 tracking-wider uppercase">
+                                    <i data-lucide="layers" class="w-3.5 h-3.5 text-[#cb3930]"></i> Kategori Sampah yang Dijemput
+                                </label>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                    <div class="p-3.5 rounded-xl border-2 border-[#cb3930] bg-[#FFE4E1]/30 flex items-center justify-between cursor-pointer">
+                                        <div class="flex items-center gap-2.5">
+                                            <i data-lucide="recycle" class="w-4 h-4 text-[#cb3930]"></i>
+                                            <span class="text-xs font-extrabold text-stone-900">Plastik Bersih (PET)</span>
+                                        </div>
+                                        <span class="w-2.5 h-2.5 rounded-full bg-[#cb3930]"></span>
+                                    </div>
+                                    <div class="p-3.5 rounded-xl border-2 border-stone-200 bg-white flex items-center justify-between cursor-pointer hover:border-stone-300">
+                                        <div class="flex items-center gap-2.5">
+                                            <i data-lucide="box" class="w-4 h-4 text-stone-600"></i>
+                                            <span class="text-xs font-bold text-stone-700">Kardus Box Gelombang</span>
+                                        </div>
+                                        <span class="w-2.5 h-2.5 rounded-full border border-stone-300"></span>
+                                    </div>
+                                    <div class="p-3.5 rounded-xl border-2 border-stone-200 bg-white flex items-center justify-between cursor-pointer hover:border-stone-300">
+                                        <div class="flex items-center gap-2.5">
+                                            <i data-lucide="wine" class="w-4 h-4 text-stone-600"></i>
+                                            <span class="text-xs font-bold text-stone-700">Kaleng Aluminium & Kaca</span>
+                                        </div>
+                                        <span class="w-2.5 h-2.5 rounded-full border border-stone-300"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Address Input -->
+                            <div class="modal-element space-y-2">
+                                <label class="flex items-center gap-2 text-[11px] font-black text-stone-500 tracking-wider uppercase">
+                                    <i data-lucide="map-pin" class="w-3.5 h-3.5 text-[#cb3930]"></i> Alamat Lokasi Penjemputan
+                                </label>
+                                <div class="rounded-xl border-2 border-stone-200 bg-white p-3.5 flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-lg bg-stone-100 flex items-center justify-center text-stone-700 shrink-0">
+                                            <i data-lucide="home" class="w-4 h-4"></i>
+                                        </div>
+                                        <div>
+                                            <span class="text-xs font-bold text-stone-900 block">Rumah — Zidan Ramadhan</span>
+                                            <span class="text-[11px] text-stone-500 block">Jl. Senopati Raya No. 42, RT 04/RW 02, Kebayoran Baru, Jakarta Selatan</span>
+                                        </div>
+                                    </div>
+                                    <span class="text-[10px] font-bold text-[#cb3930] bg-[#FFE4E1] px-2.5 py-1 rounded-full uppercase">Utama</span>
+                                </div>
+                            </div>
+
+                            <!-- Weight and Schedule Grid -->
+                            <div class="modal-element grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="space-y-1.5">
+                                    <label class="text-[11px] font-black text-stone-500 tracking-wider uppercase flex items-center gap-1.5">
+                                        <i data-lucide="scale" class="w-3.5 h-3.5 text-[#cb3930]"></i> Estimasi Berat Sampah
+                                    </label>
+                                    <div class="rounded-xl border-2 border-stone-200 bg-white px-4 py-3 font-bold text-stone-800 text-sm flex justify-between items-center">
+                                        <span>15.0 kg</span>
+                                        <span class="text-xs text-stone-400">Timbangan Digital EV</span>
+                                    </div>
+                                </div>
+                                <div class="space-y-1.5">
+                                    <label class="text-[11px] font-black text-stone-500 tracking-wider uppercase flex items-center gap-1.5">
+                                        <i data-lucide="clock" class="w-3.5 h-3.5 text-[#cb3930]"></i> Jadwal Penjemputan
+                                    </label>
+                                    <div class="rounded-xl border-2 border-stone-200 bg-white px-4 py-3 font-bold text-stone-800 text-sm flex justify-between items-center">
+                                        <span>Hari Ini (Segera / Kilat)</span>
+                                        <span class="text-xs text-[#168A5B] font-bold">● Armada Standby</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Substantial, Large, Prominent Confirm Order Submit Button (per prompt instruction) -->
+                            <div class="modal-element pt-4">
+                                <button id="modal-submit-btn" type="button" class="w-full py-6 sm:py-7 px-8 rounded-2xl sm:rounded-[2rem] bg-gradient-to-r from-[#292524] via-stone-800 to-[#292524] text-[#FFB7B2] font-black text-xl sm:text-2xl shadow-2xl shadow-stone-900/40 hover:scale-[1.01] transition-transform shine flex items-center justify-center gap-3 border border-stone-700 cursor-pointer">
+                                    <i data-lucide="check-circle" class="w-7 h-7 text-[#FFB7B2]"></i>
+                                    <span>Konfirmasi Penjemputan Sekarang</span>
+                                </button>
+                                <p class="text-center text-stone-400 text-xs mt-2.5 font-medium">Bebas biaya penjemputan untuk pelanggan Olara Premium</p>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Bottom Nav -->
-                    <div class="w-24 h-1 bg-stone-300 rounded-full mx-auto my-1"></div>
                 </div>
-
-                <!-- Right Phone: Rewards & Marketplace (280x580px, +96px translateY, Clean Stone) -->
-                <div class="w-[280px] h-[540px] md:h-[580px] bg-stone-50 rounded-[2.5rem] p-4 border-[6px] border-white shadow-soft-lg md:translate-y-24 opacity-90 transition-transform duration-500 hover:opacity-100 hover:scale-[1.02] flex flex-col justify-between">
-                    <!-- Notch -->
-                    <div class="flex justify-between items-center px-3 pt-1 text-[11px] font-semibold text-stone-600">
-                        <span>09:41</span>
-                        <div class="w-16 h-3.5 bg-stone-300 rounded-full mx-auto"></div>
-                        <i data-lucide="bell" class="w-3.5 h-3.5"></i>
-                    </div>
-
-                    <!-- Screen Content -->
-                    <div class="bg-white rounded-3xl p-4 shadow-sm my-auto space-y-3 border border-stone-100">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <span class="text-[10px] text-stone-400">Saldo Dompet</span>
-                                <h4 class="text-base font-extrabold text-[#292524]">1.450 Pts</h4>
-                            </div>
-                            <span class="text-[10px] font-bold text-[#cb3930] bg-[#FFB7B2]/20 px-2.5 py-1 rounded-full">Eco Champion</span>
-                        </div>
-
-                        <div class="p-2.5 rounded-2xl bg-stone-50 border border-stone-100 flex items-center gap-2.5">
-                            <div class="w-8 h-8 rounded-xl bg-white flex items-center justify-center text-sm shadow-xs text-[#292524]">
-                                <i data-lucide="wallet" class="w-4 h-4"></i>
-                            </div>
-                            <div>
-                                <h5 class="text-[11px] font-bold text-stone-800">GoPay Rp 50.000</h5>
-                                <p class="text-[9px] text-stone-500">500 Pts • Cair Instan</p>
-                            </div>
-                        </div>
-
-                        <div class="p-2.5 rounded-2xl bg-stone-50 border border-stone-100 flex items-center gap-2.5">
-                            <div class="w-8 h-8 rounded-xl bg-white flex items-center justify-center text-sm shadow-xs text-[#292524]">
-                                <i data-lucide="shopping-bag" class="w-4 h-4"></i>
-                            </div>
-                            <div>
-                                <h5 class="text-[11px] font-bold text-stone-800">Tokopedia Rp 25.000</h5>
-                                <p class="text-[9px] text-stone-500">250 Pts • Belanja Ritel</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Bottom Bar -->
-                    <div class="text-center py-1">
-                        <span class="text-[10px] font-medium text-stone-500">Katalog Rewards & Marketplace</span>
-                    </div>
-                </div>
-
             </div>
         </section>
 
@@ -1422,6 +1732,107 @@
         document.querySelectorAll('.reveal-item').forEach(el => {
             observer.observe(el);
         });
+
+        // 9. 3D Dashboard Showcase Parallax and Interactive Simulation
+        (function init3DDashboard() {
+            const dashboard = document.querySelector('.dashboard-3d');
+            const modal = document.getElementById('new-pickup-modal');
+            const modalElements = document.querySelectorAll('.modal-element');
+            const triggerBtn = document.getElementById('btn-new-pickup-trigger');
+            const closeBtn = document.getElementById('modal-close-btn');
+            const submitBtn = document.getElementById('modal-submit-btn');
+            
+            if (!dashboard || !modal) return;
+
+            // Parallax on scroll
+            const assets = [
+                { id: 'parallax-bg-1', factor: 0.12 },
+                { id: 'parallax-bg-2', factor: 0.18 },
+                { id: 'parallax-icon-1', factor: -0.25 },
+                { id: 'parallax-icon-2', factor: 0.2 },
+                { id: 'parallax-icon-3', factor: -0.15 },
+                { id: 'parallax-icon-4', factor: 0.3 }
+            ];
+
+            window.addEventListener('scroll', () => {
+                const rect = dashboard.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                
+                if (rect.top < windowHeight && rect.bottom > 0) {
+                    const offset = (windowHeight / 2 - rect.top) * 0.03;
+                    const rotX = Math.max(4, Math.min(16, 12 - offset * 0.6));
+                    const rotY = Math.max(-12, Math.min(-2, -8 + offset * 0.4));
+                    dashboard.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) rotateZ(1deg)`;
+
+                    assets.forEach(asset => {
+                        const el = document.getElementById(asset.id);
+                        if (el) {
+                            el.style.transform = `translateY(${offset * asset.factor * 12}px)`;
+                        }
+                    });
+                }
+            }, { passive: true });
+
+            function triggerModalSequence() {
+                modal.classList.remove('invisible', 'pointer-events-none');
+                modal.style.opacity = '1';
+                modalElements.forEach((el, index) => {
+                    setTimeout(() => {
+                        el.classList.add('active');
+                    }, 180 + (index * 110));
+                });
+            }
+
+            function resetModalSequence() {
+                modal.style.opacity = '0';
+                modal.classList.add('pointer-events-none');
+                setTimeout(() => {
+                    if (modal.style.opacity === '0') {
+                        modal.classList.add('invisible');
+                    }
+                }, 500);
+                modalElements.forEach(el => el.classList.remove('active'));
+            }
+
+            // Continuous realistic simulation loop
+            let simTimeout1, simTimeout2;
+            function runSimulation() {
+                simTimeout1 = setTimeout(() => {
+                    triggerModalSequence();
+                }, 3500);
+
+                simTimeout2 = setTimeout(() => {
+                    resetModalSequence();
+                }, 14500);
+            }
+
+            runSimulation();
+            setInterval(runSimulation, 18000);
+
+            // Manual user controls
+            if (triggerBtn) {
+                triggerBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    triggerModalSequence();
+                });
+            }
+            if (closeBtn) {
+                closeBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    resetModalSequence();
+                });
+            }
+            if (submitBtn) {
+                submitBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    submitBtn.classList.add('scale-95');
+                    setTimeout(() => {
+                        submitBtn.classList.remove('scale-95');
+                        resetModalSequence();
+                    }, 600);
+                });
+            }
+        })();
     </script>
 </body>
 </html>
