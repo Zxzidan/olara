@@ -10,6 +10,34 @@ beforeEach(function () {
     $this->user = User::where('email', 'zidan@olara.id')->first();
 });
 
+test('landing page renders successfully with softly theme and features', function () {
+    $response = $this->get(route('landing'));
+
+    $response->assertStatus(200);
+    $response->assertSee('OLARA');
+    $response->assertSee('Ubah sampah harian jadi berkah');
+    $response->assertSee('Kamera AI Pintar');
+    $response->assertSee('Marketplace B2B');
+    $response->assertSee('Tanya Jawab Populer');
+});
+
+test('guest can view login and register pages', function () {
+    $loginResponse = $this->get(route('login'));
+    $loginResponse->assertStatus(200);
+    $loginResponse->assertSee('Masuk ke Akun OLARA');
+
+    $registerResponse = $this->get(route('register'));
+    $registerResponse->assertStatus(200);
+    $registerResponse->assertSee('Buat Akun Baru');
+});
+
+test('demo login sets session and redirects to dashboard', function () {
+    $response = $this->get(route('demo.login'));
+
+    $response->assertRedirect(route('home'));
+    $this->assertAuthenticated();
+});
+
 test('dashboard page renders successfully with new layout', function () {
     $response = $this->actingAs($this->user)->get(route('home'));
 

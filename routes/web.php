@@ -5,16 +5,20 @@ use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DropoffController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LandingController;
 use App\Http\Controllers\MarketplaceController;
 use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\PickupController;
 use App\Http\Controllers\RewardController;
 use Illuminate\Support\Facades\Route;
 
-// 1. Home / Dashboard
-Route::get('/', [HomeController::class, 'index'])->name('home');
+// 1. Landing Page
+Route::get('/', [LandingController::class, 'index'])->name('landing');
 
-// 2. Authentication Routes
+// 2. Dashboard
+Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
+
+// 3. Authentication Routes
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
