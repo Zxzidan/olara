@@ -113,7 +113,7 @@
 
                     <label for="cameraFileInput" class="cursor-pointer bg-white/20 hover:bg-white/30 backdrop-blur-md text-white p-3 rounded-full border border-white/30 transition shadow-lg hover:scale-105 active:scale-95 flex items-center justify-center" title="Unggah Foto dari Galeri">
                         <i data-lucide="upload-cloud" class="w-5 h-5"></i>
-                        <input type="file" id="cameraFileInput" accept="image/*" class="hidden" onchange="handleFileUpload(event)" />
+                        <input type="file" id="cameraFileInput" accept="image/*" capture="environment" class="hidden" onchange="handleFileUpload(event)" />
                     </label>
                 </div>
             </div>
@@ -283,6 +283,63 @@
             </div>
         </div>
 
+    </div>
+
+    <!-- Camera Insecure Context Helper Modal -->
+    <div id="cameraHelpModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 hidden">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-gray-100 space-y-4">
+            <div class="flex items-center justify-between border-b border-gray-100 pb-3">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-10 h-10 rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-600">
+                        <i data-lucide="video-off" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-extrabold text-[#1B211E] text-base">Izin Kamera di HTTP Non-Secure</h3>
+                        <p class="text-xs text-[#66716B]">Browser membatasi webcam di domain HTTP</p>
+                    </div>
+                </div>
+                <button type="button" onclick="closeCameraHelpModal()" class="text-gray-400 hover:text-gray-600 text-xl font-bold leading-none p-1">
+                    &times;
+                </button>
+            </div>
+
+            <p class="text-xs text-[#66716B] leading-relaxed">
+                Karena halaman dibuka lewat <strong>http://olara.test</strong> (HTTP), browser Chrome / Edge memblokir akses <em>live streaming webcam</em> demi privasi. Silakan pilih solusi di bawah:
+            </p>
+
+            <div class="space-y-2.5">
+                <div class="p-3.5 rounded-2xl bg-[#EEF9F2] border border-[#BFE7D0] flex items-center justify-between gap-3">
+                    <div class="text-xs">
+                        <span class="font-bold text-[#0B4F38] block">Cara 1: Ambil Foto Langsung (Rekomendasi)</span>
+                        <span class="text-[#66716B]">Membuka kamera perangkat langsung untuk mengambil foto sampah.</span>
+                    </div>
+                    <button type="button" onclick="triggerDirectCameraCapture()" class="px-4 py-2 bg-[#168A5B] hover:bg-[#0F6B47] text-white text-xs font-bold rounded-xl shadow-sm transition whitespace-nowrap">
+                        Ambil Foto
+                    </button>
+                </div>
+
+                <div class="p-3.5 rounded-2xl bg-gray-50 border border-gray-200 text-xs text-[#1B211E] space-y-1">
+                    <span class="font-bold block text-gray-800">Cara 2: Live Streaming via Localhost</span>
+                    <p class="text-[#66716B] text-[11px] leading-relaxed">
+                        Chrome mengizinkan live webcam di localhost tanpa HTTPS. Jalankan <code>php artisan serve</code> lalu buka:
+                        <a href="http://localhost:8000/scan" class="text-[#168A5B] font-bold underline block mt-0.5">http://localhost:8000/scan</a>
+                    </p>
+                </div>
+
+                <div class="p-3 rounded-2xl bg-amber-50/70 border border-amber-200 text-[11px] text-amber-900 space-y-1">
+                    <span class="font-bold block">Cara 3: Buka Kunci Chrome Flags</span>
+                    <p class="text-amber-800">
+                        Buka <code>chrome://flags/#unsafely-treat-insecure-origin-as-secure</code>, masukkan <code>http://olara.test</code>, pilih <strong>Enabled</strong>, lalu Relaunch.
+                    </p>
+                </div>
+            </div>
+
+            <div class="pt-2 flex justify-end">
+                <button type="button" onclick="closeCameraHelpModal()" class="px-4 py-2 rounded-xl text-xs font-semibold text-gray-600 hover:bg-gray-100 transition">
+                    Tutup
+                </button>
+            </div>
+        </div>
     </div>
 
 </div>
@@ -471,6 +528,12 @@ function onAiPartialFallback(msg) {
 
 // ---- Camera Functions ----
 async function activateCamera() {
+    // Check if browser supports mediaDevices in the current context (blocked on non-localhost HTTP)
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        showCameraHelpModal();
+        return;
+    }
+
     try {
         cameraStream = await navigator.mediaDevices.getUserMedia({
             video: {
@@ -495,8 +558,27 @@ async function activateCamera() {
         document.getElementById('hudConfidence').textContent = 'CONF: —';
         document.getElementById('hudContamination').textContent = 'MENUNGGU';
     } catch (err) {
-        alert('Tidak dapat mengakses kamera: ' + err.message + '\n\nAnda dapat mengunggah foto secara langsung dengan tombol ikon awan di samping.');
+        showCameraHelpModal();
     }
+}
+
+function showCameraHelpModal() {
+    const modal = document.getElementById('cameraHelpModal');
+    if (modal) {
+        modal.classList.remove('hidden');
+        if (window.lucide) lucide.createIcons();
+    }
+}
+
+function closeCameraHelpModal() {
+    const modal = document.getElementById('cameraHelpModal');
+    if (modal) modal.classList.add('hidden');
+}
+
+function triggerDirectCameraCapture() {
+    closeCameraHelpModal();
+    const input = document.getElementById('cameraFileInput');
+    if (input) input.click();
 }
 
 async function captureAndDetect() {
