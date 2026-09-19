@@ -43,6 +43,7 @@
     "VIEW_COMPILED_PATH": "/tmp/storage/framework/views",
     "CACHE_STORE": "array",
     "SESSION_DRIVER": "database",
+    "SESSION_LIFETIME": "120",
     "LOG_CHANNEL": "stderr"
   }
 }

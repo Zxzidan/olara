@@ -40,6 +40,14 @@ if (! getenv('SESSION_DRIVER') && empty($_ENV['SESSION_DRIVER'])) {
     putenv('SESSION_DRIVER=database');
 }
 
+$_ENV['SESSION_LIFETIME'] = '120';
+$_SERVER['SESSION_LIFETIME'] = '120';
+putenv('SESSION_LIFETIME=120');
+
+$_ENV['SESSION_EXPIRE_ON_CLOSE'] = 'false';
+$_SERVER['SESSION_EXPIRE_ON_CLOSE'] = 'false';
+putenv('SESSION_EXPIRE_ON_CLOSE=false');
+
 if (! getenv('CACHE_STORE') && empty($_ENV['CACHE_STORE'])) {
     $_ENV['CACHE_STORE'] = 'array';
     $_SERVER['CACHE_STORE'] = 'array';
