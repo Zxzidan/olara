@@ -139,7 +139,7 @@
                 </div>
                 <div class="pl-3 w-full">
                   <div class="text-gray-600 dark:text-gray-300 text-xs mb-1">
-                    Bonus verifikasi: <strong>+50 Eco-Points</strong> siap ditukarkan saldo e-wallet!
+                    Bonus selamat datang: <strong>+10 Eco-Points</strong> telah aktif di akun Anda!
                   </div>
                   <div class="text-[10px] text-emerald-600 dark:text-emerald-400 font-medium">Baru saja</div>
                 </div>

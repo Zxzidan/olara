@@ -359,7 +359,7 @@
             </div>
             <div class="text-xs text-gray-600 space-y-2.5 max-h-60 overflow-y-auto pr-1 leading-relaxed">
                 <p>1. <strong class="text-gray-900">Penggunaan Platform:</strong> OLARA adalah ekosistem digital untuk pengelolaan dan daur ulang sampah berkelanjutan.</p>
-                <p>2. <strong class="text-gray-900">Bonus Pengguna Baru:</strong> Setiap registrasi akun baru yang valid secara otomatis menerima 50 Eco-Points yang dapat ditukarkan di Rewards Wallet.</p>
+                <p>2. <strong class="text-gray-900">Bonus Pengguna Baru:</strong> Setiap registrasi akun baru yang valid secara otomatis menerima 10 Eco-Points yang dapat ditukarkan di Rewards Wallet.</p>
                 <p>3. <strong class="text-gray-900">Keamanan Data:</strong> Data kredensial Anda disimpan secara terenkripsi dan aman sesuai standar privasi data nasional.</p>
                 <p>4. <strong class="text-gray-900">Integritas Transaksi:</strong> Aktivitas pemilahan dan pengantaran sampah diverifikasi melalui sistem AI dan mitra bank sampah terpercaya.</p>
             </div>

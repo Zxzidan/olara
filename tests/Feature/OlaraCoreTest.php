@@ -44,26 +44,34 @@ test('dashboard page renders successfully with new layout', function () {
     $response->assertStatus(200);
 });
 
-test('new user registration automatically receives 50 eco-points welcome bonus', function () {
+test('new user registration automatically receives 10 eco-points welcome bonus and clean empty history', function () {
     $email = 'pengguna.baru@olara.id';
 
     $response = $this->post(route('register.submit'), [
-        'name' => 'Pengguna Baru',
+        'first_name' => 'Pengguna',
+        'last_name' => 'Baru',
+        'origin' => 'Jakarta Selatan',
         'email' => $email,
         'password' => 'password123',
-        'phone' => '081299998888',
     ]);
 
     $response->assertRedirect(route('home'));
 
     $newUser = User::where('email', $email)->first();
     expect($newUser)->not->toBeNull();
-    expect($newUser->eco_points)->toBe(50);
+    expect($newUser->eco_points)->toBe(10);
+    expect($newUser->pointTransactions()->count())->toBe(0);
+    expect($newUser->wasteAnalyses()->count())->toBe(0);
+    expect($newUser->pickupRequests()->count())->toBe(0);
 
-    // Verify registration bonus transaction logged
-    $tx = $newUser->pointTransactions()->where('type', 'registration_bonus')->first();
-    expect($tx)->not->toBeNull();
-    expect($tx->amount)->toBe(50);
+    // Verify dashboard renders with 0.0 metrics and empty history messages
+    $dashboardResponse = $this->actingAs($newUser)->get(route('home'));
+    $dashboardResponse->assertStatus(200);
+    $dashboardResponse->assertViewHas('totalWasteManaged', 0.0);
+    $dashboardResponse->assertViewHas('totalCo2Avoided', 0.0);
+    $dashboardResponse->assertViewHas('treesEquivalent', 0.0);
+    $dashboardResponse->assertSee('Belum ada riwayat scan sampah');
+    $dashboardResponse->assertSee('Belum ada transaksi poin terbaru');
 });
 
 test('ai scanner page renders and can record waste analysis with scale photo bonus', function () {
@@ -83,9 +91,9 @@ test('ai scanner page renders and can record waste analysis with scale photo bon
 
     $response->assertRedirect(route('scanner.index'));
 
-    // Check bonus awarded
+    // Check bonus awarded (25 base + 50 weight bonus + 10 scale bonus)
     $this->user->refresh();
-    expect($this->user->eco_points)->toBe($initialPoints + 10);
+    expect($this->user->eco_points)->toBe($initialPoints + 85);
 });
 
 test('pickup request booking creates tracking code and transparent pricing', function () {

@@ -95,24 +95,16 @@ class AuthController extends Controller
             'origin' => $origin,
             'address' => $origin,
             'email' => strtolower(trim($validated['email'])),
-            'password' => password_hash($validated['password'], PASSWORD_BCRYPT, ['cost' => 12]),
-            'eco_points' => 50,
+            'password' => Hash::make($validated['password']),
+            'eco_points' => 10,
             'recycler_level' => 'Level 1 — Starter',
             'membership_tier' => 'lite',
-        ]);
-
-        // Log registration bonus transaction
-        $user->pointTransactions()->create([
-            'amount' => 50,
-            'type' => 'registration_bonus',
-            'description' => 'Bonus Registrasi Akun Baru OLARA (+50 Eco-Points)',
-            'balance_after' => 50,
         ]);
 
         Auth::login($user);
         $request->session()->regenerate();
 
-        return redirect()->route('home')->with('success', 'Akun berhasil dibuat! Bonus 50 Eco-Point telah ditambahkan ke dompet Anda.');
+        return redirect()->route('home')->with('success', 'Akun berhasil dibuat! Bonus 10 Eco-Point telah ditambahkan ke dompet Anda.');
     }
 
     public function logout(Request $request): RedirectResponse

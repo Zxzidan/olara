@@ -66,10 +66,10 @@ class HomeController extends Controller
             $recentAnalysis = collect();
         }
 
-        // Eco impact metrics for dashboard
-        $totalWasteManaged = 148.5; // kg
-        $totalCo2Avoided = 212.8; // kg CO2e
-        $treesEquivalent = 3.2;
+        // Dynamic Eco impact metrics for dashboard (0.0 for new users)
+        $totalWasteManaged = (float) ($user ? $user->wasteAnalyses()->sum('weight_kg') : 0);
+        $totalCo2Avoided = round($totalWasteManaged * 1.43, 1);
+        $treesEquivalent = round($totalWasteManaged * 0.021, 1);
 
         return view('home.index', compact(
             'user',

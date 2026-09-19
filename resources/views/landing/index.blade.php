@@ -1417,13 +1417,15 @@
                     </span>
                 </h2>
                 <p class="mt-3 text-sm text-[#78716C] max-w-sm mx-auto">
-                    Daftar gratis sekarang dan dapatkan bonus <strong>+50 Eco-Points</strong> otomatis.
+                    Daftar gratis sekarang dan dapatkan bonus <strong>+10 Eco-Points</strong> otomatis.
                 </p>
 
                 <!-- Waitlist / Quick Signup Form -->
                 <form action="{{ route('register.submit') }}" method="POST" class="mt-7 max-w-md mx-auto flex flex-col sm:flex-row gap-2.5">
                     @csrf
-                    <input type="hidden" name="name" value="Sahabat Bumi Baru">
+                    <input type="hidden" name="first_name" value="Sahabat">
+                    <input type="hidden" name="last_name" value="Bumi">
+                    <input type="hidden" name="origin" value="Indonesia">
                     <input type="hidden" name="password" value="password123">
                     <input
                         type="email"
