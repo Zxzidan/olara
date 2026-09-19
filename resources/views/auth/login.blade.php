@@ -327,12 +327,8 @@
                 <button type="button" onclick="document.getElementById('forgotModal').classList.add('hidden')" class="text-gray-400 hover:text-gray-700 text-xl font-bold leading-none">&times;</button>
             </div>
             <p class="text-xs text-gray-600 mb-4 leading-relaxed">
-                Silakan hubungi administrator sistem atau gunakan kredensial demo untuk masuk:
+                Silakan hubungi administrator sistem melalui email <a href="mailto:support@olara.id" class="font-semibold text-[#10b981] hover:underline">support@olara.id</a> untuk bantuan pemulihan kata sandi akun Anda.
             </p>
-            <div class="p-3 bg-emerald-50/70 rounded-xl border border-emerald-200 text-xs space-y-1 mb-4">
-                <p><span class="text-gray-500">Email:</span> <code class="text-emerald-700 font-mono font-bold">zidan@olara.id</code></p>
-                <p><span class="text-gray-500">Password:</span> <code class="text-emerald-700 font-mono font-bold">password123</code></p>
-            </div>
             <button type="button" onclick="document.getElementById('forgotModal').classList.add('hidden')" class="w-full py-2.5 rounded-lg olara-btn-gradient text-white text-xs font-bold cursor-pointer shadow-md">
                 Mengerti
             </button>

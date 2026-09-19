@@ -213,10 +213,6 @@
                 <i data-lucide="help-circle" class="mx-auto mb-1 w-6 h-6 text-blue-500 group-hover:scale-110 transition-transform"></i>
                 <div class="text-xs font-semibold text-gray-900 dark:text-white">Panduan</div>
               </button>
-              <a href="{{ route('demo.login') }}" class="block p-3 text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 group">
-                <i data-lucide="refresh-cw" class="mx-auto mb-1 w-6 h-6 text-gray-500 group-hover:scale-110 transition-transform"></i>
-                <div class="text-xs font-semibold text-gray-900 dark:text-white">Akun Demo</div>
-              </a>
             </div>
           </div>
 
@@ -274,11 +270,6 @@
                 <button type="button" onclick="openOnboardingModal()" class="w-full text-left flex items-center gap-2 py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                   <i data-lucide="compass" class="w-4 h-4 text-blue-500"></i> Panduan Edukasi
                 </button>
-              </li>
-              <li>
-                <a href="{{ route('demo.login') }}" class="flex items-center gap-2 py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                  <i data-lucide="refresh-cw" class="w-4 h-4 text-gray-400"></i> Reset Akun Demo
-                </a>
               </li>
               <li class="border-t border-gray-100 dark:border-gray-600">
                 <form method="POST" action="{{ route('logout') }}">
@@ -468,15 +459,6 @@
               <i data-lucide="help-circle" class="w-5 h-5 text-stone-400 group-hover:text-stone-700 dark:group-hover:text-stone-200"></i>
               <span class="ml-3">Panduan</span>
             </button>
-          </li>
-          <li>
-            <a
-              href="{{ route('demo.login') }}"
-              class="flex items-center p-2 text-sm text-stone-700 dark:text-stone-300 rounded-xl hover:bg-stone-100 dark:hover:bg-stone-800 hover:text-stone-900 dark:hover:text-white group"
-            >
-              <i data-lucide="refresh-cw" class="w-5 h-5 text-stone-400 group-hover:text-stone-700 dark:group-hover:text-stone-200"></i>
-              <span class="ml-3">Akun Demo</span>
-            </a>
           </li>
           <li>
             <form method="POST" action="{{ route('logout') }}" class="w-full">
