@@ -20,8 +20,9 @@
   ],
   "env": {
     "APP_ENV": "production",
-    "APP_DEBUG": "true",
+    "APP_DEBUG": "false",
     "APP_KEY": "base64:mS23d4kJQ29OKoXMmzNOqYgu2J3UPNguJRKiWATo8DA=",
+    "APP_MAINTENANCE_DRIVER": "array",
     "LARAVEL_STORAGE_PATH": "/tmp/storage",
     "APP_CONFIG_CACHE": "/tmp/storage/framework/cache/config.php",
     "APP_EVENTS_CACHE": "/tmp/storage/framework/cache/events.php",

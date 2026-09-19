@@ -54,7 +54,8 @@ if (! getenv('LOG_CHANNEL') && empty($_ENV['LOG_CHANNEL'])) {
 $defaults = [
     'APP_NAME' => 'Olara',
     'APP_KEY' => 'base64:mS23d4kJQ29OKoXMmzNOqYgu2J3UPNguJRKiWATo8DA=',
-    'APP_DEBUG' => 'true',
+    'APP_DEBUG' => 'false',
+    'APP_MAINTENANCE_DRIVER' => 'array',
     'DB_CONNECTION' => 'pgsql',
     'DB_HOST' => 'aws-0-ap-northeast-1.pooler.supabase.com',
     'DB_PORT' => '5432',
