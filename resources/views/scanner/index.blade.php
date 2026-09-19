@@ -139,29 +139,41 @@
                     <span class="text-[11px] text-[#66716B]">1-Klik memperbarui estimasi harga</span>
                 </div>
                 <div class="flex flex-wrap gap-1.5" id="quickCategoryChips">
-                    <button type="button" onclick="selectQuickMaterial('kardus')" class="quick-chip text-xs px-3 py-1.5 rounded-xl border border-gray-200 hover:border-[#168A5B] hover:bg-[#EEF9F2] text-gray-700 transition font-medium flex items-center gap-1.5">
-                        📦 Kardus &amp; Karton
+                    <button type="button" onclick="selectOfficialMaterialById(1)" class="quick-chip text-xs px-3 py-1.5 rounded-xl border border-gray-200 hover:border-[#168A5B] hover:bg-[#EEF9F2] text-gray-700 transition font-medium flex items-center gap-1.5">
+                        📦 Kardus (Rp 1.000)
                     </button>
-                    <button type="button" onclick="selectQuickMaterial('botol_pet')" class="quick-chip text-xs px-3 py-1.5 rounded-xl border border-gray-200 hover:border-[#168A5B] hover:bg-[#EEF9F2] text-gray-700 transition font-medium flex items-center gap-1.5">
-                        🍾 Botol Plastik PET
+                    <button type="button" onclick="selectOfficialMaterialById(13)" class="quick-chip text-xs px-3 py-1.5 rounded-xl border border-gray-200 hover:border-[#168A5B] hover:bg-[#EEF9F2] text-gray-700 transition font-medium flex items-center gap-1.5">
+                        🍾 Pet Bening (Rp 3.000)
                     </button>
-                    <button type="button" onclick="selectQuickMaterial('kaleng_logam')" class="quick-chip text-xs px-3 py-1.5 rounded-xl border border-gray-200 hover:border-[#168A5B] hover:bg-[#EEF9F2] text-gray-700 transition font-medium flex items-center gap-1.5">
-                        🥫 Kaleng Aluminium
+                    <button type="button" onclick="selectOfficialMaterialById(7)" class="quick-chip text-xs px-3 py-1.5 rounded-xl border border-gray-200 hover:border-[#168A5B] hover:bg-[#EEF9F2] text-gray-700 transition font-medium flex items-center gap-1.5">
+                        🥫 Kaleng (Rp 1.800)
                     </button>
-                    <button type="button" onclick="selectQuickMaterial('plastik_hdpe')" class="quick-chip text-xs px-3 py-1.5 rounded-xl border border-gray-200 hover:border-[#168A5B] hover:bg-[#EEF9F2] text-gray-700 transition font-medium flex items-center gap-1.5">
-                        🧴 Jerigen &amp; Plastik HDPE
+                    <button type="button" onclick="selectOfficialMaterialById(5)" class="quick-chip text-xs px-3 py-1.5 rounded-xl border border-gray-200 hover:border-[#168A5B] hover:bg-[#EEF9F2] text-gray-700 transition font-medium flex items-center gap-1.5">
+                        ⚙️ Besi (Rp 2.500)
                     </button>
-                    <button type="button" onclick="selectQuickMaterial('botol_kaca')" class="quick-chip text-xs px-3 py-1.5 rounded-xl border border-gray-200 hover:border-[#168A5B] hover:bg-[#EEF9F2] text-gray-700 transition font-medium flex items-center gap-1.5">
-                        🍷 Botol Kaca &amp; Beling
+                    <button type="button" onclick="selectOfficialMaterialById(8)" class="quick-chip text-xs px-3 py-1.5 rounded-xl border border-gray-200 hover:border-[#168A5B] hover:bg-[#EEF9F2] text-gray-700 transition font-medium flex items-center gap-1.5">
+                        🍳 Alma Panci (Rp 8.000)
                     </button>
-                    <button type="button" onclick="selectQuickMaterial('ewaste')" class="quick-chip text-xs px-3 py-1.5 rounded-xl border border-gray-200 hover:border-[#168A5B] hover:bg-[#EEF9F2] text-gray-700 transition font-medium flex items-center gap-1.5">
-                        💻 Elektronik (E-Waste)
+                    <button type="button" onclick="selectOfficialMaterialById(17)" class="quick-chip text-xs px-3 py-1.5 rounded-xl border border-gray-200 hover:border-[#168A5B] hover:bg-[#EEF9F2] text-gray-700 transition font-medium flex items-center gap-1.5">
+                        🥤 Aqua Gelas (Rp 3.400)
                     </button>
-                    <button type="button" onclick="selectQuickMaterial('organik')" class="quick-chip text-xs px-3 py-1.5 rounded-xl border border-gray-200 hover:border-[#168A5B] hover:bg-[#EEF9F2] text-gray-700 transition font-medium flex items-center gap-1.5">
-                        🍎 Organik / Sisa Makanan
+                    <button type="button" onclick="selectOfficialMaterialById(22)" class="quick-chip text-xs px-3 py-1.5 rounded-xl border border-gray-200 hover:border-[#168A5B] hover:bg-[#EEF9F2] text-gray-700 transition font-medium flex items-center gap-1.5">
+                        🛢️ Jelantah (Rp 3.400)
                     </button>
-                    <button type="button" onclick="selectQuickMaterial('kertas_hvs')" class="quick-chip text-xs px-3 py-1.5 rounded-xl border border-gray-200 hover:border-[#168A5B] hover:bg-[#EEF9F2] text-gray-700 transition font-medium flex items-center gap-1.5">
-                        📄 Kertas HVS &amp; Cetak
+                    <button type="button" onclick="selectOfficialMaterialById(32)" class="quick-chip text-xs px-3 py-1.5 rounded-xl border border-gray-200 hover:border-[#168A5B] hover:bg-[#EEF9F2] text-gray-700 transition font-medium flex items-center gap-1.5">
+                        🔥 Tabung Gas (Rp 150rb)
+                    </button>
+                    <button type="button" onclick="selectOfficialMaterialById(42)" class="quick-chip text-xs px-3 py-1.5 rounded-xl border border-gray-200 hover:border-[#168A5B] hover:bg-[#EEF9F2] text-gray-700 transition font-medium flex items-center gap-1.5">
+                        📰 Koran (Rp 1.800)
+                    </button>
+                    <button type="button" onclick="selectOfficialMaterialById(24)" class="quick-chip text-xs px-3 py-1.5 rounded-xl border border-gray-200 hover:border-[#168A5B] hover:bg-[#EEF9F2] text-gray-700 transition font-medium flex items-center gap-1.5">
+                        🍷 Beling / Kaca (Rp 150)
+                    </button>
+                    <button type="button" onclick="selectOfficialMaterialById(2)" class="quick-chip text-xs px-3 py-1.5 rounded-xl border border-gray-200 hover:border-[#168A5B] hover:bg-[#EEF9F2] text-gray-700 transition font-medium flex items-center gap-1.5">
+                        📄 Duplek (Rp 400)
+                    </button>
+                    <button type="button" onclick="selectOfficialMaterialById(41)" class="quick-chip text-xs px-3 py-1.5 rounded-xl border border-gray-200 hover:border-[#168A5B] hover:bg-[#EEF9F2] text-gray-700 transition font-medium flex items-center gap-1.5">
+                        🔌 Kabel (Rp 500)
                     </button>
                 </div>
             </div>
@@ -180,7 +192,7 @@
                         <h3 id="resultMaterialTitle" class="text-lg font-extrabold text-[#1B211E] mt-1">
                             Menunggu deteksi...
                         </h3>
-                        <p id="resultCategoryText" class="text-xs text-[#66716B]">Arahkan kamera ke sampah lalu klik tombol deteksi.</p>
+                        <p id="resultCategoryText" class="text-xs text-[#66716B]">Arahkan kamera ke sampah, atau pilih langsung dari daftar di bawah.</p>
                     </div>
                     <div class="text-right flex-shrink-0">
                         <span id="resultConfidenceBadge" class="inline-flex items-center gap-1 font-bold text-xs text-gray-400 bg-gray-100 px-2.5 py-1 rounded-full border border-gray-200">
@@ -199,7 +211,7 @@
                         <div id="contaminationBar" class="h-full bg-gradient-to-r from-emerald-500 to-emerald-400 rounded-full transition-all duration-500" style="width: 0%"></div>
                     </div>
                     <p id="resultRecommendation" class="text-xs text-[#66716B] leading-relaxed bg-[#F7F8F6] p-3 rounded-xl border border-gray-100">
-                        Foto sampah terlebih dahulu untuk mendapatkan rekomendasi pemilahan dari AI.
+                        Foto sampah terlebih dahulu untuk mendapatkan rekomendasi pemilahan dari AI atau pilih jenis barang secara manual.
                     </p>
                 </div>
 
@@ -214,6 +226,44 @@
                     <input type="hidden" name="estimated_price_per_kg" id="formPricePerKg" value="0" />
                     <input type="hidden" name="recommendation" id="formRecommendation" value="" />
                     <input type="hidden" name="action_type" id="formActionType" value="save" />
+
+                    <!-- User Material Selection & Search Box (Fitur Masukkan Jenis Barang) -->
+                    <div class="p-4 rounded-2xl bg-[#EEF9F2] border border-[#BFE7D0] space-y-2.5">
+                        <div class="flex items-center justify-between">
+                            <label for="materialSearchInput" class="text-xs font-bold text-[#0B4F38] flex items-center gap-1.5">
+                                <i data-lucide="tag" class="w-4 h-4 text-[#168A5B]"></i> Masukkan / Pilih Jenis Barang:
+                            </label>
+                            <span class="text-[10px] font-bold text-[#168A5B] bg-white px-2 py-0.5 rounded border border-[#BFE7D0]">
+                                50+ Jenis Resmi
+                            </span>
+                        </div>
+
+                        <!-- Live Search Input -->
+                        <div class="relative">
+                            <input type="text" id="materialSearchInput" placeholder="Cari nama barang (Kardus, Pet, Besi, Kaleng, Aqua, Jelantah...)" oninput="filterMaterialDropdown(this.value)" class="w-full text-xs py-2.5 pl-8 pr-3 bg-white border border-[#BFE7D0] rounded-xl focus:ring-2 focus:ring-[#168A5B] focus:outline-none placeholder-gray-400 font-medium text-[#1B211E]" />
+                            <i data-lucide="search" class="w-3.5 h-3.5 text-gray-400 absolute left-2.5 top-3"></i>
+                        </div>
+
+                        <!-- Grouped Select Dropdown -->
+                        <select id="materialSelectInput" onchange="onMaterialSelectChange(this.value)" class="w-full text-xs font-bold text-[#1B211E] py-2.5 px-3 bg-white border border-[#BFE7D0] rounded-xl focus:ring-2 focus:ring-[#168A5B] focus:outline-none">
+                            <option value="">-- Pilih Jenis Barang (Harga Resmi OLARA) --</option>
+                            @php
+                                $groupedMaterials = collect($wasteMaterials)->groupBy('category');
+                            @endphp
+                            @foreach($groupedMaterials as $cat => $items)
+                                <optgroup label="── Kategori: {{ $cat }} ──">
+                                    @foreach($items as $item)
+                                        <option value="{{ $item['id'] }}">
+                                            {{ $item['name'] }} — Rp {{ number_format($item['price_per_kg'], 0, ',', '.') }}/{{ $item['unit'] ?? 'kg' }}
+                                        </option>
+                                    @endforeach
+                                </optgroup>
+                            @endforeach
+                        </select>
+                        <p class="text-[10px] text-[#66716B]">
+                            *Pilih dari daftar atau ketik di atas untuk mencari jenis barang secara instan.
+                        </p>
+                    </div>
 
                     <!-- Valuation Metric Card -->
                     <div class="p-4 rounded-2xl bg-[#EEF9F2] border border-[#BFE7D0] flex items-center justify-between">
@@ -354,102 +404,54 @@
 // OLARA AI Dual-Vision Waste Detector
 // ============================================================
 
-const WASTE_DICTIONARY = {
-    // 1. Kertas & Kardus
-    'kardus': {
-        name: 'Kardus Cokelat Gelombang (OCC)',
-        category: 'Kertas',
-        price: 2100,
-        contamination: 5,
-        grade: 'Grade A',
-        recommendation: 'Kering dan padat. Pastikan bebas dari noda minyak atau sisa makanan sebelum ditumpuk rapat.',
-        keywords: ['carton', 'cardboard', 'box', 'crate', 'packet', 'container', 'package']
-    },
-    'kertas_hvs': {
-        name: 'Kertas HVS & Dokumen Cetak',
-        category: 'Kertas',
-        price: 1800,
-        contamination: 4,
-        grade: 'Grade A',
-        recommendation: 'Kertas putih bersih bebas staples atau klip logam memiliki harga jual tinggi.',
-        keywords: ['paper towel', 'envelope', 'book', 'notebook', 'comic book', 'binder', 'menu', 'newspaper']
-    },
+const OFFICIAL_WASTE_MATERIALS = @json($wasteMaterials);
+const OFFICIAL_MATERIALS_MAP = new Map();
+OFFICIAL_WASTE_MATERIALS.forEach(item => {
+    OFFICIAL_MATERIALS_MAP.set(parseInt(item.id), item);
+});
 
-    // 2. Plastik
-    'botol_pet': {
-        name: 'Plastik Botol Minuman PET',
-        category: 'Plastik',
-        price: 4800,
-        contamination: 4,
-        grade: 'Grade A',
-        recommendation: 'Lepaskan tutup botol dan label plastik tipis untuk menaikkan harga jual daur ulang.',
-        keywords: ['water bottle', 'pop bottle', 'bottle', 'flask', 'plastic bottle']
-    },
-    'plastik_hdpe': {
-        name: 'Jerigen Sabun & Botol Shampo HDPE',
-        category: 'Plastik',
-        price: 9800,
-        contamination: 7,
-        grade: 'Grade A',
-        recommendation: 'Bilas bersih sisa sabun dengan sedikit air dan biarkan mengering.',
-        keywords: ['water jug', 'plastic bag', 'shopping bag', 'trash bag', 'bucket', 'tub', 'cup', 'bowl', 'pill bottle']
-    },
-
-    // 3. Logam
-    'kaleng_logam': {
-        name: 'Kaleng Minuman Bersoda (Aluminium UBC)',
-        category: 'Logam',
-        price: 18500,
-        contamination: 2,
-        grade: 'Grade A',
-        recommendation: 'Kadar kemurnian tinggi. Injak atau pipihkan kaleng agar hemat tempat penyimpanan.',
-        keywords: ['can', 'tin can', 'beer can', 'soda can', 'lighter', 'aluminum', 'pot', 'pan', 'scissors', 'nail', 'screw', 'fork', 'knife', 'spoon']
-    },
-
-    // 4. Kaca
-    'botol_kaca': {
-        name: 'Botol Kaca Kecap & Sirup Bening',
-        category: 'Kaca',
-        price: 1200,
-        contamination: 5,
-        grade: 'Grade B',
-        recommendation: 'Pisahkan tutup logam dan botol kaca, jangan sampai retak atau pecah berceceran.',
-        keywords: ['wine bottle', 'beer bottle', 'wine glass', 'goblet', 'vase', 'pitcher', 'glass']
-    },
-
-    // 5. E-Waste
-    'ewaste': {
-        name: 'Kabel & Perangkat Elektronik Rusak',
-        category: 'E-Waste',
-        price: 25000,
-        contamination: 5,
-        grade: 'Grade A',
-        recommendation: 'E-waste bernilai tinggi. Simpan di tempat sejuk terlindung dari paparan hujan atau air.',
-        keywords: ['cellular telephone', 'cell phone', 'laptop', 'keyboard', 'mouse', 'hard disc', 'television', 'screen', 'remote control', 'modem', 'microwave', 'toaster']
-    },
-
-    // 6. Organik
-    'organik': {
-        name: 'Sampah Organik / Sisa Makanan',
-        category: 'Organik',
-        price: 200,
-        contamination: 35,
-        grade: 'Grade C',
-        recommendation: 'Sampah organik dapat dikompos untuk pupuk tanaman atau pakan maggot BSF.',
-        keywords: ['banana', 'apple', 'orange', 'sandwich', 'pizza', 'broccoli', 'cabbage', 'strawberry', 'food', 'bread', 'hot dog', 'lemon', 'pineapple', 'corn']
-    },
-
-    // 7. Tekstil
-    'tekstil': {
-        name: 'Limbah Tekstil & Pakaian Bekas',
-        category: 'Tekstil',
-        price: 800,
-        contamination: 12,
-        grade: 'Grade C',
-        recommendation: 'Tekstil dapat didaur ulang menjadi bahan serat kain industri atau lap majun.',
-        keywords: ['backpack', 'handbag', 'suit', 'jersey', 'jean', 'trench coat', 'sweatshirt', 'sock', 'umbrella', 'tie']
-    }
-};
+// Keywords mapping to Official Material ID
+const KEYWORD_TO_OFFICIAL_ID = [
+    { id: 1,  keywords: ['carton', 'cardboard', 'box', 'crate', 'kardus', 'packaging'] },
+    { id: 2,  keywords: ['duplek', 'duplex', 'carton board'] },
+    { id: 3,  keywords: ['paper towel', 'envelope', 'notebook', 'comic book', 'binder', 'menu', 'hvs', 'dokumen'] },
+    { id: 4,  keywords: ['book', 'buku'] },
+    { id: 5,  keywords: ['iron', 'steel', 'screw', 'nail', 'scissors', 'besi'] },
+    { id: 6,  keywords: ['scrap', 'rongsok', 'metal scrap'] },
+    { id: 7,  keywords: ['tin can', 'can', 'soda can', 'beer can', 'kaleng'] },
+    { id: 8,  keywords: ['pot', 'pan', 'panci', 'wajan', 'alma panci'] },
+    { id: 9,  keywords: ['alma kaleng', 'aluminum can', 'ubc'] },
+    { id: 10, keywords: ['zinc', 'seng'] },
+    { id: 13, keywords: ['water bottle', 'pop bottle', 'plastic bottle', 'bottle', 'pet bening'] },
+    { id: 11, keywords: ['pet bening mix', 'blues'] },
+    { id: 12, keywords: ['pet biru'] },
+    { id: 14, keywords: ['pet warna'] },
+    { id: 16, keywords: ['bucket', 'tub', 'ember'] },
+    { id: 17, keywords: ['cup', 'plastic cup', 'aqua gelas'] },
+    { id: 18, keywords: ['gelas pp b'] },
+    { id: 20, keywords: ['mountea', 'ale ale'] },
+    { id: 22, keywords: ['oil', 'fat', 'jelantah', 'frying oil', 'cooking oil'] },
+    { id: 23, keywords: ['multilayer', 'sachet', 'wrapper'] },
+    { id: 24, keywords: ['wine bottle', 'beer bottle', 'wine glass', 'goblet', 'vase', 'pitcher', 'glass', 'beling', 'kaca'] },
+    { id: 25, keywords: ['plastic bag', 'shopping bag', 'karung pp', 'sack'] },
+    { id: 27, keywords: ['infus', 'botol infus', 'ldpe'] },
+    { id: 28, keywords: ['jerigen', 'hemodialisa', 'hdpe', 'water jug'] },
+    { id: 31, keywords: ['tutup galon', 'bottle cap'] },
+    { id: 32, keywords: ['gas tank', 'lpg', 'gas cylinder', 'tabung gas'] },
+    { id: 33, keywords: ['tali plastik', 'rafia', 'strapping'] },
+    { id: 34, keywords: ['shoe', 'running shoe', 'sneaker', 'sepatu'] },
+    { id: 35, keywords: ['safety boot', 'safety shoe', 'boot'] },
+    { id: 36, keywords: ['mika', 'plastik mika'] },
+    { id: 37, keywords: ['banner', 'spanduk', 'pvc'] },
+    { id: 38, keywords: ['straw', 'sedotan'] },
+    { id: 39, keywords: ['toy', 'mainan', 'lego'] },
+    { id: 40, keywords: ['pcb', 'circuit board', 'television', 'tv', 'motherboard', 'chip'] },
+    { id: 41, keywords: ['wire', 'cable', 'kabel', 'electric wire', 'cord'] },
+    { id: 42, keywords: ['newspaper', 'koran'] },
+    { id: 45, keywords: ['cloth', 'shirt', 'suit', 'jersey', 'jean', 'trench coat', 'sweatshirt', 'baju'] },
+    { id: 46, keywords: ['tire', 'wheel', 'ban bekas'] },
+    { id: 56, keywords: ['banana', 'apple', 'orange', 'sandwich', 'pizza', 'broccoli', 'cabbage', 'strawberry', 'food', 'sampah campur'] }
+];
 
 let mobilenetModel = null;
 let cocoModel = null;
@@ -707,15 +709,25 @@ async function runDetection(imageCanvas, imgW, imgH) {
             }
         }
 
-        // 3. Match against Waste Dictionary
+        // 3. Match against Official Waste Dictionary
         const matchedCandidates = resolveWasteCandidates(cocoDets, mobilenetPredictions, imageCanvas);
 
         // 4. Draw bounding box on overlay canvas
         drawBoundingBoxes(document.getElementById('detectionCanvas'), cocoDets, matchedCandidates[0], imgW, imgH);
 
-        // 5. Update results panel
+        // 5. Update results panel and select dropdown with primary candidate
         const primary = matchedCandidates[0];
         updateResultPanel(primary.wasteInfo, primary.confidence);
+
+        // Synchronize the dropdown and search input to the detected item
+        const select = document.getElementById('materialSelectInput');
+        if (select && primary.wasteInfo.id) {
+            select.value = primary.wasteInfo.id;
+        }
+        const searchInput = document.getElementById('materialSearchInput');
+        if (searchInput && primary.wasteInfo.name) {
+            searchInput.value = primary.wasteInfo.name;
+        }
 
         // 6. Show detected candidate chips
         showDetectedObjectsList(matchedCandidates);
@@ -725,29 +737,34 @@ async function runDetection(imageCanvas, imgW, imgH) {
         // Fallback: heuristic analysis
         const fallback = heuristicColorAnalysis(imageCanvas);
         updateResultPanel(fallback.wasteInfo, fallback.confidence);
+        const select = document.getElementById('materialSelectInput');
+        if (select && fallback.wasteInfo.id) select.value = fallback.wasteInfo.id;
     }
 }
 
-// Match labels from MobileNet and COCO-SSD to Indonesian Waste Categories
+// Match labels from MobileNet and COCO-SSD to Official Indonesian Waste Materials
 function resolveWasteCandidates(cocoDets, mobilenetDets, canvas) {
     const candidates = [];
     const seen = new Set();
 
-    // Check MobileNet predictions first (much richer: carton, water bottle, tin can, etc.)
+    // Check MobileNet predictions first
     for (const pred of mobilenetDets) {
         const lowerLabel = pred.className.toLowerCase();
-        for (const [key, waste] of Object.entries(WASTE_DICTIONARY)) {
-            for (const kw of waste.keywords) {
+        for (const mapping of KEYWORD_TO_OFFICIAL_ID) {
+            for (const kw of mapping.keywords) {
                 if (lowerLabel.includes(kw)) {
-                    if (!seen.has(key)) {
-                        seen.add(key);
-                        candidates.push({
-                            key: key,
-                            wasteInfo: waste,
-                            rawLabel: pred.className,
-                            confidence: Math.round(Math.min(99, Math.max(75, pred.probability * 100))),
-                            source: 'MobileNet Vision'
-                        });
+                    if (!seen.has(mapping.id)) {
+                        seen.add(mapping.id);
+                        const item = OFFICIAL_MATERIALS_MAP.get(mapping.id);
+                        if (item) {
+                            candidates.push({
+                                id: item.id,
+                                wasteInfo: item,
+                                rawLabel: pred.className,
+                                confidence: Math.round(Math.min(99, Math.max(75, pred.probability * 100))),
+                                source: 'MobileNet Vision'
+                            });
+                        }
                     }
                     break;
                 }
@@ -758,19 +775,22 @@ function resolveWasteCandidates(cocoDets, mobilenetDets, canvas) {
     // Check COCO-SSD bounding box detections
     for (const det of cocoDets) {
         const lowerLabel = det.class.toLowerCase();
-        for (const [key, waste] of Object.entries(WASTE_DICTIONARY)) {
-            for (const kw of waste.keywords) {
+        for (const mapping of KEYWORD_TO_OFFICIAL_ID) {
+            for (const kw of mapping.keywords) {
                 if (lowerLabel.includes(kw)) {
-                    if (!seen.has(key)) {
-                        seen.add(key);
-                        candidates.push({
-                            key: key,
-                            wasteInfo: waste,
-                            rawLabel: det.class,
-                            confidence: Math.round(Math.min(99, Math.max(78, det.score * 100))),
-                            bbox: det.bbox,
-                            source: 'COCO-SSD Object'
-                        });
+                    if (!seen.has(mapping.id)) {
+                        seen.add(mapping.id);
+                        const item = OFFICIAL_MATERIALS_MAP.get(mapping.id);
+                        if (item) {
+                            candidates.push({
+                                id: item.id,
+                                wasteInfo: item,
+                                rawLabel: det.class,
+                                confidence: Math.round(Math.min(99, Math.max(78, det.score * 100))),
+                                bbox: det.bbox,
+                                source: 'COCO-SSD Object'
+                            });
+                        }
                     }
                     break;
                 }
@@ -778,12 +798,11 @@ function resolveWasteCandidates(cocoDets, mobilenetDets, canvas) {
         }
     }
 
-    // If no specific match found from neural nets, perform heuristic color & texture analysis
+    // If no candidate found from neural nets, perform heuristic color & texture analysis
     if (candidates.length === 0) {
         candidates.push(heuristicColorAnalysis(canvas));
     }
 
-    // Sort by confidence descending
     candidates.sort((a, b) => b.confidence - a.confidence);
     return candidates;
 }
@@ -810,22 +829,22 @@ function heuristicColorAnalysis(canvas) {
         const avgG = totalG / count;
         const avgB = totalB / count;
 
-        // Brown / beige tones -> Cardboard / Kardus
+        // Brown / beige tones -> Kardus (ID 1, Rp 1.000)
         if (avgR > 110 && avgG > 80 && avgB < 100 && (avgR - avgB) > 25) {
-            return { key: 'kardus', wasteInfo: WASTE_DICTIONARY['kardus'], confidence: 88, source: 'Analisis Warna & Serat' };
+            return { id: 1, wasteInfo: OFFICIAL_MATERIALS_MAP.get(1), confidence: 88, source: 'Analisis Warna & Serat' };
         }
-        // Silver / high brightness & balanced -> Cans / Metal
+        // Silver / metallic brightness -> Kaleng (ID 7, Rp 1.800)
         if (avgR > 130 && avgG > 130 && avgB > 130 && Math.abs(avgR - avgG) < 15 && Math.abs(avgG - avgB) < 15) {
-            return { key: 'kaleng_logam', wasteInfo: WASTE_DICTIONARY['kaleng_logam'], confidence: 85, source: 'Analisis Reflektansi Logam' };
+            return { id: 7, wasteInfo: OFFICIAL_MATERIALS_MAP.get(7), confidence: 85, source: 'Analisis Reflektansi Logam' };
         }
-        // High blue / cyan / translucent tint -> PET Bottle
+        // High blue / cyan / translucent tint -> Pet Bening (ID 13, Rp 3.000)
         if (avgB > avgR && avgG > avgR) {
-            return { key: 'botol_pet', wasteInfo: WASTE_DICTIONARY['botol_pet'], confidence: 86, source: 'Analisis Transparansi Plastik' };
+            return { id: 13, wasteInfo: OFFICIAL_MATERIALS_MAP.get(13), confidence: 86, source: 'Analisis Transparansi Plastik' };
         }
     } catch(e) {}
 
-    // Default to Kardus or Botol PET
-    return { key: 'kardus', wasteInfo: WASTE_DICTIONARY['kardus'], confidence: 82, source: 'Estimasi AI Adaptif' };
+    // Default to Kardus (ID 1)
+    return { id: 1, wasteInfo: OFFICIAL_MATERIALS_MAP.get(1), confidence: 82, source: 'Estimasi AI Adaptif' };
 }
 
 // ---- Draw Detection Bounding Boxes & HUD Target ----
@@ -839,8 +858,7 @@ function drawBoundingBoxes(canvas, cocoDets, primaryCandidate, imgW, imgH) {
     const sx = canvas.width / imgW;
     const sy = canvas.height / imgH;
 
-    // Check if COCO found a bounding box
-    const validDets = cocoDets.filter(d => d.bbox && d.bbox[2] > 20 && d.bbox[3] > 20);
+    const validDets = (cocoDets || []).filter(d => d.bbox && d.bbox[2] > 20 && d.bbox[3] > 20);
 
     if (validDets.length > 0) {
         validDets.slice(0, 4).forEach((det, idx) => {
@@ -851,12 +869,10 @@ function drawBoundingBoxes(canvas, cocoDets, primaryCandidate, imgW, imgH) {
             const h = bh * sy;
             const color = idx === 0 ? '#10B981' : '#3B82F6';
 
-            // Draw bounding box
             ctx.strokeStyle = color;
             ctx.lineWidth = 2.5;
             ctx.strokeRect(x, y, w, h);
 
-            // Draw HUD corners
             const cs = Math.min(16, w / 4, h / 4);
             ctx.strokeStyle = '#34D399';
             ctx.lineWidth = 4;
@@ -865,7 +881,6 @@ function drawBoundingBoxes(canvas, cocoDets, primaryCandidate, imgW, imgH) {
             ctx.beginPath(); ctx.moveTo(x, y + h - cs); ctx.lineTo(x, y + h); ctx.lineTo(x + cs, y + h); ctx.stroke();
             ctx.beginPath(); ctx.moveTo(x + w - cs, y + h); ctx.lineTo(x + w, y + h); ctx.lineTo(x + w, y + h - cs); ctx.stroke();
 
-            // Label
             const label = `${primaryCandidate.wasteInfo.name} (${primaryCandidate.confidence}%)`;
             ctx.font = 'bold 12px monospace';
             const lw = ctx.measureText(label).width + 12;
@@ -875,7 +890,6 @@ function drawBoundingBoxes(canvas, cocoDets, primaryCandidate, imgW, imgH) {
             ctx.fillText(label, x + 6, Math.max(16, y - 7));
         });
     } else {
-        // Draw centered focus HUD target frame if full-image classification matched
         const padX = canvas.width * 0.15;
         const padY = canvas.height * 0.15;
         const w = canvas.width - (padX * 2);
@@ -890,7 +904,6 @@ function drawBoundingBoxes(canvas, cocoDets, primaryCandidate, imgW, imgH) {
         ctx.strokeRect(x, y, w, h);
         ctx.setLineDash([]);
 
-        // HUD corners
         const cs = 22;
         ctx.strokeStyle = color;
         ctx.lineWidth = 3.5;
@@ -899,7 +912,6 @@ function drawBoundingBoxes(canvas, cocoDets, primaryCandidate, imgW, imgH) {
         ctx.beginPath(); ctx.moveTo(x, y + h - cs); ctx.lineTo(x, y + h); ctx.lineTo(x + cs, y + h); ctx.stroke();
         ctx.beginPath(); ctx.moveTo(x + w - cs, y + h); ctx.lineTo(x + w, y + h); ctx.lineTo(x + w, y + h - cs); ctx.stroke();
 
-        // Label banner
         const label = `${primaryCandidate.wasteInfo.name} — ${primaryCandidate.confidence}%`;
         ctx.font = 'bold 12px monospace';
         const lw = ctx.measureText(label).width + 14;
@@ -910,9 +922,9 @@ function drawBoundingBoxes(canvas, cocoDets, primaryCandidate, imgW, imgH) {
     }
 }
 
-// ---- Update Right-Hand Result Panel ----
+// ---- Update Right-Hand Result Panel with Official Material ----
 function updateResultPanel(wasteInfo, confidence) {
-    const confPct = Math.round(confidence || 95);
+    const confPct = Math.round(confidence || 98);
     const contamPct = wasteInfo.contamination || 5;
     const cleanLabel = contamPct <= 5 ? 'Sangat Bersih' : contamPct <= 15 ? 'Cukup Bersih' : contamPct <= 30 ? 'Perlu Pembersihan' : 'Kotor';
     const barColor = contamPct <= 10 ? 'from-emerald-500 to-emerald-400' : contamPct <= 25 ? 'from-yellow-400 to-yellow-300' : 'from-red-500 to-red-400';
@@ -925,25 +937,25 @@ function updateResultPanel(wasteInfo, confidence) {
 
     // Update diagnosis panel
     document.getElementById('resultMaterialTitle').textContent = wasteInfo.name;
-    document.getElementById('resultCategoryText').textContent = `Kategori: ${wasteInfo.category} • ${wasteInfo.grade || 'Grade A'} Daur Ulang`;
+    document.getElementById('resultCategoryText').textContent = `Kategori: ${wasteInfo.category} • Standar Harga Resmi OLARA`;
     document.getElementById('resultConfidenceBadge').innerHTML = `<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> ${confPct}% Akurat`;
     document.getElementById('resultConfidenceBadge').className = 'inline-flex items-center gap-1 font-bold text-xs text-[#168A5B] bg-[#EEF9F2] px-2.5 py-1 rounded-full border border-[#BFE7D0]';
     document.getElementById('resultContaminationText').textContent = `${contamPct}% (${cleanLabel})`;
     document.getElementById('contaminationBar').style.width = `${Math.min(100, Math.max(10, contamPct * 3))}%`;
     document.getElementById('contaminationBar').className = `h-full rounded-full transition-all duration-500 bg-gradient-to-r ${barColor}`;
-    document.getElementById('resultRecommendation').textContent = wasteInfo.recommendation;
-    document.getElementById('resultPricePerKg').innerHTML = `Rp ${wasteInfo.price.toLocaleString('id-ID')} <span class="text-xs font-semibold text-[#168A5B]">/ kg</span>`;
+    document.getElementById('resultRecommendation').textContent = wasteInfo.recommendation || 'Pastikan material kering dan bersih sebelum disetor.';
+    document.getElementById('resultPricePerKg').innerHTML = `Rp ${wasteInfo.price_per_kg.toLocaleString('id-ID')} <span class="text-xs font-semibold text-[#168A5B]">/ ${wasteInfo.unit || 'kg'}</span>`;
 
     // Fill hidden form fields
     document.getElementById('formMaterialName').value = wasteInfo.name;
     document.getElementById('formCategory').value = wasteInfo.category;
     document.getElementById('formConfidence').value = confPct;
     document.getElementById('formContamination').value = contamPct;
-    document.getElementById('formPricePerKg').value = wasteInfo.price;
-    document.getElementById('formRecommendation').value = wasteInfo.recommendation;
+    document.getElementById('formPricePerKg').value = wasteInfo.price_per_kg;
+    document.getElementById('formRecommendation').value = wasteInfo.recommendation || '';
 
     calculateTotalValue();
-    lucide.createIcons();
+    if (window.lucide) lucide.createIcons();
     document.getElementById('actionButtons').classList.remove('opacity-40', 'pointer-events-none');
 }
 
@@ -961,7 +973,7 @@ function showDetectedObjectsList(candidates) {
         btn.className = `text-xs px-3 py-1.5 rounded-xl border ${idx === 0 ? 'border-[#168A5B] bg-[#EEF9F2] text-[#168A5B] font-bold' : 'border-gray-200 hover:border-[#168A5B] hover:bg-[#EEF9F2] text-gray-700 hover:text-[#168A5B]'} transition font-medium flex items-center gap-1.5`;
         btn.innerHTML = `<span>${item.wasteInfo.name}</span> <span class="opacity-60 text-[10px]">${item.confidence}%</span>`;
         btn.onclick = () => {
-            updateResultPanel(item.wasteInfo, item.confidence);
+            selectOfficialMaterialById(item.wasteInfo.id);
             grid.querySelectorAll('button').forEach(b => {
                 b.className = 'text-xs px-3 py-1.5 rounded-xl border border-gray-200 hover:border-[#168A5B] hover:bg-[#EEF9F2] text-gray-700 hover:text-[#168A5B] transition font-medium flex items-center gap-1.5';
             });
@@ -971,29 +983,75 @@ function showDetectedObjectsList(candidates) {
     });
 }
 
-// Quick Material Selector (1-Click adjustment, NEVER changes the captured user photo)
-function selectQuickMaterial(key) {
-    const waste = WASTE_DICTIONARY[key];
-    if (!waste) return;
+// User Material Selection (Dropdown change)
+function onMaterialSelectChange(id) {
+    const numId = parseInt(id);
+    if (!numId) return;
+    const item = OFFICIAL_MATERIALS_MAP.get(numId);
+    if (!item) return;
 
-    // Highlight active chip
+    // Update search input text
+    const searchInput = document.getElementById('materialSearchInput');
+    if (searchInput) searchInput.value = item.name;
+
+    // Highlight active quick chip if matching
     document.querySelectorAll('#quickCategoryChips .quick-chip').forEach(btn => {
         btn.classList.remove('border-[#168A5B]', 'bg-[#EEF9F2]', 'text-[#168A5B]', 'font-bold');
         btn.classList.add('border-gray-200', 'text-gray-700');
     });
+
+    updateResultPanel(item, 98);
+
+    if (!userCapturedDataUrl) {
+        document.getElementById('hudOverlay').classList.remove('opacity-0');
+        document.getElementById('hudMaterialTag').textContent = item.name;
+    }
+}
+
+// Live Search Filter for Dropdown
+function filterMaterialDropdown(keyword) {
+    const val = (keyword || '').toLowerCase().trim();
+    const select = document.getElementById('materialSelectInput');
+    if (!select) return;
+
+    let firstMatchId = null;
+    let matchCount = 0;
+
+    const optgroups = select.querySelectorAll('optgroup');
+    optgroups.forEach(og => {
+        let hasVisibleInGroup = false;
+        const options = og.querySelectorAll('option');
+        options.forEach(opt => {
+            const text = opt.textContent.toLowerCase();
+            if (!val || text.includes(val)) {
+                opt.style.display = '';
+                hasVisibleInGroup = true;
+                matchCount++;
+                if (!firstMatchId) firstMatchId = opt.value;
+            } else {
+                opt.style.display = 'none';
+            }
+        });
+        og.style.display = hasVisibleInGroup ? '' : 'none';
+    });
+
+    // Auto-select if exact or unique match found
+    if (val.length >= 3 && matchCount === 1 && firstMatchId) {
+        select.value = firstMatchId;
+        onMaterialSelectChange(firstMatchId);
+    }
+}
+
+// 1-Click Quick Chip Selector by ID
+function selectOfficialMaterialById(id) {
+    const select = document.getElementById('materialSelectInput');
+    if (select) select.value = id;
+    onMaterialSelectChange(id);
+
     const clickedBtn = event ? event.currentTarget : null;
     if (clickedBtn) {
         clickedBtn.classList.remove('border-gray-200', 'text-gray-700');
         clickedBtn.classList.add('border-[#168A5B]', 'bg-[#EEF9F2]', 'text-[#168A5B]', 'font-bold');
-    }
-
-    // Update panel with 98% user-confirmed confidence
-    updateResultPanel(waste, 98);
-
-    // If user has not captured a photo yet, show HUD target
-    if (!userCapturedDataUrl) {
-        document.getElementById('hudOverlay').classList.remove('opacity-0');
-        document.getElementById('hudMaterialTag').textContent = waste.name;
     }
 }
 
