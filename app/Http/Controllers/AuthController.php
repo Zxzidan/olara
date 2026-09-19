@@ -69,21 +69,33 @@ class AuthController extends Controller
     public function register(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'name' => ['nullable', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:100'],
+            'last_name' => ['nullable', 'string', 'max:100'],
+            'origin' => ['required', 'string', 'max:150'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6'],
-            'phone' => ['nullable', 'string', 'max:20'],
+        ], [
+            'first_name.required' => 'Nama depan wajib diisi.',
+            'origin.required' => 'Asal (kota / daerah / instansi) wajib diisi.',
+            'email.required' => 'Alamat surel wajib diisi.',
+            'email.unique' => 'Surel ini sudah terdaftar. Silakan gunakan surel lain atau masuk.',
+            'password.required' => 'Kata sandi wajib diisi.',
+            'password.min' => 'Kata sandi minimal 6 karakter.',
         ]);
 
-        $name = ! empty($validated['name'])
-            ? $validated['name']
-            : ucwords(str_replace(['.', '_', '-'], ' ', explode('@', $validated['email'])[0]));
+        $firstName = trim($validated['first_name']);
+        $lastName = trim($validated['last_name'] ?? '');
+        $fullName = $lastName !== '' ? "{$firstName} {$lastName}" : $firstName;
+        $origin = trim($validated['origin']);
 
         $user = User::create([
-            'name' => $name,
+            'name' => $fullName,
+            'first_name' => $firstName,
+            'last_name' => $lastName !== '' ? $lastName : null,
+            'origin' => $origin,
+            'address' => $origin,
             'email' => strtolower(trim($validated['email'])),
             'password' => password_hash($validated['password'], PASSWORD_BCRYPT, ['cost' => 12]),
-            'phone' => $validated['phone'] ?? null,
             'eco_points' => 50,
             'recycler_level' => 'Level 1 — Starter',
             'membership_tier' => 'lite',

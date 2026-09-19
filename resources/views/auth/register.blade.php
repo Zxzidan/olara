@@ -112,7 +112,7 @@
         <!-- Left Side: White Form Section -->
         <div class="w-full lg:w-1/2 p-8 sm:p-12 lg:p-14 flex flex-col justify-between bg-white text-gray-900">
             
-            <div class="w-full max-w-sm mx-auto my-auto">
+            <div class="w-full max-w-sm sm:max-w-md mx-auto my-auto">
                 <!-- Brand Logo & Title -->
                 <div class="text-center mb-8">
                     <!-- OLARA Logo (Small size) -->
@@ -151,14 +151,55 @@
                 @endif
 
                 <!-- Register Form -->
-                <form action="{{ route('register.submit') }}" method="POST" class="space-y-4">
+                <form action="{{ route('register.submit') }}" method="POST" class="space-y-3.5">
                     @csrf
-                    
-                    <!-- Hidden or Optional Name derivation (auto-filled if not provided) -->
-                    <input type="hidden" name="name" id="name" value="{{ old('name') }}" />
+
+                    <!-- Name Inputs (Nama Depan & Nama Belakang) -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label for="first_name" class="block text-xs font-semibold text-gray-700 mb-1">Nama Depan <span class="text-red-500">*</span></label>
+                            <input 
+                                type="text" 
+                                name="first_name" 
+                                id="first_name" 
+                                value="{{ old('first_name') }}" 
+                                required 
+                                autocomplete="given-name"
+                                placeholder="Nama depan"
+                                class="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 text-sm placeholder-gray-400 focus:bg-white focus:outline-none focus:border-[#10b981] focus:ring-2 focus:ring-[#10b981]/20 transition"
+                            />
+                        </div>
+                        <div>
+                            <label for="last_name" class="block text-xs font-semibold text-gray-700 mb-1">Nama Belakang</label>
+                            <input 
+                                type="text" 
+                                name="last_name" 
+                                id="last_name" 
+                                value="{{ old('last_name') }}" 
+                                autocomplete="family-name"
+                                placeholder="Nama belakang (opsional)"
+                                class="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 text-sm placeholder-gray-400 focus:bg-white focus:outline-none focus:border-[#10b981] focus:ring-2 focus:ring-[#10b981]/20 transition"
+                            />
+                        </div>
+                    </div>
+
+                    <!-- Asal (Kota / Daerah / Instansi) -->
+                    <div>
+                        <label for="origin" class="block text-xs font-semibold text-gray-700 mb-1">Asal <span class="text-red-500">*</span></label>
+                        <input 
+                            type="text" 
+                            name="origin" 
+                            id="origin" 
+                            value="{{ old('origin') }}" 
+                            required 
+                            placeholder="Contoh: Jakarta / Surabaya / Komunitas Hijau"
+                            class="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 text-sm placeholder-gray-400 focus:bg-white focus:outline-none focus:border-[#10b981] focus:ring-2 focus:ring-[#10b981]/20 transition"
+                        />
+                    </div>
 
                     <!-- Email Address Input -->
                     <div>
+                        <label for="email" class="block text-xs font-semibold text-gray-700 mb-1">Email <span class="text-red-500">*</span></label>
                         <input 
                             type="email" 
                             name="email" 
@@ -166,21 +207,22 @@
                             value="{{ old('email') }}" 
                             required 
                             autocomplete="email"
-                            placeholder="Email address"
-                            class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 text-sm placeholder-gray-400 focus:bg-white focus:outline-none focus:border-[#10b981] focus:ring-2 focus:ring-[#10b981]/20 transition"
+                            placeholder="nama@email.com"
+                            class="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 text-sm placeholder-gray-400 focus:bg-white focus:outline-none focus:border-[#10b981] focus:ring-2 focus:ring-[#10b981]/20 transition"
                         />
                     </div>
 
                     <!-- Password Input -->
                     <div>
+                        <label for="password" class="block text-xs font-semibold text-gray-700 mb-1">Password <span class="text-red-500">*</span></label>
                         <input 
                             type="password" 
                             name="password" 
                             id="password" 
                             required 
                             autocomplete="new-password"
-                            placeholder="Password"
-                            class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 text-sm placeholder-gray-400 focus:bg-white focus:outline-none focus:border-[#10b981] focus:ring-2 focus:ring-[#10b981]/20 transition"
+                            placeholder="Minimal 6 karakter"
+                            class="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 text-sm placeholder-gray-400 focus:bg-white focus:outline-none focus:border-[#10b981] focus:ring-2 focus:ring-[#10b981]/20 transition"
                         />
                     </div>
 
@@ -188,14 +230,14 @@
                     <div class="pt-2">
                         <button 
                             type="submit" 
-                            class="w-full py-3.5 px-4 rounded-lg text-white font-extrabold text-xs sm:text-sm tracking-wider uppercase olara-btn-gradient shadow-lg shadow-emerald-500/25 cursor-pointer"
+                            class="w-full py-3 px-4 rounded-lg text-white font-extrabold text-xs sm:text-sm tracking-wider uppercase olara-btn-gradient shadow-lg shadow-emerald-500/25 cursor-pointer"
                         >
                             SIGN UP
                         </button>
                     </div>
 
                     <!-- Terms and Conditions link -->
-                    <div class="text-center pt-2">
+                    <div class="text-center pt-1">
                         <a 
                             href="javascript:void(0)" 
                             onclick="document.getElementById('termsModal').classList.remove('hidden')" 
@@ -208,7 +250,7 @@
             </div>
 
             <!-- Bottom Row: Switch to Login -->
-            <div class="w-full max-w-sm mx-auto pt-8 mt-6 border-t border-gray-100 flex items-center justify-between">
+            <div class="w-full max-w-sm sm:max-w-md mx-auto pt-8 mt-6 border-t border-gray-100 flex items-center justify-between">
                 <span class="text-gray-600 text-xs sm:text-sm font-medium">Have an account?</span>
                 <a 
                     href="{{ route('login') }}" 
