@@ -42,7 +42,7 @@
 
             <label class="cursor-pointer text-xs font-medium flex items-center gap-1.5 px-3 py-2 rounded-xl border border-[#DDE3DF] hover:bg-gray-50 transition {{ request('premium_only') ? 'bg-amber-50 border-amber-300 text-amber-900 font-bold' : 'text-gray-700' }}">
                 <input type="checkbox" name="premium_only" value="1" {{ request('premium_only') ? 'checked' : '' }} class="hidden" onchange="this.form.submit()" />
-                ⭐ Mitra Khusus (+25 Pts)
+                <i data-lucide="award" class="w-3.5 h-3.5 text-amber-600"></i> Mitra Khusus (+25 Pts)
             </label>
 
             <button type="submit" class="py-2 px-4 rounded-xl bg-[#168A5B] hover:bg-[#0F6B47] text-white text-xs font-bold transition shadow-sm">
@@ -83,7 +83,7 @@
                         <div>
                             @if($partner->is_premium_partner)
                                 <span class="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-amber-800 bg-amber-100 border border-amber-300 px-2 py-0.5 rounded-full mb-1">
-                                    ⭐ Mitra Resmi OLARA (+{{ $partner->bonus_points }} Poin)
+                                    <i data-lucide="award" class="w-3 h-3 text-amber-600"></i> Mitra Resmi OLARA (+{{ $partner->bonus_points }} Poin)
                                 </span>
                             @else
                                 <span class="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-gray-600 bg-gray-100 px-2 py-0.5 rounded-full mb-1">
