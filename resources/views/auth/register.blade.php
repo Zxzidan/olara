@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Masuk Akun — OLARA</title>
+    <title>Daftar Akun — OLARA</title>
 
     <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -78,8 +78,8 @@
                     <h1 class="text-white text-lg sm:text-xl font-bold tracking-wide mt-3">We are The OLARA Team</h1>
                 </div>
 
-                <!-- Subtitle / Instruction -->
-                <p class="text-[#d1d5db] text-sm sm:text-base font-medium mb-6">Please login to your account</p>
+                <!-- Subtitle / Instruction (Exactly as in reference image) -->
+                <p class="text-[#d1d5db] text-sm sm:text-base font-medium mb-6">Please register an account</p>
 
                 <!-- Session Flash Messages / Errors -->
                 @if (session('success'))
@@ -99,17 +99,20 @@
                     </div>
                 @endif
 
-                <!-- Login Form -->
-                <form action="{{ route('login.submit') }}" method="POST" class="space-y-4">
+                <!-- Register Form -->
+                <form action="{{ route('register.submit') }}" method="POST" class="space-y-4">
                     @csrf
                     
+                    <!-- Hidden or Optional Name derivation (auto-filled if not provided) -->
+                    <input type="hidden" name="name" id="name" value="{{ old('name') }}" />
+
                     <!-- Email Address Input -->
                     <div>
                         <input 
                             type="email" 
                             name="email" 
                             id="email" 
-                            value="{{ old('email', 'zidan@olara.id') }}" 
+                            value="{{ old('email') }}" 
                             required 
                             autocomplete="email"
                             placeholder="Email address"
@@ -123,45 +126,44 @@
                             type="password" 
                             name="password" 
                             id="password" 
-                            value="password123"
                             required 
-                            autocomplete="current-password"
+                            autocomplete="new-password"
                             placeholder="Password"
                             class="w-full px-4 py-3 bg-[#242826] border border-[#38423d] rounded-lg text-white text-sm placeholder-[#7e8983] focus:outline-none focus:border-[#10b981] focus:ring-1 focus:ring-[#10b981] transition shadow-inner"
                         />
                     </div>
 
-                    <!-- Action Button: LOG IN -->
+                    <!-- Action Button: SIGN UP (Matches template) -->
                     <div class="pt-2">
                         <button 
                             type="submit" 
                             class="w-full py-3.5 px-4 rounded-lg text-white font-extrabold text-xs sm:text-sm tracking-wider uppercase olara-btn-gradient shadow-lg cursor-pointer"
                         >
-                            LOG IN
+                            SIGN UP
                         </button>
                     </div>
 
-                    <!-- Forgot password link -->
+                    <!-- Terms and Conditions link (Matches template) -->
                     <div class="text-center pt-2">
                         <a 
                             href="javascript:void(0)" 
-                            onclick="document.getElementById('forgotModal').classList.remove('hidden')" 
+                            onclick="document.getElementById('termsModal').classList.remove('hidden')" 
                             class="text-zinc-400 hover:text-emerald-400 text-xs transition duration-150 inline-block py-1"
                         >
-                            Forgot password?
+                            Terms and conditions
                         </a>
                     </div>
                 </form>
             </div>
 
-            <!-- Bottom Row: Switch to Register -->
+            <!-- Bottom Row: Switch to Login (Matches template) -->
             <div class="w-full max-w-sm mx-auto pt-8 mt-6 border-t border-white/5 flex items-center justify-between">
-                <span class="text-zinc-300 text-xs sm:text-sm font-medium">Don't have an account?</span>
+                <span class="text-zinc-300 text-xs sm:text-sm font-medium">Have an account?</span>
                 <a 
-                    href="{{ route('register') }}" 
+                    href="{{ route('login') }}" 
                     class="px-5 py-2 rounded-lg olara-outline-btn text-xs font-bold uppercase tracking-wider text-center cursor-pointer inline-block"
                 >
-                    SIGN UP
+                    LOGIN
                 </a>
             </div>
 
@@ -187,25 +189,26 @@
 
     </div>
 
-    <!-- Self-Contained Forgot Password Modal (No External Navigation) -->
-    <div id="forgotModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-[#1c201e] border border-[#38423d] rounded-2xl p-6 max-w-sm w-full shadow-2xl text-white">
+    <!-- Self-Contained Terms Modal (No External Navigation) -->
+    <div id="termsModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-[#1c201e] border border-[#38423d] rounded-2xl p-6 max-w-md w-full shadow-2xl text-white">
             <div class="flex items-center justify-between mb-4">
                 <h3 class="text-base font-bold text-white flex items-center gap-2">
-                    <span class="text-emerald-400">🔑</span> Lupa Kata Sandi
+                    <span class="text-emerald-400">📋</span> Syarat & Ketentuan OLARA
                 </h3>
-                <button type="button" onclick="document.getElementById('forgotModal').classList.add('hidden')" class="text-zinc-400 hover:text-white text-lg leading-none">&times;</button>
+                <button type="button" onclick="document.getElementById('termsModal').classList.add('hidden')" class="text-zinc-400 hover:text-white text-lg leading-none">&times;</button>
             </div>
-            <p class="text-xs text-zinc-300 mb-4 leading-relaxed">
-                Silakan hubungi administrator sistem atau gunakan kredensial demo untuk masuk:
-            </p>
-            <div class="p-3 bg-[#242826] rounded-xl border border-[#38423d] text-xs space-y-1 mb-4">
-                <p><span class="text-zinc-400">Email:</span> <code class="text-emerald-300 font-mono">zidan@olara.id</code></p>
-                <p><span class="text-zinc-400">Password:</span> <code class="text-emerald-300 font-mono">password123</code></p>
+            <div class="text-xs text-zinc-300 space-y-2.5 max-h-60 overflow-y-auto pr-1">
+                <p>1. <strong>Penggunaan Platform:</strong> OLARA adalah ekosistem digital untuk pengelolaan dan daur ulang sampah berkelanjutan.</p>
+                <p>2. <strong>Bonus Pengguna Baru:</strong> Setiap registrasi akun baru yang valid secara otomatis menerima 50 Eco-Points yang dapat ditukarkan di Rewards Wallet.</p>
+                <p>3. <strong>Keamanan Data:</strong> Data kredensial Anda disimpan secara terenkripsi dan aman sesuai standar privasi data nasional.</p>
+                <p>4. <strong>Integritas Transaksi:</strong> Aktivitas pemilahan dan pengantaran sampah diverifikasi melalui sistem AI dan mitra bank sampah terpercaya.</p>
             </div>
-            <button type="button" onclick="document.getElementById('forgotModal').classList.add('hidden')" class="w-full py-2.5 rounded-lg olara-btn-gradient text-white text-xs font-bold cursor-pointer">
-                Mengerti
-            </button>
+            <div class="mt-5">
+                <button type="button" onclick="document.getElementById('termsModal').classList.add('hidden')" class="w-full py-2.5 rounded-lg olara-btn-gradient text-white text-xs font-bold cursor-pointer">
+                    Saya Setuju & Mengerti
+                </button>
+            </div>
         </div>
     </div>
 

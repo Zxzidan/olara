@@ -18,7 +18,7 @@ class AuthController extends Controller
 
     public function showRegister(): View
     {
-        return view('auth.login', ['mode' => 'register']);
+        return view('auth.register', ['mode' => 'register']);
     }
 
     public function login(Request $request): RedirectResponse
@@ -42,15 +42,19 @@ class AuthController extends Controller
     public function register(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['nullable', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6'],
             'phone' => ['nullable', 'string', 'max:20'],
         ]);
 
+        $name = ! empty($validated['name'])
+            ? $validated['name']
+            : ucwords(str_replace(['.', '_', '-'], ' ', explode('@', $validated['email'])[0]));
+
         // Create user with 50 Eco-Point welcome bonus as strictly specified by OLARA PRD
         $user = User::create([
-            'name' => $validated['name'],
+            'name' => $name,
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
             'phone' => $validated['phone'] ?? null,
