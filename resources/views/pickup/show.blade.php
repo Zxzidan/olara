@@ -233,9 +233,9 @@
                     </div>
                 </div>
 
-                @if(!$isPaid && $pickup->snap_token)
+                @if(!$isPaid)
                     <div class="pt-2">
-                        <button type="button" onclick="payPickupSnap()" class="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white text-xs font-bold shadow-md transition flex items-center justify-center gap-2">
+                        <button type="button" id="payButton" onclick="payPickupSnap()" class="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white text-xs font-bold shadow-md transition flex items-center justify-center gap-2">
                             <i data-lucide="credit-card" class="w-4 h-4"></i> Bayar Biaya Armada (Midtrans)
                         </button>
                     </div>
@@ -292,12 +292,41 @@
         }
     });
 
-    function payPickupSnap() {
+    async function payPickupSnap() {
         if (!window.snap) {
-            alert('Midtrans SDK belum siap.');
+            alert('Midtrans SDK belum siap. Silakan muat ulang halaman.');
             return;
         }
-        window.snap.pay("{{ $pickup->snap_token }}", {
+
+        const payBtn = document.getElementById('payButton');
+        const originalHtml = payBtn ? payBtn.innerHTML : '';
+        if (payBtn) {
+            payBtn.disabled = true;
+            payBtn.innerHTML = '<svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white inline" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Menyiapkan Pembayaran...';
+        }
+
+        let token = "{{ $pickup->snap_token ?? '' }}";
+        if (!token) {
+            try {
+                const res = await fetch("{{ route('pickup.snapToken', $pickup->pickup_code) }}");
+                const data = await res.json();
+                if (data.success && data.snap_token) {
+                    token = data.snap_token;
+                } else {
+                    alert('Gagal menyiapkan token pembayaran: ' + (data.message || 'Token tidak valid.'));
+                    if (payBtn) { payBtn.disabled = false; payBtn.innerHTML = originalHtml; }
+                    return;
+                }
+            } catch (err) {
+                alert('Gagal menghubungi server pembayaran.');
+                if (payBtn) { payBtn.disabled = false; payBtn.innerHTML = originalHtml; }
+                return;
+            }
+        }
+
+        if (payBtn) { payBtn.disabled = false; payBtn.innerHTML = originalHtml; }
+
+        window.snap.pay(token, {
             onSuccess: function(result) {
                 fetch("{{ route('pickup.markPaid', $pickup->pickup_code) }}", {
                     method: 'POST',

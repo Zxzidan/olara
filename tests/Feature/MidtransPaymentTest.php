@@ -313,3 +313,33 @@ test('midtrans webhook notification marks pickup request as paid and updates sta
     expect($pickup->payment_method)->toBe('qris');
     expect($pickup->transaction_id)->toBe('midtrans-pkp-trx-101');
 });
+
+test('pickup snap token endpoint returns or generates valid snap token', function () {
+    $pickup = PickupRequest::create([
+        'pickup_code' => 'PKP-202609-TOKEN1',
+        'user_id' => $this->user->id,
+        'categories' => ['Plastik'],
+        'scheduled_date' => now()->addDay(),
+        'scheduled_slot' => 'pagi',
+        'address' => 'Jl. Senopati Raya No. 42, Kebayoran Baru, Jakarta Selatan',
+        'estimated_weight' => 5.0,
+        'base_fee' => 10000,
+        'volume_surcharge' => 0,
+        'distance_km' => 3.5,
+        'distance_fee' => 7000,
+        'service_fee' => 2000,
+        'total_fee' => 19000,
+        'payment_status' => 'unpaid',
+        'payment_method' => 'Midtrans Digital',
+        'snap_token' => 'pre-existing-snap-token-123',
+        'status' => 'confirmed',
+    ]);
+
+    $response = $this->actingAs($this->user)->getJson(route('pickup.snapToken', $pickup->pickup_code));
+
+    $response->assertStatus(200);
+    $response->assertJson([
+        'success' => true,
+        'snap_token' => 'pre-existing-snap-token-123',
+    ]);
+});

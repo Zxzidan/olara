@@ -41,6 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/pickup', [PickupController::class, 'index'])->name('pickup.index');
     Route::post('/pickup', [PickupController::class, 'store'])->name('pickup.store');
     Route::get('/pickup/{code}', [PickupController::class, 'show'])->name('pickup.show');
+    Route::get('/pickup/{code}/snap-token', [PickupController::class, 'getSnapToken'])->name('pickup.snapToken');
     Route::post('/pickup/{code}/mark-paid', [PickupController::class, 'markPaid'])->name('pickup.markPaid');
 
     // Drop-off Map & Directory

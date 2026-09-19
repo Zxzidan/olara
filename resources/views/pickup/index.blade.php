@@ -46,6 +46,28 @@
         </div>
     @endif
 
+    <!-- Error and Flash Notifications -->
+    @if ($errors->any())
+        <div class="bg-rose-50 border-2 border-rose-300 text-rose-800 p-4 rounded-2xl flex items-start gap-3 shadow-sm">
+            <i data-lucide="alert-circle" class="w-5 h-5 text-rose-600 shrink-0 mt-0.5"></i>
+            <div>
+                <h4 class="text-sm font-bold text-rose-900">Periksa Kembali Formulir Anda:</h4>
+                <ul class="text-xs list-disc list-inside mt-1 space-y-0.5 text-rose-700">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div class="bg-rose-50 border-2 border-rose-300 text-rose-800 p-4 rounded-2xl flex items-center gap-3 shadow-sm">
+            <i data-lucide="alert-circle" class="w-5 h-5 text-rose-600 shrink-0"></i>
+            <span class="text-xs font-semibold">{{ session('error') }}</span>
+        </div>
+    @endif
+
     <!-- Booking Form & Price Calculator (2-Column Grid) -->
     <form action="{{ route('pickup.store') }}" method="POST" id="pickupForm" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         @csrf
@@ -126,19 +148,19 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
                             <label class="block text-xs font-bold text-[#1B211E] mb-1.5">Tanggal Penjemputan</label>
-                            <input type="date" name="scheduled_date" value="{{ date('Y-m-d', strtotime('+1 day')) }}" min="{{ date('Y-m-d') }}" required class="w-full px-4 py-2.5 rounded-xl border border-[#DDE3DF] text-xs font-medium focus:ring-2 focus:ring-[#168A5B] focus:outline-none" />
+                            <input type="date" name="scheduled_date" value="{{ old('scheduled_date', date('Y-m-d', strtotime('+1 day'))) }}" required class="w-full px-4 py-2.5 rounded-xl border border-[#DDE3DF] text-xs font-medium focus:ring-2 focus:ring-[#168A5B] focus:outline-none" />
                         </div>
 
                         <div>
                             <label class="block text-xs font-bold text-[#1B211E] mb-1.5">Pilihan Slot Waktu</label>
                             <div class="grid grid-cols-2 gap-2">
                                 <label class="cursor-pointer p-2 rounded-xl border border-[#DDE3DF] text-center has-[:checked]:bg-[#EEF9F2] has-[:checked]:border-[#168A5B]">
-                                    <input type="radio" name="scheduled_slot" value="pagi" checked class="hidden" />
+                                    <input type="radio" name="scheduled_slot" value="pagi" {{ old('scheduled_slot', 'pagi') === 'pagi' ? 'checked' : '' }} class="hidden" />
                                     <span class="block text-xs font-bold text-[#1B211E]">Pagi</span>
                                     <span class="block text-[10px] text-gray-500">08:00 - 11:00</span>
                                 </label>
                                 <label class="cursor-pointer p-2 rounded-xl border border-[#DDE3DF] text-center has-[:checked]:bg-[#EEF9F2] has-[:checked]:border-[#168A5B]">
-                                    <input type="radio" name="scheduled_slot" value="siang" class="hidden" />
+                                    <input type="radio" name="scheduled_slot" value="siang" {{ old('scheduled_slot') === 'siang' ? 'checked' : '' }} class="hidden" />
                                     <span class="block text-xs font-bold text-[#1B211E]">Siang</span>
                                     <span class="block text-[10px] text-gray-500">13:00 - 16:00</span>
                                 </label>
@@ -149,7 +171,7 @@
                     <!-- Address Input -->
                     <div>
                         <label class="block text-xs font-bold text-[#1B211E] mb-1.5">Alamat Lengkap Rumah / Kantor</label>
-                        <textarea name="address" rows="2" required class="w-full px-4 py-2.5 rounded-xl border border-[#DDE3DF] text-xs focus:ring-2 focus:ring-[#168A5B] focus:outline-none" placeholder="Masukkan nama jalan, nomor rumah, RT/RW, dan patokan">{{ $user->address ?? 'Jl. Senopati Raya No. 42, RT 04/RW 02, Kebayoran Baru, Jakarta Selatan' }}</textarea>
+                        <textarea name="address" rows="2" required class="w-full px-4 py-2.5 rounded-xl border border-[#DDE3DF] text-xs focus:ring-2 focus:ring-[#168A5B] focus:outline-none" placeholder="Masukkan nama jalan, nomor rumah, RT/RW, dan patokan">{{ old('address', (strlen($user->address ?? '') >= 10 ? $user->address : 'Jl. Senopati Raya No. 42, RT 04/RW 02, Kebayoran Baru, Jakarta Selatan')) }}</textarea>
                     </div>
 
                     <!-- Notes -->
@@ -262,5 +284,14 @@
 
     // Run on init
     calculatePickupFees();
+
+    document.getElementById('pickupForm')?.addEventListener('submit', function(e) {
+        const checkedCats = document.querySelectorAll('input[name="categories[]"]:checked');
+        if (checkedCats.length === 0) {
+            e.preventDefault();
+            alert('Silakan pilih minimal satu kategori sampah daur ulang sebelum konfirmasi penjemputan.');
+            return false;
+        }
+    });
 </script>
 @endsection

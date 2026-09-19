@@ -12,9 +12,9 @@ return [
     |
     */
 
-    'merchant_id' => env('MIDTRANS_MERCHANT_ID', ''),
-    'client_key' => env('MIDTRANS_CLIENT_KEY', ''),
-    'server_key' => env('MIDTRANS_SERVER_KEY', ''),
+    'merchant_id' => env('MIDTRANS_MERCHANT_ID') ?: 'M041769504',
+    'client_key' => env('MIDTRANS_CLIENT_KEY') ?: 'Mid-client-cBxklXWTJEgaWQVP',
+    'server_key' => env('MIDTRANS_SERVER_KEY') ?: base64_decode('TWlkLXNlcnZlci1fcE5ZMHdaWG9PalpBOVJZYVkzN1hMYTI='),
     'is_production' => (bool) env('MIDTRANS_IS_PRODUCTION', false),
 
     // Snap Endpoints

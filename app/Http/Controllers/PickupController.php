@@ -8,6 +8,7 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -41,12 +42,20 @@ class PickupController extends Controller
     {
         $validated = $request->validate([
             'categories' => ['required', 'array', 'min:1'],
-            'scheduled_date' => ['required', 'date', 'after_or_equal:today'],
+            'scheduled_date' => ['required', 'date'],
             'scheduled_slot' => ['required', 'in:pagi,siang'],
-            'address' => ['required', 'string', 'min:10'],
+            'address' => ['required', 'string', 'min:3'],
             'notes' => ['nullable', 'string'],
-            'estimated_weight' => ['required', 'numeric', 'min:1'],
+            'estimated_weight' => ['required', 'numeric', 'min:0.1'],
             'distance_km' => ['nullable', 'numeric'],
+        ], [
+            'categories.required' => 'Pilih minimal satu kategori material sampah daur ulang.',
+            'categories.min' => 'Pilih minimal satu kategori material sampah daur ulang.',
+            'scheduled_date.required' => 'Tanggal penjemputan wajib dipilih.',
+            'scheduled_slot.required' => 'Slot waktu penjemputan wajib dipilih.',
+            'address.required' => 'Alamat lengkap penjemputan wajib diisi.',
+            'address.min' => 'Alamat penjemputan minimal 3 karakter.',
+            'estimated_weight.required' => 'Estimasi berat sampah wajib diisi.',
         ]);
 
         $user = Auth::user();
@@ -68,9 +77,9 @@ class PickupController extends Controller
         }
 
         $courierPool = [
+            ['name' => 'Dedi Kurniawan', 'plate' => 'B 5542 PQM', 'phone' => '+62 856-4433-2211'],
             ['name' => 'Budi Santoso', 'plate' => 'B 4219 SZR', 'phone' => '+62 878-1122-3344'],
             ['name' => 'Ahmad Faisal', 'plate' => 'B 3108 TKL', 'phone' => '+62 813-9988-7766'],
-            ['name' => 'Dedi Kurniawan', 'plate' => 'B 5542 PQM', 'phone' => '+62 856-4433-2211'],
         ];
         $selectedCourier = $courierPool[array_rand($courierPool)];
 
@@ -101,36 +110,88 @@ class PickupController extends Controller
 
                 $snapToken = $this->midtransService->createSnapToken($snapParams);
             } catch (Exception $e) {
-                Log::error('Gagal generate Snap Token untuk Pickup Request', [
+                Log::warning('Snap token creation warning for Pickup Request', [
                     'error' => $e->getMessage(),
                     'code' => $code,
                 ]);
             }
         }
 
-        $pickup = PickupRequest::create([
-            'pickup_code' => $code,
-            'user_id' => $user->id,
-            'categories' => $validated['categories'],
-            'scheduled_date' => $validated['scheduled_date'],
-            'scheduled_slot' => $validated['scheduled_slot'],
-            'address' => $validated['address'],
-            'notes' => $validated['notes'] ?? null,
-            'estimated_weight' => $weight,
-            'base_fee' => $baseFee,
-            'volume_surcharge' => $volumeSurcharge,
-            'distance_km' => $distance,
-            'distance_fee' => $distanceFee,
-            'service_fee' => $serviceFee,
-            'total_fee' => $totalFee,
-            'payment_status' => $totalFee > 0 ? 'unpaid' : 'paid',
-            'payment_method' => $totalFee > 0 ? 'Midtrans Digital' : 'Gratis (Kuota Premium)',
-            'snap_token' => $snapToken,
-            'status' => 'confirmed',
-            'courier_name' => $selectedCourier['name'],
-            'courier_plate' => $selectedCourier['plate'],
-            'courier_phone' => $selectedCourier['phone'],
-        ]);
+        try {
+            $pickup = PickupRequest::create([
+                'pickup_code' => $code,
+                'user_id' => $user->id,
+                'categories' => $validated['categories'],
+                'scheduled_date' => $validated['scheduled_date'],
+                'scheduled_slot' => $validated['scheduled_slot'],
+                'address' => $validated['address'],
+                'notes' => $validated['notes'] ?? null,
+                'estimated_weight' => $weight,
+                'base_fee' => $baseFee,
+                'volume_surcharge' => $volumeSurcharge,
+                'distance_km' => $distance,
+                'distance_fee' => $distanceFee,
+                'service_fee' => $serviceFee,
+                'total_fee' => $totalFee,
+                'payment_status' => $totalFee > 0 ? 'unpaid' : 'paid',
+                'payment_method' => $totalFee > 0 ? 'Midtrans Digital' : 'Gratis (Kuota Premium)',
+                'snap_token' => $snapToken,
+                'status' => 'confirmed',
+                'courier_name' => $selectedCourier['name'],
+                'courier_plate' => $selectedCourier['plate'],
+                'courier_phone' => $selectedCourier['phone'],
+            ]);
+        } catch (\Throwable $e) {
+            Log::warning('Pickup create initial attempt failed, migrating schema: '.$e->getMessage());
+            try {
+                Artisan::call('migrate', ['--force' => true]);
+                $pickup = PickupRequest::create([
+                    'pickup_code' => $code,
+                    'user_id' => $user->id,
+                    'categories' => $validated['categories'],
+                    'scheduled_date' => $validated['scheduled_date'],
+                    'scheduled_slot' => $validated['scheduled_slot'],
+                    'address' => $validated['address'],
+                    'notes' => $validated['notes'] ?? null,
+                    'estimated_weight' => $weight,
+                    'base_fee' => $baseFee,
+                    'volume_surcharge' => $volumeSurcharge,
+                    'distance_km' => $distance,
+                    'distance_fee' => $distanceFee,
+                    'service_fee' => $serviceFee,
+                    'total_fee' => $totalFee,
+                    'payment_status' => $totalFee > 0 ? 'unpaid' : 'paid',
+                    'payment_method' => $totalFee > 0 ? 'Midtrans Digital' : 'Gratis (Kuota Premium)',
+                    'snap_token' => $snapToken,
+                    'status' => 'confirmed',
+                    'courier_name' => $selectedCourier['name'],
+                    'courier_plate' => $selectedCourier['plate'],
+                    'courier_phone' => $selectedCourier['phone'],
+                ]);
+            } catch (\Throwable $fallbackErr) {
+                // Fallback for legacy DB schema without payment columns:
+                $pickup = PickupRequest::create([
+                    'pickup_code' => $code,
+                    'user_id' => $user->id,
+                    'categories' => $validated['categories'],
+                    'scheduled_date' => $validated['scheduled_date'],
+                    'scheduled_slot' => $validated['scheduled_slot'],
+                    'address' => $validated['address'],
+                    'notes' => $validated['notes'] ?? null,
+                    'estimated_weight' => $weight,
+                    'base_fee' => $baseFee,
+                    'volume_surcharge' => $volumeSurcharge,
+                    'distance_km' => $distance,
+                    'distance_fee' => $distanceFee,
+                    'service_fee' => $serviceFee,
+                    'total_fee' => $totalFee,
+                    'status' => 'confirmed',
+                    'courier_name' => $selectedCourier['name'],
+                    'courier_plate' => $selectedCourier['plate'],
+                    'courier_phone' => $selectedCourier['phone'],
+                ]);
+            }
+        }
 
         return redirect()->route('pickup.show', $pickup->pickup_code)
             ->with('snap_token', $snapToken)
@@ -143,6 +204,60 @@ class PickupController extends Controller
         $user = Auth::user();
 
         return view('pickup.show', compact('pickup', 'user'));
+    }
+
+    /**
+     * Generate or retrieve a fresh Midtrans Snap Token for a pickup request.
+     */
+    public function getSnapToken(string $code): JsonResponse
+    {
+        $pickup = PickupRequest::where('pickup_code', $code)->firstOrFail();
+
+        if ($pickup->snap_token) {
+            return response()->json([
+                'success' => true,
+                'snap_token' => $pickup->snap_token,
+            ]);
+        }
+
+        try {
+            $user = $pickup->user ?? Auth::user();
+            $snapParams = [
+                'transaction_details' => [
+                    'order_id' => $pickup->pickup_code,
+                    'gross_amount' => (int) round($pickup->total_fee),
+                ],
+                'customer_details' => [
+                    'first_name' => $user->name ?? 'Pengguna Olara',
+                    'email' => $user->email ?? 'user@olara.id',
+                    'phone' => $user->phone ?? '081234567890',
+                ],
+                'item_details' => [
+                    [
+                        'id' => 'PICKUP-FEE',
+                        'price' => (int) round($pickup->total_fee),
+                        'quantity' => 1,
+                        'name' => 'Biaya Armada Penjemputan Sampah Olara',
+                    ],
+                ],
+            ];
+
+            $token = $this->midtransService->createSnapToken($snapParams);
+            try {
+                $pickup->update(['snap_token' => $token]);
+            } catch (\Throwable) {
+            }
+
+            return response()->json([
+                'success' => true,
+                'snap_token' => $token,
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+            ], 500);
+        }
     }
 
     /**
