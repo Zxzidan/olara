@@ -47,9 +47,21 @@ if (! getenv('LOG_CHANNEL') && empty($_ENV['LOG_CHANNEL'])) {
     putenv('LOG_CHANNEL=stderr');
 }
 
+// Fallback for APP_KEY if not set in Vercel environment
+if (empty($_ENV['APP_KEY']) && empty(getenv('APP_KEY'))) {
+    $defaultKey = 'base64:mS23d4kJQ29OKoXMmzNOqYgu2J3UPNguJRKiWATo8DA=';
+    $_ENV['APP_KEY'] = $defaultKey;
+    $_SERVER['APP_KEY'] = $defaultKey;
+    putenv('APP_KEY='.$defaultKey);
+}
+
 // Ensure storage subdirectories exist in /tmp for Vercel serverless environment
 $storageDirs = [
+    '/tmp/storage',
+    '/tmp/storage/app',
     '/tmp/storage/app/public',
+    '/tmp/storage/framework',
+    '/tmp/storage/framework/cache',
     '/tmp/storage/framework/cache/data',
     '/tmp/storage/framework/sessions',
     '/tmp/storage/framework/views',
@@ -58,7 +70,7 @@ $storageDirs = [
 
 foreach ($storageDirs as $dir) {
     if (! is_dir($dir)) {
-        mkdir($dir, 0755, true);
+        @mkdir($dir, 0755, true);
     }
 }
 
