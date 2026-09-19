@@ -219,68 +219,62 @@
         </div>
 
         <!-- Right Side: Green Section with Animated Mascot Carousel (IKON 1, 2, 3) -->
-        <div class="w-full lg:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col items-center justify-center olara-gradient-panel relative overflow-hidden min-h-[440px] lg:min-h-full select-none" id="mascotContainer">
+        <div class="w-full lg:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col items-center justify-center olara-gradient-panel relative overflow-hidden min-h-[440px] lg:min-h-full select-none">
             
             <!-- Ambient Subtle Background Glow Elements -->
             <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-white/20 blur-3xl pointer-events-none ambient-glow"></div>
             <div class="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-emerald-950/50 blur-3xl pointer-events-none ambient-glow"></div>
 
-            <!-- Floating Micro-Badges for 3D depth -->
-            <div class="absolute top-6 left-6 lg:top-10 lg:left-10 z-20 badge-floating-1 hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/25 text-white text-xs font-semibold shadow-lg shadow-emerald-950/20">
-                <span class="text-sm">🌱</span> <span>Eco-Friendly</span>
-            </div>
-
-            <div class="absolute bottom-14 right-6 lg:bottom-16 lg:right-10 z-20 badge-floating-2 hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/25 text-white text-xs font-semibold shadow-lg shadow-emerald-950/20">
-                <span class="text-sm">♻️</span> <span>100% Recycle</span>
-            </div>
-
             <!-- Mascot Animated Carousel Wrapper -->
             <div class="relative z-10 w-full flex flex-col items-center justify-center my-auto">
                 
-                <!-- Main Floating Mascot Stage -->
-                <div class="relative w-full max-w-[340px] sm:max-w-[420px] lg:max-w-[480px] h-[300px] sm:h-[380px] lg:h-[440px] flex items-center justify-center mascot-floating">
+                <!-- Main Mascot Stage with Horizontal Sliding Track -->
+                <div class="relative w-full max-w-[340px] sm:max-w-[420px] lg:max-w-[480px] h-[300px] sm:h-[370px] lg:h-[420px] flex items-center justify-center mascot-floating overflow-hidden rounded-3xl">
                     
-                    <!-- Mascot 1 (IKON1.png) -->
-                    <img 
-                        id="mascot-img-0"
-                        src="{{ asset('assets/img/IKON1.png') }}" 
-                        alt="Maskot OLARA 1" 
-                        class="mascot-slide absolute inset-0 w-full h-full object-contain drop-shadow-[0_20px_45px_rgba(0,0,0,0.45)] transition-all duration-700 ease-out opacity-100 scale-100 cursor-pointer"
-                    />
+                    <!-- Slide 1 (IKON1.png) -->
+                    <div id="mascot-slide-0" class="absolute inset-0 w-full h-full flex items-center justify-center" style="transform: translateX(0%); opacity: 1;">
+                        <img 
+                            src="{{ asset('assets/img/IKON1.png') }}" 
+                            alt="Maskot OLARA 1" 
+                            class="w-full h-full object-contain drop-shadow-[0_20px_45px_rgba(0,0,0,0.45)] select-none pointer-events-none"
+                        />
+                    </div>
 
-                    <!-- Mascot 2 (IKON2.png) -->
-                    <img 
-                        id="mascot-img-1"
-                        src="{{ asset('assets/img/IKON2.png') }}" 
-                        alt="Maskot OLARA 2" 
-                        class="mascot-slide absolute inset-0 w-full h-full object-contain drop-shadow-[0_20px_45px_rgba(0,0,0,0.45)] transition-all duration-700 ease-out opacity-0 scale-90 pointer-events-none cursor-pointer"
-                    />
+                    <!-- Slide 2 (IKON2.png) -->
+                    <div id="mascot-slide-1" class="absolute inset-0 w-full h-full flex items-center justify-center" style="transform: translateX(100%); opacity: 0;">
+                        <img 
+                            src="{{ asset('assets/img/IKON2.png') }}" 
+                            alt="Maskot OLARA 2" 
+                            class="w-full h-full object-contain drop-shadow-[0_20px_45px_rgba(0,0,0,0.45)] select-none pointer-events-none"
+                        />
+                    </div>
 
-                    <!-- Mascot 3 (IKON3.png) -->
-                    <img 
-                        id="mascot-img-2"
-                        src="{{ asset('assets/img/IKON3.png') }}" 
-                        alt="Maskot OLARA 3" 
-                        class="mascot-slide absolute inset-0 w-full h-full object-contain drop-shadow-[0_20px_45px_rgba(0,0,0,0.45)] transition-all duration-700 ease-out opacity-0 scale-90 pointer-events-none cursor-pointer"
-                    />
+                    <!-- Slide 3 (IKON3.png) -->
+                    <div id="mascot-slide-2" class="absolute inset-0 w-full h-full flex items-center justify-center" style="transform: translateX(100%); opacity: 0;">
+                        <img 
+                            src="{{ asset('assets/img/IKON3.png') }}" 
+                            alt="Maskot OLARA 3" 
+                            class="w-full h-full object-contain drop-shadow-[0_20px_45px_rgba(0,0,0,0.45)] select-none pointer-events-none"
+                        />
+                    </div>
 
                 </div>
 
-                <!-- Subtle Dynamic Ground Shadow beneath mascot -->
-                <div class="w-48 sm:w-64 h-4 bg-emerald-950/40 rounded-full blur-md mascot-shadow -mt-2 mb-4 pointer-events-none"></div>
+                <!-- Ground Shadow beneath mascot -->
+                <div class="w-48 sm:w-64 h-3.5 bg-emerald-950/40 rounded-full blur-md mascot-shadow -mt-1 mb-2 pointer-events-none"></div>
 
-                <!-- Pose Title & Subtitle Badge -->
-                <div class="text-center z-20 mt-1 px-4">
-                    <p id="mascotCaption" class="text-white text-sm sm:text-base font-bold tracking-wide drop-shadow-sm transition-all duration-500">
+                <!-- Pose Title & Subtitle (Lowered down with clean spacing) -->
+                <div class="text-center z-20 mt-6 sm:mt-8 px-4 max-w-sm">
+                    <p id="mascotCaption" class="text-white text-sm sm:text-base font-bold tracking-wide drop-shadow-sm transition-all duration-300">
                         Koleksi & Pilah Sampah
                     </p>
-                    <p id="mascotSubCaption" class="text-emerald-100/80 text-xs font-normal mt-0.5 transition-all duration-500">
-                        Jadikan sampah bernilai tinggi bersama OLARA
+                    <p id="mascotSubCaption" class="text-emerald-100/85 text-xs font-normal mt-1 leading-relaxed transition-all duration-300">
+                        Kumpulkan sampah plastik bernilai tinggi dengan mudah
                     </p>
                 </div>
 
-                <!-- Carousel Controls / Dot Indicators -->
-                <div class="flex items-center gap-2.5 mt-4 z-20">
+                <!-- Carousel Controls / Dot Indicators (Lowered down) -->
+                <div class="flex items-center gap-2.5 mt-4 sm:mt-5 z-20">
                     <button 
                         type="button" 
                         onclick="switchMascot(0)" 
@@ -349,22 +343,45 @@
         ];
 
         let currentMascot = 0;
-        let mascotInterval;
+        const totalMascots = 3;
 
-        function switchMascot(index) {
-            currentMascot = index;
-            for (let i = 0; i < 3; i++) {
-                const img = document.getElementById('mascot-img-' + i);
+        function switchMascot(targetIndex) {
+            if (targetIndex === currentMascot) return;
+            const prevIndex = currentMascot;
+            currentMascot = targetIndex;
+
+            const forward = (targetIndex > prevIndex) || (prevIndex === totalMascots - 1 && targetIndex === 0);
+
+            for (let i = 0; i < totalMascots; i++) {
+                const slide = document.getElementById('mascot-slide-' + i);
                 const dot = document.getElementById('mascot-dot-' + i);
-                if (img && dot) {
-                    if (i === index) {
-                        img.classList.remove('opacity-0', 'scale-90', 'pointer-events-none');
-                        img.classList.add('opacity-100', 'scale-100', 'pointer-events-auto');
+
+                if (slide) {
+                    if (i === targetIndex) {
+                        slide.style.transition = 'none';
+                        slide.style.transform = forward ? 'translateX(100%) scale(0.96)' : 'translateX(-100%) scale(0.96)';
+                        slide.style.opacity = '0';
+                        void slide.offsetWidth;
+
+                        slide.style.transition = 'transform 0.75s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.75s ease';
+                        slide.style.transform = 'translateX(0%) scale(1)';
+                        slide.style.opacity = '1';
+                    } else if (i === prevIndex) {
+                        slide.style.transition = 'transform 0.75s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.75s ease';
+                        slide.style.transform = forward ? 'translateX(-100%) scale(0.96)' : 'translateX(100%) scale(0.96)';
+                        slide.style.opacity = '0';
+                    } else {
+                        slide.style.transition = 'none';
+                        slide.style.transform = 'translateX(100%) scale(0.96)';
+                        slide.style.opacity = '0';
+                    }
+                }
+
+                if (dot) {
+                    if (i === targetIndex) {
                         dot.classList.remove('w-2.5', 'bg-white/40');
                         dot.classList.add('w-8', 'bg-white');
                     } else {
-                        img.classList.remove('opacity-100', 'scale-100', 'pointer-events-auto');
-                        img.classList.add('opacity-0', 'scale-90', 'pointer-events-none');
                         dot.classList.remove('w-8', 'bg-white');
                         dot.classList.add('w-2.5', 'bg-white/40');
                     }
@@ -379,36 +396,21 @@
                 subCaption.style.opacity = '0';
                 subCaption.style.transform = 'translateY(4px)';
                 setTimeout(() => {
-                    caption.textContent = mascotData[index].title;
-                    subCaption.textContent = mascotData[index].subtitle;
+                    caption.textContent = mascotData[targetIndex].title;
+                    subCaption.textContent = mascotData[targetIndex].subtitle;
                     caption.style.opacity = '1';
                     caption.style.transform = 'translateY(0)';
                     subCaption.style.opacity = '1';
                     subCaption.style.transform = 'translateY(0)';
-                }, 200);
+                }, 220);
             }
         }
 
-        function startMascotCycle() {
-            stopMascotCycle();
-            mascotInterval = setInterval(() => {
-                const next = (currentMascot + 1) % 3;
-                switchMascot(next);
-            }, 3500);
-        }
-
-        function stopMascotCycle() {
-            if (mascotInterval) clearInterval(mascotInterval);
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const container = document.getElementById('mascotContainer');
-            if (container) {
-                container.addEventListener('mouseenter', stopMascotCycle);
-                container.addEventListener('mouseleave', startMascotCycle);
-            }
-            startMascotCycle();
-        });
+        // Automatically slide horizontally every 3.5 seconds
+        setInterval(() => {
+            const nextIndex = (currentMascot + 1) % totalMascots;
+            switchMascot(nextIndex);
+        }, 3500);
     </script>
 </body>
 </html>
