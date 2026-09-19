@@ -100,10 +100,10 @@
                     </div>
 
                     <div>
-                        <h4 class="font-outfit text-base font-extrabold text-stone-900 dark:text-white group-hover:text-[#cb3930] dark:group-hover:text-[#ffb7b2] transition line-clamp-1">
+                        <h4 class="font-outfit text-base font-extrabold text-stone-900 dark:text-white group-hover:text-[#cb3930] dark:group-hover:text-[#ffb7b2] transition leading-snug">
                             {{ $reward->title }}
                         </h4>
-                        <p class="text-xs text-stone-500 dark:text-stone-400 mt-1.5 leading-relaxed line-clamp-2">
+                        <p class="text-xs text-stone-500 dark:text-stone-400 mt-1.5 leading-relaxed">
                             {{ $reward->description }}
                         </p>
                     </div>
