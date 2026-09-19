@@ -21,7 +21,6 @@
   "env": {
     "APP_ENV": "production",
     "APP_DEBUG": "false",
-    "APP_KEY": "base64:mS23d4kJQ29OKoXMmzNOqYgu2J3UPNguJRKiWATo8DA=",
     "APP_MAINTENANCE_DRIVER": "array",
     "LARAVEL_STORAGE_PATH": "/tmp/storage",
     "APP_CONFIG_CACHE": "/tmp/storage/framework/cache/config.php",
@@ -32,13 +31,6 @@
     "VIEW_COMPILED_PATH": "/tmp/storage/framework/views",
     "CACHE_STORE": "array",
     "SESSION_DRIVER": "cookie",
-    "LOG_CHANNEL": "stderr",
-    "DB_CONNECTION": "pgsql",
-    "DB_HOST": "aws-0-ap-northeast-1.pooler.supabase.com",
-    "DB_PORT": "5432",
-    "DB_DATABASE": "postgres",
-    "DB_USERNAME": "postgres.gqxporcsrphrifukongr",
-    "DB_PASSWORD": "Jancok1234@zida",
-    "DB_SSLMODE": "require"
+    "LOG_CHANNEL": "stderr"
   }
 }

@@ -1,9 +1,5 @@
 <?php
 
-$_ENV['APP_DEBUG'] = 'true';
-$_SERVER['APP_DEBUG'] = 'true';
-putenv('APP_DEBUG=true');
-
 $_ENV['LARAVEL_STORAGE_PATH'] = '/tmp/storage';
 $_SERVER['LARAVEL_STORAGE_PATH'] = '/tmp/storage';
 putenv('LARAVEL_STORAGE_PATH=/tmp/storage');
@@ -32,6 +28,12 @@ $_ENV['APP_EVENTS_CACHE'] = '/tmp/storage/framework/cache/events.php';
 $_SERVER['APP_EVENTS_CACHE'] = '/tmp/storage/framework/cache/events.php';
 putenv('APP_EVENTS_CACHE=/tmp/storage/framework/cache/events.php');
 
+if (! getenv('APP_MAINTENANCE_DRIVER') && empty($_ENV['APP_MAINTENANCE_DRIVER'])) {
+    $_ENV['APP_MAINTENANCE_DRIVER'] = 'array';
+    $_SERVER['APP_MAINTENANCE_DRIVER'] = 'array';
+    putenv('APP_MAINTENANCE_DRIVER=array');
+}
+
 if (! getenv('SESSION_DRIVER') && empty($_ENV['SESSION_DRIVER'])) {
     $_ENV['SESSION_DRIVER'] = 'cookie';
     $_SERVER['SESSION_DRIVER'] = 'cookie';
@@ -48,29 +50,6 @@ if (! getenv('LOG_CHANNEL') && empty($_ENV['LOG_CHANNEL'])) {
     $_ENV['LOG_CHANNEL'] = 'stderr';
     $_SERVER['LOG_CHANNEL'] = 'stderr';
     putenv('LOG_CHANNEL=stderr');
-}
-
-// Fallback environment variables for Vercel Serverless
-$defaults = [
-    'APP_NAME' => 'Olara',
-    'APP_KEY' => 'base64:mS23d4kJQ29OKoXMmzNOqYgu2J3UPNguJRKiWATo8DA=',
-    'APP_DEBUG' => 'false',
-    'APP_MAINTENANCE_DRIVER' => 'array',
-    'DB_CONNECTION' => 'pgsql',
-    'DB_HOST' => 'aws-0-ap-northeast-1.pooler.supabase.com',
-    'DB_PORT' => '5432',
-    'DB_DATABASE' => 'postgres',
-    'DB_USERNAME' => 'postgres.gqxporcsrphrifukongr',
-    'DB_PASSWORD' => 'Jancok1234@zida',
-    'DB_SSLMODE' => 'require',
-];
-
-foreach ($defaults as $k => $v) {
-    if (empty($_ENV[$k]) && empty(getenv($k))) {
-        $_ENV[$k] = $v;
-        $_SERVER[$k] = $v;
-        putenv("{$k}={$v}");
-    }
 }
 
 // Ensure storage subdirectories exist in /tmp for Vercel serverless environment
