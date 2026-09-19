@@ -11,13 +11,21 @@ use Illuminate\View\View;
 
 class AuthController extends Controller
 {
-    public function showLogin(): View
+    public function showLogin(): View|RedirectResponse
     {
+        if (Auth::check()) {
+            return redirect()->route('home');
+        }
+
         return view('auth.login', ['mode' => 'login']);
     }
 
-    public function showRegister(): View
+    public function showRegister(): View|RedirectResponse
     {
+        if (Auth::check()) {
+            return redirect()->route('home');
+        }
+
         return view('auth.register', ['mode' => 'register']);
     }
 
@@ -29,10 +37,23 @@ class AuthController extends Controller
                 'password' => ['required'],
             ]);
 
-            if (Auth::attempt($credentials, $request->boolean('remember'))) {
-                $request->session()->regenerate();
+            $email = strtolower(trim($credentials['email']));
+            $user = User::whereRaw('LOWER(email) = ?', [$email])->first();
 
-                return redirect()->route('home')->with('success', 'Selamat datang kembali di OLARA!');
+            if ($user) {
+                $isValid = false;
+                try {
+                    $isValid = Hash::check($credentials['password'], $user->password);
+                } catch (\Throwable) {
+                    $isValid = password_verify($credentials['password'], $user->password);
+                }
+
+                if ($isValid) {
+                    Auth::login($user, $request->boolean('remember'));
+                    $request->session()->regenerate();
+
+                    return redirect()->route('home')->with('success', 'Selamat datang kembali di OLARA!');
+                }
             }
 
             return back()->withErrors([
@@ -58,11 +79,10 @@ class AuthController extends Controller
             ? $validated['name']
             : ucwords(str_replace(['.', '_', '-'], ' ', explode('@', $validated['email'])[0]));
 
-        // Create user with 50 Eco-Point welcome bonus as strictly specified by OLARA PRD
         $user = User::create([
             'name' => $name,
-            'email' => $validated['email'],
-            'password' => Hash::make($validated['password']),
+            'email' => strtolower(trim($validated['email'])),
+            'password' => password_hash($validated['password'], PASSWORD_BCRYPT, ['cost' => 12]),
             'phone' => $validated['phone'] ?? null,
             'eco_points' => 50,
             'recycler_level' => 'Level 1 — Starter',

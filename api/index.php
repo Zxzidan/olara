@@ -48,6 +48,10 @@ $_ENV['SESSION_EXPIRE_ON_CLOSE'] = 'false';
 $_SERVER['SESSION_EXPIRE_ON_CLOSE'] = 'false';
 putenv('SESSION_EXPIRE_ON_CLOSE=false');
 
+$_ENV['BCRYPT_ROUNDS'] = '12';
+$_SERVER['BCRYPT_ROUNDS'] = '12';
+putenv('BCRYPT_ROUNDS=12');
+
 if (! getenv('CACHE_STORE') && empty($_ENV['CACHE_STORE'])) {
     $_ENV['CACHE_STORE'] = 'array';
     $_SERVER['CACHE_STORE'] = 'array';
