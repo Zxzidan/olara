@@ -5,6 +5,7 @@
 @section('content')
 @php
     $isPaid = ($pickup->payment_status === 'paid' || (float) $pickup->total_fee == 0);
+    $displayPoints = $pickup->points_earned > 0 ? $pickup->points_earned : \App\Models\PickupRequest::calculatePoints((float) $pickup->estimated_weight);
 @endphp
 
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
@@ -122,7 +123,7 @@
                     5
                 </div>
                 <span class="text-xs font-semibold text-gray-600">Selesai</span>
-                <span class="text-[10px] text-gray-400">Poin Masuk</span>
+                <span class="text-[10px] text-gray-400">Poin Masuk (+{{ $displayPoints }} Pts)</span>
             </div>
         </div>
     </div>
@@ -210,6 +211,18 @@
                     <div class="flex items-center justify-between pt-2">
                         <span class="text-gray-500">Estimasi Berat:</span>
                         <span class="font-bold text-[#1B211E]">{{ $pickup->estimated_weight }} kg</span>
+                    </div>
+                    <div class="flex items-center justify-between pt-2">
+                        <span class="text-gray-500">Reward Eco-Points:</span>
+                        <span class="font-extrabold text-[#168A5B] flex items-center gap-1">
+                            <i data-lucide="coins" class="w-3.5 h-3.5"></i>
+                            +{{ $displayPoints }} Poin
+                            @if($isPaid || $pickup->points_awarded)
+                                <span class="text-[9px] font-bold bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded-full">Sudah Masuk</span>
+                            @else
+                                <span class="text-[9px] font-medium bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded-full">Masuk Saat Lunas</span>
+                            @endif
+                        </span>
                     </div>
                     <div class="flex items-center justify-between pt-2">
                         <span class="text-gray-500">Slot Waktu:</span>
@@ -339,6 +352,10 @@
                         transaction_id: result.transaction_id || '',
                         payment_type: result.payment_type || 'midtrans',
                     })
+                }).then(res => res.json()).then(data => {
+                    if (data && data.points_earned) {
+                        alert(`Pembayaran armada penjemputan berhasil! +${data.points_earned} Eco-Points telah ditambahkan ke saldo dompet akun Anda.`);
+                    }
                 }).finally(() => {
                     window.location.reload();
                 });

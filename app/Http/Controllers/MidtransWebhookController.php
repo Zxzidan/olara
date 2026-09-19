@@ -154,6 +154,24 @@ class MidtransWebhookController extends Controller
                 'payment_method' => $paymentType,
                 'transaction_id' => $transactionId,
             ]);
+
+            // Award points based on waste weight upon payment completion (if not already awarded)
+            if (! $pickup->points_awarded && $pickup->user) {
+                $points = $pickup->points_earned > 0
+                    ? (int) $pickup->points_earned
+                    : PickupRequest::calculatePoints((float) $pickup->estimated_weight);
+
+                $pickup->user->addPoints(
+                    $points,
+                    'pickup_reward',
+                    "Poin Penjemputan Sampah {$pickup->pickup_code} ({$pickup->estimated_weight} kg)"
+                );
+
+                $pickup->update([
+                    'points_earned' => $points,
+                    'points_awarded' => true,
+                ]);
+            }
         }
     }
 }

@@ -19,6 +19,8 @@ class PickupRequest extends Model
         'address',
         'notes',
         'estimated_weight',
+        'points_earned',
+        'points_awarded',
         'base_fee',
         'volume_surcharge',
         'distance_km',
@@ -41,6 +43,8 @@ class PickupRequest extends Model
             'categories' => 'array',
             'scheduled_date' => 'date',
             'estimated_weight' => 'decimal:2',
+            'points_earned' => 'integer',
+            'points_awarded' => 'boolean',
             'base_fee' => 'decimal:2',
             'volume_surcharge' => 'decimal:2',
             'distance_km' => 'decimal:2',
@@ -48,6 +52,15 @@ class PickupRequest extends Model
             'service_fee' => 'decimal:2',
             'total_fee' => 'decimal:2',
         ];
+    }
+
+    /**
+     * Calculate points based on waste weight (10 Eco-Points per 1 kg).
+     * Semakin banyak kg sampah daur ulang, semakin banyak poinnya!
+     */
+    public static function calculatePoints(float $weight): int
+    {
+        return max(10, (int) round($weight * 10));
     }
 
     public function user(): BelongsTo

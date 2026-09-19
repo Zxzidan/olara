@@ -343,3 +343,152 @@ test('pickup snap token endpoint returns or generates valid snap token', functio
         'snap_token' => 'pre-existing-snap-token-123',
     ]);
 });
+
+test('pickup store calculates points earned proportional to waste weight', function () {
+    $response = $this->actingAs($this->user)->post(route('pickup.store'), [
+        'categories' => ['Plastik', 'Logam'],
+        'scheduled_date' => now()->addDays(2)->format('Y-m-d'),
+        'scheduled_slot' => 'pagi',
+        'address' => 'Jl. Kebon Jeruk No. 15, Jakarta Barat',
+        'estimated_weight' => 20.0,
+        'distance_km' => 4.0,
+    ]);
+
+    $response->assertSessionHasNoErrors();
+    $pickup = PickupRequest::where('user_id', $this->user->id)->latest()->first();
+    expect($pickup)->not->toBeNull();
+    // 20 kg * 10 = 200 points
+    expect($pickup->points_earned)->toBe(200);
+    expect($pickup->points_awarded)->toBeFalse();
+});
+
+test('user receives points based on waste weight upon pickup payment completion', function () {
+    $pickup = PickupRequest::create([
+        'pickup_code' => 'PKP-202609-POINTS1',
+        'user_id' => $this->user->id,
+        'categories' => ['Kertas/Kardus'],
+        'scheduled_date' => now()->addDay(),
+        'scheduled_slot' => 'siang',
+        'address' => 'Jl. Senopati Raya No. 42, Kebayoran Baru, Jakarta Selatan',
+        'estimated_weight' => 15.0, // 15 kg -> 150 points
+        'points_earned' => 150,
+        'points_awarded' => false,
+        'base_fee' => 10000,
+        'volume_surcharge' => 5000,
+        'distance_km' => 3.5,
+        'distance_fee' => 7000,
+        'service_fee' => 2000,
+        'total_fee' => 24000,
+        'payment_status' => 'unpaid',
+        'payment_method' => 'Midtrans Digital',
+        'status' => 'confirmed',
+    ]);
+
+    $initialPoints = $this->user->eco_points;
+
+    $response = $this->actingAs($this->user)->postJson(route('pickup.markPaid', $pickup->pickup_code), [
+        'transaction_id' => 'midtrans-pkp-points-123',
+        'payment_type' => 'qris',
+    ]);
+
+    $response->assertStatus(200);
+    $response->assertJson([
+        'success' => true,
+        'points_earned' => 150,
+    ]);
+
+    $pickup->refresh();
+    expect($pickup->payment_status)->toBe('paid');
+    expect($pickup->points_awarded)->toBeTrue();
+
+    $this->user->refresh();
+    // Lite user gets exactly 150 points
+    expect($this->user->eco_points)->toBe($initialPoints + 150);
+});
+
+test('heavier waste weight yields proportionally more points upon payment', function () {
+    // 5 kg pickup -> 50 points
+    $smallPickup = PickupRequest::create([
+        'pickup_code' => 'PKP-202609-SMALL5',
+        'user_id' => $this->user->id,
+        'categories' => ['Plastik'],
+        'scheduled_date' => now()->addDay(),
+        'scheduled_slot' => 'pagi',
+        'address' => 'Jl. Sudirman No 1',
+        'estimated_weight' => 5.0,
+        'points_earned' => 50,
+        'points_awarded' => false,
+        'total_fee' => 18000,
+        'payment_status' => 'unpaid',
+        'status' => 'confirmed',
+    ]);
+
+    // 40 kg pickup -> 400 points
+    $largePickup = PickupRequest::create([
+        'pickup_code' => 'PKP-202609-LARGE40',
+        'user_id' => $this->user->id,
+        'categories' => ['Plastik', 'Logam'],
+        'scheduled_date' => now()->addDay(),
+        'scheduled_slot' => 'pagi',
+        'address' => 'Jl. Sudirman No 1',
+        'estimated_weight' => 40.0,
+        'points_earned' => 400,
+        'points_awarded' => false,
+        'total_fee' => 38000,
+        'payment_status' => 'unpaid',
+        'status' => 'confirmed',
+    ]);
+
+    expect($largePickup->points_earned)->toBeGreaterThan($smallPickup->points_earned);
+    expect($largePickup->points_earned)->toBe(400);
+    expect($smallPickup->points_earned)->toBe(50);
+});
+
+test('points are not awarded twice if both markPaid and webhook trigger', function () {
+    $pickup = PickupRequest::create([
+        'pickup_code' => 'PKP-202609-NODOUBLE',
+        'user_id' => $this->user->id,
+        'categories' => ['Plastik'],
+        'scheduled_date' => now()->addDay(),
+        'scheduled_slot' => 'pagi',
+        'address' => 'Jl. Senopati Raya No. 42',
+        'estimated_weight' => 10.0, // 10 kg -> 100 points
+        'points_earned' => 100,
+        'points_awarded' => false,
+        'total_fee' => 19000,
+        'payment_status' => 'unpaid',
+        'status' => 'confirmed',
+    ]);
+
+    $initialPoints = $this->user->eco_points;
+
+    // First call: client markPaid
+    $this->actingAs($this->user)->postJson(route('pickup.markPaid', $pickup->pickup_code), [
+        'transaction_id' => 'trx-111',
+        'payment_type' => 'qris',
+    ])->assertStatus(200);
+
+    $this->user->refresh();
+    expect($this->user->eco_points)->toBe($initialPoints + 100);
+
+    // Second call: Midtrans Webhook arrives
+    $orderId = $pickup->pickup_code;
+    $statusCode = '200';
+    $grossAmount = '19000.00';
+    $serverKey = config('midtrans.server_key');
+    $signatureKey = hash('sha512', $orderId.$statusCode.$grossAmount.$serverKey);
+
+    $this->postJson(route('midtrans.notification'), [
+        'order_id' => $orderId,
+        'status_code' => $statusCode,
+        'gross_amount' => $grossAmount,
+        'signature_key' => $signatureKey,
+        'transaction_status' => 'settlement',
+        'payment_type' => 'qris',
+        'transaction_id' => 'trx-111',
+    ])->assertStatus(200);
+
+    // User points should still be initialPoints + 100 (NOT doubled to +200)
+    $this->user->refresh();
+    expect($this->user->eco_points)->toBe($initialPoints + 100);
+});

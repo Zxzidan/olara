@@ -117,6 +117,8 @@ class PickupController extends Controller
             }
         }
 
+        $pointsEarned = PickupRequest::calculatePoints($weight);
+
         try {
             $pickup = PickupRequest::create([
                 'pickup_code' => $code,
@@ -127,6 +129,8 @@ class PickupController extends Controller
                 'address' => $validated['address'],
                 'notes' => $validated['notes'] ?? null,
                 'estimated_weight' => $weight,
+                'points_earned' => $pointsEarned,
+                'points_awarded' => false,
                 'base_fee' => $baseFee,
                 'volume_surcharge' => $volumeSurcharge,
                 'distance_km' => $distance,
@@ -154,6 +158,8 @@ class PickupController extends Controller
                     'address' => $validated['address'],
                     'notes' => $validated['notes'] ?? null,
                     'estimated_weight' => $weight,
+                    'points_earned' => $pointsEarned,
+                    'points_awarded' => false,
                     'base_fee' => $baseFee,
                     'volume_surcharge' => $volumeSurcharge,
                     'distance_km' => $distance,
@@ -179,6 +185,7 @@ class PickupController extends Controller
                     'address' => $validated['address'],
                     'notes' => $validated['notes'] ?? null,
                     'estimated_weight' => $weight,
+                    'points_earned' => $pointsEarned,
                     'base_fee' => $baseFee,
                     'volume_surcharge' => $volumeSurcharge,
                     'distance_km' => $distance,
@@ -191,6 +198,11 @@ class PickupController extends Controller
                     'courier_phone' => $selectedCourier['phone'],
                 ]);
             }
+        }
+
+        // If free pickup (total_fee == 0), points are awarded immediately upon confirmation
+        if ($totalFee == 0) {
+            $this->awardPickupPoints($pickup);
         }
 
         return redirect()->route('pickup.show', $pickup->pickup_code)
@@ -261,7 +273,7 @@ class PickupController extends Controller
     }
 
     /**
-     * Mark Pickup Fee as paid from Snap onSuccess.
+     * Mark Pickup Fee as paid from Snap onSuccess and award Eco-Points based on weight.
      */
     public function markPaid(Request $request, string $code): JsonResponse|RedirectResponse
     {
@@ -274,10 +286,51 @@ class PickupController extends Controller
             'payment_method' => $request->input('payment_type', 'Midtrans'),
         ]);
 
+        $pointsAwarded = $this->awardPickupPoints($pickup);
+
         if ($request->expectsJson()) {
-            return response()->json(['success' => true, 'message' => 'Biaya penjemputan berhasil dibayar.']);
+            return response()->json([
+                'success' => true,
+                'message' => "Biaya penjemputan berhasil dibayar. +{$pointsAwarded} Eco-Points berhasil ditambahkan ke akun Anda!",
+                'points_earned' => $pointsAwarded,
+            ]);
         }
 
-        return redirect()->route('pickup.show', $code)->with('success', 'Biaya armada penjemputan berhasil dibayar via Midtrans!');
+        return redirect()->route('pickup.show', $code)
+            ->with('success', "Biaya armada penjemputan berhasil dibayar via Midtrans! Anda mendapatkan +{$pointsAwarded} Eco-Points!");
+    }
+
+    /**
+     * Award Eco-Points based on waste weight when payment is settled/completed.
+     */
+    public function awardPickupPoints(PickupRequest $pickup): int
+    {
+        if ($pickup->points_awarded) {
+            return (int) $pickup->points_earned;
+        }
+
+        $points = $pickup->points_earned > 0
+            ? (int) $pickup->points_earned
+            : PickupRequest::calculatePoints((float) $pickup->estimated_weight);
+
+        $user = $pickup->user;
+        if ($user) {
+            $user->addPoints(
+                $points,
+                'pickup_reward',
+                "Poin Penjemputan Sampah {$pickup->pickup_code} ({$pickup->estimated_weight} kg)"
+            );
+        }
+
+        try {
+            $pickup->update([
+                'points_earned' => $points,
+                'points_awarded' => true,
+            ]);
+        } catch (\Throwable $e) {
+            Log::warning('Pickup points_awarded update warning: '.$e->getMessage());
+        }
+
+        return $points;
     }
 }

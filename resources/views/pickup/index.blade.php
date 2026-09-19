@@ -128,8 +128,26 @@
                             <span class="text-xs font-bold text-[#168A5B]">kg</span>
                         </div>
                     </div>
+
+                    <!-- Dynamic Weight-Based Points Preview Card -->
+                    <div class="p-3.5 rounded-2xl bg-gradient-to-r from-[#EEF9F2] to-[#E2F5EA] border border-[#BFE7D0] flex items-center justify-between shadow-xs">
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-8 h-8 rounded-xl bg-[#168A5B] text-white flex items-center justify-center shrink-0 shadow-xs">
+                                <i data-lucide="coins" class="w-4 h-4"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-[#0B4F38] block">Perolehan Eco-Points:</span>
+                                <span class="text-[11px] text-[#66716B]">10 Poin / kg (semakin berat kg sampah, semakin banyak poin)</span>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <span id="estimatedPointsBadge" class="text-base font-black text-[#168A5B] block tabular-nums">+50 Poin</span>
+                            <span class="text-[10px] text-gray-500 font-medium">Masuk saat selesai bayar</span>
+                        </div>
+                    </div>
+
                     <p class="text-[11px] text-gray-400">
-                        *Untuk berat di atas 10 kg, dikenakan biaya penanganan volume sebesar Rp 5.000 per kelipatan 10 kg.
+                        *Untuk berat di atas 10 kg, dikenakan biaya penanganan volume sebesar Rp 5.000 per kelipatan 10 kg. Poin otomatis masuk ke akun Anda setelah pembayaran selesai.
                     </p>
                 </div>
             </div>
@@ -232,7 +250,7 @@
                 <div class="p-3.5 rounded-2xl bg-[#EEF9F2] border border-[#BFE7D0] flex items-center gap-3">
                     <i data-lucide="coins" class="w-5 h-5 text-[#168A5B] shrink-0"></i>
                     <p class="text-[11px] text-[#0B4F38] leading-tight">
-                        Setelah material ditimbang oleh kurir, Anda akan mendapatkan <strong>Eco-Points</strong> yang langsung dikreditkan ke dompet Anda!
+                        Setelah pembayaran selesai, Anda akan mendapatkan <strong id="summaryPointsNotice">+50 Eco-Points</strong> yang langsung masuk ke dompet Anda!
                     </p>
                 </div>
 
@@ -254,14 +272,33 @@
 <script>
     const isPremium = {{ ($user && $user->membership_tier === 'premium') ? 'true' : 'false' }};
 
+    function updatePointsPreview(weight) {
+        const w = parseFloat(weight) || 5;
+        const basePts = Math.max(10, Math.round(w * 10));
+        const multiplier = isPremium ? 1.2 : 1.0;
+        const totalPts = Math.round(basePts * multiplier);
+
+        const badge = document.getElementById('estimatedPointsBadge');
+        if (badge) {
+            badge.textContent = `+${totalPts} Poin` + (isPremium ? ' (1.2x Premium)' : '');
+        }
+
+        const notice = document.getElementById('summaryPointsNotice');
+        if (notice) {
+            notice.textContent = `+${totalPts} Eco-Points`;
+        }
+    }
+
     function syncWeight(val) {
         document.getElementById('weightNum').value = val;
         calculatePickupFees();
+        updatePointsPreview(val);
     }
 
     function syncWeightRange(val) {
         document.getElementById('weightRange').value = val;
         calculatePickupFees();
+        updatePointsPreview(val);
     }
 
     function calculatePickupFees() {
@@ -280,6 +317,8 @@
         document.getElementById('feeDistance').textContent = `Rp ${distanceFee.toLocaleString('id-ID')}`;
         document.getElementById('feeService').textContent = isPremium ? 'Rp 0 (Gratis Premium)' : `Rp ${serviceFee.toLocaleString('id-ID')}`;
         document.getElementById('feeTotal').textContent = `Rp ${total.toLocaleString('id-ID')}`;
+
+        updatePointsPreview(weight);
     }
 
     // Run on init
