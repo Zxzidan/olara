@@ -244,13 +244,13 @@
     <main class="relative z-10">
 
         <!-- ===================================================================
-             1. HERO SECTION (100% Desktop Viewport Fit: Title, Subtitle, & Dual CTA)
+             1. HERO SECTION (Lively Mascot, Headline, CTA & Micro Stats)
         =================================================================== -->
-        <section class="min-h-[90dvh] sm:h-[100dvh] flex flex-col justify-center items-center text-center px-4 sm:px-6 pt-24 sm:pt-28 pb-10 sm:pb-14 max-w-5xl mx-auto reveal-item">
+        <section class="flex flex-col justify-center items-center text-center px-4 sm:px-6 pt-20 sm:pt-24 md:pt-28 pb-10 sm:pb-12 max-w-5xl mx-auto reveal-item">
             <!-- Main Headline with Character Animation & Hand-Drawn Underline on Target Word -->
-            <h1 id="hero-heading" data-animate-heading class="heading-animated font-outfit text-2xl sm:text-4xl md:text-5xl lg:text-[54px] font-bold tracking-tight text-[#292524] leading-[1.25] sm:leading-[1.2] max-w-3xl mx-auto select-none break-words">
+            <h1 id="hero-heading" data-animate-heading class="heading-animated font-outfit text-2xl sm:text-4xl md:text-5xl lg:text-[48px] font-bold tracking-tight text-[#292524] leading-[1.25] sm:leading-[1.2] max-w-3xl mx-auto select-none break-words">
                 Ubah sampah harian jadi berkah yang 
-                <span class="relative inline-block keyword-target font-cursive text-4xl sm:text-6xl md:text-7xl text-[#cb3930] font-normal lowercase px-1 rotate-[-2deg]">
+                <span class="relative inline-block keyword-target font-cursive text-3xl sm:text-5xl md:text-6xl text-[#cb3930] font-normal lowercase px-1 rotate-[-2deg]">
                     bermakna
                     <!-- Hand-drawn SVG doodle underline animation -->
                     <svg class="hand-drawn-underline" viewBox="0 0 160 16" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" aria-hidden="true">
@@ -261,12 +261,12 @@
             </h1>
 
             <!-- Sub-headline -->
-            <p class="mt-4 sm:mt-5 text-xs sm:text-base text-[#78716C] max-w-[480px] mx-auto leading-relaxed font-normal">
+            <p class="mt-3 sm:mt-4 text-xs sm:text-base text-[#78716C] max-w-[480px] mx-auto leading-relaxed font-normal">
                 Pilah dengan AI, armada jemput ke rumah, dan tukar poin jadi saldo e-wallet.
             </p>
 
             <!-- Dual CTA Buttons -->
-            <div class="mt-6 sm:mt-7 flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto px-4 sm:px-0">
+            <div class="mt-5 sm:mt-6 flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto px-4 sm:px-0">
                 <a href="{{ Auth::check() ? route('home') : route('register') }}" class="w-full sm:w-auto px-7 py-2.5 sm:py-3 rounded-full bg-[#FFB7B2] hover:bg-[#FF9E98] text-[#292524] font-bold text-sm shadow-soft transition-all transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2">
                     <span>Mulai Gratis</span>
                     <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
@@ -276,26 +276,56 @@
                     <i data-lucide="chevron-down" class="w-4 h-4 text-[#78716C]"></i>
                 </a>
             </div>
-        </section>
 
+            <!-- Hero Mascot Showcase & Interactive Cartoon Elements -->
+            <div class="relative w-full max-w-2xl mx-auto mt-6 sm:mt-8 flex flex-col items-center">
+                <!-- Mascot Speech Bubble -->
+                <div class="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-full bg-white/95 border border-emerald-200/80 shadow-soft text-xs sm:text-sm font-semibold text-stone-800 animate-float-gentle mb-2.5 backdrop-blur-md select-none">
+                    <span class="text-base leading-none">🌱</span>
+                    <span>Hai Sobat! Pilah sampah bareng aku, yuk!</span>
+                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">Cuan & Asri</span>
+                </div>
 
-        <!-- ===================================================================
-             SHOWCASE & REALTIME IMPACT STATS
-        =================================================================== -->
-        <section class="py-12 sm:py-16 max-w-5xl mx-auto px-4 sm:px-6 reveal-item text-center">
-            <!-- Hero Mascot (IKON.png) Showcase -->
-            <div class="relative flex justify-center mb-10">
-                <div class="relative z-10 max-w-[260px] sm:max-w-[320px]">
-                    <img
-                        src="{{ asset('assets/img/IKON.png') }}"
-                        alt="Maskot Ramah OLARA"
-                        class="w-full h-auto drop-shadow-xl animate-float-slow select-none pointer-events-none"
-                    />
+                <!-- Mascot Centerpiece with Ambient Aura & Floating Gamified Badges -->
+                <div class="relative flex justify-center items-center w-full py-1">
+                    <!-- Ambient Glow Orbs -->
+                    <div class="absolute w-56 sm:w-72 h-56 sm:h-72 bg-gradient-to-tr from-emerald-200/40 via-[#FFB7B2]/30 to-amber-200/30 rounded-full blur-3xl pointer-events-none -z-0"></div>
+
+                    <!-- Left Floating Gamified Badge: AI Scanner -->
+                    <div class="absolute -left-2 sm:-left-6 md:-left-12 lg:-left-16 top-6 sm:top-8 bg-white/95 backdrop-blur-md border border-stone-200/80 shadow-soft-lg rounded-2xl p-2.5 sm:p-3 hidden sm:flex items-center gap-2.5 animate-float-slow z-20 pointer-events-none text-left">
+                        <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 shadow-xs">
+                            <i data-lucide="scan-line" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+                        </div>
+                        <div>
+                            <span class="text-[11px] sm:text-xs font-bold text-stone-900 block leading-tight">AI Scan Cerdas</span>
+                            <span class="text-[10px] text-emerald-600 font-semibold">+10 Poin Otomatis</span>
+                        </div>
+                    </div>
+
+                    <!-- Mascot 3D Cartoon Character -->
+                    <div class="relative z-10 w-40 sm:w-48 md:w-56 transition-transform duration-300 hover:scale-105">
+                        <img
+                            src="{{ asset('assets/img/IKON.png') }}"
+                            alt="Maskot Ramah OLARA"
+                            class="w-full h-auto drop-shadow-2xl animate-float-slow select-none pointer-events-none"
+                        />
+                    </div>
+
+                    <!-- Right Floating Gamified Badge: Armada Jemput -->
+                    <div class="absolute -right-2 sm:-right-6 md:-right-12 lg:-right-16 top-10 sm:top-12 bg-white/95 backdrop-blur-md border border-stone-200/80 shadow-soft-lg rounded-2xl p-2.5 sm:p-3 hidden sm:flex items-center gap-2.5 animate-float-reverse z-20 pointer-events-none text-left">
+                        <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#FFE4E1] text-[#cb3930] flex items-center justify-center shrink-0 shadow-xs">
+                            <i data-lucide="truck" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+                        </div>
+                        <div>
+                            <span class="text-[11px] sm:text-xs font-bold text-stone-900 block leading-tight">Jemput ke Rumah</span>
+                            <span class="text-[10px] text-stone-500 font-medium">Bebas Repot & Cepat</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- Micro Stats Ticker with Dynamic Count-up Animation -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4 max-w-3xl mx-auto pt-6 border-t border-stone-200/70 text-left">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4 w-full max-w-3xl mx-auto mt-6 pt-6 border-t border-stone-200/70 text-left">
                 <div class="p-3 sm:p-4 bg-white rounded-xl sm:rounded-2xl border border-stone-200/70 card-lift shadow-xs">
                     <span class="text-[11px] sm:text-xs text-[#78716C] block truncate">Sampah Terkelola</span>
                     <p class="font-outfit text-base xs:text-lg sm:text-xl font-bold text-[#292524] mt-0.5 whitespace-nowrap flex items-baseline gap-1">
@@ -352,13 +382,16 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <!-- Step 1 -->
-                <div class="bg-white rounded-3xl p-6 sm:p-7 border border-stone-200/80 shadow-soft card-lift flex flex-col justify-between">
+                <div class="bg-white rounded-3xl p-6 sm:p-7 border border-stone-200/80 shadow-soft card-lift flex flex-col justify-between group">
                     <div>
-                        <div class="flex items-center justify-between mb-5">
+                        <div class="flex items-center justify-between mb-4">
                             <div class="w-10 h-10 rounded-2xl bg-stone-100 flex items-center justify-center text-[#292524]">
                                 <i data-lucide="scan-line" class="w-5 h-5"></i>
                             </div>
                             <span class="text-xs font-bold text-[#cb3930] bg-[#FFB7B2]/20 px-2.5 py-0.5 rounded-full">01</span>
+                        </div>
+                        <div class="w-full h-36 sm:h-40 mb-4 rounded-2xl bg-gradient-to-b from-stone-50 to-stone-100/60 flex items-center justify-center overflow-hidden border border-stone-100 p-2">
+                            <img src="{{ asset('assets/img/IKON2.png') }}" alt="Pindai material sampah" class="h-28 sm:h-32 w-auto object-contain drop-shadow-sm group-hover:scale-105 transition-transform duration-300 pointer-events-none select-none" />
                         </div>
                         <h3 class="font-outfit text-lg font-bold text-[#292524] mb-2">Pindai Material Sampah</h3>
                         <p class="text-xs sm:text-sm text-[#78716C] leading-relaxed">
@@ -368,13 +401,16 @@
                 </div>
 
                 <!-- Step 2 -->
-                <div class="bg-white rounded-3xl p-6 sm:p-7 border border-stone-200/80 shadow-soft card-lift flex flex-col justify-between">
+                <div class="bg-white rounded-3xl p-6 sm:p-7 border border-stone-200/80 shadow-soft card-lift flex flex-col justify-between group">
                     <div>
-                        <div class="flex items-center justify-between mb-5">
+                        <div class="flex items-center justify-between mb-4">
                             <div class="w-10 h-10 rounded-2xl bg-stone-100 flex items-center justify-center text-[#292524]">
                                 <i data-lucide="truck" class="w-5 h-5"></i>
                             </div>
                             <span class="text-xs font-bold text-[#cb3930] bg-[#FFB7B2]/20 px-2.5 py-0.5 rounded-full">02</span>
+                        </div>
+                        <div class="w-full h-36 sm:h-40 mb-4 rounded-2xl bg-gradient-to-b from-stone-50 to-stone-100/60 flex items-center justify-center overflow-hidden border border-stone-100 p-2">
+                            <img src="{{ asset('assets/img/IKON1.png') }}" alt="Penjemputan armada jemput" class="h-28 sm:h-32 w-auto object-contain drop-shadow-sm group-hover:scale-105 transition-transform duration-300 pointer-events-none select-none" />
                         </div>
                         <h3 class="font-outfit text-lg font-bold text-[#292524] mb-2">Penjemputan ke Lokasi</h3>
                         <p class="text-xs sm:text-sm text-[#78716C] leading-relaxed">
@@ -384,13 +420,16 @@
                 </div>
 
                 <!-- Step 3 -->
-                <div class="bg-white rounded-3xl p-6 sm:p-7 border border-stone-200/80 shadow-soft card-lift flex flex-col justify-between">
+                <div class="bg-white rounded-3xl p-6 sm:p-7 border border-stone-200/80 shadow-soft card-lift flex flex-col justify-between group">
                     <div>
-                        <div class="flex items-center justify-between mb-5">
+                        <div class="flex items-center justify-between mb-4">
                             <div class="w-10 h-10 rounded-2xl bg-stone-100 flex items-center justify-center text-[#292524]">
                                 <i data-lucide="wallet" class="w-5 h-5"></i>
                             </div>
                             <span class="text-xs font-bold text-[#cb3930] bg-[#FFB7B2]/20 px-2.5 py-0.5 rounded-full">03</span>
+                        </div>
+                        <div class="w-full h-36 sm:h-40 mb-4 rounded-2xl bg-gradient-to-b from-stone-50 to-stone-100/60 flex items-center justify-center overflow-hidden border border-stone-100 p-2">
+                            <img src="{{ asset('assets/img/IKON3.png') }}" alt="Cairkan poin dan manfaat" class="h-28 sm:h-32 w-auto object-contain drop-shadow-sm group-hover:scale-105 transition-transform duration-300 pointer-events-none select-none" />
                         </div>
                         <h3 class="font-outfit text-lg font-bold text-[#292524] mb-2">Cairkan Poin & Manfaat</h3>
                         <p class="text-xs sm:text-sm text-[#78716C] leading-relaxed">

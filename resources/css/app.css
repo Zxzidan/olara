@@ -104,12 +104,25 @@ body {
     }
 }
 
+@keyframes floatGentle {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
 .animate-float-slow {
     animation: floatSlow 6s ease-in-out infinite;
 }
 
 .animate-float-reverse {
     animation: floatReverse 7s ease-in-out infinite;
+}
+
+.animate-float-gentle {
+    animation: floatGentle 4s ease-in-out infinite;
 }
 
 .animate-pulse-breathe {
@@ -598,4 +611,31 @@ body {
     #landing-mobile-drawer {
         display: none !important;
     }
+}
+
+/* 9. Fun Organic Floating Animations */
+@keyframes floatGentle {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-8px) rotate(1deg);
+    }
+}
+
+@keyframes floatReverse {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(7px) rotate(-1deg);
+    }
+}
+
+.animate-float-gentle {
+    animation: floatGentle 4.5s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+    animation: floatReverse 5s ease-in-out infinite;
 }
