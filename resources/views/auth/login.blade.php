@@ -168,18 +168,18 @@
         </div>
 
         <!-- Right Side: Green Section with Centered Mascot (IKON2.png) -->
-        <div class="w-full lg:w-1/2 p-6 sm:p-10 lg:p-12 flex items-center justify-center olara-gradient-panel relative overflow-hidden min-h-[380px] lg:min-h-full">
+        <div class="w-full lg:w-1/2 p-4 sm:p-6 lg:p-8 flex items-center justify-center olara-gradient-panel relative overflow-hidden min-h-[380px] lg:min-h-full">
             
             <!-- Ambient Subtle Background Glow Elements -->
             <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-white/20 blur-3xl pointer-events-none"></div>
             <div class="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-emerald-950/40 blur-3xl pointer-events-none"></div>
 
             <!-- Centered Mascot / Logo (IKON2.png) - Prominent, Not Too Small -->
-            <div class="relative z-10 w-full flex items-center justify-center p-2 sm:p-4">
+            <div class="relative z-10 w-full flex items-center justify-center p-2">
                 <img 
                     src="{{ asset('assets/img/IKON2.png') }}" 
                     alt="Maskot OLARA" 
-                    class="w-72 sm:w-84 md:w-96 lg:w-[420px] max-w-[92%] max-h-[480px] h-auto object-contain drop-shadow-[0_20px_45px_rgba(0,0,0,0.35)] transition-transform duration-500 hover:scale-105"
+                    class="w-[300px] sm:w-[380px] md:w-[440px] lg:w-[480px] xl:w-[510px] max-w-full max-h-[520px] sm:max-h-[560px] h-auto object-contain drop-shadow-[0_25px_50px_rgba(0,0,0,0.35)] transition-transform duration-500 hover:scale-105"
                 />
             </div>
 
