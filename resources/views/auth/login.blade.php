@@ -54,6 +54,54 @@
             transform: translateY(-1px);
             box-shadow: 0 6px 20px -3px rgba(16, 185, 129, 0.3);
         }
+
+        /* Mascot Floating & Pulse Keyframes */
+        @keyframes floatMascot {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-14px) rotate(1deg);
+            }
+        }
+        @keyframes pulseShadow {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.35;
+            }
+            50% {
+                transform: scale(0.85);
+                opacity: 0.2;
+            }
+        }
+        @keyframes floatBadge1 {
+            0%, 100% { transform: translateY(0px) rotate(-3deg); }
+            50% { transform: translateY(-8px) rotate(-1deg); }
+        }
+        @keyframes floatBadge2 {
+            0%, 100% { transform: translateY(0px) rotate(4deg); }
+            50% { transform: translateY(-10px) rotate(1deg); }
+        }
+        @keyframes ambientGlow {
+            0%, 100% { opacity: 0.25; transform: scale(1); }
+            50% { opacity: 0.45; transform: scale(1.12); }
+        }
+
+        .mascot-floating {
+            animation: floatMascot 4s ease-in-out infinite;
+        }
+        .mascot-shadow {
+            animation: pulseShadow 4s ease-in-out infinite;
+        }
+        .badge-floating-1 {
+            animation: floatBadge1 3.8s ease-in-out infinite;
+        }
+        .badge-floating-2 {
+            animation: floatBadge2 4.4s ease-in-out infinite 0.5s;
+        }
+        .ambient-glow {
+            animation: ambientGlow 6s ease-in-out infinite;
+        }
     </style>
 </head>
 <body class="min-h-screen flex items-center justify-center p-0 sm:p-6 md:p-8 bg-[#f3f5f4]">
@@ -170,20 +218,92 @@
 
         </div>
 
-        <!-- Right Side: Green Section with Centered Mascot (IKON2.png) -->
-        <div class="w-full lg:w-1/2 p-4 sm:p-6 lg:p-8 flex items-center justify-center olara-gradient-panel relative overflow-hidden min-h-[380px] lg:min-h-full">
+        <!-- Right Side: Green Section with Animated Mascot Carousel (IKON 1, 2, 3) -->
+        <div class="w-full lg:w-1/2 p-6 sm:p-8 lg:p-10 flex flex-col items-center justify-center olara-gradient-panel relative overflow-hidden min-h-[440px] lg:min-h-full select-none" id="mascotContainer">
             
             <!-- Ambient Subtle Background Glow Elements -->
-            <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-white/20 blur-3xl pointer-events-none"></div>
-            <div class="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-emerald-950/40 blur-3xl pointer-events-none"></div>
+            <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-white/20 blur-3xl pointer-events-none ambient-glow"></div>
+            <div class="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-emerald-950/50 blur-3xl pointer-events-none ambient-glow"></div>
 
-            <!-- Centered Mascot / Logo (IKON2.png) - Prominent, Not Too Small -->
-            <div class="relative z-10 w-full flex items-center justify-center p-2">
-                <img 
-                    src="{{ asset('assets/img/IKON2.png') }}" 
-                    alt="Maskot OLARA" 
-                    class="w-[300px] sm:w-[380px] md:w-[440px] lg:w-[480px] xl:w-[510px] max-w-full max-h-[520px] sm:max-h-[560px] h-auto object-contain drop-shadow-[0_25px_50px_rgba(0,0,0,0.35)] transition-transform duration-500 hover:scale-105"
-                />
+            <!-- Floating Micro-Badges for 3D depth -->
+            <div class="absolute top-6 left-6 lg:top-10 lg:left-10 z-20 badge-floating-1 hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/25 text-white text-xs font-semibold shadow-lg shadow-emerald-950/20">
+                <span class="text-sm">🌱</span> <span>Eco-Friendly</span>
+            </div>
+
+            <div class="absolute bottom-14 right-6 lg:bottom-16 lg:right-10 z-20 badge-floating-2 hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/25 text-white text-xs font-semibold shadow-lg shadow-emerald-950/20">
+                <span class="text-sm">♻️</span> <span>100% Recycle</span>
+            </div>
+
+            <!-- Mascot Animated Carousel Wrapper -->
+            <div class="relative z-10 w-full flex flex-col items-center justify-center my-auto">
+                
+                <!-- Main Floating Mascot Stage -->
+                <div class="relative w-full max-w-[340px] sm:max-w-[420px] lg:max-w-[480px] h-[300px] sm:h-[380px] lg:h-[440px] flex items-center justify-center mascot-floating">
+                    
+                    <!-- Mascot 1 (IKON1.png) -->
+                    <img 
+                        id="mascot-img-0"
+                        src="{{ asset('assets/img/IKON1.png') }}" 
+                        alt="Maskot OLARA 1" 
+                        class="mascot-slide absolute inset-0 w-full h-full object-contain drop-shadow-[0_20px_45px_rgba(0,0,0,0.45)] transition-all duration-700 ease-out opacity-100 scale-100 cursor-pointer"
+                    />
+
+                    <!-- Mascot 2 (IKON2.png) -->
+                    <img 
+                        id="mascot-img-1"
+                        src="{{ asset('assets/img/IKON2.png') }}" 
+                        alt="Maskot OLARA 2" 
+                        class="mascot-slide absolute inset-0 w-full h-full object-contain drop-shadow-[0_20px_45px_rgba(0,0,0,0.45)] transition-all duration-700 ease-out opacity-0 scale-90 pointer-events-none cursor-pointer"
+                    />
+
+                    <!-- Mascot 3 (IKON3.png) -->
+                    <img 
+                        id="mascot-img-2"
+                        src="{{ asset('assets/img/IKON3.png') }}" 
+                        alt="Maskot OLARA 3" 
+                        class="mascot-slide absolute inset-0 w-full h-full object-contain drop-shadow-[0_20px_45px_rgba(0,0,0,0.45)] transition-all duration-700 ease-out opacity-0 scale-90 pointer-events-none cursor-pointer"
+                    />
+
+                </div>
+
+                <!-- Subtle Dynamic Ground Shadow beneath mascot -->
+                <div class="w-48 sm:w-64 h-4 bg-emerald-950/40 rounded-full blur-md mascot-shadow -mt-2 mb-4 pointer-events-none"></div>
+
+                <!-- Pose Title & Subtitle Badge -->
+                <div class="text-center z-20 mt-1 px-4">
+                    <p id="mascotCaption" class="text-white text-sm sm:text-base font-bold tracking-wide drop-shadow-sm transition-all duration-500">
+                        Koleksi & Pilah Sampah
+                    </p>
+                    <p id="mascotSubCaption" class="text-emerald-100/80 text-xs font-normal mt-0.5 transition-all duration-500">
+                        Jadikan sampah bernilai tinggi bersama OLARA
+                    </p>
+                </div>
+
+                <!-- Carousel Controls / Dot Indicators -->
+                <div class="flex items-center gap-2.5 mt-4 z-20">
+                    <button 
+                        type="button" 
+                        onclick="switchMascot(0)" 
+                        id="mascot-dot-0" 
+                        class="h-2 rounded-full transition-all duration-300 w-8 bg-white shadow-sm cursor-pointer" 
+                        aria-label="Tampilkan Karakter 1"
+                    ></button>
+                    <button 
+                        type="button" 
+                        onclick="switchMascot(1)" 
+                        id="mascot-dot-1" 
+                        class="h-2 rounded-full transition-all duration-300 w-2.5 bg-white/40 hover:bg-white/70 shadow-sm cursor-pointer" 
+                        aria-label="Tampilkan Karakter 2"
+                    ></button>
+                    <button 
+                        type="button" 
+                        onclick="switchMascot(2)" 
+                        id="mascot-dot-2" 
+                        class="h-2 rounded-full transition-all duration-300 w-2.5 bg-white/40 hover:bg-white/70 shadow-sm cursor-pointer" 
+                        aria-label="Tampilkan Karakter 3"
+                    ></button>
+                </div>
+
             </div>
 
         </div>
@@ -212,5 +332,83 @@
         </div>
     </div>
 
+    <script>
+        const mascotData = [
+            {
+                title: "Koleksi & Pilah Sampah",
+                subtitle: "Kumpulkan sampah plastik bernilai tinggi dengan mudah"
+            },
+            {
+                title: "Daur Ulang Modern & AI",
+                subtitle: "Deteksi jenis sampah seketika dengan pemindai cerdas"
+            },
+            {
+                title: "Raih Eco-Points & Hadiah",
+                subtitle: "Tukarkan sampahmu jadi saldo uang & voucher belanja"
+            }
+        ];
+
+        let currentMascot = 0;
+        let mascotInterval;
+
+        function switchMascot(index) {
+            currentMascot = index;
+            for (let i = 0; i < 3; i++) {
+                const img = document.getElementById('mascot-img-' + i);
+                const dot = document.getElementById('mascot-dot-' + i);
+                if (img && dot) {
+                    if (i === index) {
+                        img.classList.remove('opacity-0', 'scale-90', 'pointer-events-none');
+                        img.classList.add('opacity-100', 'scale-100', 'pointer-events-auto');
+                        dot.classList.remove('w-2.5', 'bg-white/40');
+                        dot.classList.add('w-8', 'bg-white');
+                    } else {
+                        img.classList.remove('opacity-100', 'scale-100', 'pointer-events-auto');
+                        img.classList.add('opacity-0', 'scale-90', 'pointer-events-none');
+                        dot.classList.remove('w-8', 'bg-white');
+                        dot.classList.add('w-2.5', 'bg-white/40');
+                    }
+                }
+            }
+
+            const caption = document.getElementById('mascotCaption');
+            const subCaption = document.getElementById('mascotSubCaption');
+            if (caption && subCaption) {
+                caption.style.opacity = '0';
+                caption.style.transform = 'translateY(4px)';
+                subCaption.style.opacity = '0';
+                subCaption.style.transform = 'translateY(4px)';
+                setTimeout(() => {
+                    caption.textContent = mascotData[index].title;
+                    subCaption.textContent = mascotData[index].subtitle;
+                    caption.style.opacity = '1';
+                    caption.style.transform = 'translateY(0)';
+                    subCaption.style.opacity = '1';
+                    subCaption.style.transform = 'translateY(0)';
+                }, 200);
+            }
+        }
+
+        function startMascotCycle() {
+            stopMascotCycle();
+            mascotInterval = setInterval(() => {
+                const next = (currentMascot + 1) % 3;
+                switchMascot(next);
+            }, 3500);
+        }
+
+        function stopMascotCycle() {
+            if (mascotInterval) clearInterval(mascotInterval);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('mascotContainer');
+            if (container) {
+                container.addEventListener('mouseenter', stopMascotCycle);
+                container.addEventListener('mouseleave', startMascotCycle);
+            }
+            startMascotCycle();
+        });
+    </script>
 </body>
 </html>
