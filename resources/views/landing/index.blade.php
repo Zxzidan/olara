@@ -48,11 +48,11 @@
             </a>
 
             <!-- Desktop Links -->
-            <div class="hidden lg:flex items-center gap-7 text-[13.5px] font-medium text-[#78716C]">
+            <div class="hidden lg:flex items-center gap-6 text-[13.5px] font-medium text-[#78716C]">
                 <a href="#fitur" class="hover:text-[#292524] transition-colors">Fitur Utama</a>
                 <a href="#skenario" class="hover:text-[#292524] transition-colors">Cara Kerja</a>
-                <a href="#preview" class="hover:text-[#292524] transition-colors">Aplikasi</a>
-                <a href="#marketplace" class="hover:text-[#292524] transition-colors">Marketplace B2B</a>
+                <a href="#marketplace" class="hover:text-[#292524] transition-colors">Marketplace</a>
+                <a href="#harga" class="hover:text-[#292524] transition-colors">Paket & Harga</a>
                 <a href="#testimoni" class="hover:text-[#292524] transition-colors">Testimoni</a>
                 <a href="#faq" class="hover:text-[#292524] transition-colors">Tanya Jawab</a>
             </div>
@@ -696,6 +696,156 @@
 
 
         <!-- ===================================================================
+             PRICING & MEMBERSHIP PLANS (Paket Dasar & Premium)
+        =================================================================== -->
+        <section id="harga" class="py-20 md:py-28 max-w-5xl mx-auto px-4 sm:px-6 reveal-item">
+            <div class="text-center max-w-2xl mx-auto mb-14">
+                <span class="text-xs font-bold uppercase tracking-widest text-[#cb3930] bg-[#FFB7B2]/20 border border-[#FFB7B2]/40 px-3.5 py-1 rounded-full">
+                    Skema Keanggotaan
+                </span>
+                <h2 class="font-outfit text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#292524] mt-4 tracking-tight">
+                    Pilih Paket 
+                    <span class="relative inline-block keyword-target">
+                        Sirkular Anda
+                        <svg class="hand-drawn-underline" viewBox="0 0 220 14" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" aria-hidden="true">
+                            <path d="M 3 9 C 45 3, 150 12, 215 5" stroke="#cb3930" stroke-width="3" stroke-linecap="round" class="underline-path" />
+                        </svg>
+                    </span>
+                </h2>
+                <p class="text-stone-600 text-sm sm:text-base mt-3 leading-relaxed">
+                    Mulai aksi pilah sampah harian tanpa biaya, atau beralih ke paket Premium untuk penjemputan prioritas dan dampak lingkungan maksimal.
+                </p>
+            </div>
+
+            <!-- 2 Pricing Cards Side-by-Side -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto items-stretch">
+                
+                <!-- 1. Paket Dasar (Free) -->
+                <div class="bg-white rounded-3xl p-7 sm:p-8 border border-stone-200/80 shadow-soft flex flex-col justify-between hover:border-stone-300 transition-all group">
+                    <div class="space-y-5">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold uppercase tracking-wider text-stone-500 bg-stone-100 px-3 py-1 rounded-full">
+                                Paket Dasar
+                            </span>
+                            <span class="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200/60">
+                                Gratis Selamanya
+                            </span>
+                        </div>
+
+                        <div>
+                            <h3 class="font-outfit text-2xl sm:text-3xl font-extrabold text-[#292524]">Olara Dasar</h3>
+                            <p class="text-xs sm:text-sm text-stone-500 mt-1.5 leading-relaxed">
+                                Solusi awal untuk mulai memilah sampah rumah tangga dan menukarkan poin secara praktis.
+                            </p>
+                        </div>
+
+                        <div class="flex items-baseline gap-1.5 pt-2">
+                            <span class="font-outfit text-4xl sm:text-5xl font-extrabold text-[#292524] tracking-tight">Rp 0</span>
+                            <span class="text-xs text-stone-400 font-semibold">/ selamanya</span>
+                        </div>
+
+                        <ul class="space-y-3.5 text-xs sm:text-sm text-stone-600 pt-5 border-t border-stone-100">
+                            <li class="flex items-center gap-3">
+                                <span class="w-5 h-5 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 text-xs font-bold">✓</span>
+                                <span><strong>1x Kuota penjemputan</strong> sampah per bulan</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="w-5 h-5 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 text-xs font-bold">✓</span>
+                                <span><strong>5x Kredit Scan AI</strong> kamera deteksi sampah</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="w-5 h-5 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 text-xs font-bold">✓</span>
+                                <span>Laporan analisis dampak lingkungan bulanan</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="w-5 h-5 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 text-xs font-bold">✓</span>
+                                <span>Batas dompet hingga <strong>1.000 Eco-Points</strong></span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="w-5 h-5 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 text-xs font-bold">✓</span>
+                                <span>Akses jaringan drop-off bank sampah mitra</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="pt-8">
+                        <a href="{{ route('register') }}" class="olara-btn-secondary w-full py-3.5 rounded-full text-center block font-bold text-xs sm:text-sm">
+                            Mulai Gratis Sekarang
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 2. Paket Premium -->
+                <div class="bg-[#FDFCF8] rounded-3xl p-7 sm:p-8 border-2 border-[#cb3930]/80 shadow-soft-lg flex flex-col justify-between relative hover:border-[#cb3930] transition-all group">
+                    <!-- Highlight Badge -->
+                    <div class="absolute -top-3.5 right-6 sm:right-8">
+                        <span class="bg-[#cb3930] text-white text-[11px] font-extrabold uppercase tracking-wider px-3.5 py-1 rounded-full shadow-md flex items-center gap-1.5">
+                            <i data-lucide="crown" class="w-3.5 h-3.5"></i> Rekomendasi
+                        </span>
+                    </div>
+
+                    <div class="space-y-5">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold uppercase tracking-wider text-[#a7322b] bg-[#FFE4E1] px-3 py-1 rounded-full">
+                                Paket Premium
+                            </span>
+                            <span class="text-xs font-semibold text-amber-800 bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200/60">
+                                Fitur Lengkap
+                            </span>
+                        </div>
+
+                        <div>
+                            <h3 class="font-outfit text-2xl sm:text-3xl font-extrabold text-[#292524]">Olara Premium</h3>
+                            <p class="text-xs sm:text-sm text-stone-500 mt-1.5 leading-relaxed">
+                                Dukungan komprehensif bagi keluarga dan individu untuk memaksimalkan aksi pilah sampah harian.
+                            </p>
+                        </div>
+
+                        <div class="flex items-baseline gap-1.5 pt-2">
+                            <span class="font-outfit text-4xl sm:text-5xl font-extrabold text-[#cb3930] tracking-tight">Rp 39.000</span>
+                            <span class="text-xs text-stone-500 font-semibold">/ bulan</span>
+                        </div>
+
+                        <ul class="space-y-3.5 text-xs sm:text-sm text-[#292524] pt-5 border-t border-stone-200/80">
+                            <li class="flex items-center gap-3 font-medium">
+                                <span class="w-5 h-5 rounded-full bg-[#cb3930] text-white flex items-center justify-center shrink-0 text-xs font-bold">✓</span>
+                                <span><strong>5x Penjemputan gratis</strong> per bulan (Bebas Biaya Dasar)</span>
+                            </li>
+                            <li class="flex items-center gap-3 font-medium">
+                                <span class="w-5 h-5 rounded-full bg-[#cb3930] text-white flex items-center justify-center shrink-0 text-xs font-bold">✓</span>
+                                <span><strong>Unlimited Scan AI</strong> tanpa batasan kuota</span>
+                            </li>
+                            <li class="flex items-center gap-3 font-medium">
+                                <span class="w-5 h-5 rounded-full bg-[#cb3930] text-white flex items-center justify-center shrink-0 text-xs font-bold">✓</span>
+                                <span><strong>Multiplier 1.2x Poin ekstra</strong> di setiap setoran</span>
+                            </li>
+                            <li class="flex items-center gap-3 font-medium">
+                                <span class="w-5 h-5 rounded-full bg-[#cb3930] text-white flex items-center justify-center shrink-0 text-xs font-bold">✓</span>
+                                <span><strong>Prioritas utama</strong> armada kurir jemput (Fast-Track)</span>
+                            </li>
+                            <li class="flex items-center gap-3 font-medium">
+                                <span class="w-5 h-5 rounded-full bg-[#cb3930] text-white flex items-center justify-center shrink-0 text-xs font-bold">✓</span>
+                                <span>Batas dompet diperluas s/d <strong>50.000 Eco-Points</strong></span>
+                            </li>
+                            <li class="flex items-center gap-3 font-medium">
+                                <span class="w-5 h-5 rounded-full bg-[#cb3930] text-white flex items-center justify-center shrink-0 text-xs font-bold">✓</span>
+                                <span><strong>10% otomatis dialokasikan</strong> untuk penanaman pohon</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="pt-8">
+                        <a href="{{ route('register') }}" class="olara-btn-accent w-full py-3.5 rounded-full text-center block font-bold text-xs sm:text-sm text-white bg-[#cb3930] hover:bg-[#b03028] shadow-soft">
+                            Pilih Paket Premium
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ===================================================================
              5. 3D ELEVATED AUTO-MOVING TESTIMONIALS (Per User Specification)
              Center card elevated, 3D shadow lift, 5 stars, quote mark, auto-moving,
              dot pattern canvas background, pause on hover.
@@ -1008,6 +1158,7 @@
 
             <div class="flex items-center gap-5 font-medium text-stone-700">
                 <a href="#fitur" class="hover:text-stone-900 transition-colors">Fitur</a>
+                <a href="#harga" class="hover:text-stone-900 transition-colors">Paket & Harga</a>
                 <a href="{{ route('home') }}" class="hover:text-stone-900 transition-colors">Dashboard</a>
                 <a href="{{ route('login') }}" class="hover:text-stone-900 transition-colors">Masuk</a>
                 <a href="{{ route('register') }}" class="hover:text-stone-900 transition-colors">Daftar</a>

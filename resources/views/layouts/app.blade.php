@@ -283,6 +283,14 @@
                   <i data-lucide="refresh-cw" class="w-4 h-4 text-gray-400"></i> Reset Akun Demo
                 </a>
               </li>
+              <li class="border-t border-gray-100 dark:border-gray-600">
+                <form method="POST" action="{{ route('logout') }}">
+                  @csrf
+                  <button type="submit" class="w-full text-left flex items-center gap-2 py-2 px-4 text-xs font-semibold text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/40 dark:text-rose-400 cursor-pointer">
+                    <i data-lucide="log-out" class="w-4 h-4"></i> Log Out
+                  </button>
+                </form>
+              </li>
             </ul>
           </div>
         </div>
@@ -295,7 +303,7 @@
       aria-label="Sidenav"
       id="drawer-navigation"
     >
-      <div class="overflow-y-auto py-5 px-3 h-full bg-[#FDFCF8] dark:bg-stone-900">
+      <div class="overflow-y-auto pt-5 px-3 pb-20 h-full bg-[#FDFCF8] dark:bg-stone-900">
         <!-- Mobile Sidebar Close Header -->
         <div class="flex items-center justify-between pb-2 mb-2 border-b border-stone-200/60 dark:border-stone-800 md:hidden">
           <span class="text-xs font-bold uppercase tracking-wider text-stone-400">Navigasi OLARA</span>
@@ -322,18 +330,6 @@
 
         <!-- Main Navigation Links -->
         <ul class="space-y-1.5 font-medium">
-          <!-- Landing Page Quick Link -->
-          <li>
-            <a
-              href="{{ route('landing') }}"
-              class="flex items-center p-2 text-sm rounded-xl transition-colors group text-stone-600 dark:text-stone-300 hover:bg-[#FFE4E1]/40 dark:hover:bg-stone-800 hover:text-stone-900 dark:hover:text-white"
-            >
-              <i data-lucide="sparkles" class="w-5 h-5 text-[#ff948d] group-hover:scale-110 transition-transform"></i>
-              <span class="ml-3">Halaman Utama</span>
-              <span class="ml-auto text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-[#FFE4E1] text-[#a7322b]">Web</span>
-            </a>
-          </li>
-
           <!-- Overview -->
           <li>
             <a
@@ -487,6 +483,19 @@
               <i data-lucide="refresh-cw" class="w-5 h-5 text-stone-400 group-hover:text-stone-700 dark:group-hover:text-stone-200"></i>
               <span class="ml-3">Akun Demo</span>
             </a>
+          </li>
+          <li>
+            <form method="POST" action="{{ route('logout') }}" class="w-full">
+              @csrf
+              <button
+                type="submit"
+                class="w-full flex items-center p-2 text-sm text-rose-600 dark:text-rose-400 rounded-xl hover:bg-rose-50 dark:hover:bg-rose-950/30 group transition-colors cursor-pointer"
+                title="Keluar dari akun Anda"
+              >
+                <i data-lucide="log-out" class="w-5 h-5 text-rose-500 group-hover:text-rose-700 dark:group-hover:text-rose-300 transition-colors"></i>
+                <span class="ml-3 font-semibold">Log Out</span>
+              </button>
+            </form>
           </li>
         </ul>
       </div>
