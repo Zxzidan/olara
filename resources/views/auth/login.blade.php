@@ -17,7 +17,7 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0f1211;
+            background-color: #f3f5f4;
         }
 
         /* Olara Green Radiant Gradient for the Right Panel */
@@ -42,59 +42,61 @@
 
         /* Outline Button */
         .olara-outline-btn {
-            border: 1px solid #10b981;
-            color: #34d399;
+            border: 1.5px solid #10b981;
+            color: #059669;
+            background-color: transparent;
             transition: all 0.2s ease;
         }
         .olara-outline-btn:hover {
-            background-color: rgba(16, 185, 129, 0.15);
-            border-color: #34d399;
+            background-color: #10b981;
+            border-color: #10b981;
             color: #ffffff;
             transform: translateY(-1px);
+            box-shadow: 0 6px 20px -3px rgba(16, 185, 129, 0.3);
         }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-0 sm:p-6 md:p-8 bg-[#0f1211]">
+<body class="min-h-screen flex items-center justify-center p-0 sm:p-6 md:p-8 bg-[#f3f5f4]">
 
-    <!-- Main Auth Card Container -->
-    <div class="w-full max-w-5xl lg:max-w-6xl min-h-screen sm:min-h-[680px] bg-[#191c1b] sm:rounded-3xl shadow-2xl shadow-black/80 overflow-hidden flex flex-col lg:flex-row border border-white/5 my-auto">
+    <!-- Main Auth Card Container (Light Mode) -->
+    <div class="w-full max-w-5xl lg:max-w-6xl min-h-screen sm:min-h-[680px] bg-white sm:rounded-3xl shadow-2xl shadow-emerald-950/10 overflow-hidden flex flex-col lg:flex-row border border-gray-200/80 my-auto">
         
-        <!-- Left Side: Dark Form Section -->
-        <div class="w-full lg:w-1/2 p-8 sm:p-12 lg:p-14 flex flex-col justify-between bg-[#191c1b] text-white">
+        <!-- Left Side: White Form Section -->
+        <div class="w-full lg:w-1/2 p-8 sm:p-12 lg:p-14 flex flex-col justify-between bg-white text-gray-900">
             
             <div class="w-full max-w-sm mx-auto my-auto">
                 <!-- Brand Logo & Title -->
                 <div class="text-center mb-8">
-                    <!-- OLARA Logo (Small size matching previous logo) -->
+                    <!-- OLARA Logo (Small size) -->
                     <div class="inline-block">
                         <img 
                             src="{{ asset('assets/img/LOGO ORALA.png') }}" 
                             alt="OLARA — Pengelola Sampah Plastik" 
-                            class="h-14 sm:h-16 w-auto mx-auto object-contain drop-shadow-md"
+                            class="h-14 sm:h-16 w-auto mx-auto object-contain drop-shadow-sm"
                         />
                     </div>
 
-                    <!-- Team Name -->
-                    <h1 class="text-white text-lg sm:text-xl font-bold tracking-wide mt-3">We are The OLARA Team</h1>
+                    <!-- Team Name (Black/Dark text) -->
+                    <h1 class="text-gray-900 text-lg sm:text-xl font-bold tracking-wide mt-3">We are The OLARA Team</h1>
                     <span class="sr-only">Masuk ke Akun OLARA</span>
                 </div>
 
-                <!-- Subtitle / Instruction -->
-                <p class="text-[#d1d5db] text-sm sm:text-base font-medium mb-6">Please login to your account</p>
+                <!-- Subtitle / Instruction (Dark muted text) -->
+                <p class="text-gray-600 text-sm sm:text-base font-medium mb-6">Please login to your account</p>
 
                 <!-- Session Flash Messages / Errors -->
                 @if (session('success'))
-                    <div class="mb-5 p-3 rounded-lg bg-emerald-950/80 border border-emerald-500/50 text-emerald-300 text-xs flex items-center gap-2">
-                        <svg class="w-4 h-4 shrink-0 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    <div class="mb-5 p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs flex items-center gap-2 shadow-sm">
+                        <svg class="w-4 h-4 shrink-0 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                         <span>{{ session('success') }}</span>
                     </div>
                 @endif
 
                 @if ($errors->any())
-                    <div class="mb-5 p-3 rounded-lg bg-red-950/70 border border-red-500/50 text-red-200 text-xs">
+                    <div class="mb-5 p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs shadow-sm">
                         @foreach ($errors->all() as $error)
                             <p class="flex items-center gap-1.5">
-                                <span class="text-red-400 font-bold">•</span> {{ $error }}
+                                <span class="text-red-500 font-bold">•</span> {{ $error }}
                             </p>
                         @endforeach
                     </div>
@@ -114,7 +116,7 @@
                             required 
                             autocomplete="email"
                             placeholder="Email address"
-                            class="w-full px-4 py-3 bg-[#242826] border border-[#38423d] rounded-lg text-white text-sm placeholder-[#7e8983] focus:outline-none focus:border-[#10b981] focus:ring-1 focus:ring-[#10b981] transition shadow-inner"
+                            class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 text-sm placeholder-gray-400 focus:bg-white focus:outline-none focus:border-[#10b981] focus:ring-2 focus:ring-[#10b981]/20 transition"
                         />
                     </div>
 
@@ -128,15 +130,15 @@
                             required 
                             autocomplete="current-password"
                             placeholder="Password"
-                            class="w-full px-4 py-3 bg-[#242826] border border-[#38423d] rounded-lg text-white text-sm placeholder-[#7e8983] focus:outline-none focus:border-[#10b981] focus:ring-1 focus:ring-[#10b981] transition shadow-inner"
+                            class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 text-sm placeholder-gray-400 focus:bg-white focus:outline-none focus:border-[#10b981] focus:ring-2 focus:ring-[#10b981]/20 transition"
                         />
                     </div>
 
-                    <!-- Action Button: LOG IN -->
+                    <!-- Action Button: LOG IN (Retaining bold white font on green button) -->
                     <div class="pt-2">
                         <button 
                             type="submit" 
-                            class="w-full py-3.5 px-4 rounded-lg text-white font-extrabold text-xs sm:text-sm tracking-wider uppercase olara-btn-gradient shadow-lg cursor-pointer"
+                            class="w-full py-3.5 px-4 rounded-lg text-white font-extrabold text-xs sm:text-sm tracking-wider uppercase olara-btn-gradient shadow-lg shadow-emerald-500/25 cursor-pointer"
                         >
                             LOG IN
                         </button>
@@ -147,7 +149,7 @@
                         <a 
                             href="javascript:void(0)" 
                             onclick="document.getElementById('forgotModal').classList.remove('hidden')" 
-                            class="text-zinc-400 hover:text-emerald-400 text-xs transition duration-150 inline-block py-1"
+                            class="text-gray-500 hover:text-[#10b981] text-xs font-medium transition duration-150 inline-block py-1"
                         >
                             Forgot password?
                         </a>
@@ -156,8 +158,8 @@
             </div>
 
             <!-- Bottom Row: Switch to Register -->
-            <div class="w-full max-w-sm mx-auto pt-8 mt-6 border-t border-white/5 flex items-center justify-between">
-                <span class="text-zinc-300 text-xs sm:text-sm font-medium">Don't have an account?</span>
+            <div class="w-full max-w-sm mx-auto pt-8 mt-6 border-t border-gray-100 flex items-center justify-between">
+                <span class="text-gray-600 text-xs sm:text-sm font-medium">Don't have an account?</span>
                 <a 
                     href="{{ route('register') }}" 
                     class="px-5 py-2 rounded-lg olara-outline-btn text-xs font-bold uppercase tracking-wider text-center cursor-pointer inline-block"
@@ -188,23 +190,23 @@
 
     </div>
 
-    <!-- Self-Contained Forgot Password Modal (No External Navigation) -->
-    <div id="forgotModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-[#1c201e] border border-[#38423d] rounded-2xl p-6 max-w-sm w-full shadow-2xl text-white">
+    <!-- Self-Contained Forgot Password Modal (Light Theme) -->
+    <div id="forgotModal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white border border-gray-200 rounded-2xl p-6 max-w-sm w-full shadow-2xl text-gray-900">
             <div class="flex items-center justify-between mb-4">
-                <h3 class="text-base font-bold text-white flex items-center gap-2">
-                    <i data-lucide="key" class="w-4 h-4 text-emerald-400"></i> Lupa Kata Sandi
+                <h3 class="text-base font-bold text-gray-900 flex items-center gap-2">
+                    <span class="text-emerald-500">🔑</span> Lupa Kata Sandi
                 </h3>
-                <button type="button" onclick="document.getElementById('forgotModal').classList.add('hidden')" class="text-zinc-400 hover:text-white text-lg leading-none">&times;</button>
+                <button type="button" onclick="document.getElementById('forgotModal').classList.add('hidden')" class="text-gray-400 hover:text-gray-700 text-xl font-bold leading-none">&times;</button>
             </div>
-            <p class="text-xs text-zinc-300 mb-4 leading-relaxed">
+            <p class="text-xs text-gray-600 mb-4 leading-relaxed">
                 Silakan hubungi administrator sistem atau gunakan kredensial demo untuk masuk:
             </p>
-            <div class="p-3 bg-[#242826] rounded-xl border border-[#38423d] text-xs space-y-1 mb-4">
-                <p><span class="text-zinc-400">Email:</span> <code class="text-emerald-300 font-mono">zidan@olara.id</code></p>
-                <p><span class="text-zinc-400">Password:</span> <code class="text-emerald-300 font-mono">password123</code></p>
+            <div class="p-3 bg-emerald-50/70 rounded-xl border border-emerald-200 text-xs space-y-1 mb-4">
+                <p><span class="text-gray-500">Email:</span> <code class="text-emerald-700 font-mono font-bold">zidan@olara.id</code></p>
+                <p><span class="text-gray-500">Password:</span> <code class="text-emerald-700 font-mono font-bold">password123</code></p>
             </div>
-            <button type="button" onclick="document.getElementById('forgotModal').classList.add('hidden')" class="w-full py-2.5 rounded-lg olara-btn-gradient text-white text-xs font-bold cursor-pointer">
+            <button type="button" onclick="document.getElementById('forgotModal').classList.add('hidden')" class="w-full py-2.5 rounded-lg olara-btn-gradient text-white text-xs font-bold cursor-pointer shadow-md">
                 Mengerti
             </button>
         </div>
