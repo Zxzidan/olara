@@ -3,14 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\PickupRequest;
+use App\Services\MidtransService;
+use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class PickupController extends Controller
 {
+    public function __construct(
+        protected MidtransService $midtransService
+    ) {}
+
     public function index(Request $request): View
     {
         $user = Auth::user();
@@ -46,10 +54,6 @@ class PickupController extends Controller
         $distance = (float) ($validated['distance_km'] ?? 3.5);
 
         // Pricing formula according to PRD:
-        // Base fee: Rp 10.000
-        // Volume surcharge: Rp 5.000 per 10kg above 10kg
-        // Distance fee: Rp 2.000 / km
-        // Service fee: Rp 2.000
         $baseFee = 10000;
         $volumeSurcharge = ($weight > 10) ? ceil(($weight - 10) / 10) * 5000 : 0;
         $distanceFee = round($distance * 2000);
@@ -72,6 +76,38 @@ class PickupController extends Controller
 
         $code = 'PKP-'.date('Ym').'-'.strtoupper(Str::random(4));
 
+        $snapToken = null;
+        if ($totalFee > 0) {
+            try {
+                $snapParams = [
+                    'transaction_details' => [
+                        'order_id' => $code,
+                        'gross_amount' => (int) round($totalFee),
+                    ],
+                    'customer_details' => [
+                        'first_name' => $user->name,
+                        'email' => $user->email,
+                        'phone' => $user->phone ?? '081234567890',
+                    ],
+                    'item_details' => [
+                        [
+                            'id' => 'PICKUP-FEE',
+                            'price' => (int) round($totalFee),
+                            'quantity' => 1,
+                            'name' => 'Biaya Armada Penjemputan Sampah Olara',
+                        ],
+                    ],
+                ];
+
+                $snapToken = $this->midtransService->createSnapToken($snapParams);
+            } catch (Exception $e) {
+                Log::error('Gagal generate Snap Token untuk Pickup Request', [
+                    'error' => $e->getMessage(),
+                    'code' => $code,
+                ]);
+            }
+        }
+
         $pickup = PickupRequest::create([
             'pickup_code' => $code,
             'user_id' => $user->id,
@@ -87,13 +123,18 @@ class PickupController extends Controller
             'distance_fee' => $distanceFee,
             'service_fee' => $serviceFee,
             'total_fee' => $totalFee,
+            'payment_status' => $totalFee > 0 ? 'unpaid' : 'paid',
+            'payment_method' => $totalFee > 0 ? 'Midtrans Digital' : 'Gratis (Kuota Premium)',
+            'snap_token' => $snapToken,
             'status' => 'confirmed',
             'courier_name' => $selectedCourier['name'],
             'courier_plate' => $selectedCourier['plate'],
             'courier_phone' => $selectedCourier['phone'],
         ]);
 
-        return redirect()->route('pickup.show', $pickup->pickup_code)->with('success', 'Jadwal penjemputan berhasil dibuat! Kurir mitra kami akan segera ditugaskan.');
+        return redirect()->route('pickup.show', $pickup->pickup_code)
+            ->with('snap_token', $snapToken)
+            ->with('success', 'Jadwal penjemputan berhasil dibuat! Kurir mitra kami akan segera ditugaskan.');
     }
 
     public function show(string $code): View
@@ -102,5 +143,26 @@ class PickupController extends Controller
         $user = Auth::user();
 
         return view('pickup.show', compact('pickup', 'user'));
+    }
+
+    /**
+     * Mark Pickup Fee as paid from Snap onSuccess.
+     */
+    public function markPaid(Request $request, string $code): JsonResponse|RedirectResponse
+    {
+        $pickup = PickupRequest::where('pickup_code', $code)->firstOrFail();
+
+        $pickup->update([
+            'payment_status' => 'paid',
+            'status' => 'driver_assigned',
+            'transaction_id' => $request->input('transaction_id', $pickup->transaction_id),
+            'payment_method' => $request->input('payment_type', 'Midtrans'),
+        ]);
+
+        if ($request->expectsJson()) {
+            return response()->json(['success' => true, 'message' => 'Biaya penjemputan berhasil dibayar.']);
+        }
+
+        return redirect()->route('pickup.show', $code)->with('success', 'Biaya armada penjemputan berhasil dibayar via Midtrans!');
     }
 }

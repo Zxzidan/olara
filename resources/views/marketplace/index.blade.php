@@ -185,8 +185,8 @@
                         </div>
                     </div>
 
-                    <button type="button" onclick="openOrderModal({{ $product->id }}, '{{ addslashes($product->name) }}', '{{ $product->grade }}', {{ $product->price_per_kg }}, {{ $product->min_order_kg }})" class="w-full py-2.5 px-4 rounded-xl bg-[#168A5B] hover:bg-[#0F6B47] text-white text-xs font-bold shadow-sm transition flex items-center justify-center gap-1.5">
-                        <i data-lucide="shopping-cart" class="w-4 h-4"></i> Beli Material Ini
+                    <button type="button" onclick="openOrderModal({{ $product->id }}, '{{ addslashes($product->name) }}', '{{ $product->grade }}', {{ $product->price_per_kg }}, {{ $product->min_order_kg }})" class="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-[#168A5B] to-[#0F6B47] hover:from-[#0F6B47] hover:to-[#0B4F38] text-white text-xs font-extrabold shadow-md shadow-emerald-600/20 hover:scale-[1.02] active:scale-[0.98] transition flex items-center justify-center gap-2">
+                        <i data-lucide="zap" class="w-4 h-4 text-emerald-200"></i> Beli Sekarang
                     </button>
                 </div>
             </div>
@@ -196,25 +196,45 @@
     <!-- Recent Marketplace Orders -->
     @if($userOrders->isNotEmpty())
         <div class="bg-white border border-[#DDE3DF] rounded-3xl p-6 shadow-sm space-y-4 mt-8">
-            <h3 class="text-base font-bold text-[#1B211E]">Riwayat Pesanan Material Anda</h3>
+            <div class="flex items-center justify-between">
+                <h3 class="text-base font-bold text-[#1B211E]">Riwayat Pesanan Material Anda</h3>
+                <a href="{{ route('marketplace.orders') }}" class="text-xs font-bold text-[#168A5B] hover:underline flex items-center gap-1">
+                    Lihat Semua Pesanan <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
             
             <div class="divide-y divide-gray-100">
                 @foreach($userOrders as $order)
                     <div class="py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 first:pt-0 last:pb-0">
                         <div>
                             <div class="flex items-center gap-2">
-                                <span class="text-xs font-mono font-bold text-[#168A5B]">{{ $order->order_number }}</span>
-                                <span class="text-[10px] font-bold uppercase bg-emerald-100 text-[#168A5B] px-2 py-0.5 rounded">Lunas</span>
+                                <span class="text-xs font-mono font-bold text-[#168A5B]">#{{ $order->order_number }}</span>
+                                @if($order->isPaid())
+                                    <span class="text-[10px] font-bold uppercase bg-emerald-100 text-[#168A5B] px-2 py-0.5 rounded-full flex items-center gap-1">
+                                        <i data-lucide="check-circle" class="w-3 h-3"></i> Lunas (Midtrans)
+                                    </span>
+                                @else
+                                    <span class="text-[10px] font-bold uppercase bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full flex items-center gap-1 animate-pulse">
+                                        <i data-lucide="clock" class="w-3 h-3"></i> Menunggu Pembayaran
+                                    </span>
+                                @endif
                             </div>
                             <h5 class="text-sm font-bold text-[#1B211E] mt-1">{{ $order->items[0]['name'] ?? 'Bahan Daur Ulang' }} ({{ $order->items[0]['qty_kg'] ?? 50 }} kg)</h5>
-                            <p class="text-xs text-gray-400 font-medium">Metode Pembayaran: {{ $order->payment_method }} • {{ $order->created_at->format('d M Y') }}</p>
+                            <p class="text-xs text-gray-400 font-medium">{{ $order->payment_method }} • {{ $order->created_at->format('d M Y, H:i') }} WIB</p>
                         </div>
 
                         <div class="text-left sm:text-right flex sm:flex-col items-center sm:items-end justify-between gap-2">
                             <span class="text-sm font-extrabold text-[#0B4F38] tabular-nums">Rp {{ number_format($order->grand_total) }}</span>
-                            <a href="{{ route('marketplace.orderDetail', $order->order_number) }}" class="text-xs font-bold text-[#168A5B] hover:underline">
-                                Lihat Invoice & Sertifikat CO₂
-                            </a>
+                            <div class="flex items-center gap-2">
+                                @if(! $order->isPaid())
+                                    <button type="button" onclick="payPendingOrder('{{ $order->order_number }}')" class="px-3 py-1 rounded-lg bg-amber-500 hover:bg-amber-600 text-white text-[11px] font-bold shadow-xs transition flex items-center gap-1">
+                                        <i data-lucide="credit-card" class="w-3 h-3"></i> Bayar Sekarang
+                                    </button>
+                                @endif
+                                <a href="{{ route('marketplace.orderDetail', $order->order_number) }}" class="text-xs font-bold text-[#168A5B] hover:underline">
+                                    Detail Invoice →
+                                </a>
+                            </div>
                         </div>
                     </div>
                 @endforeach
@@ -232,14 +252,19 @@
         </button>
 
         <div class="border-b border-gray-100 pb-3 mb-4">
-            <span class="text-[10px] font-bold uppercase tracking-wider text-[#168A5B] bg-[#DDF4E8] px-2 py-0.5 rounded">
-                Formulir Pemesanan Material
-            </span>
+            <div class="flex items-center justify-between">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-[#168A5B] bg-[#DDF4E8] px-2.5 py-0.5 rounded-full">
+                    Konfirmasi Checkout & Beli
+                </span>
+                <span class="text-[11px] font-semibold text-gray-500 flex items-center gap-1">
+                    <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-600"></i> Midtrans Sandbox
+                </span>
+            </div>
             <h3 id="modalProductName" class="text-lg font-extrabold text-[#1B211E] mt-1">PET Flakes Bening</h3>
             <p id="modalProductGrade" class="text-xs text-[#66716B]">Grade A Hot Washed</p>
         </div>
 
-        <form action="{{ route('marketplace.checkout') }}" method="POST" class="space-y-4">
+        <form id="checkoutForm" onsubmit="handleCheckoutSubmit(event)" class="space-y-4">
             @csrf
             <input type="hidden" name="product_id" id="modalProductId" value="" />
 
@@ -261,16 +286,22 @@
                 <textarea name="shipping_address" id="modalAddress" rows="2" required class="w-full px-4 py-2 rounded-xl border border-[#DDE3DF] text-xs focus:ring-2 focus:ring-[#168A5B] focus:outline-none" placeholder="Masukkan alamat pengiriman lengkap armada truk">{{ $user->address ?? 'Gudang Workshop Olara, Kawasan Industri Hijau, Cikarang' }}</textarea>
             </div>
 
-            <!-- Payment Method -->
+            <!-- Payment Method Gateway -->
             <div>
-                <label class="block text-xs font-bold text-[#1B211E] mb-1.5">Metode Pembayaran Digital</label>
-                <select name="payment_method" class="w-full px-4 py-2.5 rounded-xl border border-[#DDE3DF] text-xs font-semibold text-[#1B211E] focus:ring-2 focus:ring-[#168A5B] focus:outline-none">
-                    <option value="QRIS Instant (GoPay, OVO, DANA)">QRIS Instant (Semua E-Wallet & M-Banking)</option>
-                    <option value="BCA Virtual Account">BCA Virtual Account</option>
-                    <option value="Mandiri Virtual Account">Mandiri Virtual Account</option>
-                    <option value="BRI Virtual Account">BRI Virtual Account</option>
-                    <option value="BNI Virtual Account">BNI Virtual Account</option>
-                </select>
+                <label class="block text-xs font-bold text-[#1B211E] mb-1.5">Gerbang Pembayaran Resmi</label>
+                <div class="p-3 rounded-xl border border-emerald-300 bg-emerald-50/50 flex items-center justify-between">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-8 h-8 rounded-lg bg-[#168A5B] text-white flex items-center justify-center font-black text-xs">
+                            M
+                        </div>
+                        <div>
+                            <p class="text-xs font-extrabold text-[#0B4F38]">Midtrans Payment Gateway (Sandbox)</p>
+                            <p class="text-[11px] text-[#66716B]">QRIS (GoPay/ShopeePay/OVO), VA BCA/Mandiri/BRI/BNI</p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="payment_method" value="Midtrans Digital Gateway" />
+                    <span class="text-[10px] font-extrabold uppercase tracking-wide bg-emerald-200/70 text-emerald-900 px-2 py-0.5 rounded">Otomatis</span>
+                </div>
             </div>
 
             <!-- Price Breakdown Calculation (PRD: Subtotal, PPN 10%, Shipping, Total) -->
@@ -293,9 +324,19 @@
                 </div>
             </div>
 
-            <button type="submit" class="w-full py-3 px-4 rounded-xl bg-[#168A5B] hover:bg-[#0F6B47] text-white text-sm font-bold shadow-sm transition flex items-center justify-center gap-2">
-                <i data-lucide="check-circle" class="w-4 h-4"></i> Bayar & Proses Pesanan
+            <!-- Generated Order Number Preview Alert -->
+            <div id="orderStatusBox" class="hidden p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-900 font-semibold flex items-center gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600 shrink-0 animate-spin"></i>
+                <span id="orderStatusMessage">Men-generate nomor order dan menghubungkan ke Midtrans...</span>
+            </div>
+
+            <button type="submit" id="btnCheckoutSubmit" class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-[#168A5B] to-[#0F6B47] hover:from-[#0F6B47] hover:to-[#0B4F38] text-white text-sm font-extrabold shadow-lg shadow-emerald-600/25 hover:scale-[1.01] active:scale-[0.99] transition flex items-center justify-center gap-2">
+                <i data-lucide="zap" class="w-4 h-4 text-amber-300"></i>
+                <span id="btnCheckoutText">Beli Sekarang & Generate Order</span>
             </button>
+            <p class="text-[11px] text-center text-gray-400">
+                Mengklik tombol di atas akan langsung menerbitkan nomor pesanan resmi dan memunculkan pop-up Midtrans.
+            </p>
         </form>
     </div>
 </div>
@@ -315,8 +356,14 @@
         document.getElementById('modalQtyInput').min = minOrder;
         document.getElementById('modalMinOrderNote').textContent = `Minimum pemesanan: ${minOrder} kg`;
 
+        document.getElementById('orderStatusBox').classList.add('hidden');
+        resetSubmitButton();
+
         recalcOrderModal();
         document.getElementById('orderModal').classList.remove('hidden');
+        if (window.lucide) {
+            lucide.createIcons();
+        }
     }
 
     function closeOrderModal() {
@@ -333,6 +380,140 @@
         document.getElementById('modalSubtotal').textContent = `Rp ${subtotal.toLocaleString('id-ID')}`;
         document.getElementById('modalPpn').textContent = `Rp ${ppn.toLocaleString('id-ID')}`;
         document.getElementById('modalGrandTotal').textContent = `Rp ${grandTotal.toLocaleString('id-ID')}`;
+    }
+
+    function resetSubmitButton() {
+        const btn = document.getElementById('btnCheckoutSubmit');
+        const text = document.getElementById('btnCheckoutText');
+        btn.disabled = false;
+        btn.classList.remove('opacity-60', 'cursor-not-allowed');
+        text.textContent = 'Beli Sekarang & Generate Order';
+    }
+
+    async function handleCheckoutSubmit(e) {
+        e.preventDefault();
+        const form = document.getElementById('checkoutForm');
+        const btn = document.getElementById('btnCheckoutSubmit');
+        const text = document.getElementById('btnCheckoutText');
+        const statusBox = document.getElementById('orderStatusBox');
+        const statusMsg = document.getElementById('orderStatusMessage');
+
+        btn.disabled = true;
+        btn.classList.add('opacity-60', 'cursor-not-allowed');
+        text.textContent = 'Menerbitkan Order Number...';
+
+        statusBox.classList.remove('hidden');
+        statusMsg.textContent = 'Sedang membuat pesanan resmi dan menyiapkan Midtrans...';
+
+        const formData = new FormData(form);
+
+        try {
+            const response = await fetch("{{ route('marketplace.checkout') }}", {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: formData
+            });
+
+            const data = await response.json();
+
+            if (!response.ok || !data.success) {
+                alert(data.message || 'Terjadi kendala saat membuat pesanan.');
+                resetSubmitButton();
+                statusBox.classList.add('hidden');
+                return;
+            }
+
+            statusMsg.innerHTML = `Nomor Pesanan: <strong>#${data.order_number}</strong> berhasil dibuat! Membuka Midtrans...`;
+
+            // If Snap Token is present and snap SDK is loaded
+            if (data.snap_token && window.snap) {
+                window.snap.pay(data.snap_token, {
+                    onSuccess: function(result) {
+                        statusMsg.textContent = 'Pembayaran berhasil! Mengalihkan ke invoice pesanan...';
+                        fetch(`/marketplace/order/${data.order_number}/mark-paid`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json',
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                            },
+                            body: JSON.stringify({
+                                transaction_status: result.transaction_status || 'settlement',
+                                transaction_id: result.transaction_id || '',
+                                payment_type: result.payment_type || 'midtrans',
+                            })
+                        }).finally(() => {
+                            window.location.href = data.redirect_url;
+                        });
+                    },
+                    onPending: function(result) {
+                        window.location.href = data.redirect_url + '?status=pending';
+                    },
+                    onError: function(result) {
+                        alert('Pembayaran gagal atau dibatalkan.');
+                        window.location.href = data.redirect_url;
+                    },
+                    onClose: function() {
+                        // When user closes the modal without completing
+                        window.location.href = data.redirect_url;
+                    }
+                });
+            } else {
+                // Fallback redirect
+                window.location.href = data.redirect_url;
+            }
+
+        } catch (error) {
+            console.error(error);
+            alert('Terjadi kesalahan jaringan saat memproses pesanan.');
+            resetSubmitButton();
+            statusBox.classList.add('hidden');
+        }
+    }
+
+    async function payPendingOrder(orderNumber) {
+        try {
+            const res = await fetch(`/marketplace/order/${orderNumber}/snap-token`);
+            const data = await res.json();
+
+            if (data.success && data.snap_token && window.snap) {
+                window.snap.pay(data.snap_token, {
+                    onSuccess: function(result) {
+                        fetch(`/marketplace/order/${orderNumber}/mark-paid`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json',
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                            },
+                            body: JSON.stringify({
+                                transaction_status: result.transaction_status || 'settlement',
+                                transaction_id: result.transaction_id || '',
+                                payment_type: result.payment_type || 'midtrans',
+                            })
+                        }).finally(() => {
+                            window.location.reload();
+                        });
+                    },
+                    onPending: function(result) {
+                        window.location.reload();
+                    },
+                    onError: function(result) {
+                        alert('Gagal menyelesaikan pembayaran.');
+                    },
+                    onClose: function() {
+                        window.location.reload();
+                    }
+                });
+            } else {
+                window.location.href = `/marketplace/order/${orderNumber}`;
+            }
+        } catch (e) {
+            window.location.href = `/marketplace/order/${orderNumber}`;
+        }
     }
 </script>
 @endsection

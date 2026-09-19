@@ -82,6 +82,11 @@ class User extends Authenticatable
         return $this->hasMany(MarketplaceOrder::class)->latest();
     }
 
+    public function membershipOrders(): HasMany
+    {
+        return $this->hasMany(MembershipOrder::class)->latest();
+    }
+
     /**
      * Add Eco-Points to user balance and log transaction.
      */

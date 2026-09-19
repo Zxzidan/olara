@@ -30,11 +30,46 @@
     <!-- Shopee-style Tracking Stepper Card -->
     <div class="bg-white dark:bg-gray-800 rounded-3xl p-6 sm:p-8 shadow-sm border border-gray-200 dark:border-gray-700 space-y-8">
         
+        <!-- Pending Payment Callout if not yet paid -->
+        @if($order->isPending())
+            <div class="p-5 rounded-2xl bg-amber-50 dark:bg-amber-950/70 border-2 border-amber-400 text-amber-900 dark:text-amber-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm">
+                <div class="space-y-1">
+                    <div class="flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-ping"></span>
+                        <h4 class="text-xs font-extrabold uppercase tracking-wider text-amber-800 dark:text-amber-300">Menunggu Pembayaran Midtrans</h4>
+                    </div>
+                    <p class="text-xs text-amber-800 dark:text-amber-300">
+                        Nomor Pesanan <strong>#{{ $order->order_number }}</strong> berhasil diterbitkan. Silakan bayar sebesar <strong>Rp {{ number_format($order->grand_total ?? $order->total_price) }}</strong> via Midtrans.
+                    </p>
+                </div>
+                <div class="flex items-center gap-2 shrink-0">
+                    <button type="button" onclick="triggerMidtransPayment()" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white text-xs font-extrabold shadow-md hover:scale-105 active:scale-95 transition flex items-center gap-2">
+                        <i data-lucide="credit-card" class="w-4 h-4 text-emerald-200"></i> Bayar Sekarang (Midtrans)
+                    </button>
+                </div>
+            </div>
+        @else
+            <div class="p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 flex items-center justify-between text-xs">
+                <div class="flex items-center gap-2 font-bold">
+                    <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i>
+                    <span>Pembayaran Terverifikasi Lunas melalui {{ $order->payment_method ?? 'Midtrans' }}</span>
+                </div>
+                @if($order->transaction_id)
+                    <span class="text-[11px] font-mono text-emerald-600 dark:text-emerald-400">ID: {{ $order->transaction_id }}</span>
+                @endif
+            </div>
+        @endif
+
         <!-- Order Status Header -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100 dark:border-gray-700 pb-6">
             <div>
                 <div class="flex items-center gap-2 mb-1.5">
-                    @if($order->shipping_status === 'diproses')
+                    @if($order->isPending())
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold bg-amber-100 text-amber-800 dark:bg-amber-950/80 dark:text-amber-300">
+                            <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+                            MENUNGGU PEMBAYARAN
+                        </span>
+                    @elseif($order->shipping_status === 'diproses')
                         <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold bg-amber-100 text-amber-800 dark:bg-amber-950/80 dark:text-amber-300">
                             <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
                             SEDANG DIKEMAS PENJUAL
@@ -251,20 +286,28 @@
                             <th class="p-3">Kategori & Grade</th>
                             <th class="p-3 text-right">Harga / kg</th>
                             <th class="p-3 text-right">Kuantitas</th>
-                            <th class="p-3 text-right">Total Tagihan</th>
+                            <th class="p-3 text-right">Total Subtotal</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
+                        @php
+                            $firstItem = $order->items[0] ?? null;
+                            $itemName = $firstItem['name'] ?? ($order->product->name ?? 'Material Olahan Daur Ulang');
+                            $itemGrade = $firstItem['grade'] ?? ($order->product->grade ?? 'Standar Industri');
+                            $itemPrice = $firstItem['price'] ?? ($order->price_per_kg ?? 0);
+                            $itemQty = $firstItem['qty_kg'] ?? ($order->quantity_kg ?? 50);
+                            $itemTotal = $firstItem['total'] ?? ($order->subtotal ?? $order->total_price);
+                        @endphp
                         <tr>
                             <td class="p-3 font-bold text-gray-900 dark:text-white">
-                                {{ $order->product->name ?? 'Material Olahan Daur Ulang' }}
+                                {{ $itemName }}
                             </td>
                             <td class="p-3 text-gray-500 dark:text-gray-400">
-                                {{ $order->product->category ?? 'Material' }} ({{ $order->product->grade ?? 'Standard' }})
+                                {{ $itemGrade }}
                             </td>
-                            <td class="p-3 text-right tabular-nums">Rp {{ number_format($order->price_per_kg) }}</td>
-                            <td class="p-3 text-right font-bold tabular-nums">{{ number_format($order->quantity_kg) }} kg</td>
-                            <td class="p-3 text-right font-extrabold text-emerald-600 dark:text-emerald-400 tabular-nums">Rp {{ number_format($order->total_price) }}</td>
+                            <td class="p-3 text-right tabular-nums">Rp {{ number_format($itemPrice) }}</td>
+                            <td class="p-3 text-right font-bold tabular-nums">{{ number_format($itemQty) }} kg</td>
+                            <td class="p-3 text-right font-extrabold text-emerald-600 dark:text-emerald-400 tabular-nums">Rp {{ number_format($itemTotal) }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -278,26 +321,31 @@
                 <div class="bg-gray-50 dark:bg-gray-750 p-4 rounded-xl border border-gray-100 dark:border-gray-700 space-y-1">
                     <p class="font-bold text-gray-900 dark:text-white">{{ $order->recipient_name ?? Auth::user()->name }}</p>
                     <p class="text-gray-600 dark:text-gray-300 leading-relaxed">{{ $order->shipping_address }}</p>
-                    <p class="text-[11px] text-gray-400 pt-1">Metode Pembayaran: <strong>{{ $order->payment_method }}</strong></p>
+                    <p class="text-[11px] text-gray-400 pt-1">Metode Pembayaran: <strong>{{ $order->payment_method ?? 'Midtrans Digital' }}</strong></p>
+                    <p class="text-[11px] text-gray-400">Status Pembayaran: <strong class="{{ $order->isPaid() ? 'text-emerald-600 dark:text-emerald-400' : 'text-amber-600' }}">{{ $order->isPaid() ? 'Lunas' : 'Menunggu Pembayaran' }}</strong></p>
                 </div>
             </div>
 
             <div class="space-y-2 text-xs divide-y divide-gray-100 dark:divide-gray-700">
                 <div class="flex items-center justify-between pt-1">
                     <span class="text-gray-500">Subtotal Produk:</span>
-                    <span class="font-bold text-gray-800 dark:text-gray-200 tabular-nums">Rp {{ number_format($order->total_price) }}</span>
+                    <span class="font-bold text-gray-800 dark:text-gray-200 tabular-nums">Rp {{ number_format($order->subtotal ?? $order->total_price) }}</span>
                 </div>
                 <div class="flex items-center justify-between pt-2">
-                    <span class="text-gray-500">Ongkos Kirim Logistik:</span>
-                    <span class="font-bold text-emerald-600 dark:text-emerald-400">Gratis (Subsidi Eco)</span>
+                    <span class="text-gray-500">Pajak PPN 10%:</span>
+                    <span class="font-bold text-gray-800 dark:text-gray-200 tabular-nums">Rp {{ number_format($order->ppn_amount ?? round(($order->subtotal ?? $order->total_price) * 0.1)) }}</span>
                 </div>
                 <div class="flex items-center justify-between pt-2">
-                    <span class="text-gray-500">Reward Eco-Points:</span>
-                    <span class="font-bold text-emerald-600 dark:text-emerald-400">+{{ number_format($order->eco_points_earned) }} Pts</span>
+                    <span class="text-gray-500">Ongkos Angkut Truk Logistik:</span>
+                    <span class="font-bold text-gray-800 dark:text-gray-200 tabular-nums">Rp {{ number_format($order->shipping_fee ?? 45000) }}</span>
+                </div>
+                <div class="flex items-center justify-between pt-2">
+                    <span class="text-gray-500">Reward Cashback Eco-Points:</span>
+                    <span class="font-bold text-emerald-600 dark:text-emerald-400">+{{ number_format($order->points_earned ?? $order->eco_points_earned ?? 0) }} Pts</span>
                 </div>
                 <div class="flex items-center justify-between pt-2.5 text-sm">
-                    <span class="font-extrabold text-gray-900 dark:text-white">Total Tagihan Lunas:</span>
-                    <span class="font-black text-emerald-600 dark:text-emerald-400 tabular-nums text-lg">Rp {{ number_format($order->total_price) }}</span>
+                    <span class="font-extrabold text-gray-900 dark:text-white">Total Tagihan ({{ $order->isPaid() ? 'Lunas' : 'Belum Bayar' }}):</span>
+                    <span class="font-black text-emerald-600 dark:text-emerald-400 tabular-nums text-lg">Rp {{ number_format($order->grand_total ?? $order->total_price) }}</span>
                 </div>
             </div>
         </div>
@@ -308,6 +356,11 @@
                 <i data-lucide="printer" class="w-4 h-4"></i> Cetak Invoice & Resi
             </button>
             <div class="flex items-center gap-2">
+                @if($order->isPending())
+                    <button type="button" onclick="triggerMidtransPayment()" class="py-2.5 px-5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white text-xs font-extrabold shadow-md transition flex items-center gap-2">
+                        <i data-lucide="zap" class="w-4 h-4 text-amber-300"></i> Bayar Sekarang (Midtrans)
+                    </button>
+                @endif
                 <a href="{{ route('marketplace.orders') }}" class="py-2.5 px-4 rounded-xl bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 text-xs font-bold transition">
                     Lihat Semua Pesanan
                 </a>
@@ -325,4 +378,76 @@
     </div>
 
 </div>
+
+<script>
+    const orderNumber = "{{ $order->order_number }}";
+    const initialSnapToken = "{{ session('snap_token', $order->snap_token) }}";
+    const isPending = {{ $order->isPending() ? 'true' : 'false' }};
+
+    function triggerMidtransPayment() {
+        if (!window.snap) {
+            alert('Midtrans Snap SDK sedang dimuat. Silakan coba sesaat lagi.');
+            return;
+        }
+
+        if (initialSnapToken) {
+            openSnap(initialSnapToken);
+        } else {
+            fetch(`/marketplace/order/${orderNumber}/snap-token`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success && data.snap_token) {
+                        openSnap(data.snap_token);
+                    } else {
+                        alert(data.message || 'Gagal memuat sesi pembayaran.');
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    alert('Terjadi kesalahan jaringan.');
+                });
+        }
+    }
+
+    function openSnap(token) {
+        window.snap.pay(token, {
+            onSuccess: function(result) {
+                fetch(`/marketplace/order/${orderNumber}/mark-paid`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify({
+                        transaction_status: result.transaction_status || 'settlement',
+                        transaction_id: result.transaction_id || '',
+                        payment_type: result.payment_type || 'midtrans',
+                    })
+                }).finally(() => {
+                    window.location.reload();
+                });
+            },
+            onPending: function(result) {
+                window.location.reload();
+            },
+            onError: function(result) {
+                alert('Pembayaran gagal atau kedaluwarsa.');
+                window.location.reload();
+            },
+            onClose: function() {
+                // User closed popup
+            }
+        });
+    }
+
+    // Auto trigger snap if redirected from checkout with fresh snap token
+    @if(session('snap_token') && $order->isPending())
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                triggerMidtransPayment();
+            }, 600);
+        });
+    @endif
+</script>
 @endsection

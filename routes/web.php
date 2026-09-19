@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\MarketplaceController;
 use App\Http\Controllers\MembershipController;
+use App\Http\Controllers\MidtransWebhookController;
 use App\Http\Controllers\PickupController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RewardController;
@@ -24,7 +25,10 @@ Route::post('/register', [AuthController::class, 'register'])->name('register.su
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/demo-login', [AuthController::class, 'demoLogin'])->name('demo.login');
 
-// 3. Protected Application Routes (User Must Login to Access)
+// 3. Midtrans Payment Webhook (Publicly Accessible, Signature Verified)
+Route::post('/api/midtrans/notification', [MidtransWebhookController::class, 'handleNotification'])->name('midtrans.notification');
+
+// 4. Protected Application Routes (User Must Login to Access)
 Route::middleware('auth')->group(function () {
     // Dashboard
     Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
@@ -37,6 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/pickup', [PickupController::class, 'index'])->name('pickup.index');
     Route::post('/pickup', [PickupController::class, 'store'])->name('pickup.store');
     Route::get('/pickup/{code}', [PickupController::class, 'show'])->name('pickup.show');
+    Route::post('/pickup/{code}/mark-paid', [PickupController::class, 'markPaid'])->name('pickup.markPaid');
 
     // Drop-off Map & Directory
     Route::get('/dropoff', [DropoffController::class, 'index'])->name('dropoff.index');
@@ -53,12 +58,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/marketplace/orders', [MarketplaceController::class, 'orders'])->name('marketplace.orders');
     Route::post('/marketplace/checkout', [MarketplaceController::class, 'checkout'])->name('marketplace.checkout');
     Route::get('/marketplace/order/{orderNumber}', [MarketplaceController::class, 'orderDetail'])->name('marketplace.orderDetail');
+    Route::get('/marketplace/order/{orderNumber}/snap-token', [MarketplaceController::class, 'getSnapToken'])->name('marketplace.snapToken');
+    Route::post('/marketplace/order/{orderNumber}/mark-paid', [MarketplaceController::class, 'markAsPaid'])->name('marketplace.markPaid');
     Route::post('/marketplace/order/{orderNumber}/confirm', [MarketplaceController::class, 'confirmDelivery'])->name('marketplace.confirmDelivery');
     Route::post('/marketplace/order/{orderNumber}/status', [MarketplaceController::class, 'updateShippingStatus'])->name('marketplace.updateStatus');
 
     // Membership Plans
     Route::get('/membership', [MembershipController::class, 'index'])->name('membership.index');
     Route::post('/membership/upgrade', [MembershipController::class, 'upgrade'])->name('membership.upgrade');
+    Route::post('/membership/confirm/{orderNumber}', [MembershipController::class, 'confirmPayment'])->name('membership.confirm');
 
     // Profile & Account Settings
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

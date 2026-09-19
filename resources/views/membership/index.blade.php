@@ -161,16 +161,29 @@
 
             <div class="pt-4">
                 @if($user && $user->membership_tier === 'premium')
-                    <div class="p-3 rounded-xl bg-amber-50 border border-amber-200 text-center text-xs font-bold text-amber-900">
-                        ✓ Anda sudah menikmati seluruh fasilitas Premium
+                    <div class="p-3 rounded-xl bg-amber-50 border border-amber-200 text-center text-xs font-bold text-amber-900 flex items-center justify-center gap-2">
+                        <i data-lucide="check-circle-2" class="w-4 h-4 text-amber-600"></i>
+                        <span>Anda sudah menikmati seluruh fasilitas Olara Premium</span>
                     </div>
                 @else
-                    <form action="{{ route('membership.upgrade') }}" method="POST">
+                    <form id="formUpgradePremium" onsubmit="handleUpgradePremium(event)" class="space-y-3">
                         @csrf
                         <input type="hidden" name="tier" value="premium" />
-                        <button type="submit" class="w-full py-3.5 px-4 rounded-xl bg-[#168A5B] hover:bg-[#0F6B47] text-white text-sm font-bold shadow-md transition flex items-center justify-center gap-2">
-                            <i data-lucide="zap" class="w-4 h-4"></i> Upgrade ke Premium Sekarang (+100 Pts Bonus)
+                        <input type="hidden" name="plan_type" id="inputPlanType" value="monthly" />
+
+                        <!-- Order & Payment Status Badge -->
+                        <div id="memStatusBox" class="hidden p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-900 font-semibold flex items-center gap-2">
+                            <i data-lucide="loader" class="w-4 h-4 text-emerald-600 animate-spin shrink-0"></i>
+                            <span id="memStatusMsg">Menerbitkan nomor pesanan membership dan menghubungkan Midtrans...</span>
+                        </div>
+
+                        <button type="submit" id="btnUpgradeSubmit" class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-[#168A5B] to-[#0F6B47] hover:from-[#0F6B47] hover:to-[#0B4F38] text-white text-sm font-extrabold shadow-lg shadow-emerald-600/25 hover:scale-[1.01] active:scale-[0.99] transition flex items-center justify-center gap-2">
+                            <i data-lucide="zap" class="w-4 h-4 text-amber-300"></i>
+                            <span id="btnUpgradeText">Upgrade ke Premium Sekarang (+100 Pts Bonus)</span>
                         </button>
+                        <p class="text-[11px] text-center text-gray-400">
+                            Pembayaran resmi otomatis via gerbang Midtrans (QRIS, VA Bank, E-Wallet).
+                        </p>
                     </form>
                 @endif
             </div>
@@ -207,7 +220,13 @@
 </div>
 
 <script>
+    let currentCycle = 'monthly';
+
     function setBilling(cycle) {
+        currentCycle = cycle;
+        const input = document.getElementById('inputPlanType');
+        if (input) input.value = cycle;
+
         const btnMonthly = document.getElementById('btnMonthly');
         const btnYearly = document.getElementById('btnYearly');
         const priceDisplay = document.getElementById('priceDisplay');
@@ -223,6 +242,96 @@
             btnMonthly.className = 'py-1.5 px-4 rounded-xl text-xs font-bold text-[#66716B] hover:text-[#1B211E] transition';
             priceDisplay.textContent = 'Rp 390.000';
             cycleDisplay.textContent = '/ tahun (hemat 2 bulan)';
+        }
+    }
+
+    async function handleUpgradePremium(e) {
+        e.preventDefault();
+        const btn = document.getElementById('btnUpgradeSubmit');
+        const text = document.getElementById('btnUpgradeText');
+        const statusBox = document.getElementById('memStatusBox');
+        const statusMsg = document.getElementById('memStatusMsg');
+
+        btn.disabled = true;
+        btn.classList.add('opacity-60', 'cursor-not-allowed');
+        text.textContent = 'Menyiapkan Pembayaran Midtrans...';
+
+        statusBox.classList.remove('hidden');
+        statusMsg.textContent = 'Menerbitkan nomor pesanan resmi dan menghubungkan Midtrans...';
+
+        try {
+            const res = await fetch("{{ route('membership.upgrade') }}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({
+                    tier: 'premium',
+                    plan_type: currentCycle
+                })
+            });
+
+            const data = await res.json();
+
+            if (!res.ok || !data.success) {
+                alert(data.message || 'Terjadi kendala saat memproses upgrade.');
+                btn.disabled = false;
+                btn.classList.remove('opacity-60', 'cursor-not-allowed');
+                text.textContent = 'Upgrade ke Premium Sekarang (+100 Pts Bonus)';
+                statusBox.classList.add('hidden');
+                return;
+            }
+
+            statusMsg.innerHTML = `Nomor Pesanan: <strong>#${data.order_number}</strong> diterbitkan! Membuka Midtrans...`;
+
+            if (data.snap_token && window.snap) {
+                window.snap.pay(data.snap_token, {
+                    onSuccess: function(result) {
+                        statusMsg.textContent = 'Pembayaran berhasil! Mengaktifkan status Olara Premium...';
+                        fetch(`/membership/confirm/${data.order_number}`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json',
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                            },
+                            body: JSON.stringify({
+                                transaction_status: result.transaction_status || 'settlement',
+                                transaction_id: result.transaction_id || '',
+                                payment_type: result.payment_type || 'midtrans',
+                            })
+                        }).finally(() => {
+                            window.location.reload();
+                        });
+                    },
+                    onPending: function(result) {
+                        alert('Menunggu pembayaran Midtrans diselesaikan.');
+                        window.location.reload();
+                    },
+                    onError: function(result) {
+                        alert('Pembayaran gagal atau dibatalkan.');
+                        window.location.reload();
+                    },
+                    onClose: function() {
+                        btn.disabled = false;
+                        btn.classList.remove('opacity-60', 'cursor-not-allowed');
+                        text.textContent = 'Bayar Sekarang: #' + data.order_number;
+                        statusMsg.innerHTML = `Pesanan <strong>#${data.order_number}</strong> menunggu pembayaran. Klik tombol untuk melanjutkan.`;
+                    }
+                });
+            } else {
+                window.location.reload();
+            }
+
+        } catch (err) {
+            console.error(err);
+            alert('Terjadi kesalahan jaringan.');
+            btn.disabled = false;
+            btn.classList.remove('opacity-60', 'cursor-not-allowed');
+            text.textContent = 'Upgrade ke Premium Sekarang (+100 Pts Bonus)';
+            statusBox.classList.add('hidden');
         }
     }
 </script>

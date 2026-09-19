@@ -4,6 +4,7 @@ use App\Models\MarketplaceProduct;
 use App\Models\Reward;
 use App\Models\User;
 use Database\Seeders\OlaraDatabaseSeeder;
+use Illuminate\Support\Facades\Http;
 
 beforeEach(function () {
     $this->seed(OlaraDatabaseSeeder::class);
@@ -147,7 +148,11 @@ test('analytics page renders ecological impact and carbon calculations', functio
     $response->assertSee('kg CO₂e');
 });
 
-test('marketplace allows order checkout with 10 percent PPN and awards points', function () {
+test('marketplace allows order checkout with 10 percent PPN and generates order number', function () {
+    Http::fake([
+        'https://app.sandbox.midtrans.com/snap/v1/transactions' => Http::response(['token' => 'snap-core-test'], 200),
+    ]);
+
     $product = MarketplaceProduct::first();
     expect($product)->not->toBeNull();
 
@@ -155,16 +160,21 @@ test('marketplace allows order checkout with 10 percent PPN and awards points', 
         'product_id' => $product->id,
         'quantity_kg' => $product->min_order_kg,
         'shipping_address' => 'Gudang PT Maju Bersama, Kawasan Pulogadung, Jakarta Timur',
-        'payment_method' => 'BCA Virtual Account',
+        'payment_method' => 'Midtrans Gateway',
     ]);
 
     $order = $this->user->marketplaceOrders()->latest()->first();
     expect($order)->not->toBeNull();
     $response->assertRedirect(route('marketplace.orderDetail', $order->order_number));
     expect((float) $order->ppn_amount)->toBeGreaterThan(0);
+    expect($order->order_number)->toStartWith('ORD-');
 });
 
-test('membership upgrade switches tier and awards bonus points', function () {
+test('membership upgrade switches tier and awards bonus points upon payment confirmation', function () {
+    Http::fake([
+        'https://app.sandbox.midtrans.com/snap/v1/transactions' => Http::response(['token' => 'mem-core-test'], 200),
+    ]);
+
     expect($this->user->membership_tier)->toBe('lite');
 
     $response = $this->actingAs($this->user)->post(route('membership.upgrade'), [
@@ -172,6 +182,15 @@ test('membership upgrade switches tier and awards bonus points', function () {
     ]);
 
     $response->assertRedirect(route('membership.index'));
+
+    $memOrder = $this->user->membershipOrders()->latest()->first();
+    expect($memOrder)->not->toBeNull();
+
+    // Confirm payment
+    $confirmResponse = $this->actingAs($this->user)->post(route('membership.confirm', $memOrder->order_number), [
+        'transaction_status' => 'settlement',
+    ]);
+    $confirmResponse->assertRedirect(route('membership.index'));
 
     $this->user->refresh();
     expect($this->user->membership_tier)->toBe('premium');

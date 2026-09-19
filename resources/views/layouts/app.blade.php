@@ -34,6 +34,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Flowbite JS -->
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+    <!-- Midtrans Snap JS SDK -->
+    <script type="text/javascript" src="{{ config('midtrans.snap_js') }}" data-client-key="{{ config('midtrans.client_key') }}"></script>
 
     @stack('styles')
 </head>

@@ -4,14 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\MarketplaceOrder;
 use App\Models\MarketplaceProduct;
+use App\Services\MidtransService;
+use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class MarketplaceController extends Controller
 {
+    public function __construct(
+        protected MidtransService $midtransService
+    ) {}
+
     public function index(Request $request): View
     {
         $user = Auth::user();
@@ -33,20 +41,28 @@ class MarketplaceController extends Controller
         return view('marketplace.index', compact('products', 'user', 'selectedCategory', 'userOrders'));
     }
 
-    public function checkout(Request $request): RedirectResponse
+    /**
+     * Checkout: Generates Order Number immediately and creates Midtrans Snap Token.
+     */
+    public function checkout(Request $request): JsonResponse|RedirectResponse
     {
         $validated = $request->validate([
             'product_id' => ['required', 'exists:marketplace_products,id'],
             'quantity_kg' => ['required', 'integer', 'min:1'],
             'shipping_address' => ['required', 'string', 'min:10'],
-            'payment_method' => ['required', 'string'],
+            'payment_method' => ['nullable', 'string'],
         ]);
 
         $product = MarketplaceProduct::findOrFail($validated['product_id']);
         $user = Auth::user();
 
         if ($validated['quantity_kg'] < $product->min_order_kg) {
-            return back()->with('error', "Minimum pemesanan untuk {$product->name} adalah {$product->min_order_kg} kg.");
+            $errorMsg = "Minimum pemesanan untuk {$product->name} adalah {$product->min_order_kg} kg.";
+            if ($request->expectsJson()) {
+                return response()->json(['success' => false, 'message' => $errorMsg], 422);
+            }
+
+            return back()->with('error', $errorMsg);
         }
 
         $qty = (int) $validated['quantity_kg'];
@@ -58,10 +74,60 @@ class MarketplaceController extends Controller
         $co2Saved = round($qty * $product->co2_savings_per_kg, 2);
         $pointsEarned = (int) floor($subtotal / 10000); // 1 point per 10k purchase
 
+        // 1. Instantly generate official unique order number
         $orderNumber = 'ORD-'.date('Ym').'-'.strtoupper(Str::random(5));
-
         $trackingNumber = 'JTR-'.strtoupper(Str::random(8));
 
+        // 2. Request Midtrans Snap Token
+        $snapToken = null;
+        try {
+            $snapParams = [
+                'transaction_details' => [
+                    'order_id' => $orderNumber,
+                    'gross_amount' => (int) round($grandTotal),
+                ],
+                'customer_details' => [
+                    'first_name' => $user->name,
+                    'email' => $user->email,
+                    'phone' => $user->phone ?? '081234567890',
+                    'shipping_address' => [
+                        'first_name' => $user->name,
+                        'address' => $validated['shipping_address'],
+                        'city' => 'Jakarta',
+                        'country_code' => 'IDN',
+                    ],
+                ],
+                'item_details' => [
+                    [
+                        'id' => 'PRD-'.$product->id,
+                        'price' => (int) round($product->price_per_kg),
+                        'quantity' => $qty,
+                        'name' => mb_substr($product->name, 0, 50),
+                    ],
+                    [
+                        'id' => 'TAX-PPN',
+                        'price' => (int) round($ppn),
+                        'quantity' => 1,
+                        'name' => 'PPN 10%',
+                    ],
+                    [
+                        'id' => 'SHP-JTR',
+                        'price' => (int) round($shippingFee),
+                        'quantity' => 1,
+                        'name' => 'Ongkir Armada JNE Trucking',
+                    ],
+                ],
+            ];
+
+            $snapToken = $this->midtransService->createSnapToken($snapParams);
+        } catch (Exception $e) {
+            Log::error('Gagal generate Snap Token Midtrans saat checkout', [
+                'error' => $e->getMessage(),
+                'order_number' => $orderNumber,
+            ]);
+        }
+
+        // 3. Create Order Record with Pending status
         $order = MarketplaceOrder::create([
             'order_number' => $orderNumber,
             'user_id' => $user->id,
@@ -80,9 +146,10 @@ class MarketplaceController extends Controller
             'ppn_amount' => $ppn,
             'shipping_fee' => $shippingFee,
             'grand_total' => $grandTotal,
-            'payment_method' => $validated['payment_method'],
-            'payment_status' => 'paid',
-            'shipping_status' => 'dikirim',
+            'payment_method' => $validated['payment_method'] ?? 'Midtrans Digital Payment',
+            'payment_status' => 'pending',
+            'snap_token' => $snapToken,
+            'shipping_status' => 'diproses',
             'courier_name' => 'JNE Trucking (JTR)',
             'tracking_number' => $trackingNumber,
             'estimated_delivery_date' => now()->addDays(2)->toDateString(),
@@ -91,12 +158,142 @@ class MarketplaceController extends Controller
             'points_earned' => $pointsEarned,
         ]);
 
-        // Award cashback points
-        if ($pointsEarned > 0) {
-            $user->addPoints($pointsEarned, 'marketplace_purchase', "Cashback Poin Pesanan {$orderNumber}");
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'order_number' => $orderNumber,
+                'snap_token' => $snapToken,
+                'redirect_url' => route('marketplace.orderDetail', $order->order_number),
+                'message' => "Nomor pesanan {$orderNumber} berhasil dibuat.",
+            ]);
         }
 
-        return redirect()->route('marketplace.orderDetail', $order->order_number)->with('success', "Pesanan {$orderNumber} berhasil dibuat dan lunas! Anda mendapatkan +{$pointsEarned} Eco-Points.");
+        return redirect()->route('marketplace.orderDetail', $order->order_number)
+            ->with('snap_token', $snapToken)
+            ->with('info', "Nomor pesanan {$orderNumber} berhasil dibuat! Silakan selesaikan pembayaran via Midtrans.");
+    }
+
+    /**
+     * Re-fetch or generate Snap Token for an existing pending order.
+     */
+    public function getSnapToken(string $orderNumber): JsonResponse
+    {
+        $order = MarketplaceOrder::where('order_number', $orderNumber)->firstOrFail();
+
+        if ($order->isPaid()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Pesanan ini sudah lunas.',
+                'is_paid' => true,
+            ]);
+        }
+
+        if ($order->snap_token) {
+            return response()->json([
+                'success' => true,
+                'snap_token' => $order->snap_token,
+                'order_number' => $order->order_number,
+            ]);
+        }
+
+        // Generate new snap token if not exists
+        try {
+            $user = $order->user;
+            $firstItem = $order->items[0] ?? [];
+            $snapParams = [
+                'transaction_details' => [
+                    'order_id' => $order->order_number,
+                    'gross_amount' => (int) round($order->grand_total),
+                ],
+                'customer_details' => [
+                    'first_name' => $user?->name ?? 'Pelanggan Olara',
+                    'email' => $user?->email ?? 'customer@olara.id',
+                    'phone' => $user?->phone ?? '081234567890',
+                ],
+                'item_details' => [
+                    [
+                        'id' => 'ORD-'.($firstItem['product_id'] ?? 1),
+                        'price' => (int) round($firstItem['price'] ?? $order->subtotal),
+                        'quantity' => (int) ($firstItem['qty_kg'] ?? 1),
+                        'name' => mb_substr($firstItem['name'] ?? 'Material Olahan Daur Ulang', 0, 50),
+                    ],
+                    [
+                        'id' => 'TAX-PPN',
+                        'price' => (int) round($order->ppn_amount),
+                        'quantity' => 1,
+                        'name' => 'PPN 10%',
+                    ],
+                    [
+                        'id' => 'SHP-JTR',
+                        'price' => (int) round($order->shipping_fee),
+                        'quantity' => 1,
+                        'name' => 'Ongkir Armada JNE Trucking',
+                    ],
+                ],
+            ];
+
+            $token = $this->midtransService->createSnapToken($snapParams);
+            $order->update(['snap_token' => $token]);
+
+            return response()->json([
+                'success' => true,
+                'snap_token' => $token,
+                'order_number' => $order->order_number,
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal membuat sesi pembayaran: '.$e->getMessage(),
+            ], 500);
+        }
+    }
+
+    /**
+     * Mark order as paid upon client Snap callback or verify with Midtrans.
+     */
+    public function markAsPaid(Request $request, string $orderNumber): JsonResponse|RedirectResponse
+    {
+        $order = MarketplaceOrder::where('order_number', $orderNumber)->firstOrFail();
+
+        // Check with Midtrans Core API if possible
+        $statusData = $this->midtransService->getTransactionStatus($orderNumber);
+        $txStatus = $statusData['transaction_status'] ?? $request->input('transaction_status', 'settlement');
+        $fraudStatus = $statusData['fraud_status'] ?? $request->input('fraud_status', 'accept');
+        $paymentType = $statusData['payment_type'] ?? $request->input('payment_type', 'midtrans');
+        $txId = $statusData['transaction_id'] ?? $request->input('transaction_id');
+
+        $isSuccess = ($txStatus === 'settlement')
+            || ($txStatus === 'capture' && $fraudStatus === 'accept')
+            || ($request->input('payment_status') === 'success');
+
+        if ($isSuccess) {
+            $order->update([
+                'payment_status' => 'paid',
+                'payment_type' => $paymentType,
+                'transaction_id' => $txId ?? $order->transaction_id,
+                'shipping_status' => 'diproses',
+            ]);
+
+            // Award points
+            if ($order->points_earned > 0 && $order->user) {
+                $order->user->addPoints(
+                    $order->points_earned,
+                    'marketplace_purchase',
+                    "Cashback Poin Pesanan {$order->order_number}"
+                );
+            }
+        }
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'payment_status' => $order->payment_status,
+                'message' => 'Status pembayaran berhasil diperbarui.',
+            ]);
+        }
+
+        return redirect()->route('marketplace.orderDetail', $order->order_number)
+            ->with('success', "Pembayaran untuk pesanan {$orderNumber} berhasil diverifikasi! Pesanan Anda kini sedang dikemas.");
     }
 
     public function orders(Request $request): View

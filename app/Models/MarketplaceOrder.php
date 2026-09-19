@@ -21,6 +21,10 @@ class MarketplaceOrder extends Model
         'grand_total',
         'payment_method',
         'payment_status',
+        'snap_token',
+        'payment_type',
+        'transaction_id',
+        'payment_response',
         'co2_saved_kg',
         'points_earned',
         'shipping_status',
@@ -42,10 +46,21 @@ class MarketplaceOrder extends Model
             'grand_total' => 'decimal:2',
             'co2_saved_kg' => 'decimal:2',
             'points_earned' => 'integer',
+            'payment_response' => 'array',
             'estimated_delivery_date' => 'date',
             'delivered_at' => 'datetime',
             'completed_at' => 'datetime',
         ];
+    }
+
+    public function isPaid(): bool
+    {
+        return in_array($this->payment_status, ['paid', 'settlement', 'capture']);
+    }
+
+    public function isPending(): bool
+    {
+        return in_array($this->payment_status, ['pending', 'unpaid']);
     }
 
     public function user(): BelongsTo
