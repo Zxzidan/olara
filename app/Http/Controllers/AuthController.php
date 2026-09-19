@@ -23,20 +23,26 @@ class AuthController extends Controller
 
     public function login(Request $request): RedirectResponse
     {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+        try {
+            $credentials = $request->validate([
+                'email' => ['required', 'email'],
+                'password' => ['required'],
+            ]);
 
-        if (Auth::attempt($credentials, $request->boolean('remember'))) {
-            $request->session()->regenerate();
+            if (Auth::attempt($credentials, $request->boolean('remember'))) {
+                $request->session()->regenerate();
 
-            return redirect()->intended(route('home'))->with('success', 'Selamat datang kembali di OLARA!');
+                return redirect()->intended(route('home'))->with('success', 'Selamat datang kembali di OLARA!');
+            }
+
+            return back()->withErrors([
+                'email' => 'Surel atau kata sandi yang Anda masukkan tidak sesuai.',
+            ])->onlyInput('email');
+        } catch (\Throwable $e) {
+            return back()->withErrors([
+                'email' => 'Gagal masuk: '.$e->getMessage(),
+            ])->onlyInput('email');
         }
-
-        return back()->withErrors([
-            'email' => 'Surel atau kata sandi yang Anda masukkan tidak sesuai.',
-        ])->onlyInput('email');
     }
 
     public function register(Request $request): RedirectResponse

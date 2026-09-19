@@ -56,9 +56,15 @@ class HomeController extends Controller
         $pointsRemaining = max(0, $nextTierPoints - $points);
 
         // Recent activities & transactions
-        $recentTransactions = $user ? $user->pointTransactions()->take(6)->get() : collect();
-        $activePickup = $user ? $user->pickupRequests()->whereIn('status', ['confirmed', 'driver_assigned', 'on_the_way'])->first() : null;
-        $recentAnalysis = $user ? $user->wasteAnalyses()->take(3)->get() : collect();
+        try {
+            $recentTransactions = $user ? $user->pointTransactions()->take(6)->get() : collect();
+            $activePickup = $user ? $user->pickupRequests()->whereIn('status', ['confirmed', 'driver_assigned', 'on_the_way'])->first() : null;
+            $recentAnalysis = $user ? $user->wasteAnalyses()->take(3)->get() : collect();
+        } catch (\Throwable $e) {
+            $recentTransactions = collect();
+            $activePickup = null;
+            $recentAnalysis = collect();
+        }
 
         // Eco impact metrics for dashboard
         $totalWasteManaged = 148.5; // kg
