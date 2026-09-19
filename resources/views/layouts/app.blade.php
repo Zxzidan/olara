@@ -213,6 +213,10 @@
                 <i data-lucide="help-circle" class="mx-auto mb-1 w-6 h-6 text-blue-500 group-hover:scale-110 transition-transform"></i>
                 <div class="text-xs font-semibold text-gray-900 dark:text-white">Panduan</div>
               </button>
+              <a href="{{ route('profile.edit') }}" class="block p-3 text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 group">
+                <i data-lucide="user-pen" class="mx-auto mb-1 w-6 h-6 text-emerald-500 group-hover:scale-110 transition-transform"></i>
+                <div class="text-xs font-semibold text-gray-900 dark:text-white">Edit Profil</div>
+              </a>
             </div>
           </div>
 
@@ -254,6 +258,11 @@
               <li>
                 <a href="{{ route('home') }}" class="flex items-center gap-2 py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                   <i data-lucide="layout-dashboard" class="w-4 h-4 text-gray-400"></i> Dashboard Utama
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('profile.edit') }}" class="flex items-center gap-2 py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white font-medium text-emerald-600 dark:text-emerald-400">
+                  <i data-lucide="user-pen" class="w-4 h-4 text-emerald-500"></i> Edit Profil
                 </a>
               </li>
               <li>
@@ -461,6 +470,15 @@
         <!-- Bottom Secondary Links -->
         <ul class="pt-4 mt-4 space-y-1.5 border-t border-stone-200/80 dark:border-stone-800">
           <li>
+            <a
+              href="{{ route('profile.edit') }}"
+              class="flex items-center p-2 text-sm rounded-xl transition-colors group {{ request()->routeIs('profile.*') ? 'bg-[#FFE4E1]/60 text-stone-900 dark:bg-stone-800 dark:text-white font-bold shadow-xs' : 'text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 hover:text-stone-900 dark:hover:text-white' }}"
+            >
+              <i data-lucide="user-pen" class="w-5 h-5 {{ request()->routeIs('profile.*') ? 'text-[#cb3930] dark:text-[#ffb7b2]' : 'text-stone-400 group-hover:text-stone-700 dark:group-hover:text-stone-200' }}"></i>
+              <span class="ml-3">Edit Profil</span>
+            </a>
+          </li>
+          <li>
             <button
               type="button"
               onclick="openOnboardingModal(); closeMobileSidebar();"
@@ -489,7 +507,7 @@
       <!-- Bottom Sticky Sidenav Toolbar -->
       <div class="hidden absolute bottom-0 left-0 justify-between items-center px-4 py-3 w-full lg:flex bg-[#FDFCF8] dark:bg-stone-900 border-t border-stone-200/80 dark:border-stone-800 z-20">
         <div class="flex items-center gap-2">
-          <a href="{{ route('membership.index') }}" class="p-1.5 text-stone-500 rounded hover:text-stone-900 dark:text-stone-400 dark:hover:text-white hover:bg-stone-100 dark:hover:bg-stone-800" title="Pengaturan Akun">
+          <a href="{{ route('profile.edit') }}" class="p-1.5 text-stone-500 rounded hover:text-stone-900 dark:text-stone-400 dark:hover:text-white hover:bg-stone-100 dark:hover:bg-stone-800" title="Edit Profil & Pengaturan Akun">
             <i data-lucide="settings" class="w-4 h-4"></i>
           </a>
           <button type="button" onclick="openOnboardingModal()" class="p-1.5 text-stone-500 rounded hover:text-stone-900 dark:text-stone-400 dark:hover:text-white hover:bg-stone-100 dark:hover:bg-stone-800" title="Bantuan">

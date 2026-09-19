@@ -151,12 +151,12 @@
                         <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
                     </a>
                 @else
-                    <a href="{{ route('login') }}" class="hidden sm:inline-block text-xs font-semibold text-[#292524] hover:text-stone-900 px-2.5 py-2 transition-colors">
+                    <a href="{{ route('login') }}" class="text-xs font-semibold text-[#292524] hover:text-stone-900 px-3 py-2 transition-colors">
                         Masuk
                     </a>
-                    <a href="{{ route('demo.login') }}" class="inline-flex items-center gap-1 sm:gap-1.5 bg-[#FFB7B2] hover:bg-[#FF9E98] text-[#292524] px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs font-bold transition-all shadow-soft group">
-                        <span>Demo</span>
-                        <i data-lucide="sparkles" class="w-3.5 h-3.5 group-hover:rotate-12 transition-transform"></i>
+                    <a href="{{ route('register') }}" class="inline-flex items-center gap-1.5 bg-[#FFB7B2] hover:bg-[#FF9E98] text-[#292524] px-4 py-2 rounded-full text-xs font-bold transition-all shadow-soft group">
+                        <span>Daftar Sekarang</span>
+                        <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform"></i>
                     </a>
                 @endauth
 
@@ -265,7 +265,7 @@
 
             <!-- Dual CTA Buttons -->
             <div class="mt-6 sm:mt-7 flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto px-4 sm:px-0">
-                <a href="{{ route('demo.login') }}" class="w-full sm:w-auto px-7 py-2.5 sm:py-3 rounded-full bg-[#FFB7B2] hover:bg-[#FF9E98] text-[#292524] font-bold text-sm shadow-soft transition-all transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2">
+                <a href="{{ Auth::check() ? route('home') : route('register') }}" class="w-full sm:w-auto px-7 py-2.5 sm:py-3 rounded-full bg-[#FFB7B2] hover:bg-[#FF9E98] text-[#292524] font-bold text-sm shadow-soft transition-all transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2">
                     <span>Mulai Gratis</span>
                     <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
                 </a>
@@ -1520,12 +1520,7 @@
                     </button>
                 </form>
 
-                <div class="mt-5 flex items-center justify-center gap-5 text-xs text-[#78716C]">
-                    <a href="{{ route('demo.login') }}" class="font-bold text-[#292524] hover:underline flex items-center gap-1">
-                        <i data-lucide="play-circle" class="w-3.5 h-3.5 text-[#cb3930]"></i>
-                        <span>Coba Akun Demo (Zidan)</span>
-                    </a>
-                    <span>•</span>
+                <div class="mt-5 flex items-center justify-center text-xs text-[#78716C]">
                     <a href="{{ route('login') }}" class="hover:underline">Sudah punya akun? Masuk</a>
                 </div>
             </div>

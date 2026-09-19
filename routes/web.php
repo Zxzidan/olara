@@ -9,6 +9,7 @@ use App\Http\Controllers\LandingController;
 use App\Http\Controllers\MarketplaceController;
 use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\PickupController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RewardController;
 use Illuminate\Support\Facades\Route;
 
@@ -58,4 +59,9 @@ Route::middleware('auth')->group(function () {
     // Membership Plans
     Route::get('/membership', [MembershipController::class, 'index'])->name('membership.index');
     Route::post('/membership/upgrade', [MembershipController::class, 'upgrade'])->name('membership.upgrade');
+
+    // Profile & Account Settings
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password');
 });
