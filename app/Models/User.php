@@ -88,6 +88,7 @@ class User extends Authenticatable
         $adjustedAmount = (int) round($amount * $multiplier);
 
         $this->increment('eco_points', $adjustedAmount);
+        $this->refresh();
         $this->updateRecyclerLevel();
 
         return $this->pointTransactions()->create([

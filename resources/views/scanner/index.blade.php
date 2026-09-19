@@ -26,7 +26,7 @@
 
         <div class="flex items-center gap-2">
             <span class="text-xs font-bold text-[#0B4F38] bg-[#EEF9F2] border border-[#BFE7D0] px-3 py-1.5 rounded-xl flex items-center gap-1.5">
-                <i data-lucide="award" class="w-4 h-4 text-[#168A5B]"></i> Unggah foto timbangan: +10 Poin
+                <i data-lucide="award" class="w-4 h-4 text-[#168A5B]"></i> Simpan Scan: +25 Poin (Bonus Timbangan: +10 Poin)
             </span>
         </div>
     </div>
@@ -301,7 +301,7 @@
                     <div class="p-3 rounded-xl border border-[#DDE3DF] bg-[#F7F8F6] space-y-2">
                         <label class="flex items-center gap-2 cursor-pointer">
                             <input type="checkbox" name="has_scale_photo" id="scalePhotoCheck" class="w-4 h-4 text-[#168A5B] rounded border-gray-300 focus:ring-[#168A5B]" onchange="toggleScaleBonus(this)" />
-                            <span class="text-xs font-bold text-[#1B211E]">Unggah Bukti Timbangan Digital (+10 Poin)</span>
+                            <span class="text-xs font-bold text-[#1B211E]">Unggah Bukti Timbangan Digital (+10 Poin Tambahan)</span>
                         </label>
                         <p class="text-[11px] text-[#66716B] pl-6">
                             Verifikasi foto timbangan untuk meningkatkan akurasi data dan otomatis memperoleh bonus Eco-Point tambahan.
@@ -318,8 +318,8 @@
                             <button type="button" onclick="submitScanForm('dropoff')" class="py-2.5 px-3 rounded-xl border border-[#BFE7D0] bg-[#EEF9F2] hover:bg-[#DDF4E8] text-[#0B4F38] text-xs font-bold transition flex items-center justify-center gap-1.5">
                                 <i data-lucide="map-pin" class="w-3.5 h-3.5 text-[#168A5B]"></i> Setor ke Mitra
                             </button>
-                            <button type="button" onclick="submitScanForm('save')" class="py-2.5 px-3 rounded-xl border border-[#DDE3DF] bg-white hover:bg-gray-50 text-gray-700 text-xs font-bold transition flex items-center justify-center gap-1.5">
-                                <i data-lucide="bookmark" class="w-3.5 h-3.5"></i> Simpan Hasil
+                            <button type="button" onclick="submitScanForm('save')" class="py-2.5 px-3 rounded-xl border border-[#BFE7D0] bg-[#EEF9F2] hover:bg-[#DDF4E8] text-[#0B4F38] text-xs font-bold transition flex items-center justify-center gap-1.5 shadow-sm">
+                                <i data-lucide="bookmark-plus" class="w-3.5 h-3.5 text-[#168A5B]"></i> Simpan Hasil (+25 Pts)
                             </button>
                         </div>
                     </div>
