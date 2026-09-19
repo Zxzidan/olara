@@ -208,7 +208,7 @@
 
                 <!-- Incentive Eco-Point Notice -->
                 <div class="p-3.5 rounded-2xl bg-[#EEF9F2] border border-[#BFE7D0] flex items-center gap-3">
-                    <span class="text-xl">🌿</span>
+                    <i data-lucide="coins" class="w-5 h-5 text-[#168A5B] shrink-0"></i>
                     <p class="text-[11px] text-[#0B4F38] leading-tight">
                         Setelah material ditimbang oleh kurir, Anda akan mendapatkan <strong>Eco-Points</strong> yang langsung dikreditkan ke dompet Anda!
                     </p>

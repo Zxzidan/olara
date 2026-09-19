@@ -47,7 +47,7 @@
             <!-- Tab: Diproses / Dikemas -->
             <a href="{{ route('marketplace.orders', ['status' => 'diproses']) }}"
                class="flex-1 min-w-[120px] text-center px-3 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition whitespace-nowrap {{ $status === 'diproses' ? 'bg-primary-600 text-white shadow-sm' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700' }}">
-                📦 Dikemas
+                Dikemas
                 @if($counts['diproses'] > 0)
                     <span class="ml-1.5 px-1.5 py-0.5 text-[10px] rounded-full {{ $status === 'diproses' ? 'bg-primary-700 text-white' : 'bg-amber-100 dark:bg-amber-900/60 text-amber-700 dark:text-amber-300 font-bold' }}">
                         {{ $counts['diproses'] }}
@@ -58,7 +58,7 @@
             <!-- Tab: Dikirim (Dalam Perjalanan) -->
             <a href="{{ route('marketplace.orders', ['status' => 'dikirim']) }}"
                class="flex-1 min-w-[120px] text-center px-3 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition whitespace-nowrap {{ $status === 'dikirim' ? 'bg-primary-600 text-white shadow-sm' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700' }}">
-                🚚 Dikirim
+                Dikirim
                 @if($counts['dikirim'] > 0)
                     <span class="ml-1.5 px-1.5 py-0.5 text-[10px] rounded-full {{ $status === 'dikirim' ? 'bg-primary-700 text-white' : 'bg-blue-100 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300 font-bold' }}">
                         {{ $counts['dikirim'] }}
@@ -69,7 +69,7 @@
             <!-- Tab: Sampai di Lokasi -->
             <a href="{{ route('marketplace.orders', ['status' => 'sampai']) }}"
                class="flex-1 min-w-[120px] text-center px-3 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition whitespace-nowrap {{ $status === 'sampai' ? 'bg-primary-600 text-white shadow-sm' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700' }}">
-                📍 Sampai
+                Sampai
                 @if($counts['sampai'] > 0)
                     <span class="ml-1.5 px-1.5 py-0.5 text-[10px] rounded-full {{ $status === 'sampai' ? 'bg-primary-700 text-white' : 'bg-purple-100 dark:bg-purple-900/60 text-purple-700 dark:text-purple-300 font-bold' }}">
                         {{ $counts['sampai'] }}
@@ -80,7 +80,7 @@
             <!-- Tab: Selesai -->
             <a href="{{ route('marketplace.orders', ['status' => 'selesai']) }}"
                class="flex-1 min-w-[120px] text-center px-3 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition whitespace-nowrap {{ $status === 'selesai' ? 'bg-primary-600 text-white shadow-sm' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700' }}">
-                ✅ Selesai
+                Selesai
                 @if($counts['selesai'] > 0)
                     <span class="ml-1.5 px-1.5 py-0.5 text-[10px] rounded-full {{ $status === 'selesai' ? 'bg-primary-700 text-white' : 'bg-emerald-100 dark:bg-emerald-900/60 text-emerald-700 dark:text-emerald-300' }}">
                         {{ $counts['selesai'] }}
@@ -136,15 +136,15 @@
                 <!-- Product Body -->
                 <div class="p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-gray-100 dark:border-gray-700">
                     <div class="flex items-center gap-4">
-                        <div class="w-16 h-16 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 flex items-center justify-center text-2xl flex-shrink-0">
+                        <div class="w-16 h-16 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 flex items-center justify-center text-emerald-600 flex-shrink-0">
                             @if(str_contains(strtolower($order->product->category ?? ''), 'plastik'))
-                                ♻️
+                                <i data-lucide="recycle" class="w-8 h-8"></i>
                             @elseif(str_contains(strtolower($order->product->category ?? ''), 'kertas'))
-                                📦
+                                <i data-lucide="package" class="w-8 h-8"></i>
                             @elseif(str_contains(strtolower($order->product->category ?? ''), 'logam'))
-                                🥫
+                                <i data-lucide="box" class="w-8 h-8"></i>
                             @else
-                                🌿
+                                <i data-lucide="leaf" class="w-8 h-8"></i>
                             @endif
                         </div>
                         <div>
@@ -174,7 +174,7 @@
                             Rp {{ number_format($order->total_price) }}
                         </div>
                         <div class="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded-full mt-1">
-                            <span>🌿 +{{ number_format($order->eco_points_earned) }} Pts</span>
+                            <span>+{{ number_format($order->eco_points_earned) }} Pts</span>
                         </div>
                     </div>
                 </div>
@@ -231,7 +231,7 @@
                             </span>
                         @elseif($order->shipping_status === 'sampai')
                             <span class="text-purple-600 dark:text-purple-400 font-medium">
-                                🔔 Silakan klik <strong>Pesanan Diterima</strong> jika material sudah sampai dengan lengkap.
+                                Silakan klik <strong>Pesanan Diterima</strong> jika material sudah sampai dengan lengkap.
                             </span>
                         @else
                             <span>Hubungi customer care jika paket mengalami kendala logistik.</span>

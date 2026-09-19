@@ -32,7 +32,7 @@
         <!-- Metric 1: Total Sampah -->
         <div class="bg-white border border-[#DDE3DF] rounded-3xl p-6 shadow-sm space-y-2">
             <div class="w-10 h-10 rounded-xl bg-[#EEF9F2] text-[#168A5B] flex items-center justify-center font-bold">
-                📦
+                <i data-lucide="package" class="w-5 h-5"></i>
             </div>
             <span class="text-xs text-[#66716B] font-medium block">Total Sampah Terkelola</span>
             <div class="flex items-baseline gap-1.5">
@@ -47,7 +47,7 @@
         <!-- Metric 2: Emisi Karbon Dicegah -->
         <div class="bg-white border border-[#DDE3DF] rounded-3xl p-6 shadow-sm space-y-2">
             <div class="w-10 h-10 rounded-xl bg-[#EEF9F2] text-[#168A5B] flex items-center justify-center font-bold">
-                🌱
+                <i data-lucide="leaf" class="w-5 h-5"></i>
             </div>
             <span class="text-xs text-[#66716B] font-medium block">Emisi Karbon Dicegah</span>
             <div class="flex items-baseline gap-1.5">
@@ -62,7 +62,7 @@
         <!-- Metric 3: Pohon Diselamatkan -->
         <div class="bg-white border border-[#DDE3DF] rounded-3xl p-6 shadow-sm space-y-2">
             <div class="w-10 h-10 rounded-xl bg-[#EEF9F2] text-[#168A5B] flex items-center justify-center font-bold">
-                🌳
+                <i data-lucide="trees" class="w-5 h-5"></i>
             </div>
             <span class="text-xs text-[#66716B] font-medium block">Setara Pohon Dewasa</span>
             <div class="flex items-baseline gap-1.5">
@@ -77,7 +77,7 @@
         <!-- Metric 4: Air & Energi -->
         <div class="bg-white border border-[#DDE3DF] rounded-3xl p-6 shadow-sm space-y-2">
             <div class="w-10 h-10 rounded-xl bg-[#EEF9F2] text-[#168A5B] flex items-center justify-center font-bold">
-                💧
+                <i data-lucide="droplets" class="w-5 h-5"></i>
             </div>
             <span class="text-xs text-[#66716B] font-medium block">Konservasi Air Bersih</span>
             <div class="flex items-baseline gap-1.5">

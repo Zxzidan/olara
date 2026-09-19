@@ -40,8 +40,8 @@
     <!-- Tree Reforestation Community Impact Banner (PRD Donasi Aksi Hijau) -->
     <div class="bg-white border border-[#BFE7D0] rounded-3xl p-6 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
         <div class="flex items-start gap-4">
-            <div class="w-12 h-12 rounded-2xl bg-[#EEF9F2] text-[#168A5B] flex items-center justify-center shrink-0 text-2xl">
-                🌱
+            <div class="w-12 h-12 rounded-2xl bg-[#EEF9F2] text-[#168A5B] flex items-center justify-center shrink-0">
+                <i data-lucide="sprout" class="w-6 h-6 text-[#168A5B]"></i>
             </div>
             <div>
                 <span class="text-xs font-bold uppercase tracking-wider text-[#168A5B] bg-[#DDF4E8] px-2 py-0.5 rounded">
@@ -171,8 +171,8 @@
         </button>
 
         <div class="text-center space-y-3">
-            <div class="w-14 h-14 rounded-2xl bg-[#EEF9F2] text-[#168A5B] mx-auto flex items-center justify-center text-2xl">
-                🎁
+            <div class="w-14 h-14 rounded-2xl bg-[#EEF9F2] text-[#168A5B] mx-auto flex items-center justify-center">
+                <i data-lucide="gift" class="w-7 h-7 text-[#168A5B]"></i>
             </div>
             <h3 class="text-lg font-extrabold text-[#1B211E]">Konfirmasi Penukaran Poin</h3>
             <p id="modalRewardDesc" class="text-xs text-[#66716B] leading-relaxed">

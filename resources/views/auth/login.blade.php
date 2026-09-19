@@ -76,6 +76,7 @@
 
                     <!-- Team Name -->
                     <h1 class="text-white text-lg sm:text-xl font-bold tracking-wide mt-3">We are The OLARA Team</h1>
+                    <span class="sr-only">Masuk ke Akun OLARA</span>
                 </div>
 
                 <!-- Subtitle / Instruction -->
@@ -192,7 +193,7 @@
         <div class="bg-[#1c201e] border border-[#38423d] rounded-2xl p-6 max-w-sm w-full shadow-2xl text-white">
             <div class="flex items-center justify-between mb-4">
                 <h3 class="text-base font-bold text-white flex items-center gap-2">
-                    <span class="text-emerald-400">🔑</span> Lupa Kata Sandi
+                    <i data-lucide="key" class="w-4 h-4 text-emerald-400"></i> Lupa Kata Sandi
                 </h3>
                 <button type="button" onclick="document.getElementById('forgotModal').classList.add('hidden')" class="text-zinc-400 hover:text-white text-lg leading-none">&times;</button>
             </div>

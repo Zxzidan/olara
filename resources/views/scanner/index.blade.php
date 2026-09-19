@@ -140,40 +140,40 @@
                 </div>
                 <div class="flex flex-wrap gap-1.5" id="quickCategoryChips">
                     <button type="button" onclick="selectOfficialMaterialById(1)" class="quick-chip text-xs px-3 py-1.5 rounded-xl border border-gray-200 hover:border-[#168A5B] hover:bg-[#EEF9F2] text-gray-700 transition font-medium flex items-center gap-1.5">
-                        📦 Kardus (Rp 1.000)
+                        Kardus (Rp 1.000)
                     </button>
                     <button type="button" onclick="selectOfficialMaterialById(13)" class="quick-chip text-xs px-3 py-1.5 rounded-xl border border-gray-200 hover:border-[#168A5B] hover:bg-[#EEF9F2] text-gray-700 transition font-medium flex items-center gap-1.5">
-                        🍾 Pet Bening (Rp 3.000)
+                        Pet Bening (Rp 3.000)
                     </button>
                     <button type="button" onclick="selectOfficialMaterialById(7)" class="quick-chip text-xs px-3 py-1.5 rounded-xl border border-gray-200 hover:border-[#168A5B] hover:bg-[#EEF9F2] text-gray-700 transition font-medium flex items-center gap-1.5">
-                        🥫 Kaleng (Rp 1.800)
+                        Kaleng (Rp 1.800)
                     </button>
                     <button type="button" onclick="selectOfficialMaterialById(5)" class="quick-chip text-xs px-3 py-1.5 rounded-xl border border-gray-200 hover:border-[#168A5B] hover:bg-[#EEF9F2] text-gray-700 transition font-medium flex items-center gap-1.5">
-                        ⚙️ Besi (Rp 2.500)
+                        Besi (Rp 2.500)
                     </button>
                     <button type="button" onclick="selectOfficialMaterialById(8)" class="quick-chip text-xs px-3 py-1.5 rounded-xl border border-gray-200 hover:border-[#168A5B] hover:bg-[#EEF9F2] text-gray-700 transition font-medium flex items-center gap-1.5">
-                        🍳 Alma Panci (Rp 8.000)
+                        Alma Panci (Rp 8.000)
                     </button>
                     <button type="button" onclick="selectOfficialMaterialById(17)" class="quick-chip text-xs px-3 py-1.5 rounded-xl border border-gray-200 hover:border-[#168A5B] hover:bg-[#EEF9F2] text-gray-700 transition font-medium flex items-center gap-1.5">
-                        🥤 Aqua Gelas (Rp 3.400)
+                        Aqua Gelas (Rp 3.400)
                     </button>
                     <button type="button" onclick="selectOfficialMaterialById(22)" class="quick-chip text-xs px-3 py-1.5 rounded-xl border border-gray-200 hover:border-[#168A5B] hover:bg-[#EEF9F2] text-gray-700 transition font-medium flex items-center gap-1.5">
-                        🛢️ Jelantah (Rp 3.400)
+                        Jelantah (Rp 3.400)
                     </button>
                     <button type="button" onclick="selectOfficialMaterialById(32)" class="quick-chip text-xs px-3 py-1.5 rounded-xl border border-gray-200 hover:border-[#168A5B] hover:bg-[#EEF9F2] text-gray-700 transition font-medium flex items-center gap-1.5">
-                        🔥 Tabung Gas (Rp 150rb)
+                        Tabung Gas (Rp 150rb)
                     </button>
                     <button type="button" onclick="selectOfficialMaterialById(42)" class="quick-chip text-xs px-3 py-1.5 rounded-xl border border-gray-200 hover:border-[#168A5B] hover:bg-[#EEF9F2] text-gray-700 transition font-medium flex items-center gap-1.5">
-                        📰 Koran (Rp 1.800)
+                        Koran (Rp 1.800)
                     </button>
                     <button type="button" onclick="selectOfficialMaterialById(24)" class="quick-chip text-xs px-3 py-1.5 rounded-xl border border-gray-200 hover:border-[#168A5B] hover:bg-[#EEF9F2] text-gray-700 transition font-medium flex items-center gap-1.5">
-                        🍷 Beling / Kaca (Rp 150)
+                        Beling / Kaca (Rp 150)
                     </button>
                     <button type="button" onclick="selectOfficialMaterialById(2)" class="quick-chip text-xs px-3 py-1.5 rounded-xl border border-gray-200 hover:border-[#168A5B] hover:bg-[#EEF9F2] text-gray-700 transition font-medium flex items-center gap-1.5">
-                        📄 Duplek (Rp 400)
+                        Duplek (Rp 400)
                     </button>
                     <button type="button" onclick="selectOfficialMaterialById(41)" class="quick-chip text-xs px-3 py-1.5 rounded-xl border border-gray-200 hover:border-[#168A5B] hover:bg-[#EEF9F2] text-gray-700 transition font-medium flex items-center gap-1.5">
-                        🔌 Kabel (Rp 500)
+                        Kabel (Rp 500)
                     </button>
                 </div>
             </div>

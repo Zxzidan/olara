@@ -93,12 +93,9 @@
         <!-- Right Cluster -->
         <div class="flex items-center gap-1 sm:gap-2 lg:order-2">
           <!-- Eco-Points Pill -->
-          <a href="{{ route('rewards.index') }}" class="flex items-center gap-1.5 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 dark:bg-emerald-950/50 dark:border-emerald-800/80 dark:hover:bg-emerald-900/60 px-2.5 sm:px-3 py-1.5 rounded-full transition group" title="Saldo Eco-Points Anda">
-            <span class="w-5 h-5 rounded-full bg-emerald-600 dark:bg-emerald-500 text-white flex items-center justify-center text-[10px] font-bold">🌿</span>
-            <div class="flex items-baseline gap-1">
-              <span class="text-xs sm:text-sm font-extrabold text-emerald-800 dark:text-emerald-200 tabular-nums">{{ number_format(Auth::user()?->eco_points ?? 0) }}</span>
-              <span class="text-[10px] font-semibold text-emerald-600 dark:text-emerald-400">Pts</span>
-            </div>
+          <a href="{{ route('rewards.index') }}" class="flex items-center gap-1.5 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 dark:bg-emerald-950/50 dark:border-emerald-800/80 dark:hover:bg-emerald-900/60 px-3 py-1.5 rounded-full transition group" title="Saldo Eco-Points Anda">
+            <span class="text-xs sm:text-sm font-extrabold text-emerald-800 dark:text-emerald-200 tabular-nums">{{ number_format(Auth::user()?->eco_points ?? 0) }}</span>
+            <span class="text-[11px] font-bold text-emerald-600 dark:text-emerald-400">Pts</span>
           </a>
 
           <!-- Dark Mode Toggle Button -->
@@ -395,9 +392,6 @@
             >
               <i data-lucide="gift" class="w-5 h-5 {{ request()->routeIs('rewards.*') ? 'text-[#cb3930] dark:text-[#ffb7b2]' : 'text-stone-400 group-hover:text-stone-700 dark:group-hover:text-stone-200' }}"></i>
               <span class="flex-1 ml-3 whitespace-nowrap">Tukar Poin</span>
-              <span class="inline-flex items-center justify-center w-5 h-5 text-xs font-bold rounded-full text-white bg-[#cb3930]">
-                ★
-              </span>
             </a>
           </li>
 

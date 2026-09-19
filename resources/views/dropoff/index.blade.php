@@ -163,9 +163,9 @@
             const popupContent = `
                 <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 12px; max-width: 200px;">
                     <b style="color: #0B4F38; font-size: 13px;">${p.name}</b>
-                    ${isOfficial ? '<span style="display:inline-block; font-size:9px; background:#FEF3C7; color:#92400E; padding:1px 5px; border-radius:4px; font-weight:bold; margin-top:2px;">⭐ MITRA RESMI (+25 PTS)</span>' : ''}
+                    ${isOfficial ? '<span style="display:inline-block; font-size:9px; background:#FEF3C7; color:#92400E; padding:1px 5px; border-radius:4px; font-weight:bold; margin-top:2px;">MITRA RESMI (+25 PTS)</span>' : ''}
                     <p style="color: #66716B; margin: 4px 0;">${p.address}</p>
-                    <p style="font-size:11px; color:#168A5B; font-weight:bold; margin-bottom:6px;">🕒 ${p.operating_hours}</p>
+                    <p style="font-size:11px; color:#168A5B; font-weight:bold; margin-bottom:6px;">Jam: ${p.operating_hours}</p>
                     <a href="https://www.google.com/maps/dir/?api=1&destination=${p.latitude},${p.longitude}" target="_blank" style="display:block; text-align:center; background:#168A5B; color:white; padding:4px 8px; border-radius:6px; text-decoration:none; font-weight:bold; font-size:11px;">Rute Google Maps</a>
                 </div>
             `;

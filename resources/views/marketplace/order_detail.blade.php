@@ -234,8 +234,8 @@
                 <h4 class="text-base sm:text-lg font-bold">Menghemat {{ $order->co2_saved_kg }} kg Emisi CO₂e</h4>
                 <p class="text-xs text-emerald-100/80">Dengan membeli bahan baku daur ulang, Anda mencegah ekstraksi material mentah dan memajukan sirkularitas.</p>
             </div>
-            <div class="text-3xl sm:text-4xl pl-4">
-                🌱
+            <div class="text-3xl sm:text-4xl pl-4 flex items-center justify-center">
+                <i data-lucide="sprout" class="w-8 h-8 text-emerald-300"></i>
             </div>
         </div>
 

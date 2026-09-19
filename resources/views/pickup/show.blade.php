@@ -52,7 +52,7 @@
             <!-- Step 3 (Active) -->
             <div class="flex flex-col items-center text-center p-3 rounded-2xl bg-gradient-to-b from-[#EEF9F2] to-white border-2 border-[#168A5B] shadow-sm animate-pulse">
                 <div class="w-8 h-8 rounded-full bg-[#168A5B] text-white flex items-center justify-center text-xs font-bold mb-2">
-                    🚚
+                    <i data-lucide="truck" class="w-4 h-4"></i>
                 </div>
                 <span class="text-xs font-extrabold text-[#168A5B]">Dalam Perjalanan</span>
                 <span class="text-[10px] text-gray-500 font-medium">Sedang OTW</span>
@@ -110,7 +110,7 @@
                             <span class="text-[10px] bg-emerald-100 text-[#168A5B] font-bold px-1.5 py-0.5 rounded">Verified</span>
                         </div>
                         <p class="text-xs text-amber-500 font-bold flex items-center gap-1 mt-0.5">
-                            ★ 4.9 <span class="text-gray-400 font-normal">(1.420 penjemputan)</span>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i> 4.9 <span class="text-gray-400 font-normal">(1.420 penjemputan)</span>
                         </p>
                         <p class="text-xs text-gray-500 font-mono mt-0.5">{{ $pickup->courier_plate ?? 'B 4219 SZR' }} • Motor Roda Tiga</p>
                     </div>

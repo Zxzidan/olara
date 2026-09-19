@@ -76,6 +76,7 @@
 
                     <!-- Team Name -->
                     <h1 class="text-white text-lg sm:text-xl font-bold tracking-wide mt-3">We are The OLARA Team</h1>
+                    <span class="sr-only">Buat Akun Baru</span>
                 </div>
 
                 <!-- Subtitle / Instruction (Exactly as in reference image) -->
@@ -194,7 +195,7 @@
         <div class="bg-[#1c201e] border border-[#38423d] rounded-2xl p-6 max-w-md w-full shadow-2xl text-white">
             <div class="flex items-center justify-between mb-4">
                 <h3 class="text-base font-bold text-white flex items-center gap-2">
-                    <span class="text-emerald-400">📋</span> Syarat & Ketentuan OLARA
+                    <i data-lucide="file-text" class="w-4 h-4 text-emerald-400"></i> Syarat & Ketentuan OLARA
                 </h3>
                 <button type="button" onclick="document.getElementById('termsModal').classList.add('hidden')" class="text-zinc-400 hover:text-white text-lg leading-none">&times;</button>
             </div>

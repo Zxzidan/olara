@@ -104,8 +104,8 @@
         <div class="bg-gradient-to-b from-[#EEF9F2] to-white border-2 border-[#168A5B] rounded-3xl p-8 shadow-xl relative flex flex-col justify-between space-y-6">
             <!-- Highlight Ribbon -->
             <div class="absolute -top-3.5 right-8">
-                <span class="bg-[#168A5B] text-white text-[10px] font-extrabold uppercase tracking-wider px-3 py-1 rounded-full shadow-md flex items-center gap-1">
-                    ⭐ Paling Direkomendasikan
+                <span class="bg-[#168A5B] text-white text-[10px] font-extrabold uppercase tracking-wider px-3 py-1 rounded-full shadow-md flex items-center gap-1.5">
+                    <i data-lucide="crown" class="w-3 h-3"></i> Paling Direkomendasikan
                 </span>
             </div>
 

@@ -64,15 +64,15 @@
                                         </span>
                                     @elseif($order->shipping_status === 'dikirim')
                                         <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300 animate-pulse">
-                                            🚚 Dikirim
+                                            Dikirim
                                         </span>
                                     @elseif($order->shipping_status === 'sampai')
                                         <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-100 text-purple-800 dark:bg-purple-950 dark:text-purple-300">
-                                            📍 Sampai
+                                            Sampai
                                         </span>
                                     @elseif($order->shipping_status === 'selesai')
                                         <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
-                                            ✓ Selesai
+                                            Selesai
                                         </span>
                                     @endif
                                 </div>
@@ -84,8 +84,8 @@
                                     <span class="font-bold text-emerald-600 dark:text-emerald-400">Rp {{ number_format($order->total_price) }}</span>
                                 </div>
                                 @if(in_array($order->shipping_status, ['dikirim', 'sampai']))
-                                    <div class="mt-2 text-[10px] font-bold text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/60 px-2 py-1 rounded-lg flex items-center gap-1">
-                                        <span>🔔</span>
+                                    <div class="mt-2 text-[10px] font-bold text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/60 px-2 py-1 rounded-lg flex items-center gap-1.5">
+                                        <i data-lucide="info" class="w-3.5 h-3.5 shrink-0"></i>
                                         <span>Barang sudah sampai? Klik untuk konfirmasi penerimaan.</span>
                                     </div>
                                 @endif
@@ -164,7 +164,7 @@
 
                     <!-- Environmental Carbon Saving Badge -->
                     <div class="p-2.5 rounded-xl bg-[#EEF9F2] border border-[#BFE7D0] flex items-center gap-2 text-[11px] text-[#0B4F38] font-medium">
-                        <span>🌱</span>
+                        <i data-lucide="leaf" class="w-4 h-4 text-[#168A5B] shrink-0"></i>
                         <span>Hemat <strong>{{ $product->co2_savings_per_kg }} kg CO₂e</strong> per kg dibanding material virgin</span>
                     </div>
                 </div>
