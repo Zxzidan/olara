@@ -35,14 +35,6 @@
     <!-- Global Analog Grain Texture Overlay -->
     <div class="grain-overlay" aria-hidden="true"></div>
 
-    <!-- Background Ambient Blurred Floating Blobs -->
-    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
-        <div class="absolute top-[-10%] left-[-5%] w-[480px] h-[480px] md:w-[650px] md:h-[650px] rounded-full bg-[#FFE4E1] opacity-60 blur-[100px] animate-float-slow"></div>
-        <div class="absolute top-[25%] right-[-10%] w-[420px] h-[420px] md:w-[600px] md:h-[600px] rounded-full bg-[#E6E6FA] opacity-60 blur-[110px] animate-float-reverse"></div>
-        <div class="absolute top-[60%] left-[5%] w-[450px] h-[450px] md:w-[580px] md:h-[580px] rounded-full bg-[#E8EFE8] opacity-60 blur-[120px] animate-float-slow"></div>
-        <div class="absolute bottom-[-5%] right-[10%] w-[500px] h-[500px] rounded-full bg-[#FFE4E1] opacity-50 blur-[110px] animate-float-reverse"></div>
-    </div>
-
     <!-- Floating Pill Navigation Bar -->
     <header class="fixed top-4 md:top-6 left-0 right-0 z-40 flex justify-center px-4">
         <nav class="w-full max-w-5xl bg-white/70 backdrop-blur-[20px] border border-stone-200/60 rounded-full px-4 sm:px-6 py-3 shadow-soft flex items-center justify-between transition-all">
@@ -136,8 +128,6 @@
                         class="w-full h-auto drop-shadow-xl animate-float-slow select-none pointer-events-none"
                     />
                 </div>
-                <!-- Soft Glow Base Ring -->
-                <div class="absolute bottom-4 w-56 h-12 bg-[#FFB7B2]/30 rounded-full blur-xl -z-0"></div>
             </div>
 
             <!-- Micro Stats Ticker with Dynamic Count-up Animation -->

@@ -76,14 +76,14 @@
           <form action="{{ route('dropoff.index') }}" method="GET" class="hidden md:block md:pl-2">
             <label for="topbar-search" class="sr-only">Search</label>
             <div class="relative md:w-64 lg:w-80">
-              <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none text-gray-500 dark:text-gray-400">
+              <div class="flex absolute inset-y-0 left-0 items-center pl-3.5 pointer-events-none text-stone-400">
                 <i data-lucide="search" class="w-4 h-4"></i>
               </div>
               <input
                 type="text"
                 name="search"
                 id="topbar-search"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-9 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                class="bg-stone-100/70 border border-stone-200/80 text-stone-800 text-xs rounded-full focus:ring-2 focus:ring-[#FFB7B2] focus:border-[#FFB7B2] block w-full pl-9.5 pr-4 py-2 dark:bg-stone-800 dark:border-stone-700 dark:placeholder-stone-400 dark:text-stone-100 transition-all placeholder:text-stone-400"
                 placeholder="Cari bank sampah, material daur ulang..."
               />
             </div>
@@ -347,18 +347,18 @@
 
           <!-- Category Header: Layanan Inti -->
           <li class="pt-4 pb-1">
-            <span class="px-3 text-[11px] font-bold uppercase tracking-wider text-stone-400 dark:text-stone-500">Layanan Sampah</span>
+            <span class="px-3 text-[10px] font-bold uppercase tracking-wider text-stone-400 dark:text-stone-500">Layanan Sampah</span>
           </li>
 
           <!-- 1. AI Scanner -->
           <li>
             <a
               href="{{ route('scanner.index') }}"
-              class="flex items-center p-2 text-sm rounded-lg transition-colors group {{ request()->routeIs('scanner.*') ? 'bg-primary-50 text-primary-700 dark:bg-primary-950 dark:text-primary-300 font-bold' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white' }}"
+              class="flex items-center p-2 text-sm rounded-xl transition-colors group {{ request()->routeIs('scanner.*') ? 'bg-[#FFE4E1]/50 text-stone-900 dark:bg-stone-800 dark:text-white font-bold shadow-xs' : 'text-stone-700 dark:text-stone-300 hover:bg-stone-100/70 dark:hover:bg-stone-800 hover:text-stone-900 dark:hover:text-white' }}"
             >
-              <i data-lucide="scan-line" class="w-5 h-5 {{ request()->routeIs('scanner.*') ? 'text-primary-600 dark:text-primary-400' : 'text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-200' }}"></i>
+              <i data-lucide="scan-line" class="w-5 h-5 {{ request()->routeIs('scanner.*') ? 'text-[#cb3930] dark:text-[#ffb7b2]' : 'text-stone-400 group-hover:text-stone-700 dark:group-hover:text-stone-200' }}"></i>
               <span class="flex-1 ml-3 whitespace-nowrap">Scan AI</span>
-              <span class="inline-flex items-center justify-center px-2 py-0.5 text-[10px] font-bold rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-300">
+              <span class="inline-flex items-center justify-center px-2 py-0.5 text-[10px] font-bold rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
                 +10 Pts
               </span>
             </a>
@@ -368,9 +368,9 @@
           <li>
             <a
               href="{{ route('pickup.index') }}"
-              class="flex items-center p-2 text-sm rounded-lg transition-colors group {{ request()->routeIs('pickup.*') ? 'bg-primary-50 text-primary-700 dark:bg-primary-950 dark:text-primary-300 font-bold' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white' }}"
+              class="flex items-center p-2 text-sm rounded-xl transition-colors group {{ request()->routeIs('pickup.*') ? 'bg-[#FFE4E1]/50 text-stone-900 dark:bg-stone-800 dark:text-white font-bold shadow-xs' : 'text-stone-700 dark:text-stone-300 hover:bg-stone-100/70 dark:hover:bg-stone-800 hover:text-stone-900 dark:hover:text-white' }}"
             >
-              <i data-lucide="truck" class="w-5 h-5 {{ request()->routeIs('pickup.*') ? 'text-primary-600 dark:text-primary-400' : 'text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-200' }}"></i>
+              <i data-lucide="truck" class="w-5 h-5 {{ request()->routeIs('pickup.*') ? 'text-[#cb3930] dark:text-[#ffb7b2]' : 'text-stone-400 group-hover:text-stone-700 dark:group-hover:text-stone-200' }}"></i>
               <span class="flex-1 ml-3 whitespace-nowrap">Jemput Sampah</span>
             </a>
           </li>
@@ -379,27 +379,27 @@
           <li>
             <a
               href="{{ route('dropoff.index') }}"
-              class="flex items-center p-2 text-sm rounded-lg transition-colors group {{ request()->routeIs('dropoff.*') ? 'bg-primary-50 text-primary-700 dark:bg-primary-950 dark:text-primary-300 font-bold' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white' }}"
+              class="flex items-center p-2 text-sm rounded-xl transition-colors group {{ request()->routeIs('dropoff.*') ? 'bg-[#FFE4E1]/50 text-stone-900 dark:bg-stone-800 dark:text-white font-bold shadow-xs' : 'text-stone-700 dark:text-stone-300 hover:bg-stone-100/70 dark:hover:bg-stone-800 hover:text-stone-900 dark:hover:text-white' }}"
             >
-              <i data-lucide="map-pin" class="w-5 h-5 {{ request()->routeIs('dropoff.*') ? 'text-primary-600 dark:text-primary-400' : 'text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-200' }}"></i>
+              <i data-lucide="map-pin" class="w-5 h-5 {{ request()->routeIs('dropoff.*') ? 'text-[#cb3930] dark:text-[#ffb7b2]' : 'text-stone-400 group-hover:text-stone-700 dark:group-hover:text-stone-200' }}"></i>
               <span class="flex-1 ml-3 whitespace-nowrap">Peta Mitra</span>
             </a>
           </li>
 
           <!-- Category Header: Insentif & Sirkular -->
           <li class="pt-4 pb-1">
-            <span class="px-3 text-[11px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500">Ekonomi Sirkular</span>
+            <span class="px-3 text-[10px] font-bold uppercase tracking-wider text-stone-400 dark:text-stone-500">Ekonomi Sirkular</span>
           </li>
 
           <!-- 4. Tukar Poin -->
           <li>
             <a
               href="{{ route('rewards.index') }}"
-              class="flex items-center p-2 text-sm rounded-lg transition-colors group {{ request()->routeIs('rewards.*') ? 'bg-primary-50 text-primary-700 dark:bg-primary-950 dark:text-primary-300 font-bold' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white' }}"
+              class="flex items-center p-2 text-sm rounded-xl transition-colors group {{ request()->routeIs('rewards.*') ? 'bg-[#FFE4E1]/50 text-stone-900 dark:bg-stone-800 dark:text-white font-bold shadow-xs' : 'text-stone-700 dark:text-stone-300 hover:bg-stone-100/70 dark:hover:bg-stone-800 hover:text-stone-900 dark:hover:text-white' }}"
             >
-              <i data-lucide="gift" class="w-5 h-5 {{ request()->routeIs('rewards.*') ? 'text-primary-600 dark:text-primary-400' : 'text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-200' }}"></i>
+              <i data-lucide="gift" class="w-5 h-5 {{ request()->routeIs('rewards.*') ? 'text-[#cb3930] dark:text-[#ffb7b2]' : 'text-stone-400 group-hover:text-stone-700 dark:group-hover:text-stone-200' }}"></i>
               <span class="flex-1 ml-3 whitespace-nowrap">Tukar Poin</span>
-              <span class="inline-flex items-center justify-center w-5 h-5 text-xs font-bold rounded-full text-white bg-emerald-600">
+              <span class="inline-flex items-center justify-center w-5 h-5 text-xs font-bold rounded-full text-white bg-[#cb3930]">
                 ★
               </span>
             </a>
@@ -411,19 +411,19 @@
               type="button"
               id="marketplace-menu-btn"
               onclick="toggleMarketplaceDropdown(event)"
-              class="flex items-center w-full p-2 text-sm rounded-lg transition-colors group cursor-pointer {{ request()->routeIs('marketplace.*') ? 'bg-primary-50 text-primary-700 dark:bg-primary-950 dark:text-primary-300 font-bold' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white' }}"
+              class="flex items-center w-full p-2 text-sm rounded-xl transition-colors group cursor-pointer {{ request()->routeIs('marketplace.*') ? 'bg-[#FFE4E1]/50 text-stone-900 dark:bg-stone-800 dark:text-white font-bold shadow-xs' : 'text-stone-700 dark:text-stone-300 hover:bg-stone-100/70 dark:hover:bg-stone-800 hover:text-stone-900 dark:hover:text-white' }}"
             >
-              <i data-lucide="shopping-bag" class="w-5 h-5 {{ request()->routeIs('marketplace.*') ? 'text-primary-600 dark:text-primary-400' : 'text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-200' }}"></i>
+              <i data-lucide="shopping-bag" class="w-5 h-5 {{ request()->routeIs('marketplace.*') ? 'text-[#cb3930] dark:text-[#ffb7b2]' : 'text-stone-400 group-hover:text-stone-700 dark:group-hover:text-stone-200' }}"></i>
               <span class="flex-1 ml-3 text-left whitespace-nowrap">Marketplace B2B</span>
               <span id="marketplace-chevron-wrapper" class="inline-flex transition-transform duration-200 {{ request()->routeIs('marketplace.*') ? 'rotate-180' : '' }}">
-                <i data-lucide="chevron-down" id="marketplace-chevron" class="w-4 h-4 text-gray-400"></i>
+                <i data-lucide="chevron-down" id="marketplace-chevron" class="w-4 h-4 text-stone-400"></i>
               </span>
             </button>
             <div id="marketplace-submenu" class="{{ request()->routeIs('marketplace.*') ? '' : 'hidden' }} py-1 pl-6 space-y-1">
               <a
                 href="{{ route('marketplace.index') }}"
                 onclick="closeMobileSidebar()"
-                class="flex items-center gap-2 p-2 text-xs rounded-lg transition-colors {{ request()->routeIs('marketplace.index') ? 'text-primary-600 font-bold dark:text-primary-400 bg-primary-100/50 dark:bg-primary-900/40' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white' }}"
+                class="flex items-center gap-2 p-2 text-xs rounded-lg transition-colors {{ request()->routeIs('marketplace.index') ? 'text-[#cb3930] font-bold dark:text-[#ffb7b2] bg-[#FFE4E1]/40 dark:bg-stone-800' : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 hover:bg-stone-100 dark:hover:bg-stone-800 dark:hover:text-white' }}"
               >
                 <i data-lucide="store" class="w-3.5 h-3.5"></i>
                 <span>Katalog Produk</span>
@@ -431,7 +431,7 @@
               <a
                 href="{{ route('marketplace.orders') }}"
                 onclick="closeMobileSidebar()"
-                class="flex items-center justify-between p-2 text-xs rounded-lg transition-colors {{ request()->routeIs('marketplace.orders') || request()->routeIs('marketplace.orderDetail') ? 'text-primary-600 font-bold dark:text-primary-400 bg-primary-100/50 dark:bg-primary-900/40' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white' }}"
+                class="flex items-center justify-between p-2 text-xs rounded-lg transition-colors {{ request()->routeIs('marketplace.orders') || request()->routeIs('marketplace.orderDetail') ? 'text-[#cb3930] font-bold dark:text-[#ffb7b2] bg-[#FFE4E1]/40 dark:bg-stone-800' : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 hover:bg-stone-100 dark:hover:bg-stone-800 dark:hover:text-white' }}"
               >
                 <span class="flex items-center gap-2">
                   <i data-lucide="truck" class="w-3.5 h-3.5"></i>
@@ -448,9 +448,9 @@
           <li>
             <a
               href="{{ route('analytics.index') }}"
-              class="flex items-center p-2 text-sm rounded-lg transition-colors group {{ request()->routeIs('analytics.*') ? 'bg-primary-50 text-primary-700 dark:bg-primary-950 dark:text-primary-300 font-bold' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white' }}"
+              class="flex items-center p-2 text-sm rounded-xl transition-colors group {{ request()->routeIs('analytics.*') ? 'bg-[#FFE4E1]/50 text-stone-900 dark:bg-stone-800 dark:text-white font-bold shadow-xs' : 'text-stone-700 dark:text-stone-300 hover:bg-stone-100/70 dark:hover:bg-stone-800 hover:text-stone-900 dark:hover:text-white' }}"
             >
-              <i data-lucide="bar-chart-3" class="w-5 h-5 {{ request()->routeIs('analytics.*') ? 'text-primary-600 dark:text-primary-400' : 'text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-200' }}"></i>
+              <i data-lucide="bar-chart-3" class="w-5 h-5 {{ request()->routeIs('analytics.*') ? 'text-[#cb3930] dark:text-[#ffb7b2]' : 'text-stone-400 group-hover:text-stone-700 dark:group-hover:text-stone-200' }}"></i>
               <span class="flex-1 ml-3 whitespace-nowrap">Dampak Karbon</span>
             </a>
           </li>
@@ -459,32 +459,32 @@
           <li>
             <a
               href="{{ route('membership.index') }}"
-              class="flex items-center p-2 text-sm rounded-lg transition-colors group {{ request()->routeIs('membership.*') ? 'bg-primary-50 text-primary-700 dark:bg-primary-950 dark:text-primary-300 font-bold' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white' }}"
+              class="flex items-center p-2 text-sm rounded-xl transition-colors group {{ request()->routeIs('membership.*') ? 'bg-[#FFE4E1]/50 text-stone-900 dark:bg-stone-800 dark:text-white font-bold shadow-xs' : 'text-stone-700 dark:text-stone-300 hover:bg-stone-100/70 dark:hover:bg-stone-800 hover:text-stone-900 dark:hover:text-white' }}"
             >
-              <i data-lucide="crown" class="w-5 h-5 {{ request()->routeIs('membership.*') ? 'text-primary-600 dark:text-primary-400' : 'text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-200' }}"></i>
+              <i data-lucide="crown" class="w-5 h-5 {{ request()->routeIs('membership.*') ? 'text-[#cb3930] dark:text-[#ffb7b2]' : 'text-stone-400 group-hover:text-stone-700 dark:group-hover:text-stone-200' }}"></i>
               <span class="flex-1 ml-3 whitespace-nowrap">Membership</span>
             </a>
           </li>
         </ul>
 
         <!-- Bottom Secondary Links -->
-        <ul class="pt-4 mt-4 space-y-1.5 border-t border-gray-200 dark:border-gray-700">
+        <ul class="pt-4 mt-4 space-y-1.5 border-t border-stone-200/80 dark:border-stone-800">
           <li>
             <button
               type="button"
               onclick="openOnboardingModal()"
-              class="w-full flex items-center p-2 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white group"
+              class="w-full flex items-center p-2 text-sm text-stone-700 dark:text-stone-300 rounded-xl hover:bg-stone-100 dark:hover:bg-stone-800 hover:text-stone-900 dark:hover:text-white group"
             >
-              <i data-lucide="help-circle" class="w-5 h-5 text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-200"></i>
+              <i data-lucide="help-circle" class="w-5 h-5 text-stone-400 group-hover:text-stone-700 dark:group-hover:text-stone-200"></i>
               <span class="ml-3">Panduan</span>
             </button>
           </li>
           <li>
             <a
               href="{{ route('demo.login') }}"
-              class="flex items-center p-2 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white group"
+              class="flex items-center p-2 text-sm text-stone-700 dark:text-stone-300 rounded-xl hover:bg-stone-100 dark:hover:bg-stone-800 hover:text-stone-900 dark:hover:text-white group"
             >
-              <i data-lucide="refresh-cw" class="w-5 h-5 text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-200"></i>
+              <i data-lucide="refresh-cw" class="w-5 h-5 text-stone-400 group-hover:text-stone-700 dark:group-hover:text-stone-200"></i>
               <span class="ml-3">Akun Demo</span>
             </a>
           </li>
@@ -492,16 +492,16 @@
       </div>
 
       <!-- Bottom Sticky Sidenav Toolbar -->
-      <div class="hidden absolute bottom-0 left-0 justify-between items-center px-4 py-3 w-full lg:flex bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 z-20">
+      <div class="hidden absolute bottom-0 left-0 justify-between items-center px-4 py-3 w-full lg:flex bg-[#FDFCF8] dark:bg-stone-900 border-t border-stone-200/80 dark:border-stone-800 z-20">
         <div class="flex items-center gap-2">
-          <a href="{{ route('membership.index') }}" class="p-1.5 text-gray-500 rounded hover:text-gray-900 dark:text-gray-400 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700" title="Pengaturan Akun">
+          <a href="{{ route('membership.index') }}" class="p-1.5 text-stone-500 rounded hover:text-stone-900 dark:text-stone-400 dark:hover:text-white hover:bg-stone-100 dark:hover:bg-stone-800" title="Pengaturan Akun">
             <i data-lucide="settings" class="w-4 h-4"></i>
           </a>
-          <button type="button" onclick="openOnboardingModal()" class="p-1.5 text-gray-500 rounded hover:text-gray-900 dark:text-gray-400 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700" title="Bantuan">
+          <button type="button" onclick="openOnboardingModal()" class="p-1.5 text-stone-500 rounded hover:text-stone-900 dark:text-stone-400 dark:hover:text-white hover:bg-stone-100 dark:hover:bg-stone-800" title="Bantuan">
             <i data-lucide="info" class="w-4 h-4"></i>
           </button>
         </div>
-        <span class="text-[11px] font-mono text-gray-400 dark:text-gray-500">v1.0 MVP</span>
+        <span class="text-[11px] font-mono text-stone-400 dark:text-stone-500">v1.0 MVP</span>
       </div>
     </aside>
 
