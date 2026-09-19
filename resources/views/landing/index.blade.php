@@ -1123,7 +1123,7 @@
                             </li>
                             <li class="flex items-center gap-3 font-medium">
                                 <span class="w-5 h-5 rounded-full bg-[#cb3930] text-white flex items-center justify-center shrink-0 text-xs font-bold">✓</span>
-                                <span><strong>Unlimited Scan AI</strong> tanpa batasan kuota</span>
+                                <span><strong>100 Token</strong> scan AI</span>
                             </li>
                             <li class="flex items-center gap-3 font-medium">
                                 <span class="w-5 h-5 rounded-full bg-[#cb3930] text-white flex items-center justify-center shrink-0 text-xs font-bold">✓</span>

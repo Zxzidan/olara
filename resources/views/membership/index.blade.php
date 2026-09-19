@@ -138,7 +138,7 @@
                     </li>
                     <li class="flex items-center gap-2.5 font-medium">
                         <i data-lucide="check-circle-2" class="w-4 h-4 text-[#168A5B] shrink-0"></i>
-                        <span><strong>100 Token</strong>scan AI</span>
+                        <span><strong>100 Token</strong> scan AI</span>
                     </li>
                     <li class="flex items-center gap-2.5 font-medium">
                         <i data-lucide="check-circle-2" class="w-4 h-4 text-[#168A5B] shrink-0"></i>
