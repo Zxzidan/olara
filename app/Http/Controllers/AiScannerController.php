@@ -131,9 +131,8 @@ class AiScannerController extends Controller
             'status' => 'analyzed',
         ]);
 
-        // Award Eco-Points on saving AI waste scan:
-        // Base points: 25 Eco-Points + Weight bonus: min(50, round(weight * 5)) + Scale bonus: 10
-        $pointsEarned = 25 + (int) min(50, round($weight * 5)) + ($hasScale ? 10 : 0);
+        // Award Eco-Points on saving AI waste scan: 10 Eco-Points
+        $pointsEarned = 10;
 
         if ($user) {
             $desc = "Hasil Scan AI Sampah: {$validated['material_name']} ({$weight} kg)";

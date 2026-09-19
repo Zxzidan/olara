@@ -91,9 +91,9 @@ test('ai scanner page renders and can record waste analysis with scale photo bon
 
     $response->assertRedirect(route('scanner.index'));
 
-    // Check bonus awarded (25 base + 50 weight bonus + 10 scale bonus)
+    // Check bonus awarded (10 Eco-Points)
     $this->user->refresh();
-    expect($this->user->eco_points)->toBe($initialPoints + 85);
+    expect($this->user->eco_points)->toBe($initialPoints + 10);
 });
 
 test('pickup request booking creates tracking code and transparent pricing', function () {

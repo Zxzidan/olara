@@ -26,7 +26,7 @@
 
         <div class="flex items-center gap-2">
             <span class="text-xs font-bold text-[#0B4F38] bg-[#EEF9F2] border border-[#BFE7D0] px-3 py-1.5 rounded-xl flex items-center gap-1.5">
-                <i data-lucide="award" class="w-4 h-4 text-[#168A5B]"></i> Simpan Scan: +25 Poin (Bonus Timbangan: +10 Poin)
+                <i data-lucide="award" class="w-4 h-4 text-[#168A5B]"></i> Simpan Scan: +10 Poin
             </span>
         </div>
     </div>
@@ -319,7 +319,7 @@
                                 <i data-lucide="map-pin" class="w-3.5 h-3.5 text-[#168A5B]"></i> Setor ke Mitra
                             </button>
                             <button type="button" onclick="submitScanForm('save')" class="py-2.5 px-3 rounded-xl border border-[#BFE7D0] bg-[#EEF9F2] hover:bg-[#DDF4E8] text-[#0B4F38] text-xs font-bold transition flex items-center justify-center gap-1.5 shadow-sm">
-                                <i data-lucide="bookmark-plus" class="w-3.5 h-3.5 text-[#168A5B]"></i> Simpan Hasil (+25 Pts)
+                                <i data-lucide="bookmark-plus" class="w-3.5 h-3.5 text-[#168A5B]"></i> Simpan Hasil (+10 Pts)
                             </button>
                         </div>
                     </div>
