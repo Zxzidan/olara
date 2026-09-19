@@ -90,11 +90,11 @@
         <!-- ===================================================================
              1. HERO SECTION (100% Desktop Viewport Fit: Title, Subtitle, & Dual CTA)
         =================================================================== -->
-        <section class="min-h-[100dvh] flex flex-col justify-center items-center text-center px-4 sm:px-6 pt-24 pb-14 max-w-5xl mx-auto reveal-item">
+        <section class="h-[100dvh] min-h-[480px] flex flex-col justify-center items-center text-center px-4 sm:px-6 pt-16 sm:pt-20 pb-8 sm:pb-10 max-w-5xl mx-auto reveal-item">
             <!-- Main Headline with Character Animation & Hand-Drawn Underline on Target Word -->
-            <h1 id="hero-heading" data-animate-heading class="heading-animated font-outfit text-4xl sm:text-5xl md:text-6xl lg:text-[68px] font-bold tracking-tight text-[#292524] leading-[1.16] max-w-4xl mx-auto select-none">
+            <h1 id="hero-heading" data-animate-heading class="heading-animated font-outfit text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-bold tracking-tight text-[#292524] leading-[1.2] max-w-3xl mx-auto select-none">
                 Ubah sampah harian jadi berkah yang 
-                <span class="relative inline-block keyword-target font-cursive text-5xl sm:text-7xl md:text-8xl text-[#cb3930] font-normal lowercase px-1 rotate-[-2deg]">
+                <span class="relative inline-block keyword-target font-cursive text-4xl sm:text-6xl md:text-7xl text-[#cb3930] font-normal lowercase px-1 rotate-[-2deg]">
                     bermakna
                     <!-- Hand-drawn SVG doodle underline animation -->
                     <svg class="hand-drawn-underline" viewBox="0 0 160 16" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" aria-hidden="true">
@@ -105,17 +105,17 @@
             </h1>
 
             <!-- Sub-headline -->
-            <p class="mt-6 text-base sm:text-lg text-[#78716C] max-w-[500px] mx-auto leading-relaxed font-normal">
+            <p class="mt-4 sm:mt-5 text-sm sm:text-base text-[#78716C] max-w-[480px] mx-auto leading-relaxed font-normal">
                 Pilah dengan AI, armada jemput ke rumah, dan tukar poin jadi saldo e-wallet.
             </p>
 
             <!-- Dual CTA Buttons -->
-            <div class="mt-9 flex flex-col sm:flex-row items-center justify-center gap-3.5">
-                <a href="{{ route('demo.login') }}" class="w-full sm:w-auto px-7 py-3 rounded-full bg-[#FFB7B2] hover:bg-[#FF9E98] text-[#292524] font-bold text-sm shadow-soft transition-all transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2">
+            <div class="mt-6 sm:mt-7 flex flex-col sm:flex-row items-center justify-center gap-3">
+                <a href="{{ route('demo.login') }}" class="w-full sm:w-auto px-7 py-2.5 sm:py-3 rounded-full bg-[#FFB7B2] hover:bg-[#FF9E98] text-[#292524] font-bold text-sm shadow-soft transition-all transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2">
                     <span>Mulai Gratis</span>
                     <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
                 </a>
-                <a href="#cara-kerja" class="w-full sm:w-auto px-6 py-3 rounded-full bg-white hover:bg-stone-50 text-[#292524] font-semibold text-sm border border-stone-200/80 shadow-soft transition-all flex items-center justify-center gap-2">
+                <a href="#cara-kerja" class="w-full sm:w-auto px-6 py-2.5 sm:py-3 rounded-full bg-white hover:bg-stone-50 text-[#292524] font-semibold text-sm border border-stone-200/80 shadow-soft transition-all flex items-center justify-center gap-2">
                     <span>Lihat Fitur</span>
                     <i data-lucide="chevron-down" class="w-4 h-4 text-[#78716C]"></i>
                 </a>
