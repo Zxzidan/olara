@@ -14,6 +14,18 @@
       "dest": "/build/$1"
     },
     {
+      "src": "/assets/(.*)",
+      "dest": "/assets/$1"
+    },
+    {
+      "src": "/favicon.ico",
+      "dest": "/favicon.ico"
+    },
+    {
+      "src": "/robots.txt",
+      "dest": "/robots.txt"
+    },
+    {
       "src": "/(.*)",
       "dest": "/api/index.php"
     }
@@ -30,7 +42,7 @@
     "APP_SERVICES_CACHE": "/tmp/storage/framework/cache/services.php",
     "VIEW_COMPILED_PATH": "/tmp/storage/framework/views",
     "CACHE_STORE": "array",
-    "SESSION_DRIVER": "cookie",
+    "SESSION_DRIVER": "database",
     "LOG_CHANNEL": "stderr"
   }
 }
