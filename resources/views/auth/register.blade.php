@@ -169,19 +169,19 @@
 
         </div>
 
-        <!-- Right Side: Green Section with Centered OLARA Logo (2x Size, Never Cut Off) -->
-        <div class="w-full lg:w-1/2 p-8 sm:p-12 lg:p-14 flex items-center justify-center olara-gradient-panel relative overflow-hidden min-h-[320px] lg:min-h-full">
+        <!-- Right Side: Green Section with Centered Mascot (IKON2.png) -->
+        <div class="w-full lg:w-1/2 p-6 sm:p-10 lg:p-12 flex items-center justify-center olara-gradient-panel relative overflow-hidden min-h-[380px] lg:min-h-full">
             
             <!-- Ambient Subtle Background Glow Elements -->
             <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-white/20 blur-3xl pointer-events-none"></div>
             <div class="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-emerald-950/40 blur-3xl pointer-events-none"></div>
 
-            <!-- Centered OLARA Logo (2x Size, Fully Visible) -->
-            <div class="relative z-10 w-full flex items-center justify-center p-4">
+            <!-- Centered Mascot / Logo (IKON2.png) - Prominent, Not Too Small -->
+            <div class="relative z-10 w-full flex items-center justify-center p-2 sm:p-4">
                 <img 
-                    src="{{ asset('assets/img/LOGO ORALA.png') }}" 
-                    alt="OLARA — Pengelola Sampah Plastik" 
-                    class="w-72 sm:w-80 md:w-[360px] max-w-[85%] max-h-[360px] h-auto object-contain drop-shadow-[0_15px_30px_rgba(0,0,0,0.25)] transition-transform duration-300 hover:scale-105"
+                    src="{{ asset('assets/img/IKON2.png') }}" 
+                    alt="Maskot OLARA" 
+                    class="w-72 sm:w-84 md:w-96 lg:w-[420px] max-w-[92%] max-h-[480px] h-auto object-contain drop-shadow-[0_20px_45px_rgba(0,0,0,0.35)] transition-transform duration-500 hover:scale-105"
                 />
             </div>
 
