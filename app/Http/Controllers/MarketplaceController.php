@@ -49,8 +49,15 @@ class MarketplaceController extends Controller
         $validated = $request->validate([
             'product_id' => ['required', 'exists:marketplace_products,id'],
             'quantity_kg' => ['required', 'integer', 'min:1'],
-            'shipping_address' => ['required', 'string', 'min:10'],
+            'shipping_address' => ['required', 'string', 'min:3'],
             'payment_method' => ['nullable', 'string'],
+        ], [
+            'product_id.required' => 'Produk material daur ulang wajib dipilih.',
+            'product_id.exists' => 'Produk material daur ulang tidak ditemukan.',
+            'quantity_kg.required' => 'Kuantitas pesanan wajib diisi.',
+            'quantity_kg.min' => 'Kuantitas pesanan minimal 1 kg.',
+            'shipping_address.required' => 'Alamat pengiriman wajib diisi.',
+            'shipping_address.min' => 'Alamat pengiriman minimal 3 karakter.',
         ]);
 
         $product = MarketplaceProduct::findOrFail($validated['product_id']);

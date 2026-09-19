@@ -420,7 +420,14 @@
             const data = await response.json();
 
             if (!response.ok || !data.success) {
-                alert(data.message || 'Terjadi kendala saat membuat pesanan.');
+                let errorMsg = data.message || 'Terjadi kendala saat membuat pesanan.';
+                if (data.errors) {
+                    const firstField = Object.keys(data.errors)[0];
+                    if (firstField && data.errors[firstField] && data.errors[firstField][0]) {
+                        errorMsg = data.errors[firstField][0];
+                    }
+                }
+                alert(errorMsg);
                 resetSubmitButton();
                 statusBox.classList.add('hidden');
                 return;
