@@ -6,9 +6,9 @@
 <div class="max-w-7xl mx-auto space-y-8 pb-8">
 
     <!-- Top Greeting & Action Cluster -->
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-5 bg-white dark:bg-stone-800/95 p-6 sm:p-7 rounded-2xl border border-stone-200/80 dark:border-stone-700/80 shadow-soft">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-5 bg-white dark:bg-stone-800/95 p-5 sm:p-7 rounded-2xl border border-stone-200/80 dark:border-stone-700/80 shadow-soft">
         <div class="space-y-1">
-            <div class="flex items-center gap-2.5 flex-wrap">
+            <div class="flex items-center gap-2 sm:gap-2.5 flex-wrap">
                 <h1 class="font-outfit text-xl sm:text-2xl font-extrabold text-stone-900 dark:text-white tracking-tight">
                     Halo, {{ $user ? explode(' ', $user->name)[0] : 'Pejuang Bumi' }}!
                 </h1>
@@ -26,12 +26,12 @@
             </p>
         </div>
 
-        <div class="flex items-center gap-3 shrink-0">
-            <button type="button" onclick="openOnboardingModal()" class="olara-btn-secondary cursor-pointer">
+        <div class="flex items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
+            <button type="button" onclick="openOnboardingModal()" class="olara-btn-secondary cursor-pointer flex-1 sm:flex-initial justify-center">
                 <i data-lucide="compass" class="w-4 h-4 text-stone-500"></i>
                 <span>Panduan</span>
             </button>
-            <a href="{{ route('scanner.index') }}" class="olara-btn-primary">
+            <a href="{{ route('scanner.index') }}" class="olara-btn-primary flex-1 sm:flex-initial justify-center">
                 <i data-lucide="scan-line" class="w-4 h-4"></i>
                 <span>Scan AI</span>
             </a>
@@ -147,18 +147,18 @@
             </div>
 
             <!-- Right: Fast Shortcut Pills -->
-            <div class="lg:col-span-5 grid grid-cols-3 gap-3">
-                <a href="{{ route('scanner.index') }}" class="flex flex-col items-center justify-center p-3.5 rounded-xl border border-stone-200/80 dark:border-stone-700 hover:bg-stone-50 dark:hover:bg-stone-700/70 text-center transition group shadow-2xs active:scale-[0.98]">
-                    <i data-lucide="scan-line" class="w-5 h-5 text-stone-800 dark:text-stone-200 mb-1 group-hover:scale-105 transition-transform"></i>
-                    <span class="text-xs font-semibold text-stone-800 dark:text-stone-200">Scan AI</span>
+            <div class="lg:col-span-5 grid grid-cols-3 gap-2 sm:gap-3">
+                <a href="{{ route('scanner.index') }}" class="flex flex-col items-center justify-center p-2.5 sm:p-3.5 rounded-xl border border-stone-200/80 dark:border-stone-700 hover:bg-stone-50 dark:hover:bg-stone-700/70 text-center transition group shadow-2xs active:scale-[0.98]">
+                    <i data-lucide="scan-line" class="w-4 sm:w-5 h-4 sm:h-5 text-stone-800 dark:text-stone-200 mb-1 group-hover:scale-105 transition-transform"></i>
+                    <span class="text-[11px] sm:text-xs font-semibold text-stone-800 dark:text-stone-200 truncate max-w-full">Scan AI</span>
                 </a>
-                <a href="{{ route('pickup.index') }}" class="flex flex-col items-center justify-center p-3.5 rounded-xl border border-stone-200/80 dark:border-stone-700 hover:bg-stone-50 dark:hover:bg-stone-700/70 text-center transition group shadow-2xs active:scale-[0.98]">
-                    <i data-lucide="truck" class="w-5 h-5 text-[#cb3930] mb-1 group-hover:scale-105 transition-transform"></i>
-                    <span class="text-xs font-semibold text-stone-800 dark:text-stone-200">Jemput</span>
+                <a href="{{ route('pickup.index') }}" class="flex flex-col items-center justify-center p-2.5 sm:p-3.5 rounded-xl border border-stone-200/80 dark:border-stone-700 hover:bg-stone-50 dark:hover:bg-stone-700/70 text-center transition group shadow-2xs active:scale-[0.98]">
+                    <i data-lucide="truck" class="w-4 sm:w-5 h-4 sm:h-5 text-[#cb3930] mb-1 group-hover:scale-105 transition-transform"></i>
+                    <span class="text-[11px] sm:text-xs font-semibold text-stone-800 dark:text-stone-200 truncate max-w-full">Jemput</span>
                 </a>
-                <a href="{{ route('dropoff.index') }}" class="flex flex-col items-center justify-center p-3.5 rounded-xl border border-stone-200/80 dark:border-stone-700 hover:bg-stone-50 dark:hover:bg-stone-700/70 text-center transition group shadow-2xs active:scale-[0.98]">
-                    <i data-lucide="map-pin" class="w-5 h-5 text-stone-800 dark:text-stone-200 mb-1 group-hover:scale-105 transition-transform"></i>
-                    <span class="text-xs font-semibold text-stone-800 dark:text-stone-200">Bank Sampah</span>
+                <a href="{{ route('dropoff.index') }}" class="flex flex-col items-center justify-center p-2.5 sm:p-3.5 rounded-xl border border-stone-200/80 dark:border-stone-700 hover:bg-stone-50 dark:hover:bg-stone-700/70 text-center transition group shadow-2xs active:scale-[0.98]">
+                    <i data-lucide="map-pin" class="w-4 sm:w-5 h-4 sm:h-5 text-stone-800 dark:text-stone-200 mb-1 group-hover:scale-105 transition-transform"></i>
+                    <span class="text-[11px] sm:text-xs font-semibold text-stone-800 dark:text-stone-200 truncate max-w-full">Bank Sampah</span>
                 </a>
             </div>
         </div>
@@ -166,22 +166,22 @@
 
     <!-- Active Pickup Tracking Banner (if any) -->
     @if($activePickup)
-        <div class="bg-[#FFE4E1]/30 dark:bg-stone-800/95 border border-[#FFB7B2]/50 dark:border-stone-700 p-5 sm:p-6 rounded-2xl shadow-soft flex flex-col sm:flex-row sm:items-center justify-between gap-5">
-            <div class="flex items-center gap-4">
-                <div class="w-11 h-11 rounded-full bg-[#FFB7B2] text-[#292524] flex items-center justify-center shrink-0 shadow-xs">
+        <div class="bg-[#FFE4E1]/30 dark:bg-stone-800/95 border border-[#FFB7B2]/50 dark:border-stone-700 p-5 sm:p-6 rounded-2xl shadow-soft flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-5">
+            <div class="flex items-center gap-3.5 sm:gap-4">
+                <div class="w-10 sm:w-11 h-10 sm:h-11 rounded-full bg-[#FFB7B2] text-[#292524] flex items-center justify-center shrink-0 shadow-xs">
                     <i data-lucide="truck" class="w-5 h-5"></i>
                 </div>
-                <div>
-                    <div class="flex items-center gap-2">
+                <div class="min-w-0">
+                    <div class="flex items-center gap-2 flex-wrap">
                         <span class="text-[10px] font-extrabold uppercase tracking-wider text-[#cb3930] bg-[#FFE4E1] px-2.5 py-0.5 rounded-full">Penjemputan Aktif</span>
                         <span class="text-xs font-mono font-bold text-stone-800 dark:text-stone-200 bg-white dark:bg-stone-900 px-2 py-0.5 rounded-full border border-stone-200 dark:border-stone-700">{{ $activePickup->pickup_code }}</span>
                     </div>
-                    <p class="text-xs text-stone-600 dark:text-stone-300 mt-1">
+                    <p class="text-xs text-stone-600 dark:text-stone-300 mt-1 leading-snug">
                         Jadwal: <strong>{{ \Carbon\Carbon::parse($activePickup->scheduled_date)->translatedFormat('d M Y') }}</strong> (Slot: {{ ucfirst($activePickup->scheduled_slot) }}) • Kurir: {{ $activePickup->courier_name ?? 'Mitra OLARA' }}
                     </p>
                 </div>
             </div>
-            <a href="{{ route('pickup.show', $activePickup->pickup_code) }}" class="olara-btn-primary shrink-0">
+            <a href="{{ route('pickup.show', $activePickup->pickup_code) }}" class="olara-btn-primary w-full sm:w-auto shrink-0 justify-center">
                 <span>Lacak Armada</span>
                 <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
             </a>
@@ -191,8 +191,8 @@
     <!-- 2-Column Split: Recent Analyses & Point Transactions -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <!-- Left Panel: Recent AI Scans -->
-        <div class="bg-white dark:bg-stone-800/95 p-6 sm:p-7 rounded-2xl border border-stone-200/80 dark:border-stone-700/80 shadow-soft">
-            <div class="flex items-center justify-between mb-5 pb-3 border-b border-stone-100 dark:border-stone-700/60">
+        <div class="bg-white dark:bg-stone-800/95 p-5 sm:p-7 rounded-2xl border border-stone-200/80 dark:border-stone-700/80 shadow-soft">
+            <div class="flex items-center justify-between mb-4 sm:mb-5 pb-3 border-b border-stone-100 dark:border-stone-700/60">
                 <div class="flex items-center gap-2">
                     <i data-lucide="scan-line" class="w-4 h-4 text-[#cb3930]"></i>
                     <h3 class="font-outfit text-sm sm:text-base font-bold text-stone-900 dark:text-white">Riwayat Scan AI</h3>
@@ -210,14 +210,14 @@
             @else
                 <div class="divide-y divide-stone-100 dark:divide-stone-700/60">
                     @foreach($recentAnalysis as $analysis)
-                        <div class="py-3.5 flex items-center justify-between gap-3 first:pt-0 last:pb-0">
-                            <div class="flex items-center gap-3">
-                                <div class="w-9 h-9 rounded-full bg-stone-100 dark:bg-stone-700 text-stone-700 dark:text-stone-300 flex items-center justify-center shrink-0">
+                        <div class="py-3 sm:py-3.5 flex items-center justify-between gap-3 first:pt-0 last:pb-0">
+                            <div class="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-1">
+                                <div class="w-8 sm:w-9 h-8 sm:h-9 rounded-full bg-stone-100 dark:bg-stone-700 text-stone-700 dark:text-stone-300 flex items-center justify-center shrink-0">
                                     <i data-lucide="box" class="w-4 h-4"></i>
                                 </div>
-                                <div>
-                                    <p class="text-xs font-bold text-stone-900 dark:text-white leading-snug">{{ $analysis->material_name }}</p>
-                                    <div class="flex items-center gap-2 text-[11px] text-stone-500 dark:text-stone-400 mt-0.5">
+                                <div class="min-w-0 flex-1">
+                                    <p class="text-xs font-bold text-stone-900 dark:text-white leading-snug truncate">{{ $analysis->material_name }}</p>
+                                    <div class="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-[11px] text-stone-500 dark:text-stone-400 mt-0.5 truncate">
                                         <span>{{ $analysis->category }}</span>
                                         <span>•</span>
                                         <span class="text-[#168A5B] dark:text-emerald-400 font-semibold">{{ $analysis->confidence_rate }}%</span>
@@ -230,7 +230,7 @@
                                 <span class="text-xs font-bold text-[#168A5B] dark:text-emerald-400 tabular-nums">
                                     Rp {{ number_format($analysis->total_estimated_value) }}
                                 </span>
-                                <span class="block text-[10px] text-stone-400">{{ $analysis->created_at->diffForHumans() }}</span>
+                                <span class="block text-[9px] sm:text-[10px] text-stone-400">{{ $analysis->created_at->diffForHumans() }}</span>
                             </div>
                         </div>
                     @endforeach
@@ -239,8 +239,8 @@
         </div>
 
         <!-- Right Panel: Recent Point Transactions -->
-        <div class="bg-white dark:bg-stone-800/95 p-6 sm:p-7 rounded-2xl border border-stone-200/80 dark:border-stone-700/80 shadow-soft">
-            <div class="flex items-center justify-between mb-5 pb-3 border-b border-stone-100 dark:border-stone-700/60">
+        <div class="bg-white dark:bg-stone-800/95 p-5 sm:p-7 rounded-2xl border border-stone-200/80 dark:border-stone-700/80 shadow-soft">
+            <div class="flex items-center justify-between mb-4 sm:mb-5 pb-3 border-b border-stone-100 dark:border-stone-700/60">
                 <div class="flex items-center gap-2">
                     <i data-lucide="history" class="w-4 h-4 text-[#cb3930]"></i>
                     <h3 class="font-outfit text-sm sm:text-base font-bold text-stone-900 dark:text-white">Transaksi Poin</h3>
@@ -258,21 +258,21 @@
             @else
                 <div class="divide-y divide-stone-100 dark:divide-stone-700/60">
                     @foreach($recentTransactions as $tx)
-                        <div class="py-3.5 flex items-center justify-between gap-3 first:pt-0 last:pb-0">
-                            <div class="flex items-center gap-3">
-                                <div class="w-9 h-9 rounded-full {{ $tx->amount >= 0 ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300' : 'bg-stone-100 text-stone-600 dark:bg-stone-700 dark:text-stone-300' }} flex items-center justify-center shrink-0">
+                        <div class="py-3 sm:py-3.5 flex items-center justify-between gap-3 first:pt-0 last:pb-0">
+                            <div class="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-1">
+                                <div class="w-8 sm:w-9 h-8 sm:h-9 rounded-full {{ $tx->amount >= 0 ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300' : 'bg-stone-100 text-stone-600 dark:bg-stone-700 dark:text-stone-300' }} flex items-center justify-center shrink-0">
                                     <i data-lucide="{{ $tx->amount >= 0 ? 'arrow-up-right' : 'arrow-down-left' }}" class="w-4 h-4"></i>
                                 </div>
-                                <div>
+                                <div class="min-w-0 flex-1">
                                     <p class="text-xs font-semibold text-stone-900 dark:text-white leading-snug line-clamp-1">{{ $tx->description }}</p>
-                                    <span class="text-[10px] text-stone-400">{{ $tx->created_at->diffForHumans() }}</span>
+                                    <span class="text-[9px] sm:text-[10px] text-stone-400">{{ $tx->created_at->diffForHumans() }}</span>
                                 </div>
                             </div>
                             <div class="text-right shrink-0">
                                 <span class="text-xs font-extrabold tabular-nums {{ $tx->amount >= 0 ? 'text-[#168A5B] dark:text-emerald-400' : 'text-stone-500 dark:text-stone-400' }}">
                                     {{ $tx->amount >= 0 ? '+' : '' }}{{ number_format($tx->amount) }} Pts
                                 </span>
-                                <span class="block text-[10px] text-stone-400">Saldo: {{ number_format($tx->balance_after) }}</span>
+                                <span class="block text-[9px] sm:text-[10px] text-stone-400">Saldo: {{ number_format($tx->balance_after) }}</span>
                             </div>
                         </div>
                     @endforeach

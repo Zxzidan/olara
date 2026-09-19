@@ -43,39 +43,39 @@
 
   <div class="antialiased bg-[#FDFCF8] dark:bg-stone-900 min-h-screen">
     <!-- Top Navigation Bar -->
-    <nav class="bg-[#FDFCF8]/90 border-b border-stone-200/80 px-4 py-2.5 backdrop-blur-md dark:bg-stone-900/90 dark:border-stone-800 fixed left-0 right-0 top-0 z-50 transition-colors">
-      <div class="flex flex-wrap justify-between items-center">
+    <nav class="bg-[#FDFCF8]/90 border-b border-stone-200/80 px-3 sm:px-4 py-2.5 backdrop-blur-md dark:bg-stone-900/90 dark:border-stone-800 fixed left-0 right-0 top-0 z-50 transition-colors">
+      <div class="flex items-center justify-between w-full">
         <!-- Brand & Mobile Toggle -->
-        <div class="flex justify-start items-center">
+        <div class="flex items-center shrink-0">
           <button
             id="sidebar-toggle-btn"
             type="button"
             onclick="toggleSidebar(event)"
-            aria-controls="drawer-navigation"
-            class="p-2 mr-2 text-gray-600 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 focus:bg-gray-100 dark:focus:bg-gray-700 focus:ring-2 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white transition-colors"
+            class="hamburger-strip-btn md:hidden text-stone-600 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white hover:bg-stone-100 dark:hover:bg-stone-800 mr-1 sm:mr-2 focus:outline-none shrink-0"
             title="Buka / Tutup Sidebar"
             aria-label="Toggle sidebar"
           >
-            <i data-lucide="menu" class="w-5 h-5"></i>
-            <span class="sr-only">Toggle sidebar</span>
+            <span class="strip-line"></span>
+            <span class="strip-line"></span>
+            <span class="strip-line"></span>
           </button>
 
-          <a href="{{ route('home') }}" class="flex items-center gap-2.5 mr-3 sm:mr-4 group py-0.5" title="OLARA — Sirkular Bumi">
+          <a href="{{ route('home') }}" class="flex items-center gap-2 sm:gap-2.5 mr-2 sm:mr-4 group py-0.5 shrink-0" title="OLARA — Sirkular Bumi">
             <img
               src="{{ asset('assets/img/logo-emblem.png') }}"
               alt="OLARA — Sirkular Bumi"
-              class="h-8 sm:h-9 w-auto object-contain transition-transform group-hover:scale-105"
+              class="h-7 sm:h-9 w-auto object-contain transition-transform group-hover:scale-105"
             />
             <div class="flex flex-col">
-              <span class="font-outfit font-extrabold text-base tracking-tight text-stone-900 dark:text-white leading-none">OLARA</span>
-              <span class="text-[9px] font-semibold text-stone-500 dark:text-stone-400 tracking-widest uppercase mt-0.5">Sirkular Bumi</span>
+              <span class="font-outfit font-extrabold text-base sm:text-lg tracking-tight text-stone-900 dark:text-white leading-none">OLARA</span>
+              <span class="text-[8px] sm:text-[9px] font-semibold text-stone-500 dark:text-stone-400 tracking-widest uppercase mt-0.5 hidden xs:inline-block">Sirkular Bumi</span>
             </div>
           </a>
 
           <!-- Topbar Search -->
           <form action="{{ route('dropoff.index') }}" method="GET" class="hidden md:block md:pl-2">
             <label for="topbar-search" class="sr-only">Search</label>
-            <div class="relative md:w-64 lg:w-80">
+            <div class="relative md:w-56 lg:w-72">
               <div class="flex absolute inset-y-0 left-0 items-center pl-3.5 pointer-events-none text-stone-400">
                 <i data-lucide="search" class="w-4 h-4"></i>
               </div>
@@ -83,33 +83,33 @@
                 type="text"
                 name="search"
                 id="topbar-search"
-                class="bg-stone-100/70 border border-stone-200/80 text-stone-800 text-xs rounded-full focus:ring-2 focus:ring-[#FFB7B2] focus:border-[#FFB7B2] block w-full pl-9.5 pr-4 py-2 dark:bg-stone-800 dark:border-stone-700 dark:placeholder-stone-400 dark:text-stone-100 transition-all placeholder:text-stone-400"
-                placeholder="Cari bank sampah, material daur ulang..."
+                class="bg-stone-100/70 border border-stone-200/80 text-stone-800 text-xs rounded-full focus:ring-2 focus:ring-[#FFB7B2] focus:border-[#FFB7B2] block w-full pl-9 pr-4 py-1.5 dark:bg-stone-800 dark:border-stone-700 dark:placeholder-stone-400 dark:text-stone-100 transition-all placeholder:text-stone-400"
+                placeholder="Cari bank sampah..."
               />
             </div>
           </form>
         </div>
 
-        <!-- Right Cluster -->
-        <div class="flex items-center gap-1 sm:gap-2 lg:order-2">
+        <!-- Right Cluster (Single Row, Never Wraps) -->
+        <div class="flex items-center gap-1 sm:gap-2 shrink-0">
           <!-- Eco-Points Pill -->
-          <a href="{{ route('rewards.index') }}" class="flex items-center gap-1.5 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 dark:bg-emerald-950/50 dark:border-emerald-800/80 dark:hover:bg-emerald-900/60 px-3 py-1.5 rounded-full transition group" title="Saldo Eco-Points Anda">
+          <a href="{{ route('rewards.index') }}" class="flex items-center gap-1 sm:gap-1.5 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 dark:bg-emerald-950/50 dark:border-emerald-800/80 dark:hover:bg-emerald-900/60 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full transition group shrink-0" title="Saldo Eco-Points Anda">
             <span class="text-xs sm:text-sm font-extrabold text-emerald-800 dark:text-emerald-200 tabular-nums">{{ number_format(Auth::user()?->eco_points ?? 0) }}</span>
-            <span class="text-[11px] font-bold text-emerald-600 dark:text-emerald-400">Pts</span>
+            <span class="text-[10px] sm:text-[11px] font-bold text-emerald-600 dark:text-emerald-400">Pts</span>
           </a>
 
           <!-- Dark Mode Toggle Button -->
           <button
             id="theme-toggle"
             type="button"
-            class="p-2 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+            class="p-1.5 sm:p-2 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:outline-none"
             title="Ganti Tema Gelap / Terang"
           >
             <span id="theme-toggle-dark-icon" class="hidden">
-              <i data-lucide="moon" class="w-5 h-5"></i>
+              <i data-lucide="moon" class="w-4 sm:w-5 h-4 sm:h-5"></i>
             </span>
             <span id="theme-toggle-light-icon" class="hidden">
-              <i data-lucide="sun" class="w-5 h-5"></i>
+              <i data-lucide="sun" class="w-4 sm:w-5 h-4 sm:h-5"></i>
             </span>
           </button>
 
@@ -117,11 +117,11 @@
           <button
             type="button"
             data-dropdown-toggle="notification-dropdown"
-            class="p-2 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 relative"
+            class="p-1.5 sm:p-2 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:outline-none relative"
           >
             <span class="sr-only">Lihat notifikasi</span>
-            <i data-lucide="bell" class="w-5 h-5"></i>
-            <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-emerald-500 rounded-full"></span>
+            <i data-lucide="bell" class="w-4 sm:w-5 h-4 sm:h-5"></i>
+            <span class="absolute top-1 right-1 sm:top-1.5 sm:right-1.5 w-2 h-2 bg-emerald-500 rounded-full"></span>
           </button>
 
           <!-- Notification Dropdown Menu -->
@@ -161,15 +161,15 @@
             </a>
           </div>
 
-          <!-- Apps Grid Dropdown Button -->
+          <!-- Apps Grid Dropdown Button (Hidden on xs/mobile, visible on sm+) -->
           <button
             type="button"
             data-dropdown-toggle="apps-dropdown"
-            class="p-2 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+            class="hidden sm:inline-flex p-1.5 sm:p-2 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:outline-none"
             title="Menu Fitur Utama"
           >
             <span class="sr-only">Semua Fitur</span>
-            <i data-lucide="grid" class="w-5 h-5"></i>
+            <i data-lucide="grid" class="w-4 sm:w-5 h-4 sm:h-5"></i>
           </button>
 
           <!-- Apps Grid Dropdown Menu -->
@@ -213,10 +213,6 @@
                 <i data-lucide="help-circle" class="mx-auto mb-1 w-6 h-6 text-blue-500 group-hover:scale-110 transition-transform"></i>
                 <div class="text-xs font-semibold text-gray-900 dark:text-white">Panduan</div>
               </button>
-              <a href="{{ route('demo.login') }}" class="block p-3 text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 group">
-                <i data-lucide="refresh-cw" class="mx-auto mb-1 w-6 h-6 text-gray-500 group-hover:scale-110 transition-transform"></i>
-                <div class="text-xs font-semibold text-gray-900 dark:text-white">Akun Demo</div>
-              </a>
             </div>
           </div>
 
@@ -275,11 +271,6 @@
                   <i data-lucide="compass" class="w-4 h-4 text-blue-500"></i> Panduan Edukasi
                 </button>
               </li>
-              <li>
-                <a href="{{ route('demo.login') }}" class="flex items-center gap-2 py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                  <i data-lucide="refresh-cw" class="w-4 h-4 text-gray-400"></i> Reset Akun Demo
-                </a>
-              </li>
               <li class="border-t border-gray-100 dark:border-gray-600">
                 <form method="POST" action="{{ route('logout') }}">
                   @csrf
@@ -296,15 +287,18 @@
 
     <!-- Sidebar Navigation -->
     <aside
-      class="fixed top-0 left-0 z-40 w-64 h-screen pt-14 bg-[#FDFCF8] border-r border-stone-200/80 dark:bg-stone-900 dark:border-stone-800 transition-transform duration-300 ease-in-out"
+      class="fixed top-0 left-0 z-60 md:z-40 w-64 max-w-[85vw] h-screen pt-4 md:pt-14 bg-[#FDFCF8] border-r border-stone-200/80 dark:bg-stone-900 dark:border-stone-800 shadow-2xl md:shadow-none"
       aria-label="Sidenav"
       id="drawer-navigation"
     >
-      <div class="overflow-y-auto pt-5 px-3 pb-20 h-full bg-[#FDFCF8] dark:bg-stone-900">
+      <div class="overflow-y-auto pt-2 md:pt-5 px-3 pb-28 h-full bg-[#FDFCF8] dark:bg-stone-900">
         <!-- Mobile Sidebar Close Header -->
-        <div class="flex items-center justify-between pb-2 mb-2 border-b border-stone-200/60 dark:border-stone-800 md:hidden">
-          <span class="text-xs font-bold uppercase tracking-wider text-stone-400">Navigasi OLARA</span>
-          <button id="sidebar-close-btn" type="button" onclick="closeMobileSidebar()" class="p-1.5 text-stone-500 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800 cursor-pointer" title="Tutup Menu">
+        <div class="flex items-center justify-between pb-3 mb-3 border-b border-stone-200/60 dark:border-stone-800 md:hidden">
+          <div class="flex items-center gap-2">
+            <img src="{{ asset('assets/img/logo-emblem.png') }}" alt="OLARA" class="h-6 w-auto object-contain" />
+            <span class="font-outfit font-extrabold text-sm text-stone-900 dark:text-white tracking-tight">Menu OLARA</span>
+          </div>
+          <button id="sidebar-close-btn" type="button" onclick="closeMobileSidebar()" class="p-1.5 text-stone-500 rounded-xl hover:bg-stone-100 dark:hover:bg-stone-800 cursor-pointer" title="Tutup Menu">
             <i data-lucide="x" class="w-5 h-5"></i>
           </button>
         </div>
@@ -331,6 +325,7 @@
           <li>
             <a
               href="{{ route('home') }}"
+              onclick="closeMobileSidebar()"
               class="flex items-center p-2 text-sm rounded-xl transition-colors group {{ request()->routeIs('home') ? 'bg-[#FFE4E1]/60 text-stone-900 dark:bg-stone-800 dark:text-white font-bold shadow-sm' : 'text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 hover:text-stone-900 dark:hover:text-white' }}"
             >
               <i data-lucide="layout-dashboard" class="w-5 h-5 {{ request()->routeIs('home') ? 'text-[#ef5348] dark:text-[#ffb7b2]' : 'text-stone-400 group-hover:text-stone-700 dark:group-hover:text-stone-200' }}"></i>
@@ -347,6 +342,7 @@
           <li>
             <a
               href="{{ route('scanner.index') }}"
+              onclick="closeMobileSidebar()"
               class="flex items-center p-2 text-sm rounded-xl transition-colors group {{ request()->routeIs('scanner.*') ? 'bg-[#FFE4E1]/50 text-stone-900 dark:bg-stone-800 dark:text-white font-bold shadow-xs' : 'text-stone-700 dark:text-stone-300 hover:bg-stone-100/70 dark:hover:bg-stone-800 hover:text-stone-900 dark:hover:text-white' }}"
             >
               <i data-lucide="scan-line" class="w-5 h-5 {{ request()->routeIs('scanner.*') ? 'text-[#cb3930] dark:text-[#ffb7b2]' : 'text-stone-400 group-hover:text-stone-700 dark:group-hover:text-stone-200' }}"></i>
@@ -361,6 +357,7 @@
           <li>
             <a
               href="{{ route('pickup.index') }}"
+              onclick="closeMobileSidebar()"
               class="flex items-center p-2 text-sm rounded-xl transition-colors group {{ request()->routeIs('pickup.*') ? 'bg-[#FFE4E1]/50 text-stone-900 dark:bg-stone-800 dark:text-white font-bold shadow-xs' : 'text-stone-700 dark:text-stone-300 hover:bg-stone-100/70 dark:hover:bg-stone-800 hover:text-stone-900 dark:hover:text-white' }}"
             >
               <i data-lucide="truck" class="w-5 h-5 {{ request()->routeIs('pickup.*') ? 'text-[#cb3930] dark:text-[#ffb7b2]' : 'text-stone-400 group-hover:text-stone-700 dark:group-hover:text-stone-200' }}"></i>
@@ -372,6 +369,7 @@
           <li>
             <a
               href="{{ route('dropoff.index') }}"
+              onclick="closeMobileSidebar()"
               class="flex items-center p-2 text-sm rounded-xl transition-colors group {{ request()->routeIs('dropoff.*') ? 'bg-[#FFE4E1]/50 text-stone-900 dark:bg-stone-800 dark:text-white font-bold shadow-xs' : 'text-stone-700 dark:text-stone-300 hover:bg-stone-100/70 dark:hover:bg-stone-800 hover:text-stone-900 dark:hover:text-white' }}"
             >
               <i data-lucide="map-pin" class="w-5 h-5 {{ request()->routeIs('dropoff.*') ? 'text-[#cb3930] dark:text-[#ffb7b2]' : 'text-stone-400 group-hover:text-stone-700 dark:group-hover:text-stone-200' }}"></i>
@@ -388,6 +386,7 @@
           <li>
             <a
               href="{{ route('rewards.index') }}"
+              onclick="closeMobileSidebar()"
               class="flex items-center p-2 text-sm rounded-xl transition-colors group {{ request()->routeIs('rewards.*') ? 'bg-[#FFE4E1]/50 text-stone-900 dark:bg-stone-800 dark:text-white font-bold shadow-xs' : 'text-stone-700 dark:text-stone-300 hover:bg-stone-100/70 dark:hover:bg-stone-800 hover:text-stone-900 dark:hover:text-white' }}"
             >
               <i data-lucide="gift" class="w-5 h-5 {{ request()->routeIs('rewards.*') ? 'text-[#cb3930] dark:text-[#ffb7b2]' : 'text-stone-400 group-hover:text-stone-700 dark:group-hover:text-stone-200' }}"></i>
@@ -438,6 +437,7 @@
           <li>
             <a
               href="{{ route('analytics.index') }}"
+              onclick="closeMobileSidebar()"
               class="flex items-center p-2 text-sm rounded-xl transition-colors group {{ request()->routeIs('analytics.*') ? 'bg-[#FFE4E1]/50 text-stone-900 dark:bg-stone-800 dark:text-white font-bold shadow-xs' : 'text-stone-700 dark:text-stone-300 hover:bg-stone-100/70 dark:hover:bg-stone-800 hover:text-stone-900 dark:hover:text-white' }}"
             >
               <i data-lucide="bar-chart-3" class="w-5 h-5 {{ request()->routeIs('analytics.*') ? 'text-[#cb3930] dark:text-[#ffb7b2]' : 'text-stone-400 group-hover:text-stone-700 dark:group-hover:text-stone-200' }}"></i>
@@ -449,6 +449,7 @@
           <li>
             <a
               href="{{ route('membership.index') }}"
+              onclick="closeMobileSidebar()"
               class="flex items-center p-2 text-sm rounded-xl transition-colors group {{ request()->routeIs('membership.*') ? 'bg-[#FFE4E1]/50 text-stone-900 dark:bg-stone-800 dark:text-white font-bold shadow-xs' : 'text-stone-700 dark:text-stone-300 hover:bg-stone-100/70 dark:hover:bg-stone-800 hover:text-stone-900 dark:hover:text-white' }}"
             >
               <i data-lucide="crown" class="w-5 h-5 {{ request()->routeIs('membership.*') ? 'text-[#cb3930] dark:text-[#ffb7b2]' : 'text-stone-400 group-hover:text-stone-700 dark:group-hover:text-stone-200' }}"></i>
@@ -462,21 +463,12 @@
           <li>
             <button
               type="button"
-              onclick="openOnboardingModal()"
+              onclick="openOnboardingModal(); closeMobileSidebar();"
               class="w-full flex items-center p-2 text-sm text-stone-700 dark:text-stone-300 rounded-xl hover:bg-stone-100 dark:hover:bg-stone-800 hover:text-stone-900 dark:hover:text-white group"
             >
               <i data-lucide="help-circle" class="w-5 h-5 text-stone-400 group-hover:text-stone-700 dark:group-hover:text-stone-200"></i>
               <span class="ml-3">Panduan</span>
             </button>
-          </li>
-          <li>
-            <a
-              href="{{ route('demo.login') }}"
-              class="flex items-center p-2 text-sm text-stone-700 dark:text-stone-300 rounded-xl hover:bg-stone-100 dark:hover:bg-stone-800 hover:text-stone-900 dark:hover:text-white group"
-            >
-              <i data-lucide="refresh-cw" class="w-5 h-5 text-stone-400 group-hover:text-stone-700 dark:group-hover:text-stone-200"></i>
-              <span class="ml-3">Akun Demo</span>
-            </a>
           </li>
           <li>
             <form method="POST" action="{{ route('logout') }}" class="w-full">
@@ -509,10 +501,10 @@
     </aside>
 
     <!-- Mobile Backdrop -->
-    <div id="sidebar-backdrop" onclick="closeMobileSidebar()" class="fixed inset-0 bg-gray-900/50 z-30 hidden md:hidden transition-opacity cursor-pointer"></div>
+    <div id="sidebar-backdrop" onclick="closeMobileSidebar()" class="mobile-drawer-backdrop cursor-pointer" aria-hidden="true"></div>
 
     <!-- Main View Content Container -->
-    <main id="main-content" class="p-4 h-auto pt-20 flex-grow transition-all duration-300 ease-in-out">
+    <main id="main-content" class="p-3 sm:p-4 h-auto pt-16 sm:pt-20 flex-grow transition-all duration-300 ease-in-out">
       <!-- Global Alert / Toast Notifications -->
       @if(session('success'))
         <div id="flashToast" class="mb-4">
@@ -713,30 +705,29 @@
     const sidebar = document.getElementById('drawer-navigation');
     const mainContent = document.getElementById('main-content');
     const sidebarBackdrop = document.getElementById('sidebar-backdrop');
+    const sidebarToggleBtn = document.getElementById('sidebar-toggle-btn');
 
     function isDesktop() {
         return window.innerWidth >= 768;
     }
 
-    function initSidebarState() {
+    window.openMobileSidebar = function() {
         if (!sidebar) return;
-        if (isDesktop()) {
-            const isCollapsed = localStorage.getItem('olara_sidebar_collapsed') === 'true';
-            if (isCollapsed) {
-                sidebar.style.transform = 'translateX(-100%)';
-                if (mainContent) mainContent.style.marginLeft = '0px';
-            } else {
-                sidebar.style.transform = 'translateX(0px)';
-                if (mainContent) mainContent.style.marginLeft = '16rem';
-            }
-            sidebarBackdrop?.classList.add('hidden');
-        } else {
-            // Mobile: closed by default
-            sidebar.style.transform = 'translateX(-100%)';
-            if (mainContent) mainContent.style.marginLeft = '0px';
-            sidebarBackdrop?.classList.add('hidden');
-        }
-    }
+        sidebar.classList.add('is-open');
+        sidebarToggleBtn?.classList.add('is-active');
+        requestAnimationFrame(() => {
+            sidebarBackdrop?.classList.add('is-active');
+        });
+        document.body.classList.add('overflow-hidden');
+    };
+
+    window.closeMobileSidebar = function() {
+        if (!sidebar) return;
+        sidebar.classList.remove('is-open');
+        sidebarBackdrop?.classList.remove('is-active');
+        sidebarToggleBtn?.classList.remove('is-active');
+        document.body.classList.remove('overflow-hidden');
+    };
 
     window.toggleSidebar = function(e) {
         if (e) {
@@ -746,37 +737,46 @@
         if (!sidebar) return;
 
         if (isDesktop()) {
-            const isCurrentlyHidden = sidebar.style.transform === 'translateX(-100%)' || localStorage.getItem('olara_sidebar_collapsed') === 'true';
-            if (isCurrentlyHidden) {
-                // Open sidebar on desktop
-                sidebar.style.transform = 'translateX(0px)';
+            const isCollapsed = sidebar.classList.contains('is-collapsed');
+            if (isCollapsed) {
+                sidebar.classList.remove('is-collapsed');
                 if (mainContent) mainContent.style.marginLeft = '16rem';
+                sidebarToggleBtn?.classList.add('is-active');
                 localStorage.setItem('olara_sidebar_collapsed', 'false');
             } else {
-                // Close sidebar on desktop
-                sidebar.style.transform = 'translateX(-100%)';
+                sidebar.classList.add('is-collapsed');
                 if (mainContent) mainContent.style.marginLeft = '0px';
+                sidebarToggleBtn?.classList.remove('is-active');
                 localStorage.setItem('olara_sidebar_collapsed', 'true');
             }
         } else {
-            // Mobile toggle
-            const isCurrentlyOpen = sidebar.style.transform === 'translateX(0px)';
-            if (isCurrentlyOpen) {
-                sidebar.style.transform = 'translateX(-100%)';
-                sidebarBackdrop?.classList.add('hidden');
+            if (sidebar.classList.contains('is-open')) {
+                window.closeMobileSidebar();
             } else {
-                sidebar.style.transform = 'translateX(0px)';
-                sidebarBackdrop?.classList.remove('hidden');
+                window.openMobileSidebar();
             }
         }
     };
 
-    window.closeMobileSidebar = function() {
-        if (!isDesktop() && sidebar) {
-            sidebar.style.transform = 'translateX(-100%)';
-            sidebarBackdrop?.classList.add('hidden');
+    function initSidebarState() {
+        if (!sidebar) return;
+        if (isDesktop()) {
+            window.closeMobileSidebar();
+            const isCollapsed = localStorage.getItem('olara_sidebar_collapsed') === 'true';
+            if (isCollapsed) {
+                sidebar.classList.add('is-collapsed');
+                if (mainContent) mainContent.style.marginLeft = '0px';
+                sidebarToggleBtn?.classList.remove('is-active');
+            } else {
+                sidebar.classList.remove('is-collapsed');
+                if (mainContent) mainContent.style.marginLeft = '16rem';
+                sidebarToggleBtn?.classList.add('is-active');
+            }
+        } else {
+            window.closeMobileSidebar();
+            if (mainContent) mainContent.style.marginLeft = '0px';
         }
-    };
+    }
 
     window.toggleMarketplaceDropdown = function(e) {
         if (e) {
@@ -796,6 +796,13 @@
             chevronWrapper?.classList.remove('rotate-180');
         }
     };
+
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            window.closeMobileSidebar();
+        }
+    });
 
     // Initialize sidebar state on page load
     initSidebarState();

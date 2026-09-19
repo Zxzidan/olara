@@ -3,7 +3,7 @@
 @section('title', 'Peta Mitra Bank Sampah (Drop-Off) — OLARA')
 
 @section('content')
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+<div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 space-y-5 sm:space-y-6">
 
     <!-- Header -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -58,11 +58,11 @@
     </form>
 
     <!-- Split-Screen View: Map (Left/Top) & Directory List (Right) -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
 
         <!-- Left 7 Cols: Interactive Map Canvas -->
         <div class="lg:col-span-7 space-y-4">
-            <div class="bg-white border border-[#DDE3DF] rounded-3xl p-4 shadow-sm">
+            <div class="bg-white border border-[#DDE3DF] rounded-3xl p-3 sm:p-4 shadow-sm">
                 <div class="flex items-center justify-between mb-3 px-2">
                     <div class="flex items-center gap-2">
                         <i data-lucide="map" class="w-4 h-4 text-[#168A5B]"></i>
@@ -71,12 +71,12 @@
                     <span class="text-xs text-[#66716B]">{{ $partners->count() }} Mitra Ditemukan</span>
                 </div>
 
-                <div id="depotMap" class="w-full h-[520px] rounded-2xl overflow-hidden border border-gray-200 z-10"></div>
+                <div id="depotMap" class="w-full h-[320px] sm:h-[420px] lg:h-[520px] rounded-2xl overflow-hidden border border-gray-200 z-10"></div>
             </div>
         </div>
 
         <!-- Right 5 Cols: Directory Cards List -->
-        <div class="lg:col-span-5 space-y-4 max-h-[580px] overflow-y-auto pr-1">
+        <div class="lg:col-span-5 space-y-4 max-h-none lg:max-h-[580px] lg:overflow-y-auto pr-0 lg:pr-1">
             @forelse($partners as $partner)
                 <div class="bg-white border border-[#DDE3DF] hover:border-[#168A5B] rounded-2xl p-5 transition shadow-sm space-y-3" id="partner-card-{{ $partner->id }}">
                     <div class="flex items-start justify-between gap-2">

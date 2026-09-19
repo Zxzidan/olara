@@ -121,55 +121,132 @@
     <div class="grain-overlay" aria-hidden="true"></div>
 
     <!-- Floating Pill Navigation Bar -->
-    <header class="fixed top-4 md:top-6 left-0 right-0 z-40 flex justify-center px-4">
-        <nav class="w-full max-w-5xl bg-white/70 backdrop-blur-[20px] border border-stone-200/60 rounded-full px-4 sm:px-6 py-3 shadow-soft flex items-center justify-between transition-all">
+    <header class="fixed top-3 sm:top-4 md:top-6 left-0 right-0 z-40 flex justify-center px-3 sm:px-4">
+        <nav class="w-full max-w-5xl bg-white/80 backdrop-blur-[20px] border border-stone-200/70 rounded-full px-3.5 sm:px-6 py-2.5 sm:py-3 shadow-soft flex items-center justify-between transition-all">
             <!-- Brand & Official Logo -->
-            <a href="{{ route('landing') }}" class="flex items-center gap-2.5 group">
-                <img src="{{ asset('assets/img/logo-emblem.png') }}" class="h-8 sm:h-9 w-auto object-contain group-hover:scale-105 transition-transform" alt="Logo OLARA">
+            <a href="{{ route('landing') }}" class="flex items-center gap-2 sm:gap-2.5 group shrink-0">
+                <img src="{{ asset('assets/img/logo-emblem.png') }}" class="h-7 sm:h-9 w-auto object-contain group-hover:scale-105 transition-transform" alt="Logo OLARA">
                 <div class="flex flex-col">
                     <span class="font-outfit font-extrabold text-base md:text-lg tracking-tight text-[#292524] leading-none">OLARA</span>
-                    <span class="text-[9px] font-semibold text-stone-500 tracking-widest uppercase mt-0.5">Sirkular Bumi</span>
+                    <span class="text-[8px] sm:text-[9px] font-semibold text-stone-500 tracking-widest uppercase mt-0.5 hidden xs:inline-block">Sirkular Bumi</span>
                 </div>
             </a>
 
             <!-- Desktop Links -->
             <div class="hidden lg:flex items-center gap-6 text-[13.5px] font-medium text-[#78716C]">
                 <a href="#fitur" class="hover:text-[#292524] transition-colors">Fitur Utama</a>
-                <a href="#skenario" class="hover:text-[#292524] transition-colors">Cara Kerja</a>
+                <a href="#cara-kerja" class="hover:text-[#292524] transition-colors">Cara Kerja</a>
+                <a href="#preview" class="hover:text-[#292524] transition-colors">Preview</a>
                 <a href="#marketplace" class="hover:text-[#292524] transition-colors">Marketplace</a>
                 <a href="#harga" class="hover:text-[#292524] transition-colors">Paket & Harga</a>
                 <a href="#testimoni" class="hover:text-[#292524] transition-colors">Testimoni</a>
                 <a href="#faq" class="hover:text-[#292524] transition-colors">Tanya Jawab</a>
             </div>
 
-            <!-- CTA Cluster -->
-            <div class="flex items-center gap-2">
+            <!-- CTA Cluster & Mobile Hamburger Toggle -->
+            <div class="flex items-center gap-1.5 sm:gap-2">
                 @auth
-                    <a href="{{ route('home') }}" class="inline-flex items-center gap-2 bg-[#292524] text-white px-4 py-2 rounded-full text-xs font-semibold hover:bg-stone-800 transition-all shadow-sm">
-                        <span>Buka Dashboard</span>
+                    <a href="{{ route('home') }}" class="inline-flex items-center gap-1.5 sm:gap-2 bg-[#292524] text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs font-semibold hover:bg-stone-800 transition-all shadow-sm">
+                        <span>Dashboard</span>
                         <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
                     </a>
                 @else
-                    <a href="{{ route('login') }}" class="hidden sm:inline-block text-xs font-semibold text-[#292524] hover:text-stone-900 px-3 py-2 transition-colors">
+                    <a href="{{ route('login') }}" class="hidden sm:inline-block text-xs font-semibold text-[#292524] hover:text-stone-900 px-2.5 py-2 transition-colors">
                         Masuk
                     </a>
-                    <a href="{{ route('demo.login') }}" class="inline-flex items-center gap-1.5 bg-[#FFB7B2] hover:bg-[#FF9E98] text-[#292524] px-4 py-2 rounded-full text-xs font-bold transition-all shadow-soft group">
-                        <span>Coba Akun Demo</span>
+                    <a href="{{ route('demo.login') }}" class="inline-flex items-center gap-1 sm:gap-1.5 bg-[#FFB7B2] hover:bg-[#FF9E98] text-[#292524] px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs font-bold transition-all shadow-soft group">
+                        <span>Demo</span>
                         <i data-lucide="sparkles" class="w-3.5 h-3.5 group-hover:rotate-12 transition-transform"></i>
                     </a>
                 @endauth
+
+                <!-- Hamburger Strip 3 Button for Mobile -->
+                <button
+                    id="landing-mobile-menu-btn"
+                    type="button"
+                    onclick="toggleLandingMobileMenu()"
+                    class="hamburger-strip-btn lg:hidden text-[#292524] hover:bg-stone-100 rounded-full focus:outline-none"
+                    aria-label="Buka Menu Navigasi"
+                    title="Menu Navigasi"
+                >
+                    <span class="strip-line"></span>
+                    <span class="strip-line"></span>
+                    <span class="strip-line"></span>
+                </button>
             </div>
         </nav>
     </header>
+
+    <!-- Mobile Navigation Drawer / Overlay (Landing Page) -->
+    <div id="landing-mobile-backdrop" onclick="closeLandingMobileMenu()" class="mobile-drawer-backdrop z-40 cursor-pointer" aria-hidden="true"></div>
+    <div id="landing-mobile-drawer" class="fixed top-16 sm:top-20 inset-x-3 sm:inset-x-4 max-w-md mx-auto bg-white/95 backdrop-blur-xl border border-stone-200/90 shadow-2xl rounded-3xl p-5 z-50 hidden transition-all duration-300 transform -translate-y-4 opacity-0 lg:hidden">
+        <div class="flex items-center justify-between pb-3 border-b border-stone-100">
+            <div class="flex items-center gap-2">
+                <img src="{{ asset('assets/img/logo-emblem.png') }}" class="h-6 w-auto object-contain" alt="OLARA">
+                <span class="font-outfit font-extrabold text-sm text-[#292524]">Navigasi OLARA</span>
+            </div>
+            <button onclick="closeLandingMobileMenu()" class="p-1.5 text-stone-400 hover:text-stone-700 rounded-lg hover:bg-stone-100 transition" aria-label="Tutup Menu">
+                <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+        </div>
+        <nav class="py-2.5 flex flex-col space-y-1">
+            <a href="#fitur" onclick="closeLandingMobileMenu()" class="flex items-center gap-3 px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold text-[#292524] hover:bg-[#FFE4E1]/50 transition">
+                <i data-lucide="sparkles" class="w-4 h-4 text-[#cb3930]"></i>
+                <span>Fitur Utama</span>
+            </a>
+            <a href="#cara-kerja" onclick="closeLandingMobileMenu()" class="flex items-center gap-3 px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold text-[#292524] hover:bg-[#FFE4E1]/50 transition">
+                <i data-lucide="workflow" class="w-4 h-4 text-emerald-600"></i>
+                <span>Cara Kerja</span>
+            </a>
+            <a href="#preview" onclick="closeLandingMobileMenu()" class="flex items-center gap-3 px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold text-[#292524] hover:bg-[#FFE4E1]/50 transition">
+                <i data-lucide="layout-dashboard" class="w-4 h-4 text-sky-600"></i>
+                <span>Preview Dashboard</span>
+            </a>
+            <a href="#marketplace" onclick="closeLandingMobileMenu()" class="flex items-center gap-3 px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold text-[#292524] hover:bg-[#FFE4E1]/50 transition">
+                <i data-lucide="store" class="w-4 h-4 text-indigo-600"></i>
+                <span>Marketplace B2B</span>
+            </a>
+            <a href="#harga" onclick="closeLandingMobileMenu()" class="flex items-center gap-3 px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold text-[#292524] hover:bg-[#FFE4E1]/50 transition">
+                <i data-lucide="crown" class="w-4 h-4 text-amber-500"></i>
+                <span>Paket & Harga</span>
+            </a>
+            <a href="#testimoni" onclick="closeLandingMobileMenu()" class="flex items-center gap-3 px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold text-[#292524] hover:bg-[#FFE4E1]/50 transition">
+                <i data-lucide="message-square-quote" class="w-4 h-4 text-pink-600"></i>
+                <span>Testimoni Pengguna</span>
+            </a>
+            <a href="#faq" onclick="closeLandingMobileMenu()" class="flex items-center gap-3 px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold text-[#292524] hover:bg-[#FFE4E1]/50 transition">
+                <i data-lucide="help-circle" class="w-4 h-4 text-teal-600"></i>
+                <span>Tanya Jawab (FAQ)</span>
+            </a>
+        </nav>
+        <div class="pt-3 border-t border-stone-100 flex flex-col gap-2">
+            @auth
+                <a href="{{ route('home') }}" class="w-full py-2.5 px-4 rounded-xl bg-[#292524] text-white text-center text-xs font-bold shadow-sm flex items-center justify-center gap-2">
+                    <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+                    <span>Masuk ke Dashboard</span>
+                </a>
+            @else
+                <div class="grid grid-cols-2 gap-2">
+                    <a href="{{ route('login') }}" class="py-2.5 px-3 rounded-xl border border-stone-200 text-stone-800 text-center text-xs font-bold hover:bg-stone-50 transition">
+                        Masuk Akun
+                    </a>
+                    <a href="{{ route('demo.login') }}" class="py-2.5 px-3 rounded-xl bg-[#FFB7B2] hover:bg-[#FF9E98] text-[#292524] text-center text-xs font-bold transition shadow-soft flex items-center justify-center gap-1.5">
+                        <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                        <span>Coba Demo</span>
+                    </a>
+                </div>
+            @endauth
+        </div>
+    </div>
 
     <main class="relative z-10">
 
         <!-- ===================================================================
              1. HERO SECTION (100% Desktop Viewport Fit: Title, Subtitle, & Dual CTA)
         =================================================================== -->
-        <section class="h-[100dvh] min-h-[480px] flex flex-col justify-center items-center text-center px-4 sm:px-6 pt-16 sm:pt-20 pb-8 sm:pb-10 max-w-5xl mx-auto reveal-item">
+        <section class="min-h-[90dvh] sm:h-[100dvh] flex flex-col justify-center items-center text-center px-4 sm:px-6 pt-24 sm:pt-28 pb-10 sm:pb-14 max-w-5xl mx-auto reveal-item">
             <!-- Main Headline with Character Animation & Hand-Drawn Underline on Target Word -->
-            <h1 id="hero-heading" data-animate-heading class="heading-animated font-outfit text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-bold tracking-tight text-[#292524] leading-[1.2] max-w-3xl mx-auto select-none">
+            <h1 id="hero-heading" data-animate-heading class="heading-animated font-outfit text-2xl sm:text-4xl md:text-5xl lg:text-[54px] font-bold tracking-tight text-[#292524] leading-[1.25] sm:leading-[1.2] max-w-3xl mx-auto select-none break-words">
                 Ubah sampah harian jadi berkah yang 
                 <span class="relative inline-block keyword-target font-cursive text-4xl sm:text-6xl md:text-7xl text-[#cb3930] font-normal lowercase px-1 rotate-[-2deg]">
                     bermakna
@@ -182,12 +259,12 @@
             </h1>
 
             <!-- Sub-headline -->
-            <p class="mt-4 sm:mt-5 text-sm sm:text-base text-[#78716C] max-w-[480px] mx-auto leading-relaxed font-normal">
+            <p class="mt-4 sm:mt-5 text-xs sm:text-base text-[#78716C] max-w-[480px] mx-auto leading-relaxed font-normal">
                 Pilah dengan AI, armada jemput ke rumah, dan tukar poin jadi saldo e-wallet.
             </p>
 
             <!-- Dual CTA Buttons -->
-            <div class="mt-6 sm:mt-7 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <div class="mt-6 sm:mt-7 flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto px-4 sm:px-0">
                 <a href="{{ route('demo.login') }}" class="w-full sm:w-auto px-7 py-2.5 sm:py-3 rounded-full bg-[#FFB7B2] hover:bg-[#FF9E98] text-[#292524] font-bold text-sm shadow-soft transition-all transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2">
                     <span>Mulai Gratis</span>
                     <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
@@ -585,48 +662,48 @@
                     </div>
 
                     <!-- MODAL OVERLAY (Interactive Simulation per reference spec) -->
-                    <div id="new-pickup-modal" class="absolute inset-0 z-[150] bg-white opacity-0 pointer-events-none invisible transition-all duration-500 flex flex-col p-6 sm:p-10 justify-between">
+                    <div id="new-pickup-modal" class="absolute inset-0 z-[150] bg-white opacity-0 pointer-events-none invisible transition-all duration-500 flex flex-col p-4 sm:p-8 md:p-10 justify-between overflow-y-auto">
                         
                         <!-- Modal Header -->
-                        <div class="modal-element flex items-center justify-between border-b border-stone-200/70 pb-5">
-                            <div class="flex items-center gap-4">
-                                <div class="w-12 h-12 rounded-2xl bg-[#cb3930] text-white flex items-center justify-center text-xl shadow-lg shadow-rose-200/50">
-                                    <i data-lucide="truck" class="w-6 h-6"></i>
+                        <div class="modal-element flex items-center justify-between border-b border-stone-200/70 pb-3 sm:pb-5">
+                            <div class="flex items-center gap-3 sm:gap-4">
+                                <div class="w-10 sm:w-12 h-10 sm:h-12 rounded-2xl bg-[#cb3930] text-white flex items-center justify-center text-lg sm:text-xl shadow-lg shadow-rose-200/50 shrink-0">
+                                    <i data-lucide="truck" class="w-5 sm:w-6 h-5 sm:h-6"></i>
                                 </div>
                                 <div>
-                                    <h3 class="font-outfit text-xl sm:text-2xl font-black text-stone-900">Pesan Penjemputan Sampah Kilat</h3>
-                                    <p class="text-stone-500 text-xs font-bold uppercase tracking-wider mt-0.5">Armada Listrik Ramah Lingkungan OLARA</p>
+                                    <h3 class="font-outfit text-base sm:text-xl md:text-2xl font-black text-stone-900 leading-snug">Pesan Penjemputan Sampah Kilat</h3>
+                                    <p class="text-stone-500 text-[10px] sm:text-xs font-bold uppercase tracking-wider mt-0.5">Armada Listrik Ramah Lingkungan OLARA</p>
                                 </div>
                             </div>
-                            <button id="modal-close-btn" type="button" class="p-2 rounded-xl text-stone-400 hover:text-stone-600 hover:bg-stone-100 transition cursor-pointer">
+                            <button id="modal-close-btn" type="button" class="p-1.5 sm:p-2 rounded-xl text-stone-400 hover:text-stone-600 hover:bg-stone-100 transition cursor-pointer shrink-0">
                                 <i data-lucide="x" class="w-5 h-5"></i>
                             </button>
                         </div>
 
                         <!-- Modal Form Elements -->
-                        <div class="space-y-4 max-w-4xl w-full mx-auto my-auto py-2">
+                        <div class="space-y-3 sm:space-y-4 max-w-4xl w-full mx-auto my-auto py-2">
                             <!-- Category Selection -->
                             <div class="modal-element space-y-2">
-                                <label class="flex items-center gap-2 text-[11px] font-black text-stone-500 tracking-wider uppercase">
+                                <label class="flex items-center gap-2 text-[10px] sm:text-[11px] font-black text-stone-500 tracking-wider uppercase">
                                     <i data-lucide="layers" class="w-3.5 h-3.5 text-[#cb3930]"></i> Kategori Sampah yang Dijemput
                                 </label>
-                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                                    <div class="p-3.5 rounded-xl border-2 border-[#cb3930] bg-[#FFE4E1]/30 flex items-center justify-between cursor-pointer">
-                                        <div class="flex items-center gap-2.5">
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3">
+                                    <div class="p-2.5 sm:p-3.5 rounded-xl border-2 border-[#cb3930] bg-[#FFE4E1]/30 flex items-center justify-between cursor-pointer">
+                                        <div class="flex items-center gap-2 sm:gap-2.5">
                                             <i data-lucide="recycle" class="w-4 h-4 text-[#cb3930]"></i>
                                             <span class="text-xs font-extrabold text-stone-900">Plastik Bersih (PET)</span>
                                         </div>
                                         <span class="w-2.5 h-2.5 rounded-full bg-[#cb3930]"></span>
                                     </div>
-                                    <div class="p-3.5 rounded-xl border-2 border-stone-200 bg-white flex items-center justify-between cursor-pointer hover:border-stone-300">
-                                        <div class="flex items-center gap-2.5">
+                                    <div class="p-2.5 sm:p-3.5 rounded-xl border-2 border-stone-200 bg-white flex items-center justify-between cursor-pointer hover:border-stone-300">
+                                        <div class="flex items-center gap-2 sm:gap-2.5">
                                             <i data-lucide="box" class="w-4 h-4 text-stone-600"></i>
                                             <span class="text-xs font-bold text-stone-700">Kardus Box Gelombang</span>
                                         </div>
                                         <span class="w-2.5 h-2.5 rounded-full border border-stone-300"></span>
                                     </div>
-                                    <div class="p-3.5 rounded-xl border-2 border-stone-200 bg-white flex items-center justify-between cursor-pointer hover:border-stone-300">
-                                        <div class="flex items-center gap-2.5">
+                                    <div class="p-2.5 sm:p-3.5 rounded-xl border-2 border-stone-200 bg-white flex items-center justify-between cursor-pointer hover:border-stone-300">
+                                        <div class="flex items-center gap-2 sm:gap-2.5">
                                             <i data-lucide="wine" class="w-4 h-4 text-stone-600"></i>
                                             <span class="text-xs font-bold text-stone-700">Kaleng Aluminium & Kaca</span>
                                         </div>
@@ -636,53 +713,53 @@
                             </div>
 
                             <!-- Address Input -->
-                            <div class="modal-element space-y-2">
-                                <label class="flex items-center gap-2 text-[11px] font-black text-stone-500 tracking-wider uppercase">
+                            <div class="modal-element space-y-1.5 sm:space-y-2">
+                                <label class="flex items-center gap-2 text-[10px] sm:text-[11px] font-black text-stone-500 tracking-wider uppercase">
                                     <i data-lucide="map-pin" class="w-3.5 h-3.5 text-[#cb3930]"></i> Alamat Lokasi Penjemputan
                                 </label>
-                                <div class="rounded-xl border-2 border-stone-200 bg-white p-3.5 flex items-center justify-between">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-8 h-8 rounded-lg bg-stone-100 flex items-center justify-center text-stone-700 shrink-0">
+                                <div class="rounded-xl border-2 border-stone-200 bg-white p-2.5 sm:p-3.5 flex items-center justify-between">
+                                    <div class="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                                        <div class="w-7 sm:w-8 h-7 sm:h-8 rounded-lg bg-stone-100 flex items-center justify-center text-stone-700 shrink-0">
                                             <i data-lucide="home" class="w-4 h-4"></i>
                                         </div>
-                                        <div>
-                                            <span class="text-xs font-bold text-stone-900 block">Rumah — Zidan Ramadhan</span>
-                                            <span class="text-[11px] text-stone-500 block">Jl. Senopati Raya No. 42, RT 04/RW 02, Kebayoran Baru, Jakarta Selatan</span>
+                                        <div class="min-w-0">
+                                            <span class="text-xs font-bold text-stone-900 block truncate">Rumah — Zidan Ramadhan</span>
+                                            <span class="text-[10px] sm:text-[11px] text-stone-500 block truncate">Jl. Senopati Raya No. 42, Kebayoran Baru, Jakarta</span>
                                         </div>
                                     </div>
-                                    <span class="text-[10px] font-bold text-[#cb3930] bg-[#FFE4E1] px-2.5 py-1 rounded-full uppercase">Utama</span>
+                                    <span class="text-[9px] sm:text-[10px] font-bold text-[#cb3930] bg-[#FFE4E1] px-2 py-0.5 rounded-full uppercase shrink-0 ml-2">Utama</span>
                                 </div>
                             </div>
 
                             <!-- Weight and Schedule Grid -->
-                            <div class="modal-element grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div class="space-y-1.5">
-                                    <label class="text-[11px] font-black text-stone-500 tracking-wider uppercase flex items-center gap-1.5">
+                            <div class="modal-element grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-4">
+                                <div class="space-y-1">
+                                    <label class="text-[10px] sm:text-[11px] font-black text-stone-500 tracking-wider uppercase flex items-center gap-1.5">
                                         <i data-lucide="scale" class="w-3.5 h-3.5 text-[#cb3930]"></i> Estimasi Berat Sampah
                                     </label>
-                                    <div class="rounded-xl border-2 border-stone-200 bg-white px-4 py-3 font-bold text-stone-800 text-sm flex justify-between items-center">
+                                    <div class="rounded-xl border-2 border-stone-200 bg-white px-3 sm:px-4 py-2 sm:py-3 font-bold text-stone-800 text-xs sm:text-sm flex justify-between items-center">
                                         <span>15.0 kg</span>
-                                        <span class="text-xs text-stone-400">Timbangan Digital EV</span>
+                                        <span class="text-[11px] text-stone-400">Timbangan Digital</span>
                                     </div>
                                 </div>
-                                <div class="space-y-1.5">
-                                    <label class="text-[11px] font-black text-stone-500 tracking-wider uppercase flex items-center gap-1.5">
+                                <div class="space-y-1">
+                                    <label class="text-[10px] sm:text-[11px] font-black text-stone-500 tracking-wider uppercase flex items-center gap-1.5">
                                         <i data-lucide="clock" class="w-3.5 h-3.5 text-[#cb3930]"></i> Jadwal Penjemputan
                                     </label>
-                                    <div class="rounded-xl border-2 border-stone-200 bg-white px-4 py-3 font-bold text-stone-800 text-sm flex justify-between items-center">
-                                        <span>Hari Ini (Segera / Kilat)</span>
-                                        <span class="text-xs text-[#168A5B] font-bold">● Armada Standby</span>
+                                    <div class="rounded-xl border-2 border-stone-200 bg-white px-3 sm:px-4 py-2 sm:py-3 font-bold text-stone-800 text-xs sm:text-sm flex justify-between items-center">
+                                        <span>Hari Ini (Kilat)</span>
+                                        <span class="text-[11px] text-[#168A5B] font-bold">● Standby</span>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Substantial, Large, Prominent Confirm Order Submit Button (per prompt instruction) -->
-                            <div class="modal-element pt-4">
-                                <button id="modal-submit-btn" type="button" class="w-full py-6 sm:py-7 px-8 rounded-2xl sm:rounded-[2rem] bg-gradient-to-r from-[#292524] via-stone-800 to-[#292524] text-[#FFB7B2] font-black text-xl sm:text-2xl shadow-2xl shadow-stone-900/40 hover:scale-[1.01] transition-transform shine flex items-center justify-center gap-3 border border-stone-700 cursor-pointer">
-                                    <i data-lucide="check-circle" class="w-7 h-7 text-[#FFB7B2]"></i>
-                                    <span>Konfirmasi Penjemputan Sekarang</span>
+                            <div class="modal-element pt-2 sm:pt-4">
+                                <button id="modal-submit-btn" type="button" class="w-full py-3.5 sm:py-5 md:py-6 px-4 sm:px-8 rounded-xl sm:rounded-2xl bg-gradient-to-r from-[#292524] via-stone-800 to-[#292524] text-[#FFB7B2] font-black text-xs sm:text-base md:text-xl shadow-xl shadow-stone-900/30 hover:scale-[1.01] transition-transform shine flex items-center justify-center gap-2 sm:gap-3 border border-stone-700 cursor-pointer">
+                                    <i data-lucide="check-circle" class="w-5 sm:w-6 h-5 sm:h-6 text-[#FFB7B2] shrink-0"></i>
+                                    <span class="truncate">Konfirmasi Penjemputan Sekarang</span>
                                 </button>
-                                <p class="text-center text-stone-400 text-xs mt-2.5 font-medium">Bebas biaya penjemputan untuk pelanggan Olara Premium</p>
+                                <p class="text-center text-stone-400 text-[10px] sm:text-xs mt-2 font-medium">Bebas biaya penjemputan untuk pelanggan Olara Premium</p>
                             </div>
                         </div>
                     </div>
@@ -1757,6 +1834,10 @@
             ];
 
             window.addEventListener('scroll', () => {
+                if (window.innerWidth < 768) {
+                    dashboard.style.transform = 'none';
+                    return;
+                }
                 const rect = dashboard.getBoundingClientRect();
                 const windowHeight = window.innerHeight;
                 
@@ -1835,6 +1916,57 @@
                 });
             }
         })();
+
+        // 10. Mobile Navigation Menu Controller
+        const landingDrawer = document.getElementById('landing-mobile-drawer');
+        const landingBackdrop = document.getElementById('landing-mobile-backdrop');
+        const landingMenuBtn = document.getElementById('landing-mobile-menu-btn');
+
+        function toggleLandingMobileMenu() {
+            if (!landingDrawer || !landingMenuBtn) return;
+            const isOpen = !landingDrawer.classList.contains('hidden');
+            if (isOpen) {
+                closeLandingMobileMenu();
+            } else {
+                openLandingMobileMenu();
+            }
+        }
+
+        function openLandingMobileMenu() {
+            if (!landingDrawer || !landingMenuBtn) return;
+            landingMenuBtn.classList.add('is-active');
+            landingBackdrop.classList.add('is-active');
+            landingDrawer.classList.remove('hidden');
+            requestAnimationFrame(() => {
+                landingDrawer.classList.remove('-translate-y-4', 'opacity-0');
+                landingDrawer.classList.add('translate-y-0', 'opacity-100');
+            });
+            document.body.classList.add('overflow-hidden', 'lg:overflow-auto');
+        }
+
+        function closeLandingMobileMenu() {
+            if (!landingDrawer || !landingMenuBtn) return;
+            landingMenuBtn.classList.remove('is-active');
+            landingBackdrop.classList.remove('is-active');
+            landingDrawer.classList.remove('translate-y-0', 'opacity-100');
+            landingDrawer.classList.add('-translate-y-4', 'opacity-0');
+            setTimeout(() => {
+                landingDrawer.classList.add('hidden');
+            }, 350);
+            document.body.classList.remove('overflow-hidden', 'lg:overflow-auto');
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeLandingMobileMenu();
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 1024) {
+                closeLandingMobileMenu();
+            }
+        });
     </script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 @section('title', 'Marketplace Bahan Baku Daur Ulang — OLARA')
 
 @section('content')
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+<div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 space-y-6 sm:space-y-8">
 
     <!-- Header -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -39,7 +39,7 @@
                 <!-- Dropdown Menu -->
                 <div
                     id="order-tracking-dropdown"
-                    class="hidden z-50 my-2 w-80 sm:w-96 text-base list-none bg-white rounded-2xl divide-y divide-gray-100 shadow-2xl border border-gray-100 dark:bg-gray-800 dark:divide-gray-700 dark:border-gray-700"
+                    class="hidden z-50 my-2 w-[calc(100vw-2rem)] sm:w-96 max-w-sm right-0 sm:right-auto text-base list-none bg-white rounded-2xl divide-y divide-gray-100 shadow-2xl border border-gray-100 dark:bg-gray-800 dark:divide-gray-700 dark:border-gray-700"
                 >
                     <div class="py-3 px-4 flex items-center justify-between bg-gray-50 dark:bg-gray-750 rounded-t-2xl">
                         <span class="text-xs font-bold text-gray-900 dark:text-white uppercase tracking-wider flex items-center gap-1.5">

@@ -3,7 +3,7 @@
 @section('title', 'AI Waste Scanner — Deteksi & Valuasi Sampah')
 
 @section('content')
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+<div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 space-y-6 sm:space-y-8">
 
     <!-- Header & Intro -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -74,7 +74,7 @@
                 </div>
 
                 <!-- HUD Overlay Frame -->
-                <div id="hudOverlay" class="absolute inset-6 sm:inset-8 border-2 border-emerald-500/60 rounded-2xl pointer-events-none flex flex-col justify-between p-3.5 shadow-[0_0_25px_rgba(16,185,129,0.25)] opacity-0 transition-opacity duration-300 z-30">
+                <div id="hudOverlay" class="absolute inset-4 sm:inset-8 border-2 border-emerald-500/60 rounded-2xl pointer-events-none flex flex-col justify-between p-2.5 sm:p-3.5 shadow-[0_0_25px_rgba(16,185,129,0.25)] opacity-0 transition-opacity duration-300 z-30">
                     <div class="flex items-center justify-between text-xs font-mono text-emerald-400">
                         <span class="bg-black/75 px-2.5 py-1 rounded-lg backdrop-blur-md flex items-center gap-1.5 border border-emerald-500/30">
                             <span id="trackingDot" class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
@@ -88,7 +88,7 @@
                     </div>
 
                     <div class="flex items-center justify-between text-[11px] font-mono text-emerald-400">
-                        <span id="hudMaterialTag" class="bg-black/80 px-3 py-1.5 rounded-lg backdrop-blur-md font-bold text-white border border-emerald-500/30 max-w-[200px] truncate">
+                        <span id="hudMaterialTag" class="bg-black/80 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg backdrop-blur-md font-bold text-white border border-emerald-500/30 max-w-[150px] sm:max-w-[200px] truncate">
                             Arahkan ke sampah...
                         </span>
                         <span id="hudContamination" class="bg-black/75 px-2.5 py-1 rounded-lg backdrop-blur-md text-emerald-300 border border-emerald-500/30">
@@ -98,21 +98,21 @@
                 </div>
 
                 <!-- Camera Action Controls Toolbar -->
-                <div class="absolute bottom-4 inset-x-0 flex items-center justify-center gap-3 z-40 px-4">
-                    <button type="button" id="activateCameraBtn" onclick="activateCamera()" class="bg-white/20 hover:bg-white/30 backdrop-blur-md text-white px-5 py-2.5 rounded-full border border-white/30 transition shadow-lg text-sm font-semibold flex items-center gap-2 hover:scale-105 active:scale-95">
+                <div class="absolute bottom-3 sm:bottom-4 inset-x-0 flex items-center justify-center gap-2 sm:gap-3 z-40 px-2 sm:px-4 flex-wrap">
+                    <button type="button" id="activateCameraBtn" onclick="activateCamera()" class="bg-white/20 hover:bg-white/30 backdrop-blur-md text-white px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-white/30 transition shadow-lg text-xs sm:text-sm font-semibold flex items-center gap-2 hover:scale-105 active:scale-95">
                         <i data-lucide="camera" class="w-4 h-4"></i> Aktifkan Kamera
                     </button>
 
-                    <button type="button" id="captureBtn" onclick="captureAndDetect()" class="hidden bg-[#168A5B] hover:bg-[#0F6B47] text-white px-6 py-3 rounded-full font-bold text-sm shadow-xl flex items-center gap-2 border border-emerald-400/50 transition hover:scale-105 active:scale-95">
-                        <i data-lucide="scan-line" class="w-5 h-5"></i> Ambil Foto &amp; Deteksi
+                    <button type="button" id="captureBtn" onclick="captureAndDetect()" class="hidden bg-[#168A5B] hover:bg-[#0F6B47] text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-bold text-xs sm:text-sm shadow-xl flex items-center gap-2 border border-emerald-400/50 transition hover:scale-105 active:scale-95">
+                        <i data-lucide="scan-line" class="w-4 sm:w-5 h-4 sm:h-5"></i> Ambil Foto &amp; Deteksi
                     </button>
 
-                    <button type="button" id="retakeBtn" onclick="retakePhoto()" class="hidden bg-white/25 hover:bg-white/35 backdrop-blur-md text-white px-5 py-2.5 rounded-full border border-white/30 transition shadow-lg text-sm font-semibold flex items-center gap-2 hover:scale-105 active:scale-95">
+                    <button type="button" id="retakeBtn" onclick="retakePhoto()" class="hidden bg-white/25 hover:bg-white/35 backdrop-blur-md text-white px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-white/30 transition shadow-lg text-xs sm:text-sm font-semibold flex items-center gap-2 hover:scale-105 active:scale-95">
                         <i data-lucide="rotate-ccw" class="w-4 h-4"></i> Foto Ulang
                     </button>
 
-                    <label for="cameraFileInput" class="cursor-pointer bg-white/20 hover:bg-white/30 backdrop-blur-md text-white p-3 rounded-full border border-white/30 transition shadow-lg hover:scale-105 active:scale-95 flex items-center justify-center" title="Unggah Foto dari Galeri">
-                        <i data-lucide="upload-cloud" class="w-5 h-5"></i>
+                    <label for="cameraFileInput" class="cursor-pointer bg-white/20 hover:bg-white/30 backdrop-blur-md text-white p-2.5 sm:p-3 rounded-full border border-white/30 transition shadow-lg hover:scale-105 active:scale-95 flex items-center justify-center" title="Unggah Foto dari Galeri">
+                        <i data-lucide="upload-cloud" class="w-4 sm:w-5 h-4 sm:h-5"></i>
                         <input type="file" id="cameraFileInput" accept="image/*" capture="environment" class="hidden" onchange="handleFileUpload(event)" />
                     </label>
                 </div>

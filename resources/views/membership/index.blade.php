@@ -3,36 +3,36 @@
 @section('title', 'Skema Keanggotaan (Membership) — OLARA')
 
 @section('content')
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+<div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-8 sm:space-y-12">
 
     <!-- Header & Pitch -->
     <div class="text-center max-w-2xl mx-auto space-y-3">
         <span class="text-xs font-bold uppercase tracking-wider text-[#168A5B] bg-[#DDF4E8] px-3 py-1 rounded-full">
             Tingkatkan Dampak Anda
         </span>
-        <h1 class="text-3xl sm:text-4xl font-extrabold text-[#1B211E] tracking-tight">
+        <h1 class="text-2xl sm:text-4xl font-extrabold text-[#1B211E] tracking-tight">
             Pilihan Paket Keanggotaan OLARA
         </h1>
-        <p class="text-sm text-[#66716B] leading-relaxed">
+        <p class="text-xs sm:text-sm text-[#66716B] leading-relaxed">
             Nikmati fasilitas penjemputan armada prioritas, poin reward ekstra, dan pemindaian kamera AI tanpa batas dengan beralih ke paket Premium.
         </p>
 
         <!-- Monthly / Annual Toggle -->
-        <div class="inline-flex items-center gap-3 bg-white p-1 rounded-2xl border border-[#DDE3DF] shadow-xs mt-4">
-            <button type="button" onclick="setBilling('monthly')" id="btnMonthly" class="py-1.5 px-4 rounded-xl text-xs font-bold bg-[#168A5B] text-white transition">
+        <div class="inline-flex max-w-full flex-wrap sm:flex-nowrap justify-center items-center gap-1.5 sm:gap-3 bg-white p-1.5 rounded-2xl border border-[#DDE3DF] shadow-xs mt-4">
+            <button type="button" onclick="setBilling('monthly')" id="btnMonthly" class="py-1.5 px-3 sm:px-4 rounded-xl text-xs font-bold bg-[#168A5B] text-white transition">
                 Tagihan Bulanan
             </button>
-            <button type="button" onclick="setBilling('yearly')" id="btnYearly" class="py-1.5 px-4 rounded-xl text-xs font-bold text-[#66716B] hover:text-[#1B211E] transition flex items-center gap-1.5">
+            <button type="button" onclick="setBilling('yearly')" id="btnYearly" class="py-1.5 px-3 sm:px-4 rounded-xl text-xs font-bold text-[#66716B] hover:text-[#1B211E] transition flex items-center gap-1.5">
                 Tagihan Tahunan <span class="bg-amber-100 text-amber-800 text-[10px] px-1.5 py-0.5 rounded-md font-extrabold">Hemat 20%</span>
             </button>
         </div>
     </div>
 
     <!-- 2 Plan Cards Side-by-Side (PRD Section 9) -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto items-stretch">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto items-stretch">
         
         <!-- Plan 1: Paket Lite (Gratis) -->
-        <div class="bg-white border border-[#DDE3DF] rounded-3xl p-8 shadow-sm flex flex-col justify-between space-y-6">
+        <div class="bg-white border border-[#DDE3DF] rounded-3xl p-5 sm:p-8 shadow-sm flex flex-col justify-between space-y-6">
             <div class="space-y-4">
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-bold uppercase tracking-wider text-gray-400 bg-gray-100 px-2.5 py-1 rounded-full">
@@ -46,12 +46,12 @@
                 </div>
 
                 <div>
-                    <h3 class="text-2xl font-extrabold text-[#1B211E]">Olara Lite</h3>
+                    <h3 class="text-xl sm:text-2xl font-extrabold text-[#1B211E]">Olara Lite</h3>
                     <p class="text-xs text-[#66716B] mt-1">Solusi awal untuk mulai memilah sampah rumah tangga secara praktis.</p>
                 </div>
 
                 <div class="flex items-baseline gap-1 pt-2">
-                    <span class="text-4xl font-extrabold text-[#1B211E]">Rp 0</span>
+                    <span class="text-3xl sm:text-4xl font-extrabold text-[#1B211E]">Rp 0</span>
                     <span class="text-xs text-gray-400 font-semibold">/ selamanya</span>
                 </div>
 
@@ -101,9 +101,9 @@
         </div>
 
         <!-- Plan 2: Paket Premium (Highlighted Card) -->
-        <div class="bg-gradient-to-b from-[#EEF9F2] to-white border-2 border-[#168A5B] rounded-3xl p-8 shadow-xl relative flex flex-col justify-between space-y-6">
+        <div class="bg-gradient-to-b from-[#EEF9F2] to-white border-2 border-[#168A5B] rounded-3xl p-5 sm:p-8 shadow-xl relative flex flex-col justify-between space-y-6">
             <!-- Highlight Ribbon -->
-            <div class="absolute -top-3.5 right-8">
+            <div class="absolute -top-3.5 right-4 sm:right-8">
                 <span class="bg-[#168A5B] text-white text-[10px] font-extrabold uppercase tracking-wider px-3 py-1 rounded-full shadow-md flex items-center gap-1.5">
                     <i data-lucide="crown" class="w-3 h-3"></i> Paling Direkomendasikan
                 </span>

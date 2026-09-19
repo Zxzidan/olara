@@ -3,10 +3,10 @@
 @section('title', 'Tukar Eco-Points & Hadiah — OLARA')
 
 @section('content')
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+<div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 space-y-6 sm:space-y-8">
 
     <!-- Points Wallet Summary Banner (PRD Section F) -->
-    <div class="rounded-3xl bg-stone-900 text-white dark:bg-stone-950 border border-stone-800 p-6 sm:p-8 shadow-soft-lg relative overflow-hidden">
+    <div class="rounded-3xl bg-stone-900 text-white dark:bg-stone-950 border border-stone-800 p-4 sm:p-8 shadow-soft-lg relative overflow-hidden">
         <!-- Decorative warm ambient glow -->
         <div class="absolute -right-16 -top-16 w-64 h-64 bg-[#FFB7B2]/10 rounded-full blur-3xl pointer-events-none"></div>
 
@@ -16,10 +16,10 @@
                     <i data-lucide="wallet" class="w-3.5 h-3.5 text-[#FFB7B2]"></i> Dompet Eco-Points Terintegrasi
                 </span>
                 <div class="flex items-baseline gap-3">
-                    <h1 class="font-outfit text-4xl sm:text-5xl font-extrabold tracking-tight tabular-nums text-white">
+                    <h1 class="font-outfit text-3xl sm:text-5xl font-extrabold tracking-tight tabular-nums text-white">
                         {{ number_format($user?->eco_points ?? 0) }}
                     </h1>
-                    <span class="text-xl font-bold text-[#FFB7B2]">Points Tersedia</span>
+                    <span class="text-base sm:text-xl font-bold text-[#FFB7B2]">Points Tersedia</span>
                 </div>
                 <p class="text-xs sm:text-sm text-stone-300 leading-relaxed max-w-2xl">
                     Setiap 1 Eco-Point bernilai setara <strong class="text-white">Rp 100</strong>. Anda dapat mencairkan poin ke dompet digital, menukarkan voucher ritel, atau mendonasikannya untuk aksi reboisasi hutan mangrove.
@@ -42,7 +42,7 @@
     </div>
 
     <!-- Tree Reforestation Community Impact Banner (PRD Donasi Aksi Hijau) -->
-    <div class="bg-white dark:bg-stone-800/95 border border-stone-200/80 dark:border-stone-700/80 rounded-3xl p-6 sm:p-7 shadow-soft flex flex-col md:flex-row items-center justify-between gap-6">
+    <div class="bg-white dark:bg-stone-800/95 border border-stone-200/80 dark:border-stone-700/80 rounded-3xl p-4 sm:p-7 shadow-soft flex flex-col md:flex-row items-center justify-between gap-6">
         <div class="flex items-start gap-4">
             <div class="w-12 h-12 rounded-2xl bg-[#E8EFE8] text-[#168A5B] dark:bg-stone-700 dark:text-emerald-300 flex items-center justify-center shrink-0">
                 <i data-lucide="sprout" class="w-6 h-6"></i>
@@ -56,12 +56,12 @@
             </div>
         </div>
 
-        <div class="flex items-center gap-4 shrink-0">
-            <div class="text-right">
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 shrink-0 w-full sm:w-auto">
+            <div class="text-left sm:text-right">
                 <span class="text-xs text-stone-400">Total Pohon Tertanam:</span>
                 <p class="text-lg font-extrabold text-[#168A5B] dark:text-emerald-400 tabular-nums">{{ number_format($totalTreesDonated) }} Pohon</p>
             </div>
-            <button type="button" onclick="openRedeemModal(9, 'Donasi 1 Bibit Pohon Mangrove Pesisir Jawa', 200, 'Yayasan LindungiHutan')" class="olara-btn-primary py-2.5 px-5 text-xs">
+            <button type="button" onclick="openRedeemModal(9, 'Donasi 1 Bibit Pohon Mangrove Pesisir Jawa', 200, 'Yayasan LindungiHutan')" class="olara-btn-primary py-2.5 px-5 text-xs text-center">
                 Donasikan Sekarang
             </button>
         </div>
@@ -90,7 +90,7 @@
     <!-- Rewards Grid (3 Columns) -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         @foreach($rewards as $reward)
-            <div class="bg-white dark:bg-stone-800/95 border border-stone-200/80 dark:border-stone-700/80 hover:border-stone-300 dark:hover:border-stone-600 rounded-3xl p-6 shadow-soft flex flex-col justify-between transition group hover:shadow-md">
+            <div class="bg-white dark:bg-stone-800/95 border border-stone-200/80 dark:border-stone-700/80 hover:border-stone-300 dark:hover:border-stone-600 rounded-3xl p-5 sm:p-6 shadow-soft flex flex-col justify-between transition group hover:shadow-md">
                 <div class="space-y-3">
                     <div class="flex items-center justify-between">
                         <span class="text-[10px] font-bold uppercase tracking-wider text-[#a7322b] bg-[#FFE4E1] dark:bg-stone-700 dark:text-[#ffb7b2] px-2.5 py-0.5 rounded-full">
