@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -271,7 +271,7 @@
                     <span>Mulai Gratis</span>
                     <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
                 </a>
-                <a href="#cara-kerja" class="w-full sm:w-auto px-6 py-2.5 sm:py-3 rounded-full bg-white hover:bg-stone-50 text-[#292524] font-semibold text-sm border border-stone-200/80 shadow-soft transition-all flex items-center justify-center gap-2">
+                <a href="#fitur" class="w-full sm:w-auto px-6 py-2.5 sm:py-3 rounded-full bg-white hover:bg-stone-50 text-[#292524] font-semibold text-sm border border-stone-200/80 shadow-soft transition-all flex items-center justify-center gap-2">
                     <span>Lihat Fitur</span>
                     <i data-lucide="chevron-down" class="w-4 h-4 text-[#78716C]"></i>
                 </a>
@@ -826,7 +826,7 @@
              4. COMPREHENSIVE FEATURES (All Dashboard Features Per Section)
              With IKON1.png, IKON2.png, IKON3.png Mascot Integration & Journey Line
         =================================================================== -->
-        <section id="fitur" class="relative py-20 md:py-28 max-w-5xl mx-auto px-4 sm:px-6 space-y-24">
+        <section id="fitur" style="scroll-margin-top: 90px;" class="relative py-20 md:py-28 max-w-5xl mx-auto px-4 sm:px-6 space-y-24 scroll-mt-24">
 
             <!-- Journey Line Connector (Scroll Percentage Animated SVG) -->
             <div class="absolute left-1/2 -translate-x-1/2 top-32 bottom-32 w-16 pointer-events-none hidden lg:block -z-0 opacity-70" aria-hidden="true">
