@@ -1,58 +1,252 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <img src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=800&auto=format&fit=crop&q=80" width="100%" style="border-radius: 12px; max-height: 280px; object-fit: cover;" alt="OLARA Hero Banner" />
 </p>
 
-## About Laravel
+<h1 align="center">🌿 OLARA — Olah Kembali, Jaga Bumi</h1>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<p align="center">
+  <strong>Digital Eco-Wellness & Smart Circular Waste Management Platform</strong><br>
+  <em>Platform sirkular pengelolaan sampah cerdas dengan AI Scanner, penjemputan on-demand, marketplace bahan daur ulang, dan reward e-wallet instan.</em>
+</p>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+<p align="center">
+  <img src="https://img.shields.io/badge/Laravel-13.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel 13" />
+  <img src="https://img.shields.io/badge/PHP-8.3%2B-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP 8.3+" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-v4.0-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS v4" />
+  <img src="https://img.shields.io/badge/Vite-8.x-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" />
+  <img src="https://img.shields.io/badge/Midtrans-Snap_Payment-002B49?style=for-the-badge" alt="Midtrans Snap" />
+  <img src="https://img.shields.io/badge/Pest-v5.x-9333EA?style=for-the-badge" alt="Pest PHP" />
+  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License MIT" />
+</p>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 📖 Tentang OLARA
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+**OLARA (Olah Kembali, Jaga Bumi)** adalah platform ekosistem sirkular modern yang menjembatani masyarakat, pegiat lingkungan, mitra bank sampah/TPS3R, serta industri daur ulang. Melalui integrasi kecerdasan buatan (*AI recognition*), logistik penjemputan *on-demand*, dan gateway pembayaran digital, OLARA mengubah kebiasaan memilah sampah menjadi aksi nyata yang bernilai ekonomis sekaligus berdampak positif bagi iklim bumi.
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## ✨ Fitur-Fitur Utama
 
-## Agentic Development
+### 1. 📷 Kamera AI Pintar (AI Smart Waste Scanner)
+* **Pengenalan Sampah Otomatis**: Mendeteksi kategori material sampah (Botol PET, Plastik HDPE, Kaleng Aluminium, Kardus/Kertas, Beling/Kaca, Minyak Jelantah, Besi/Rongsok, hingga Limbah B3).
+* **Estimasi Nilai Pasar Real-Time**: Memberikan estimasi harga pasar terkini per kilogram.
+* **Analisis Kontaminasi & Rekomendasi**: Menghitung persentase kontaminasi serta panduan pemilahan yang tepat agar harga jual optimal.
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+### 2. 🚚 Armada Penjemputan On-Demand (Pickup Service)
+* **Jemput Sampah dari Rumah/Kantor**: Pengguna dapat menjadwalkan penjemputan sampah tanpa repot mengantar sendiri.
+* **Pilihan Armada Ramah Lingkungan**: Pilihan kendaraan mulai dari *Eco Bike*, *Tosa Roda Tiga*, hingga *Van Eco Box*.
+* **Tracking & Verifikasi Timbangan**: Status penjemputan transparan lengkap dengan kode booking unik dan verifikasi berat timbangan oleh kurir.
 
-```bash
-composer require laravel/boost --dev
+### 3. 📍 Peta & Direktori Mitra Drop-off (Drop-off Directory)
+* **Peta Interaktif Bank Sampah & TPS3R**: Temukan titik setor terdekat, jam operasional, dan kontak resmi.
+* **Bonus Insentif Mitra**: Dapatkan poin bonus tambahan ketika menyetorkan sampah langsung ke mitra resmi terdaftar.
 
-php artisan boost:install
+### 4. 🛒 Marketplace Bahan Daur Ulang (Circular Marketplace)
+* **Katalog Komoditas Daur Ulang**: Jual beli cacahan plastik (PET Flakes), pelet plastik olahan, kertas press, dan material rongsok berkualitas untuk UMKM dan pabrik daur ulang.
+* **Sistem Keranjang & Checkout Lengkap**: Mendukung perhitungan ongkos kirim ekspedisi, kuantitas grosir, dan invoice digital.
+* **Status Pengiriman Real-Time**: Lacak status pesanan dari menunggu pembayaran, dikemas, dalam perjalanan, hingga selesai.
+
+### 5. 💳 Integrasi Pembayaran Digital (Midtrans Snap & Webhook)
+* **Metode Pembayaran Luas**: Pembayaran ongkir penjemputan, pesanan marketplace, dan biaya langganan membership via QRIS (GoPay, ShopeePay, OVO, DANA), Virtual Account (BCA, Mandiri, BNI, BRI, Permata), serta Kartu Kredit/Debit.
+* **Verifikasi Otomatis (Webhook Listener)**: Sinkronisasi status transaksi secara instan tanpa perlu unggah bukti transfer manual.
+
+### 6. 🎁 Dompet Poin & Reward (Eco-Points & Wallet)
+* **Dapatkan Poin Sirkular**: Akumulasi poin dari setiap kilogram sampah yang dipilah, dijemput, atau disetor.
+* **Katalog Reward Fleksibel**: Tukarkan poin menjadi saldo e-wallet, voucher belanja, token listrik/pulsa, atau konversikan menjadi donasi penanaman bibit pohon mangrove.
+
+### 7. 📊 Analitik Jejak Karbon & Dampak Lingkungan (Eco Analytics)
+* **Metrik Dampak Terukur**: Pantau total kilogram sampah terkelola, reduksi emisi karbon (*kg CO₂ avoided*), dan pohon terselamatkan (*trees saved*).
+* **Level & Lencana Pengguna**: Gamifikasi kenaikan tingkat daur ulang (mulai dari *Eco Starter* hingga *Eco Champion*).
+
+### 8. ⭐ Paket Keanggotaan (Membership Tiers)
+* **Tingkatan Membership**: *Free*, *Eco Lite*, dan *Eco Pro*.
+* **Benefit Eksklusif**: Gratis kuota penjemputan armada bulanan, pengali poin ekstra (*point multiplier*), dan prioritas layanan pelanggan.
+
+### 9. ⚡ Fitur Demo Login 1-Klik
+* Memudahkan proses presentasi, evaluasi juri/klien, atau pengujian fitur tanpa harus mendaftar dan memverifikasi akun baru.
+
+---
+
+## 🛠️ Tech Stack & Arsitektur
+
+| Komponen | Teknologi | Keterangan |
+| :--- | :--- | :--- |
+| **Framework Backend** | Laravel 13.x | Arsitektur MVC, Eloquent ORM, Service Layer |
+| **Bahasa Pemrograman** | PHP 8.3 / 8.4 | Type Hinting ketat, Constructor Promotion, Enums |
+| **Frontend & Templating** | Laravel Blade Engine | Desain modular dengan Blade Components |
+| **CSS Framework** | Tailwind CSS v4 | `@tailwindcss/vite` untuk performa kompilasi ultra cepat |
+| **Asset Bundler** | Vite 8.x | Hot Module Replacement (HMR) |
+| **Ikonografi & Font** | Lucide Icons, Google Fonts | Plus Jakarta Sans, Outfit, Reenie Beanie |
+| **Database** | PostgreSQL / SQLite / MySQL | Kompatibel penuh dengan pgsql (Supabase), MySQL, atau SQLite |
+| **Payment Gateway** | Midtrans Snap API | Seamless checkout pop-up & Webhook notification handler |
+| **Testing Framework** | Pest PHP v5.x | Pengujian fitur otomatis (Feature & Unit Tests) |
+| **Code Formatter** | Laravel Pint | Standarisasi PSR-12 dan konvensi Laravel |
+
+---
+
+## 📂 Struktur Direktori Utama
+
+```text
+olara/
+├── app/
+│   ├── Http/Controllers/
+│   │   ├── AiScannerController.php        # Logika scan kamera AI & kalkulasi harga material
+│   │   ├── AnalyticsController.php        # Dashboard jejak karbon & analitik sampah
+│   │   ├── AuthController.php             # Login, register, demo login, logout
+│   │   ├── DropoffController.php          # Direktori & peta mitra bank sampah
+│   │   ├── HomeController.php             # Dashboard pengguna utama
+│   │   ├── LandingController.php          # Landing page publik interaktif
+│   │   ├── MarketplaceController.php      # Katalog produk, checkout & pesanan
+│   │   ├── MembershipController.php       # Upgrade & aktivasi paket langganan
+│   │   ├── MidtransWebhookController.php  # Webhook notifikasi pembayaran Midtrans
+│   │   ├── PickupController.php           # Permintaan jemput sampah & Snap Token
+│   │   ├── ProfileController.php          # Pengaturan profil, alamat, & sandi
+│   │   └── RewardController.php           # Penukaran poin & riwayat reward
+│   └── Models/                            # User, PickupRequest, MarketplaceOrder, dsb.
+├── database/
+│   ├── migrations/                        # Skema database terstruktur
+│   └── seeders/
+│       ├── DatabaseSeeder.php
+│       └── OlaraDatabaseSeeder.php        # Data awal lengkap produk, transaksi, & akun demo
+├── resources/
+│   ├── css/app.css                        # Setup Tailwind CSS v4
+│   ├── js/app.js                          # Alpine.js / interaktivitas klien
+│   └── views/                             # Template Blade per modul (landing, scanner, pickup, dll.)
+├── routes/
+│   └── web.php                            # Definisi rute aplikasi
+└── tests/
+    └── Feature/                           # Pest test suites (Midtrans, Core Flow, Profil)
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+---
 
-## Contributing
+## 🚀 Panduan Instalasi & Menjalankan Aplikasi
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Ikuti langkah-langkah berikut untuk menjalankan OLARA di lingkungan lokal:
 
-## Code of Conduct
+### 1. Prasyarat Sistem
+* PHP `>= 8.3` (Disarankan PHP 8.4)
+* Composer `>= 2.2`
+* Node.js `>= 18.x` & NPM
+* Database PostgreSQL / MySQL / SQLite
+* Laravel Herd (opsional, sangat disarankan untuk macOS/Windows)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 2. Kloning Repositori
+```bash
+git clone https://github.com/username/olara.git
+cd olara
+```
 
-## Security Vulnerabilities
+### 3. Pasang Dependensi
+```bash
+# Pasang dependensi PHP
+composer install
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+# Pasang dependensi Frontend (Node.js)
+npm install
+```
 
-## License
+### 4. Konfigurasi Environment (`.env`)
+Salin berkas `.env.example` ke `.env` (atau buat berkas `.env` baru jika belum ada):
+```bash
+cp .env.example .env
+```
+Lalu generate encryption key Laravel:
+```bash
+php artisan key:generate
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Sesuaikan konfigurasi database dan payment gateway di dalam file `.env`:
+```env
+APP_NAME=Olara
+APP_ENV=local
+APP_KEY=base64:...
+APP_DEBUG=true
+APP_URL=http://olara.test
+
+# Konfigurasi Database (Contoh PostgreSQL / Supabase)
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=olara_db
+DB_USERNAME=postgres
+DB_PASSWORD=secret
+
+# Atau gunakan SQLite untuk kemudahan pengujian lokal
+# DB_CONNECTION=sqlite
+
+# Konfigurasi Midtrans Payment Gateway (Sandbox)
+MIDTRANS_MERCHANT_ID=your_merchant_id
+MIDTRANS_CLIENT_KEY=your_client_key
+MIDTRANS_SERVER_KEY=your_server_key
+MIDTRANS_IS_PRODUCTION=false
+```
+
+### 5. Migrasi & Seeding Database
+Jalankan migrasi tabel dan isi data awal (data dummy interaktif mitra, produk daur ulang, reward, dan transaksi):
+```bash
+php artisan migrate:fresh --seed
+```
+
+### 6. Menjalankan Server Pengembangan
+Jalankan backend Laravel dan Vite frontend secara bersamaan:
+
+```bash
+# Opsi 1: Menggunakan perintah bawaan Composer
+composer run dev
+
+# Opsi 2: Menggunakan terminal terpisah
+# Terminal 1:
+php artisan serve
+# Terminal 2:
+npm run dev
+```
+
+Buka peramban Anda di `http://127.0.0.1:8000` atau `http://olara.test` jika menggunakan Laravel Herd.
+
+---
+
+## 🔑 Akun Uji Coba (Demo Credentials)
+
+Anda dapat langsung mengklik tombol **"Quick Demo Login"** di halaman login, atau menggunakan kredensial default berikut yang telah disediakan oleh seeder:
+
+* **Email**: `zidan@olara.id`
+* **Password**: `password123`
+* **Role**: Pengguna Terverifikasi (*Eco Champion - Level 4*)
+* **Eco-Points Bawaan**: 1.450 Poin
+
+---
+
+## 🧪 Pengujian Otomatis (Testing)
+
+Proyek ini telah dilengkapi dengan rangkaian automated test menggunakan **Pest PHP**:
+
+```bash
+# Menjalankan seluruh test suite
+php artisan test
+
+# Menjalankan pengujian fitur spesifik
+php artisan test --filter=MidtransPaymentTest
+php artisan test --filter=OlaraCoreTest
+```
+
+---
+
+## 🎨 Standar Kode & Format
+
+Untuk memastikan konsistensi kode PHP sesuai standar PSR-12 dan panduan Laravel:
+```bash
+vendor/bin/pint --format agent
+```
+
+---
+
+## 📄 Lisensi
+
+Platform OLARA dirilis di bawah lisensi [MIT License](LICENSE). Bebas digunakan, dikembangkan, dan dimodifikasi untuk tujuan edukasi maupun komersial.
+
+<p align="center">
+  Dibuat dengan dedikasi untuk masa depan bumi yang lebih hijau dan berkelanjutan 🌱
+</p>
