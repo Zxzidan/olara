@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=800&auto=format&fit=crop&q=80" width="100%" style="border-radius: 12px; max-height: 280px; object-fit: cover;" alt="OLARA Hero Banner" />
+  <img src="public/assets/img/LOGO%20ORALA.png" width="220" alt="OLARA Logo" />
 </p>
 
 <h1 align="center">🌿 OLARA — Olah Kembali, Jaga Bumi</h1>
